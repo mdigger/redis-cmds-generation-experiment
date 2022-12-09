@@ -1,0 +1,1240 @@
+//go:build ignore
+
+package main
+
+import (
+	"bytes"
+	"encoding/gob"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"go/format"
+	"hash/crc32"
+	"io"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+	"unicode"
+)
+
+type goStruct struct {
+	Node      *node
+	FullName  string
+	BuildDef  buildDef
+	NextNodes []*node
+	Variadic  bool
+
+	MultipleToken bool
+}
+
+type buildDef struct {
+	MethodName string
+	Command    []string
+	Parameters []parameter
+}
+
+func (d buildDef) hash() uint32 {
+	hash := crc32.NewIEEE()
+	gob.NewEncoder(hash).Encode(d)
+	return hash.Sum32()
+}
+
+type parameter struct {
+	Name string
+	Type string
+}
+type complexity []string
+
+func (c *complexity) UnmarshalJSON(b []byte) error {
+	if len(b) == 0 {
+		return nil
+	}
+
+	if b[0] == '[' {
+		r := make([]string, 0, 3)
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+
+		*c = r
+
+		return nil
+	}
+
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+
+	*c = []string{s}
+
+	return nil
+}
+
+type command struct {
+	Summary    string     `json:"summary"`
+	Complexity complexity `json:"complexity"`
+	Group      string     `json:"group"`
+	Since      string     `json:"since"`
+	Container  string     `json:"container"`
+	Arguments  []argument `json:"arguments"`
+	Flags      []string   `json:"command_flags"`
+	Arity      int        `json:"arity"`
+	Deprecated string     `json:"deprecated_since"`
+	Replaced   string     `json:"replaced_by"`
+}
+
+type argument struct {
+	Name          interface{} `json:"name"`
+	Type          interface{} `json:"type"`
+	Command       string      `json:"command"`
+	Enum          []string    `json:"enum"`
+	Block         []argument  `json:"block"`
+	Arguments     []argument  `json:"arguments"`
+	Multiple      bool        `json:"multiple"`
+	Optional      bool        `json:"optional"`
+	Variadic      bool        `json:"variadic"`
+	MultipleToken bool        `json:"multiple_token"`
+}
+
+type node struct {
+	Parent *node
+	Child  *node
+	Next   *node
+	Cmd    command
+	Arg    argument
+	Root   bool
+}
+
+func (n *node) FindRoot() (root *node) {
+	root = n
+	for root.Parent != nil {
+		root = root.Parent
+	}
+	return
+}
+
+//gocyclo:ignore
+func (n *node) GoStructs() (out []goStruct) {
+	fn := n.FullName()
+	// fix for XGROUP and XADD
+	if len(n.Arg.Enum) == 2 && ((n.Arg.Enum[0] == "id" && n.Arg.Enum[1] == "$") || (n.Arg.Enum[0] == "*" && n.Arg.Enum[1] == "ID")) {
+		n.Arg.Enum = nil
+		n.Arg.Name = "id"
+		n.Arg.Type = "string"
+		if !strings.HasSuffix(fn, "Id") {
+			fn += "Id"
+		}
+	}
+
+	// fix for TS.MRANGE, TS.MREVRANGE, TS.MGET, TS.QUERYINDEX
+	if len(n.Arg.Enum) >= 2 && (n.Arg.Enum[0] == "l=v" && n.Arg.Enum[1] == "l!=v") {
+		n.Arg.Enum = nil
+		n.Arg.Name = "filter"
+		n.Arg.Type = "string"
+		if !strings.HasSuffix(fn, "Filter") {
+			fn += "Filter"
+		}
+	}
+
+	if len(n.Arg.Block) > 0 {
+		panic("GoStructs should not be called on Block node")
+	} else if len(n.Arg.Enum) > 0 {
+		for _, e := range n.Arg.Enum {
+			s := goStruct{
+				Node:     n,
+				FullName: fn,
+				BuildDef: buildDef{
+					MethodName: name(e),
+					Command:    nil,
+					Parameters: nil,
+				},
+				Variadic:      n.Variadic() && !n.MultipleToken(),
+				MultipleToken: n.MultipleToken(),
+				NextNodes:     n.NextNodes(),
+			}
+			if len(n.Arg.Command) != 0 {
+				if !strings.HasSuffix(s.FullName, name(n.Arg.Command)) {
+					s.FullName += name(n.Arg.Command)
+				}
+				s.BuildDef.MethodName = name(n.Arg.Command) + name(e)
+				s.BuildDef.Command = strings.Split(n.Arg.Command, " ")
+			}
+			if !strings.HasSuffix(s.FullName, name(e)) {
+				s.FullName += name(e)
+			}
+			cmds := strings.Split(e, " ")
+			if len(cmds) == 1 {
+				if cmds[0] == "VECTOR" {
+					s.BuildDef.Command = append(s.BuildDef.Command, cmds...)
+					s.BuildDef.Parameters = []parameter{
+						{Name: "algo", Type: "string"},
+						{Name: "nargs", Type: "integer"},
+						{Name: "args", Type: "...string"},
+					}
+				} else {
+					s.BuildDef.Command = append(s.BuildDef.Command, cmds...)
+					s.BuildDef.Parameters = nil
+				}
+			} else {
+				switch cmds[1] {
+				case "name", "category", "pattern":
+					s.BuildDef.Command = append(s.BuildDef.Command, cmds[:1]...)
+					s.BuildDef.Parameters = []parameter{{Name: lcFirst(name(cmds[1])), Type: "string"}}
+				case "seconds", "milliseconds", "timestamp", "milliseconds-timestamp":
+					s.BuildDef.Command = append(s.BuildDef.Command, cmds[:1]...)
+					s.BuildDef.Parameters = []parameter{{Name: lcFirst(name(cmds[1])), Type: "integer"}}
+				case "*":
+					// fix for FT.AGGREGATE
+					if cmds[0] == "LOAD" {
+						s.BuildDef.Command = append(s.BuildDef.Command, cmds...)
+						s.BuildDef.Parameters = nil
+					}
+				case "label1":
+					// fix for TS.MRANGE, TS.MREVRANGE, TS.MGET
+					if cmds[0] == "SELECTED_LABELS" {
+						s.FullName = strings.TrimRight(s.FullName, "Label1")
+						s.BuildDef.MethodName = strings.TrimRight(s.BuildDef.MethodName, "Label1")
+						s.BuildDef.Command = append(s.BuildDef.Command, cmds[0])
+						s.BuildDef.Parameters = []parameter{{Name: "labels", Type: "[]string"}}
+					}
+				default:
+					panic("unknown enum " + cmds[1])
+				}
+			}
+			out = append(out, s)
+		}
+		return
+	} else {
+		s := goStruct{
+			Node:     n,
+			FullName: fn,
+			BuildDef: buildDef{
+				MethodName: n.Name(),
+				Parameters: nil,
+			},
+			Variadic:      n.Variadic() && !n.MultipleToken(),
+			MultipleToken: n.MultipleToken(),
+			NextNodes:     n.NextNodes(),
+		}
+		if len(n.Arg.Command) != 0 {
+			s.BuildDef.Command = strings.Split(n.Arg.Command, " ")
+		}
+
+		switch nm := n.Arg.Name.(type) {
+		case string:
+			if s.FullName == "FtCreatePrefixPrefix" && nm == "count" && n.Arg.Command == "PREFIX" {
+				s.FullName = "FtCreatePrefixCount"
+			}
+			s.BuildDef.Parameters = []parameter{{Name: lcFirst(name(nm)), Type: n.Arg.Type.(string)}} // not change to go type here, change at render
+		case []interface{}:
+			for i, nn := range nm {
+				s.BuildDef.Parameters = append(s.BuildDef.Parameters, parameter{Name: lcFirst(name(nn.(string))), Type: n.Arg.Type.([]interface{})[i].(string)})
+			}
+		default:
+			if n.Arg.Type == nil || (n.Arg.Type != nil && n.Arg.Type.(string) == "command") {
+				// ignore
+			} else {
+				panic("unknown arg name")
+			}
+		}
+		out = append(out, s)
+	}
+	return
+}
+
+func (n *node) MultipleToken() bool {
+	return n.Arg.MultipleToken
+}
+
+func (n *node) Variadic() bool {
+	return n.Arg.Multiple || n.Arg.Variadic
+}
+
+func (n *node) FullName() (out string) {
+	if n.Parent != nil {
+		return n.Parent.FullName() + n.Name()
+	}
+	return n.Name()
+}
+
+func (n *node) Name() (out string) {
+	var tokens []string
+	if n.Arg.Command != "" {
+		tokens = append(tokens, name(n.Arg.Command))
+	} else {
+		switch n := n.Arg.Name.(type) {
+		case string:
+			tokens = append(tokens, name(n))
+		case []interface{}:
+			for _, nn := range n {
+				tokens = append(tokens, name(nn.(string)))
+			}
+		}
+		if len(tokens) == 0 {
+			if n.Child != nil {
+				tokens = append(tokens, n.Child.Name())
+			}
+		}
+	}
+
+	duplicate := map[string]bool{}
+	for _, t := range tokens {
+		if len(t) == 0 || duplicate[t] {
+			continue
+		}
+		duplicate[t] = true
+		out += t
+	}
+	return
+}
+
+func (n *node) NextNodes() (nodes []*node) {
+	defer func() {
+		deduped := make([]*node, 0, len(nodes))
+	next:
+		for _, n := range nodes {
+			for _, nn := range deduped {
+				if n == nn {
+					continue next
+				}
+			}
+			deduped = append(deduped, n)
+		}
+		nodes = deduped
+	}()
+
+	if n.Child == nil && n.Variadic() {
+		nodes = append(nodes, n)
+	}
+
+	if n.Child != nil {
+		nodes = append(nodes, blockEntries(n)...)
+	}
+
+	parent := n
+	for parent != nil {
+		next := parent.Next
+		for next != nil {
+			nodes = append(nodes, next)
+			if !next.Arg.Optional {
+				return nodes
+			}
+			next = next.Next
+		}
+
+		parent = parent.Parent
+		// block variadic
+		if parent != nil && parent.Variadic() {
+			nodes = append(nodes, blockEntries(parent)...)
+		}
+		if parent != nil && parent.Root {
+			break // don't climb to root
+		}
+	}
+	return nodes
+}
+
+func (n *node) Walk(fn func(node *node)) {
+	next := n
+	for next != nil {
+		if next.Child != nil {
+			next.Child.Walk(fn)
+		} else {
+			fn(next)
+		}
+		next = next.Next
+	}
+}
+
+func main() {
+	path := flag.String("path", ".", "path to `spec` folder")
+	flag.Parse()
+
+	if ext := filepath.Ext(*path); ext != ".json" {
+		*path = filepath.Join(*path, "*.json")
+	}
+
+	files, err := filepath.Glob(*path)
+	if err != nil {
+		panic(err)
+	}
+	if len(files) == 0 {
+		panic(fmt.Errorf("no spec files match %q", *path))
+	}
+
+	commands := map[string]command{}
+
+	for _, p := range files {
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			panic(err)
+		}
+
+		cmds := map[string]command{}
+		if err := json.Unmarshal(raw, &cmds); err != nil {
+			panic(fmt.Errorf("file %q parsing error: %w", p, err))
+		}
+
+		for key, value := range cmds {
+			if value.Container != "" {
+				newKey := strings.Join([]string{value.Container, key}, " ")
+				commands[newKey] = value
+				continue
+			}
+
+			commands[key] = value
+		}
+	}
+
+	var roots []string
+	nodes := map[string]*node{}
+	for k, cmd := range commands {
+		root := &node{Cmd: cmd, Arg: argument{Name: k, Command: k, Type: "command"}, Root: true}
+		root.Next = makeChildNodes(root, cmd.Arguments)
+		roots = append(roots, k)
+		nodes[k] = root
+	}
+	sort.Strings(roots)
+
+	structs := map[string]goStruct{}
+	for _, name := range roots {
+		n := nodes[name]
+		n.Walk(func(n *node) {
+			for _, s := range n.GoStructs() {
+				if v, ok := structs[s.FullName]; ok {
+					panic("struct conflict " + v.FullName)
+				}
+				structs[s.FullName] = s
+			}
+		})
+	}
+
+	var buf bytes.Buffer
+	generate(&buf, structs)
+	if err = writeFile("cmd_generated.go", buf.Bytes()); err != nil {
+		panic(err)
+	}
+
+	buf.Reset()
+	tests(&buf, structs)
+	if err = writeFile("cmd_generated_test.go", buf.Bytes()); err != nil {
+		panic(err)
+	}
+}
+
+func writeFile(name string, data []byte) (err error) {
+	data, err = format.Source(data)
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Create(name)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	_, err = f.Write(data)
+	return err
+}
+
+func tests(f io.Writer, structs map[string]goStruct) {
+	var names []string
+	for name := range structs {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+
+	var pathes [][]goStruct
+	for _, name := range names {
+		s := structs[name]
+		if !s.Node.Root {
+			continue
+		}
+		pathes = makePath(s, nil, pathes)
+	}
+
+	fmt.Fprintf(f, "// Code generated DO NOT EDIT\n\npackage cmd\n\n")
+
+	fmt.Fprintf(f, "import \"testing\"\n\n")
+
+	mod := 100
+
+	for i, p := range pathes {
+		if i%mod == 0 {
+			fmt.Fprintf(f, "func tc%d(s Builder, t *testing.T) {\n", i/mod)
+		}
+		printPath(f, "s", p, "Build")
+		if within(p[0], cacheableCMDs) {
+			printPath(f, "s", p, "Cache")
+		}
+		if i%mod == mod-1 || i == len(pathes)-1 {
+			fmt.Fprintf(f, "}\n\n")
+		}
+	}
+
+	fmt.Fprintf(f, "func TestCommand_cslotInit(t *testing.T) {\n")
+	fmt.Fprintf(f, "\tvar s = NewBuilder(cslotInit)\n")
+	for i := 0; i <= len(pathes)/mod; i++ {
+		fmt.Fprintf(f, "\tt.Run(\"%d\", func(t *testing.T) { tc%d(s, t) })\n", i, i)
+	}
+	fmt.Fprintf(f, "}\n\n")
+
+	fmt.Fprintf(f, "func TestCommand_cslotNo(t *testing.T) {\n")
+	fmt.Fprintf(f, "\tvar s = NewBuilder(cslotNo)\n")
+	for i := 0; i <= len(pathes)/mod; i++ {
+		fmt.Fprintf(f, "\tt.Run(\"%d\", func(t *testing.T) { tc%d(s, t) })\n", i, i)
+	}
+	fmt.Fprintf(f, "}\n\n")
+}
+
+func makePath(s goStruct, path []goStruct, pathes [][]goStruct) [][]goStruct {
+	path = append(path, s)
+	nexts := s.Node.NextNodes()
+	if len(path) < 8 {
+		for _, n := range nexts {
+			if s.Node == n {
+				continue
+			}
+			if n.Parent != nil && n.Parent.Child == n {
+				continue
+			}
+			nodes := []*node{n}
+			if n.Child != nil {
+				nodes = blockEntries(n)
+			}
+			for _, nn := range nodes {
+				for _, ss := range nn.GoStructs() {
+					clone := make([]goStruct, len(path))
+					copy(clone, path)
+					pathes = makePath(ss, clone, pathes)
+				}
+			}
+		}
+	}
+	if allOptional(s.Node, nexts) {
+		pathes = append(pathes, path)
+	}
+	return pathes
+}
+
+func testParams(defs []parameter) string {
+	var params []string
+	for _, param := range defs {
+		switch toGoType(param.Type) {
+		case "[]string":
+			params = append(params, `[]string{"1"}`)
+		case "string":
+			params = append(params, `"1"`)
+		case "int64", "float64":
+			params = append(params, `1`)
+		}
+	}
+	return strings.Join(params, ", ")
+}
+
+func printPath(f io.Writer, receiver string, path []goStruct, end string) {
+	fmt.Fprintf(f, "\t%s.%s()", receiver, path[0].BuildDef.MethodName)
+	for _, s := range path[1:] {
+		fmt.Fprintf(f, ".%s(", s.BuildDef.MethodName)
+		if (len(s.BuildDef.Parameters) != 1 && s.Variadic) || s.MultipleToken {
+			fmt.Fprintf(f, ").%s(", s.BuildDef.MethodName)
+		}
+		fmt.Fprintf(f, "%s)", testParams(s.BuildDef.Parameters))
+		if s.Variadic || s.MultipleToken {
+			fmt.Fprintf(f, ".%s(%s)", s.BuildDef.MethodName, testParams(s.BuildDef.Parameters))
+		}
+	}
+	fmt.Fprintf(f, ".%s()\n", end)
+}
+
+func generate(f io.Writer, structs map[string]goStruct) {
+	var names []string
+	for name := range structs {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+
+	fmt.Fprintf(f, "// Code generated DO NOT EDIT\n\npackage cmd\n\n")
+	fmt.Fprintf(f, "import %q\n\n", "strconv")
+
+	for _, name := range names {
+		s := structs[name]
+
+		if s.Node.Cmd.Summary != "" {
+			fmt.Fprintf(f, "// %s.\n", s.Node.Cmd.Summary)
+		}
+
+		switch len(s.Node.Cmd.Complexity) {
+		case 0:
+			break
+		case 1:
+			fmt.Fprintf(f, "//\n// Time complexity: %s\n", s.Node.Cmd.Complexity[0])
+		default:
+			fmt.Fprint(f, "//\n// Time complexity:\n")
+			for _, s := range s.Node.Cmd.Complexity {
+				fmt.Fprintf(f, "// \t- %s\n", s)
+			}
+		}
+
+		if len(s.Node.Cmd.Deprecated) > 0 {
+			fmt.Fprintf(f, "//\n// Deprecated: [since %s] %s\n",
+				s.Node.Cmd.Deprecated, s.Node.Cmd.Replaced)
+		}
+
+		fmt.Fprintf(f, "type %s Base\n\n", s.FullName)
+
+		if s.Node.Root {
+			printRootBuilder(f, s)
+		}
+
+		dedupe := make(map[string]uint32)
+		for _, next := range s.NextNodes {
+			nodes := []*node{next}
+			if next.Child != nil {
+				nodes = blockEntries(next)
+			}
+			for _, nn := range nodes {
+				for _, ss := range nn.GoStructs() {
+					hash := ss.BuildDef.hash()
+					if h, ok := dedupe[ss.BuildDef.MethodName]; ok {
+						if h != hash {
+							panic("same method but different hash")
+						}
+					} else {
+						dedupe[ss.BuildDef.MethodName] = hash
+						printBuilder(f, s, ss)
+					}
+				}
+			}
+		}
+
+		if allOptional(s.Node, s.NextNodes) {
+			printFinalBuilder(f, s, "Build", "Completed")
+			if within(s.Node.FindRoot().GoStructs()[0], cacheableCMDs) {
+				printFinalBuilder(f, s, "Cache", "Cacheable")
+			}
+		}
+	}
+
+	checkAllUsed("noRetCMDs", noRetCMDs)
+	checkAllUsed("blockingCMDs", blockingCMDs)
+	checkAllUsed("cacheableCMDs", cacheableCMDs)
+	checkAllUsed("readOnlyCMDs", readOnlyCMDs)
+}
+
+func checkAllUsed(name string, tags map[string]bool) {
+	for t, v := range tags {
+		if !v {
+			panic(fmt.Sprintf("unsued tag %s in %s", t, name))
+		}
+	}
+}
+
+func allOptional(s *node, nodes []*node) bool {
+	for _, n := range nodes {
+		if s == n {
+			continue
+		}
+		if n.Parent != nil && n.Parent.Child == n {
+			continue
+		}
+		if !n.Arg.Optional {
+			return false
+		}
+	}
+	return true
+}
+
+func toGoType(paramType string) string {
+	switch paramType {
+	case "[]string": // TODO hack for TS.MRANGE, TS.MREVRANGE, TS.MGET
+		return "[]string"
+	case "...string": // TODO hack for FT.CREATE VECTOR
+		return "...string"
+	case "key", "string", "pattern", "type":
+		return "string"
+	case "double":
+		return "float64"
+	case "integer", "posix time":
+		return "int64"
+	case "pure-token":
+		// FIXME: pure-token
+		return "string"
+	case "unix-time":
+		// FIXME: unix-time
+		return "int64"
+	default:
+		panic("unknown param type " + paramType)
+	}
+}
+
+func toGoName(paramName string) string {
+	if paramName == "type" {
+		return "typ"
+	}
+	return paramName
+}
+
+func printRootBuilder(w io.Writer, root goStruct) {
+	if root.Node.Cmd.Summary != "" {
+		fmt.Fprintf(w, "// %s start a command to %s\n//\n", root.FullName, root.Node.Cmd.Summary)
+	}
+
+	fmt.Fprintf(w, "// Command: %s.\n", root.Node.Arg.Command)
+
+	switch len(root.Node.Cmd.Complexity) {
+	case 0:
+		break
+	case 1:
+		fmt.Fprintf(w, "//\n// Time complexity: %s\n", root.Node.Cmd.Complexity[0])
+	default:
+		fmt.Fprint(w, "//\n// Time complexity:\n")
+		for _, s := range root.Node.Cmd.Complexity {
+			fmt.Fprintf(w, "// \t- %s\n", s)
+		}
+	}
+
+	if len(root.Node.Cmd.Deprecated) > 0 {
+		fmt.Fprintf(w, "//\n// Deprecated: [since %s] %s\n",
+			root.Node.Cmd.Deprecated, root.Node.Cmd.Replaced)
+	}
+
+	fmt.Fprintf(w, "func (b Builder) %s() %s {\n", root.FullName, root.FullName)
+
+	var appends []string
+	for _, cmd := range root.BuildDef.Command {
+		appends = append(appends, fmt.Sprintf(`"%s"`, cmd))
+	}
+
+	if tag := rootCf(root); tag != "" {
+		fmt.Fprintf(w, "\tc := %s{command: emptyCommand(), cslot: b.slot, ctags: %s}\n", root.FullName, tag)
+	} else {
+		fmt.Fprintf(w, "\tc := %s{command: emptyCommand(), cslot: b.slot}\n", root.FullName)
+	}
+	fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+	fmt.Fprintf(w, "\treturn c\n")
+	fmt.Fprintf(w, "}\n\n")
+}
+
+func rootCf(root goStruct) (tag string) {
+	if within(root, blockingCMDs) {
+		tag = "ctagBlock"
+	}
+
+	if within(root, noRetCMDs) {
+		if tag != "" {
+			panic("root cf collision")
+		}
+		tag = "ctagNoRet"
+	}
+
+	if within(root, mtGetCMDs) {
+		if tag != "" {
+			panic("root cf collision")
+		}
+		tag = "ctagMtGet"
+	}
+
+	if within(root, readOnlyCMDs) {
+		if tag != "" {
+			panic("root cf collision")
+		}
+		tag = "ctagReadOnly"
+	}
+
+	return tag
+}
+
+func printFinalBuilder(w io.Writer, parent goStruct, method, ss string) {
+	switch ss {
+	case "Completed":
+		fmt.Fprintf(w, "// Return Completed Redis command.\n")
+	case "Cacheable":
+		fmt.Fprintf(w, "// Return Completed Cacheable Redis command.\n")
+	}
+
+	fmt.Fprintf(w, "func (c %s) %s() %s {\n", parent.FullName, method, ss)
+	fmt.Fprintf(w, "\treturn %s(c)\n", strings.ToLower(ss))
+	fmt.Fprintf(w, "}\n\n")
+}
+
+//gocyclo:ignore
+func printBuilder(w io.Writer, parent, next goStruct) {
+	fmt.Fprintf(w, "func (c %s) %s(", parent.FullName, next.BuildDef.MethodName)
+	if len(next.BuildDef.Parameters) == 1 && next.Variadic {
+		fmt.Fprintf(w, "%s ...%s", toGoName(next.BuildDef.Parameters[0].Name), toGoType(next.BuildDef.Parameters[0].Type))
+	} else if (next.Variadic || next.MultipleToken) && parent.FullName != next.FullName {
+		// no parameter
+	} else {
+		for i, param := range next.BuildDef.Parameters {
+			fmt.Fprintf(w, "%s %s", toGoName(param.Name), toGoType(param.Type))
+			if i != len(next.BuildDef.Parameters)-1 {
+				fmt.Fprintf(w, ", ")
+			}
+		}
+	}
+	fmt.Fprintf(w, ") %s {\n", next.FullName)
+
+	if len(next.BuildDef.Parameters) == 1 && next.Variadic {
+		if next.BuildDef.Parameters[0].Type == "key" {
+			fmt.Fprintf(w, "\tif c.cslot&cslotNo == cslotNo {\n")
+			fmt.Fprintf(w, "\t\tfor _, k := range %s {\n", toGoName(next.BuildDef.Parameters[0].Name))
+			fmt.Fprintf(w, "\t\t\tc.cslot = cslotNo | getSlot(k)\n")
+			fmt.Fprintf(w, "\t\t\tbreak\n")
+			fmt.Fprintf(w, "\t\t}\n")
+			fmt.Fprintf(w, "\t} else {\n")
+			fmt.Fprintf(w, "\t\tfor _, k := range %s {\n", toGoName(next.BuildDef.Parameters[0].Name))
+			fmt.Fprintf(w, "\t\t\tc.cslot.set(getSlot(k))\n")
+			fmt.Fprintf(w, "\t\t}\n")
+			fmt.Fprintf(w, "\t}\n")
+		}
+	} else {
+		if len(next.BuildDef.Parameters) != 1 && (next.Variadic || next.MultipleToken) && parent.FullName != next.FullName {
+			// no parameter
+		} else {
+			for _, arg := range next.BuildDef.Parameters {
+				if arg.Type == "key" {
+					fmt.Fprintf(w, "\tif c.cslot&cslotNo == cslotNo {\n")
+					fmt.Fprintf(w, "\t\tc.cslot = cslotNo | getSlot(%s)\n", toGoName(arg.Name))
+					fmt.Fprintf(w, "\t} else {\n")
+					fmt.Fprintf(w, "\t\tc.cslot.set(getSlot(%s))\n", toGoName(arg.Name))
+					fmt.Fprintf(w, "\t}\n")
+				}
+			}
+		}
+	}
+
+	for _, cmd := range next.BuildDef.Command {
+		if cmd == "BLOCK" {
+			fmt.Fprintf(w, "\tc.ctags = ctagBlock\n")
+			break
+		}
+	}
+
+	var appends []string
+
+	for _, cmd := range next.BuildDef.Command {
+		if cmd == "" {
+			panic("unexpected empty command on " + next.FullName)
+		}
+		if cmd == `""` {
+			appends = append(appends, `""`)
+		} else {
+			if !(len(next.BuildDef.Parameters) != 1 && next.Variadic && parent.FullName == next.FullName) {
+				appends = append(appends, fmt.Sprintf(`"%s"`, cmd))
+			}
+		}
+	}
+
+	if len(appends) == 0 && next.Variadic && len(next.BuildDef.Parameters) == 1 && toGoType(next.BuildDef.Parameters[0].Type) == "string" {
+		appends = append(appends, toGoName(next.BuildDef.Parameters[0].Name)+"...")
+		fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+	} else if len(next.BuildDef.Parameters) != 1 && (next.Variadic || next.MultipleToken) && parent.FullName != next.FullName {
+		// no parameter
+		if len(appends) != 0 && !next.MultipleToken {
+			fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+		}
+	} else if !(next.MultipleToken && parent.FullName != next.FullName) {
+		allstring := true
+		for _, p := range next.BuildDef.Parameters {
+			if toGoType(p.Type) != "string" {
+				allstring = false
+				break
+			}
+		}
+		if allstring && !next.Variadic {
+			for _, p := range next.BuildDef.Parameters {
+				appends = append(appends, toGoName(p.Name))
+			}
+			fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+		} else {
+			if len(next.BuildDef.Parameters) == 1 && next.Variadic {
+				if len(appends) != 0 {
+					fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+				}
+				if toGoType(next.BuildDef.Parameters[0].Type) == "string" {
+					fmt.Fprintf(w, "\tc.command.append(%s...)\n", toGoName(next.BuildDef.Parameters[0].Name))
+				} else {
+					fmt.Fprintf(w, "\tfor _, n := range %s {\n", toGoName(next.BuildDef.Parameters[0].Name))
+					switch toGoType(next.BuildDef.Parameters[0].Type) {
+					case "float64":
+						fmt.Fprintf(w, "\t\tc.command.append(strconv.FormatFloat(n, 'f', -1, 64))\n")
+					case "int64":
+						fmt.Fprintf(w, "\t\tc.command.append(strconv.FormatInt(n, 10))\n")
+					default:
+						panic("unexpected param type " + next.BuildDef.Parameters[0].Type)
+					}
+					fmt.Fprintf(w, "\t}\n")
+				}
+			} else {
+				var follows []string
+				for _, p := range next.BuildDef.Parameters {
+					switch toGoType(p.Type) {
+					case "float64":
+						appends = append(appends, fmt.Sprintf("strconv.FormatFloat(%s, 'f', -1, 64)", toGoName(p.Name)))
+					case "int64":
+						appends = append(appends, fmt.Sprintf("strconv.FormatInt(%s, 10)", toGoName(p.Name)))
+					case "string":
+						appends = append(appends, toGoName(p.Name))
+					case "[]string": // TODO hack for TS.MRANGE, TS.MREVRANGE, TS.MGET
+						follows = append(follows, toGoName(p.Name)+"...")
+					case "...string": // TODO hack for FT.CREATE VECTOR
+						follows = append(follows, toGoName(p.Name)+"...")
+					default:
+						panic("unexpected param type " + next.BuildDef.Parameters[0].Type)
+					}
+				}
+				fmt.Fprintf(w, "\tc.command.append(%s)\n", strings.Join(appends, ", "))
+				for _, follow := range follows {
+					fmt.Fprintf(w, "\tc.command.append(%s)\n", follow)
+				}
+			}
+		}
+	}
+
+	if parent.FullName == next.FullName {
+		fmt.Fprintf(w, "\treturn c\n")
+	} else {
+		fmt.Fprintf(w, "\treturn (%s)(c)\n", next.FullName)
+	}
+	fmt.Fprintf(w, "}\n\n")
+}
+
+func makeChildNodes(parent *node, args []argument) (first *node) {
+	if len(args) == 0 {
+		return nil
+	}
+	var nodes []*node
+	for _, arg := range args {
+
+		if len(arg.Arguments) != 0 {
+			arg.Block = arg.Arguments
+		}
+		if arg.Type == "enum" && len(arg.Enum) == 0 && arg.Command != "" {
+			arg.Enum = []string{arg.Command}
+			arg.Command = ""
+		}
+		if arg.Type == "oneof" && len(arg.Block) == 0 && arg.Command != "" {
+			arg.Enum = []string{arg.Command}
+		}
+
+		nodes = append(nodes, &node{Parent: parent, Arg: arg})
+	}
+	for i, node := range nodes {
+		node.Child = makeChildNodes(node, node.Arg.Block)
+		if len(node.Arg.Block) != 0 && node.Arg.Command != "" {
+			if node.Child.Arg.Optional {
+				panic("unexpected block command with optional child")
+			}
+			if node.Child.Arg.Command == "" {
+				node.Child.Arg.Command = node.Arg.Command
+			} else {
+				node.Child.Arg.Command = node.Arg.Command + " " + node.Child.Arg.Command
+			}
+		}
+		if i != len(nodes)-1 {
+			node.Next = nodes[i+1]
+		}
+	}
+	return nodes[0]
+}
+
+func blockEntries(block *node) (nodes []*node) {
+	for child := block.Child; child != nil && child.Parent == block; child = child.Next {
+		if child.Child != nil {
+			nodes = append(nodes, blockEntries(child)...)
+		} else {
+			nodes = append(nodes, child)
+		}
+		if !child.Arg.Optional {
+			break
+		}
+	}
+	return nodes
+}
+
+func name(s string) (name string) {
+	switch s {
+	case "~":
+		return "Almost"
+	case "=":
+		return "Exact"
+	case "$":
+		return "Last"
+	case "\"\"":
+		return "Empty"
+	}
+	for _, n := range strings.Split(strings.NewReplacer("-", " ", "_", " ", ":", " ", "/", " ", ".", " ", "*", "all").Replace(s), " ") {
+		name += ucFirst(strings.ToLower(n))
+	}
+	return name
+}
+
+func ucFirst(str string) string {
+	for i, v := range str {
+		return string(unicode.ToUpper(v)) + str[i+1:]
+	}
+	return ""
+}
+
+func lcFirst(str string) string {
+	for i, v := range str {
+		return string(unicode.ToLower(v)) + str[i+1:]
+	}
+	return ""
+}
+
+func within(cmd goStruct, cmds map[string]bool) bool {
+	n := strings.ToLower(cmd.FullName)
+	if _, ok := cmds[n]; ok {
+		cmds[n] = true
+		return true
+	}
+	return false
+}
+
+var noRetCMDs = map[string]bool{
+	"subscribe":    false,
+	"psubscribe":   false,
+	"unsubscribe":  false,
+	"punsubscribe": false,
+	"ssubscribe":   false,
+	"sunsubscribe": false,
+}
+
+var mtGetCMDs = map[string]bool{
+	"mget":     false,
+	"jsonmget": false,
+}
+
+var blockingCMDs = map[string]bool{
+	"blpop":       false,
+	"brpop":       false,
+	"brpoplpush":  false,
+	"blmove":      false,
+	"blmpop":      false,
+	"bzpopmin":    false,
+	"bzpopmax":    false,
+	"bzmpop":      false,
+	"clientpause": false,
+	"migrate":     false,
+	"wait":        false,
+}
+
+var cacheableCMDs = map[string]bool{
+	"bitcount":            false,
+	"bitfieldro":          false,
+	"bitpos":              false,
+	"expiretime":          false,
+	"geodist":             false,
+	"geohash":             false,
+	"geopos":              false,
+	"georadiusro":         false,
+	"georadiusbymemberro": false,
+	"geosearch":           false,
+	"get":                 false,
+	"mget":                false,
+	"getbit":              false,
+	"getrange":            false,
+	"hexists":             false,
+	"hget":                false,
+	"hgetall":             false,
+	"hkeys":               false,
+	"hlen":                false,
+	"hmget":               false,
+	"hstrlen":             false,
+	"hvals":               false,
+	"lindex":              false,
+	"llen":                false,
+	"lpos":                false,
+	"lrange":              false,
+	"pexpiretime":         false,
+	"pttl":                false,
+	"scard":               false,
+	"sismember":           false,
+	"smembers":            false,
+	"smismember":          false,
+	"sortro":              false,
+	"strlen":              false,
+	"ttl":                 false,
+	"type":                false,
+	"zcard":               false,
+	"zcount":              false,
+	"zlexcount":           false,
+	"zmscore":             false,
+	"zrange":              false,
+	"zrangebylex":         false,
+	"zrangebyscore":       false,
+	"zrank":               false,
+	"zrevrange":           false,
+	"zrevrangebylex":      false,
+	"zrevrangebyscore":    false,
+	"zrevrank":            false,
+	"zscore":              false,
+	"jsonget":             false,
+	"jsonmget":            false,
+	"jsonstrlen":          false,
+	"jsonarrindex":        false,
+	"jsonarrlen":          false,
+	"jsonobjkeys":         false,
+	"jsonobjlen":          false,
+	"jsontype":            false,
+	"jsonresp":            false,
+	"bfexists":            false,
+	"bfinfo":              false,
+	"cfexists":            false,
+	"cfcount":             false,
+	"cfinfo":              false,
+	"cmsquery":            false,
+	"cmsinfo":             false,
+	"topkquery":           false,
+	"topklist":            false,
+	"topkinfo":            false,
+	"fcallro":             false,
+	"graphroquery":        false,
+	"aitensorget":         false,
+	"aimodelget":          false,
+	"aimodelexecute":      false,
+	"aiscriptget":         false,
+}
+
+var readOnlyCMDs = map[string]bool{
+	"bitcount":            false,
+	"bitfieldro":          false,
+	"bitpos":              false,
+	"dbsize":              false,
+	"dump":                false,
+	"evalro":              false,
+	"evalsharo":           false,
+	"exists":              false,
+	"expiretime":          false,
+	"geodist":             false,
+	"geohash":             false,
+	"geopos":              false,
+	"georadiusro":         false,
+	"georadiusbymemberro": false,
+	"geosearch":           false,
+	"get":                 false,
+	"getbit":              false,
+	"getrange":            false,
+	"hexists":             false,
+	"hget":                false,
+	"hgetall":             false,
+	"hkeys":               false,
+	"hlen":                false,
+	"hmget":               false,
+	"hrandfield":          false,
+	"hscan":               false,
+	"hstrlen":             false,
+	"hvals":               false,
+	"keys":                false,
+	"lindex":              false,
+	"llen":                false,
+	"lolwut":              false,
+	"lpos":                false,
+	"lrange":              false,
+	"memorydoctor":        false,
+	"memorystats":         false,
+	"memoryusage":         false,
+	"memorymallocstats":   false,
+	"objectencoding":      false,
+	"objectfreq":          false,
+	"objecthelp":          false,
+	"objectidletime":      false,
+	"objectrefcount":      false,
+	"pexpiretime":         false,
+	"pfcount":             false,
+	"pttl":                false,
+	"pubsubchannels":      false,
+	"pubsubnumpat":        false,
+	"pubsubnumsub":        false,
+	"pubsubhelp":          false,
+	"randomkey":           false,
+	"scan":                false,
+	"scard":               false,
+	"sdiff":               false,
+	"sinter":              false,
+	"sintercard":          false,
+	"sismember":           false,
+	"slowlogget":          false,
+	"slowloglen":          false,
+	"slowloghelp":         false,
+	"smembers":            false,
+	"smismember":          false,
+	"sortro":              false,
+	"srandmember":         false,
+	"sscan":               false,
+	"lcs":                 false,
+	"strlen":              false,
+	"sunion":              false,
+	"touch":               false,
+	"ttl":                 false,
+	"type":                false,
+	"xinfoconsumers":      false,
+	"xinfogroups":         false,
+	"xinfostream":         false,
+	"xinfohelp":           false,
+	"xlen":                false,
+	"xpending":            false,
+	"xrange":              false,
+	"xread":               false,
+	"xrevrange":           false,
+	"zcard":               false,
+	"zcount":              false,
+	"zdiff":               false,
+	"zinter":              false,
+	"zlexcount":           false,
+	"zmscore":             false,
+	"zrandmember":         false,
+	"zrange":              false,
+	"zrangebylex":         false,
+	"zrangebyscore":       false,
+	"zrank":               false,
+	"zrevrange":           false,
+	"zrevrangebylex":      false,
+	"zrevrangebyscore":    false,
+	"zrevrank":            false,
+	"zscan":               false,
+	"zscore":              false,
+	"zunion":              false,
+	"zintercard":          false,
+	"jsonget":             false,
+	"jsonstrlen":          false,
+	"jsonarrindex":        false,
+	"jsonarrlen":          false,
+	"jsonobjkeys":         false,
+	"jsonobjlen":          false,
+	"jsontype":            false,
+	"jsonresp":            false,
+	"bfexists":            false,
+	"bfmexists":           false,
+	"bfscandump":          false,
+	"bfinfo":              false,
+	"cfexists":            false,
+	"cfcount":             false,
+	"cfscandump":          false,
+	"cfinfo":              false,
+	"cmsquery":            false,
+	"cmsinfo":             false,
+	"topkquery":           false,
+	"topklist":            false,
+	"topkinfo":            false,
+	"tsrange":             false,
+	"tsrevrange":          false,
+	"tsget":               false,
+	"tsinfo":              false,
+	"tsqueryindex":        false,
+	"graphroquery":        false,
+	"graphexplain":        false,
+	"graphslowlog":        false,
+	"graphconfigget":      false,
+	"graphlist":           false,
+	"fcallro":             false,
+	"aitensorget":         false,
+	"aimodelget":          false,
+	"aimodelexecute":      false,
+	"aiscriptget":         false,
+}
