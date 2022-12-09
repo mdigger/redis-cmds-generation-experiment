@@ -9,7 +9,7 @@ import "strconv"
 // Time complexity: O(1) since the categories and commands are a fixed set.
 type AclCat Base
 
-// AclCat start a command to List the ACL categories or the commands inside a category
+// List the ACL categories or the commands inside a category
 //
 // Command: ACL CAT.
 //
@@ -25,14 +25,14 @@ func (c AclCat) Categoryname(categoryname string) AclCatCategoryname {
 	return (AclCatCategoryname)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclCat) Build() Completed {
 	return completed(c)
 }
 
 type AclCatCategoryname Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclCatCategoryname) Build() Completed {
 	return completed(c)
 }
@@ -42,7 +42,7 @@ func (c AclCatCategoryname) Build() Completed {
 // Time complexity: O(1) amortized time considering the typical user.
 type AclDeluser Base
 
-// AclDeluser start a command to Remove the specified ACL users and the associated rules
+// Remove the specified ACL users and the associated rules
 //
 // Command: ACL DELUSER.
 //
@@ -65,7 +65,7 @@ func (c AclDeluserUsername) Username(username ...string) AclDeluserUsername {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclDeluserUsername) Build() Completed {
 	return completed(c)
 }
@@ -91,7 +91,7 @@ func (c AclDryrunArg) Arg(arg ...string) AclDryrunArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclDryrunArg) Build() Completed {
 	return completed(c)
 }
@@ -103,7 +103,7 @@ func (c AclDryrunCommand) Arg(arg ...string) AclDryrunArg {
 	return (AclDryrunArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclDryrunCommand) Build() Completed {
 	return completed(c)
 }
@@ -120,7 +120,7 @@ func (c AclDryrunUsername) Command(command string) AclDryrunCommand {
 // Time complexity: O(1)
 type AclGenpass Base
 
-// AclGenpass start a command to Generate a pseudorandom secure password to use for ACL users
+// Generate a pseudorandom secure password to use for ACL users
 //
 // Command: ACL GENPASS.
 //
@@ -136,14 +136,14 @@ func (c AclGenpass) Bits(bits int64) AclGenpassBits {
 	return (AclGenpassBits)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclGenpass) Build() Completed {
 	return completed(c)
 }
 
 type AclGenpassBits Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclGenpassBits) Build() Completed {
 	return completed(c)
 }
@@ -153,7 +153,7 @@ func (c AclGenpassBits) Build() Completed {
 // Time complexity: O(N). Where N is the number of password, command and pattern rules that the user has.
 type AclGetuser Base
 
-// AclGetuser start a command to Get the rules for a specific ACL user
+// Get the rules for a specific ACL user
 //
 // Command: ACL GETUSER.
 //
@@ -171,7 +171,7 @@ func (c AclGetuser) Username(username string) AclGetuserUsername {
 
 type AclGetuserUsername Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclGetuserUsername) Build() Completed {
 	return completed(c)
 }
@@ -181,7 +181,7 @@ func (c AclGetuserUsername) Build() Completed {
 // Time complexity: O(1)
 type AclHelp Base
 
-// AclHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: ACL HELP.
 //
@@ -192,7 +192,7 @@ func (b Builder) AclHelp() AclHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclHelp) Build() Completed {
 	return completed(c)
 }
@@ -202,7 +202,7 @@ func (c AclHelp) Build() Completed {
 // Time complexity: O(N). Where N is the number of configured users.
 type AclList Base
 
-// AclList start a command to List the current ACL rules in ACL config file format
+// List the current ACL rules in ACL config file format
 //
 // Command: ACL LIST.
 //
@@ -213,7 +213,7 @@ func (b Builder) AclList() AclList {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclList) Build() Completed {
 	return completed(c)
 }
@@ -223,7 +223,7 @@ func (c AclList) Build() Completed {
 // Time complexity: O(N). Where N is the number of configured users.
 type AclLoad Base
 
-// AclLoad start a command to Reload the ACLs from the configured ACL file
+// Reload the ACLs from the configured ACL file
 //
 // Command: ACL LOAD.
 //
@@ -234,7 +234,7 @@ func (b Builder) AclLoad() AclLoad {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclLoad) Build() Completed {
 	return completed(c)
 }
@@ -244,7 +244,7 @@ func (c AclLoad) Build() Completed {
 // Time complexity: O(N) with N being the number of entries shown.
 type AclLog Base
 
-// AclLog start a command to List latest events denied because of ACLs in place
+// List latest events denied because of ACLs in place
 //
 // Command: ACL LOG.
 //
@@ -272,14 +272,14 @@ func (c AclLogCountCount) Reset() AclLogCountReset {
 	return (AclLogCountReset)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclLogCountCount) Build() Completed {
 	return completed(c)
 }
 
 type AclLogCountReset Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclLogCountReset) Build() Completed {
 	return completed(c)
 }
@@ -289,7 +289,7 @@ func (c AclLogCountReset) Build() Completed {
 // Time complexity: O(N). Where N is the number of configured users.
 type AclSave Base
 
-// AclSave start a command to Save the current ACL rules in the configured ACL file
+// Save the current ACL rules in the configured ACL file
 //
 // Command: ACL SAVE.
 //
@@ -300,7 +300,7 @@ func (b Builder) AclSave() AclSave {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclSave) Build() Completed {
 	return completed(c)
 }
@@ -310,7 +310,7 @@ func (c AclSave) Build() Completed {
 // Time complexity: O(N). Where N is the number of rules provided.
 type AclSetuser Base
 
-// AclSetuser start a command to Modify or create the rules for a specific ACL user
+// Modify or create the rules for a specific ACL user
 //
 // Command: ACL SETUSER.
 //
@@ -333,7 +333,7 @@ func (c AclSetuserRule) Rule(rule ...string) AclSetuserRule {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclSetuserRule) Build() Completed {
 	return completed(c)
 }
@@ -345,7 +345,7 @@ func (c AclSetuserUsername) Rule(rule ...string) AclSetuserRule {
 	return (AclSetuserRule)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclSetuserUsername) Build() Completed {
 	return completed(c)
 }
@@ -355,7 +355,7 @@ func (c AclSetuserUsername) Build() Completed {
 // Time complexity: O(N). Where N is the number of configured users.
 type AclUsers Base
 
-// AclUsers start a command to List the username of all the configured ACL rules
+// List the username of all the configured ACL rules
 //
 // Command: ACL USERS.
 //
@@ -366,7 +366,7 @@ func (b Builder) AclUsers() AclUsers {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclUsers) Build() Completed {
 	return completed(c)
 }
@@ -376,7 +376,7 @@ func (c AclUsers) Build() Completed {
 // Time complexity: O(1)
 type AclWhoami Base
 
-// AclWhoami start a command to Return the name of the user associated to the current connection
+// Return the name of the user associated to the current connection
 //
 // Command: ACL WHOAMI.
 //
@@ -387,7 +387,7 @@ func (b Builder) AclWhoami() AclWhoami {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AclWhoami) Build() Completed {
 	return completed(c)
 }
@@ -397,7 +397,7 @@ func (c AclWhoami) Build() Completed {
 // Time complexity: O(1)
 type AiModeldel Base
 
-// AiModeldel start a command to deletes a model stored as a key's value.
+// deletes a model stored as a key's value.
 //
 // Command: AI.MODELDEL.
 //
@@ -420,7 +420,7 @@ func (c AiModeldel) Key(key string) AiModeldelKey {
 
 type AiModeldelKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModeldelKey) Build() Completed {
 	return completed(c)
 }
@@ -430,7 +430,7 @@ func (c AiModeldelKey) Build() Completed {
 // Time complexity: O(1)
 type AiModelexecute Base
 
-// AiModelexecute start a command to runs a model stored as a key's value using its specified backend and device. It accepts one or more input tensors and store output tensors.
+// runs a model stored as a key's value using its specified backend and device. It accepts one or more input tensors and store output tensors.
 //
 // Command: AI.MODELEXECUTE.
 //
@@ -489,12 +489,12 @@ func (c AiModelexecuteOutputsOutput) Timeout(timeout int64) AiModelexecuteTimeou
 	return (AiModelexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelexecuteOutputsOutput) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiModelexecuteOutputsOutput) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -508,12 +508,12 @@ func (c AiModelexecuteOutputsOutputs) Output(output ...string) AiModelexecuteOut
 
 type AiModelexecuteTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelexecuteTimeout) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiModelexecuteTimeout) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -523,7 +523,7 @@ func (c AiModelexecuteTimeout) Cache() Cacheable {
 // Time complexity: O(1)
 type AiModelget Base
 
-// AiModelget start a command to returns a model's metadata and blob stored as a key's value.
+// returns a model's metadata and blob stored as a key's value.
 //
 // Command: AI.MODELGET.
 //
@@ -546,12 +546,12 @@ func (c AiModelget) Key(key string) AiModelgetKey {
 
 type AiModelgetBlob Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelgetBlob) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiModelgetBlob) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -568,12 +568,12 @@ func (c AiModelgetKey) Blob() AiModelgetBlob {
 	return (AiModelgetBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelgetKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiModelgetKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -585,12 +585,12 @@ func (c AiModelgetMeta) Blob() AiModelgetBlob {
 	return (AiModelgetBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelgetMeta) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiModelgetMeta) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -600,7 +600,7 @@ func (c AiModelgetMeta) Cache() Cacheable {
 // Time complexity: O(1)
 type AiModelstore Base
 
-// AiModelstore start a command to stores a model as the value of a key
+// stores a model as the value of a key
 //
 // Command: AI.MODELSTORE.
 //
@@ -684,14 +684,14 @@ func (c AiModelstoreBatchsize) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreBatchsize) Build() Completed {
 	return completed(c)
 }
 
 type AiModelstoreBlob Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreBlob) Build() Completed {
 	return completed(c)
 }
@@ -733,7 +733,7 @@ func (c AiModelstoreDeviceCpu) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreDeviceCpu) Build() Completed {
 	return completed(c)
 }
@@ -775,7 +775,7 @@ func (c AiModelstoreDeviceGpu) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreDeviceGpu) Build() Completed {
 	return completed(c)
 }
@@ -797,7 +797,7 @@ func (c AiModelstoreInputsInput) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreInputsInput) Build() Completed {
 	return completed(c)
 }
@@ -848,7 +848,7 @@ func (c AiModelstoreMinbatchsize) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreMinbatchsize) Build() Completed {
 	return completed(c)
 }
@@ -870,7 +870,7 @@ func (c AiModelstoreMinbatchtimeout) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreMinbatchtimeout) Build() Completed {
 	return completed(c)
 }
@@ -887,7 +887,7 @@ func (c AiModelstoreOutputsOutput) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreOutputsOutput) Build() Completed {
 	return completed(c)
 }
@@ -931,7 +931,7 @@ func (c AiModelstoreTag) Blob(blob string) AiModelstoreBlob {
 	return (AiModelstoreBlob)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiModelstoreTag) Build() Completed {
 	return completed(c)
 }
@@ -941,7 +941,7 @@ func (c AiModelstoreTag) Build() Completed {
 // Time complexity: O(1)
 type AiScriptdel Base
 
-// AiScriptdel start a command to deletes a script stored as a key's value.
+// deletes a script stored as a key's value.
 //
 // Command: AI.SCRIPTDEL.
 //
@@ -964,7 +964,7 @@ func (c AiScriptdel) Key(key string) AiScriptdelKey {
 
 type AiScriptdelKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptdelKey) Build() Completed {
 	return completed(c)
 }
@@ -974,7 +974,7 @@ func (c AiScriptdelKey) Build() Completed {
 // Time complexity: O(1)
 type AiScriptexecute Base
 
-// AiScriptexecute start a command to command runs a script stored as a key's value on its specified device.
+// command runs a script stored as a key's value on its specified device.
 //
 // Command: AI.SCRIPTEXECUTE.
 //
@@ -1012,7 +1012,7 @@ func (c AiScriptexecuteArgsArg) Timeout(timeout int64) AiScriptexecuteTimeout {
 	return (AiScriptexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteArgsArg) Build() Completed {
 	return completed(c)
 }
@@ -1051,7 +1051,7 @@ func (c AiScriptexecuteFunction) Timeout(timeout int64) AiScriptexecuteTimeout {
 	return (AiScriptexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteFunction) Build() Completed {
 	return completed(c)
 }
@@ -1078,7 +1078,7 @@ func (c AiScriptexecuteInputsInput) Timeout(timeout int64) AiScriptexecuteTimeou
 	return (AiScriptexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteInputsInput) Build() Completed {
 	return completed(c)
 }
@@ -1124,7 +1124,7 @@ func (c AiScriptexecuteKeysKey) Timeout(timeout int64) AiScriptexecuteTimeout {
 	return (AiScriptexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteKeysKey) Build() Completed {
 	return completed(c)
 }
@@ -1148,7 +1148,7 @@ func (c AiScriptexecuteOutputsOutput) Timeout(timeout int64) AiScriptexecuteTime
 	return (AiScriptexecuteTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteOutputsOutput) Build() Completed {
 	return completed(c)
 }
@@ -1162,7 +1162,7 @@ func (c AiScriptexecuteOutputsOutputs) Output(output ...string) AiScriptexecuteO
 
 type AiScriptexecuteTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptexecuteTimeout) Build() Completed {
 	return completed(c)
 }
@@ -1172,7 +1172,7 @@ func (c AiScriptexecuteTimeout) Build() Completed {
 // Time complexity: O(1)
 type AiScriptget Base
 
-// AiScriptget start a command to returns the TorchScript stored as a key's value.
+// returns the TorchScript stored as a key's value.
 //
 // Command: AI.SCRIPTGET.
 //
@@ -1205,12 +1205,12 @@ func (c AiScriptgetKey) Source() AiScriptgetSource {
 	return (AiScriptgetSource)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptgetKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiScriptgetKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1222,24 +1222,24 @@ func (c AiScriptgetMeta) Source() AiScriptgetSource {
 	return (AiScriptgetSource)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptgetMeta) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiScriptgetMeta) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type AiScriptgetSource Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptgetSource) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiScriptgetSource) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1249,7 +1249,7 @@ func (c AiScriptgetSource) Cache() Cacheable {
 // Time complexity: O(1)
 type AiScriptstore Base
 
-// AiScriptstore start a command to stores a TorchScript as the value of a key.
+// stores a TorchScript as the value of a key.
 //
 // Command: AI.SCRIPTSTORE.
 //
@@ -1301,7 +1301,7 @@ func (c AiScriptstoreEntryPointsEntryPoint) EntryPoint(entryPoint ...string) AiS
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiScriptstoreEntryPointsEntryPoint) Build() Completed {
 	return completed(c)
 }
@@ -1337,7 +1337,7 @@ func (c AiScriptstoreTag) EntryPoints(entryPointCount int64) AiScriptstoreEntryP
 // Time complexity: O(1)
 type AiTensorget Base
 
-// AiTensorget start a command to returns a tensor stored as key's value.
+// returns a tensor stored as key's value.
 //
 // Command: AI.TENSORGET.
 //
@@ -1360,24 +1360,24 @@ func (c AiTensorget) Key(key string) AiTensorgetKey {
 
 type AiTensorgetFormatBlob Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorgetFormatBlob) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiTensorgetFormatBlob) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type AiTensorgetFormatValues Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorgetFormatValues) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiTensorgetFormatValues) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1401,12 +1401,12 @@ func (c AiTensorgetMeta) Values() AiTensorgetFormatValues {
 	return (AiTensorgetFormatValues)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorgetMeta) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c AiTensorgetMeta) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1416,7 +1416,7 @@ func (c AiTensorgetMeta) Cache() Cacheable {
 // Time complexity: O(1)
 type AiTensorset Base
 
-// AiTensorset start a command to stores a tensor as the value of a key.
+// stores a tensor as the value of a key.
 //
 // Command: AI.TENSORSET.
 //
@@ -1445,7 +1445,7 @@ func (c AiTensorsetBlob) Values(value ...string) AiTensorsetValues {
 	return (AiTensorsetValues)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorsetBlob) Build() Completed {
 	return completed(c)
 }
@@ -1522,7 +1522,7 @@ func (c AiTensorsetShape) Values(value ...string) AiTensorsetValues {
 	return (AiTensorsetValues)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorsetShape) Build() Completed {
 	return completed(c)
 }
@@ -1625,7 +1625,7 @@ func (c AiTensorsetValues) Values(value ...string) AiTensorsetValues {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AiTensorsetValues) Build() Completed {
 	return completed(c)
 }
@@ -1635,7 +1635,7 @@ func (c AiTensorsetValues) Build() Completed {
 // Time complexity: O(1). The amortized time complexity is O(1) assuming the appended value is small and the already present value is of any size, since the dynamic string library used by Redis will double the free space available on every reallocation.
 type Append Base
 
-// Append start a command to Append a value to a key
+// Append a value to a key
 //
 // Command: APPEND.
 //
@@ -1665,7 +1665,7 @@ func (c AppendKey) Value(value string) AppendValue {
 
 type AppendValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AppendValue) Build() Completed {
 	return completed(c)
 }
@@ -1675,7 +1675,7 @@ func (c AppendValue) Build() Completed {
 // Time complexity: O(1)
 type Asking Base
 
-// Asking start a command to Sent by cluster clients after an -ASK redirect
+// Sent by cluster clients after an -ASK redirect
 //
 // Command: ASKING.
 //
@@ -1686,7 +1686,7 @@ func (b Builder) Asking() Asking {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Asking) Build() Completed {
 	return completed(c)
 }
@@ -1694,7 +1694,7 @@ func (c Asking) Build() Completed {
 // Authenticate to the server.
 type Auth Base
 
-// Auth start a command to Authenticate to the server
+// Authenticate to the server
 //
 // Command: AUTH.
 func (b Builder) Auth() Auth {
@@ -1715,7 +1715,7 @@ func (c Auth) Password(password string) AuthPassword {
 
 type AuthPassword Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c AuthPassword) Build() Completed {
 	return completed(c)
 }
@@ -1732,7 +1732,7 @@ func (c AuthUsername) Password(password string) AuthPassword {
 // Time complexity: O(k), where k is the number of hash functions used by the last sub-filter
 type BfAdd Base
 
-// BfAdd start a command to Adds an item to a Bloom Filter
+// Adds an item to a Bloom Filter
 //
 // Command: BF.ADD.
 //
@@ -1755,7 +1755,7 @@ func (c BfAdd) Key(key string) BfAddKey {
 
 type BfAddItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfAddItem) Build() Completed {
 	return completed(c)
 }
@@ -1772,7 +1772,7 @@ func (c BfAddKey) Item(item string) BfAddItem {
 // Time complexity: O(k), where k is the number of hash functions used by the last sub-filter
 type BfExists Base
 
-// BfExists start a command to Checks whether an item exists in a Bloom Filter
+// Checks whether an item exists in a Bloom Filter
 //
 // Command: BF.EXISTS.
 //
@@ -1795,12 +1795,12 @@ func (c BfExists) Key(key string) BfExistsKey {
 
 type BfExistsItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfExistsItem) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfExistsItem) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1817,7 +1817,7 @@ func (c BfExistsKey) Item(item string) BfExistsItem {
 // Time complexity: O(1)
 type BfInfo Base
 
-// BfInfo start a command to Returns information about a Bloom Filter
+// Returns information about a Bloom Filter
 //
 // Command: BF.INFO.
 //
@@ -1865,72 +1865,72 @@ func (c BfInfoKey) Expansion() BfInfoSingleValueExpansion {
 	return (BfInfoSingleValueExpansion)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BfInfoSingleValueCapacity Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoSingleValueCapacity) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoSingleValueCapacity) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BfInfoSingleValueExpansion Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoSingleValueExpansion) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoSingleValueExpansion) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BfInfoSingleValueFilters Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoSingleValueFilters) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoSingleValueFilters) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BfInfoSingleValueItems Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoSingleValueItems) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoSingleValueItems) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BfInfoSingleValueSize Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInfoSingleValueSize) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BfInfoSingleValueSize) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -1940,7 +1940,7 @@ func (c BfInfoSingleValueSize) Cache() Cacheable {
 // Time complexity: O(k * n), where k is the number of hash functions and n is the number of items
 type BfInsert Base
 
-// BfInsert start a command to Adds one or more items to a Bloom Filter. A filter will be created if it does not exist
+// Adds one or more items to a Bloom Filter. A filter will be created if it does not exist
 //
 // Command: BF.INSERT.
 //
@@ -2034,7 +2034,7 @@ func (c BfInsertItem) Item(item ...string) BfInsertItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfInsertItem) Build() Completed {
 	return completed(c)
 }
@@ -2102,7 +2102,7 @@ func (c BfInsertNonscaling) Items() BfInsertItems {
 // Time complexity: O(n), where n is the capacity
 type BfLoadchunk Base
 
-// BfLoadchunk start a command to Restores a filter previously saved using SCANDUMP
+// Restores a filter previously saved using SCANDUMP
 //
 // Command: BF.LOADCHUNK.
 //
@@ -2125,7 +2125,7 @@ func (c BfLoadchunk) Key(key string) BfLoadchunkKey {
 
 type BfLoadchunkData Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfLoadchunkData) Build() Completed {
 	return completed(c)
 }
@@ -2149,7 +2149,7 @@ func (c BfLoadchunkKey) Iterator(iterator int64) BfLoadchunkIterator {
 // Time complexity: O(k * n), where k is the number of hash functions and n is the number of items
 type BfMadd Base
 
-// BfMadd start a command to Adds one or more items to a Bloom Filter. A filter will be created if it does not exist
+// Adds one or more items to a Bloom Filter. A filter will be created if it does not exist
 //
 // Command: BF.MADD.
 //
@@ -2177,7 +2177,7 @@ func (c BfMaddItem) Item(item ...string) BfMaddItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfMaddItem) Build() Completed {
 	return completed(c)
 }
@@ -2194,7 +2194,7 @@ func (c BfMaddKey) Item(item ...string) BfMaddItem {
 // Time complexity: O(k * n), where k is the number of hash functions and n is the number of items
 type BfMexists Base
 
-// BfMexists start a command to Checks whether one or more items exist in a Bloom Filter
+// Checks whether one or more items exist in a Bloom Filter
 //
 // Command: BF.MEXISTS.
 //
@@ -2222,7 +2222,7 @@ func (c BfMexistsItem) Item(item ...string) BfMexistsItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfMexistsItem) Build() Completed {
 	return completed(c)
 }
@@ -2239,7 +2239,7 @@ func (c BfMexistsKey) Item(item ...string) BfMexistsItem {
 // Time complexity: O(1)
 type BfReserve Base
 
-// BfReserve start a command to Creates a new Bloom Filter
+// Creates a new Bloom Filter
 //
 // Command: BF.RESERVE.
 //
@@ -2272,7 +2272,7 @@ func (c BfReserveCapacity) Nonscaling() BfReserveNonscaling {
 	return (BfReserveNonscaling)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfReserveCapacity) Build() Completed {
 	return completed(c)
 }
@@ -2291,7 +2291,7 @@ func (c BfReserveExpansion) Nonscaling() BfReserveNonscaling {
 	return (BfReserveNonscaling)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfReserveExpansion) Build() Completed {
 	return completed(c)
 }
@@ -2305,7 +2305,7 @@ func (c BfReserveKey) ErrorRate(errorRate float64) BfReserveErrorRate {
 
 type BfReserveNonscaling Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfReserveNonscaling) Build() Completed {
 	return completed(c)
 }
@@ -2315,7 +2315,7 @@ func (c BfReserveNonscaling) Build() Completed {
 // Time complexity: O(n), where n is the capacity
 type BfScandump Base
 
-// BfScandump start a command to Begins an incremental save of the bloom filter
+// Begins an incremental save of the bloom filter
 //
 // Command: BF.SCANDUMP.
 //
@@ -2338,7 +2338,7 @@ func (c BfScandump) Key(key string) BfScandumpKey {
 
 type BfScandumpIterator Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BfScandumpIterator) Build() Completed {
 	return completed(c)
 }
@@ -2353,7 +2353,7 @@ func (c BfScandumpKey) Iterator(iterator int64) BfScandumpIterator {
 // Asynchronously rewrite the append-only file.
 type Bgrewriteaof Base
 
-// Bgrewriteaof start a command to Asynchronously rewrite the append-only file
+// Asynchronously rewrite the append-only file
 //
 // Command: BGREWRITEAOF.
 func (b Builder) Bgrewriteaof() Bgrewriteaof {
@@ -2362,7 +2362,7 @@ func (b Builder) Bgrewriteaof() Bgrewriteaof {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Bgrewriteaof) Build() Completed {
 	return completed(c)
 }
@@ -2370,7 +2370,7 @@ func (c Bgrewriteaof) Build() Completed {
 // Asynchronously save the dataset to disk.
 type Bgsave Base
 
-// Bgsave start a command to Asynchronously save the dataset to disk
+// Asynchronously save the dataset to disk
 //
 // Command: BGSAVE.
 func (b Builder) Bgsave() Bgsave {
@@ -2384,14 +2384,14 @@ func (c Bgsave) Schedule() BgsaveSchedule {
 	return (BgsaveSchedule)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Bgsave) Build() Completed {
 	return completed(c)
 }
 
 type BgsaveSchedule Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BgsaveSchedule) Build() Completed {
 	return completed(c)
 }
@@ -2401,7 +2401,7 @@ func (c BgsaveSchedule) Build() Completed {
 // Time complexity: O(N)
 type Bitcount Base
 
-// Bitcount start a command to Count set bits in a string
+// Count set bits in a string
 //
 // Command: BITCOUNT.
 //
@@ -2434,36 +2434,36 @@ func (c BitcountIndexEnd) Bit() BitcountIndexIndexUnitBit {
 	return (BitcountIndexIndexUnitBit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitcountIndexEnd) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitcountIndexEnd) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BitcountIndexIndexUnitBit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitcountIndexIndexUnitBit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitcountIndexIndexUnitBit) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BitcountIndexIndexUnitByte Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitcountIndexIndexUnitByte) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitcountIndexIndexUnitByte) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2482,12 +2482,12 @@ func (c BitcountKey) Start(start int64) BitcountIndexStart {
 	return (BitcountIndexStart)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitcountKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitcountKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2497,7 +2497,7 @@ func (c BitcountKey) Cache() Cacheable {
 // Time complexity: O(1) for each subcommand specified
 type Bitfield Base
 
-// Bitfield start a command to Perform arbitrary bitfield integer operations on strings
+// Perform arbitrary bitfield integer operations on strings
 //
 // Command: BITFIELD.
 //
@@ -2645,7 +2645,7 @@ func (c BitfieldOperationWriteSetIncrby) Incrby(encoding string, offset int64, i
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitfieldOperationWriteSetIncrby) Build() Completed {
 	return completed(c)
 }
@@ -2682,7 +2682,7 @@ func (c BitfieldOperationWriteSetSet) Set(encoding string, offset int64, value i
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitfieldOperationWriteSetSet) Build() Completed {
 	return completed(c)
 }
@@ -2692,7 +2692,7 @@ func (c BitfieldOperationWriteSetSet) Build() Completed {
 // Time complexity: O(1) for each subcommand specified
 type BitfieldRo Base
 
-// BitfieldRo start a command to Perform arbitrary bitfield integer operations on strings. Read-only variant of BITFIELD
+// Perform arbitrary bitfield integer operations on strings. Read-only variant of BITFIELD
 //
 // Command: BITFIELD_RO.
 //
@@ -2720,12 +2720,12 @@ func (c BitfieldRoGet) Get(encoding string, offset int64) BitfieldRoGet {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitfieldRoGet) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitfieldRoGet) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2741,7 +2741,7 @@ func (c BitfieldRoKey) Get() BitfieldRoGet {
 // Time complexity: O(N)
 type Bitop Base
 
-// Bitop start a command to Perform bitwise operations between strings
+// Perform bitwise operations between strings
 //
 // Command: BITOP.
 //
@@ -2791,7 +2791,7 @@ func (c BitopKey) Key(key ...string) BitopKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitopKey) Build() Completed {
 	return completed(c)
 }
@@ -2813,7 +2813,7 @@ func (c BitopOperation) Destkey(destkey string) BitopDestkey {
 // Time complexity: O(N)
 type Bitpos Base
 
-// Bitpos start a command to Find first bit set or clear in a string
+// Find first bit set or clear in a string
 //
 // Command: BITPOS.
 //
@@ -2841,12 +2841,12 @@ func (c BitposBit) Start(start int64) BitposIndexStart {
 	return (BitposIndexStart)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitposBit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitposBit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2863,36 +2863,36 @@ func (c BitposIndexEndIndexEnd) Bit() BitposIndexEndIndexIndexUnitBit {
 	return (BitposIndexEndIndexIndexUnitBit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitposIndexEndIndexEnd) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitposIndexEndIndexEnd) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BitposIndexEndIndexIndexUnitBit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitposIndexEndIndexIndexUnitBit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitposIndexEndIndexIndexUnitBit) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type BitposIndexEndIndexIndexUnitByte Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitposIndexEndIndexIndexUnitByte) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitposIndexEndIndexIndexUnitByte) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2904,12 +2904,12 @@ func (c BitposIndexStart) End(end int64) BitposIndexEndIndexEnd {
 	return (BitposIndexEndIndexEnd)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BitposIndexStart) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c BitposIndexStart) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -2926,7 +2926,7 @@ func (c BitposKey) Bit(bit int64) BitposBit {
 // Time complexity: O(1)
 type Blmove Base
 
-// Blmove start a command to Pop an element from a list, push it to another list and return it; or block until one is available
+// Pop an element from a list, push it to another list and return it; or block until one is available
 //
 // Command: BLMOVE.
 //
@@ -2973,7 +2973,7 @@ func (c BlmoveSource) Destination(destination string) BlmoveDestination {
 
 type BlmoveTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BlmoveTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3021,7 +3021,7 @@ func (c BlmoveWheretoRight) Timeout(timeout float64) BlmoveTimeout {
 // Time complexity: O(N+M) where N is the number of provided keys and M is the number of elements returned.
 type Blmpop Base
 
-// Blmpop start a command to Pop elements from a list, or block until one is available
+// Pop elements from a list, or block until one is available
 //
 // Command: BLMPOP.
 //
@@ -3039,7 +3039,7 @@ func (c Blmpop) Timeout(timeout float64) BlmpopTimeout {
 
 type BlmpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BlmpopCount) Build() Completed {
 	return completed(c)
 }
@@ -3102,7 +3102,7 @@ func (c BlmpopWhereLeft) Count(count int64) BlmpopCount {
 	return (BlmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BlmpopWhereLeft) Build() Completed {
 	return completed(c)
 }
@@ -3114,7 +3114,7 @@ func (c BlmpopWhereRight) Count(count int64) BlmpopCount {
 	return (BlmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BlmpopWhereRight) Build() Completed {
 	return completed(c)
 }
@@ -3124,7 +3124,7 @@ func (c BlmpopWhereRight) Build() Completed {
 // Time complexity: O(N) where N is the number of provided keys.
 type Blpop Base
 
-// Blpop start a command to Remove and get the first element in a list, or block until one is available
+// Remove and get the first element in a list, or block until one is available
 //
 // Command: BLPOP.
 //
@@ -3174,7 +3174,7 @@ func (c BlpopKey) Timeout(timeout float64) BlpopTimeout {
 
 type BlpopTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BlpopTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3184,7 +3184,7 @@ func (c BlpopTimeout) Build() Completed {
 // Time complexity: O(N) where N is the number of provided keys.
 type Brpop Base
 
-// Brpop start a command to Remove and get the last element in a list, or block until one is available
+// Remove and get the last element in a list, or block until one is available
 //
 // Command: BRPOP.
 //
@@ -3234,7 +3234,7 @@ func (c BrpopKey) Timeout(timeout float64) BrpopTimeout {
 
 type BrpopTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BrpopTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3244,7 +3244,7 @@ func (c BrpopTimeout) Build() Completed {
 // Time complexity: O(1)
 type Brpoplpush Base
 
-// Brpoplpush start a command to Pop an element from a list, push it to another list and return it; or block until one is available
+// Pop an element from a list, push it to another list and return it; or block until one is available
 //
 // Command: BRPOPLPUSH.
 //
@@ -3286,7 +3286,7 @@ func (c BrpoplpushSource) Destination(destination string) BrpoplpushDestination 
 
 type BrpoplpushTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BrpoplpushTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3296,7 +3296,7 @@ func (c BrpoplpushTimeout) Build() Completed {
 // Time complexity: O(K) + O(N*log(M)) where K is the number of provided keys, N being the number of elements in the sorted set, and M being the number of elements popped.
 type Bzmpop Base
 
-// Bzmpop start a command to Remove and return members with scores in a sorted set or block until one is available
+// Remove and return members with scores in a sorted set or block until one is available
 //
 // Command: BZMPOP.
 //
@@ -3314,7 +3314,7 @@ func (c Bzmpop) Timeout(timeout float64) BzmpopTimeout {
 
 type BzmpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BzmpopCount) Build() Completed {
 	return completed(c)
 }
@@ -3377,7 +3377,7 @@ func (c BzmpopWhereMax) Count(count int64) BzmpopCount {
 	return (BzmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BzmpopWhereMax) Build() Completed {
 	return completed(c)
 }
@@ -3389,7 +3389,7 @@ func (c BzmpopWhereMin) Count(count int64) BzmpopCount {
 	return (BzmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BzmpopWhereMin) Build() Completed {
 	return completed(c)
 }
@@ -3399,7 +3399,7 @@ func (c BzmpopWhereMin) Build() Completed {
 // Time complexity: O(log(N)) with N being the number of elements in the sorted set.
 type Bzpopmax Base
 
-// Bzpopmax start a command to Remove and return the member with the highest score from one or more sorted sets, or block until one is available
+// Remove and return the member with the highest score from one or more sorted sets, or block until one is available
 //
 // Command: BZPOPMAX.
 //
@@ -3449,7 +3449,7 @@ func (c BzpopmaxKey) Timeout(timeout float64) BzpopmaxTimeout {
 
 type BzpopmaxTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BzpopmaxTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3459,7 +3459,7 @@ func (c BzpopmaxTimeout) Build() Completed {
 // Time complexity: O(log(N)) with N being the number of elements in the sorted set.
 type Bzpopmin Base
 
-// Bzpopmin start a command to Remove and return the member with the lowest score from one or more sorted sets, or block until one is available
+// Remove and return the member with the lowest score from one or more sorted sets, or block until one is available
 //
 // Command: BZPOPMIN.
 //
@@ -3509,7 +3509,7 @@ func (c BzpopminKey) Timeout(timeout float64) BzpopminTimeout {
 
 type BzpopminTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c BzpopminTimeout) Build() Completed {
 	return completed(c)
 }
@@ -3519,7 +3519,7 @@ func (c BzpopminTimeout) Build() Completed {
 // Time complexity: O(k + i), where k is the number of sub-filters and i is maxIterations
 type CfAdd Base
 
-// CfAdd start a command to Adds an item to a Cuckoo Filter
+// Adds an item to a Cuckoo Filter
 //
 // Command: CF.ADD.
 //
@@ -3542,7 +3542,7 @@ func (c CfAdd) Key(key string) CfAddKey {
 
 type CfAddItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfAddItem) Build() Completed {
 	return completed(c)
 }
@@ -3559,7 +3559,7 @@ func (c CfAddKey) Item(item string) CfAddItem {
 // Time complexity: O(k + i), where k is the number of sub-filters and i is maxIterations
 type CfAddnx Base
 
-// CfAddnx start a command to Adds an item to a Cuckoo Filter if the item did not exist previously.
+// Adds an item to a Cuckoo Filter if the item did not exist previously.
 //
 // Command: CF.ADDNX.
 //
@@ -3582,7 +3582,7 @@ func (c CfAddnx) Key(key string) CfAddnxKey {
 
 type CfAddnxItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfAddnxItem) Build() Completed {
 	return completed(c)
 }
@@ -3599,7 +3599,7 @@ func (c CfAddnxKey) Item(item string) CfAddnxItem {
 // Time complexity: O(k), where k is the number of sub-filters
 type CfCount Base
 
-// CfCount start a command to Return the number of times an item might be in a Cuckoo Filter
+// Return the number of times an item might be in a Cuckoo Filter
 //
 // Command: CF.COUNT.
 //
@@ -3622,12 +3622,12 @@ func (c CfCount) Key(key string) CfCountKey {
 
 type CfCountItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfCountItem) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c CfCountItem) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -3644,7 +3644,7 @@ func (c CfCountKey) Item(item string) CfCountItem {
 // Time complexity: O(k), where k is the number of sub-filters
 type CfDel Base
 
-// CfDel start a command to Deletes an item from a Cuckoo Filter
+// Deletes an item from a Cuckoo Filter
 //
 // Command: CF.DEL.
 //
@@ -3667,7 +3667,7 @@ func (c CfDel) Key(key string) CfDelKey {
 
 type CfDelItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfDelItem) Build() Completed {
 	return completed(c)
 }
@@ -3684,7 +3684,7 @@ func (c CfDelKey) Item(item string) CfDelItem {
 // Time complexity: O(k), where k is the number of sub-filters
 type CfExists Base
 
-// CfExists start a command to Checks whether one or more items exist in a Cuckoo Filter
+// Checks whether one or more items exist in a Cuckoo Filter
 //
 // Command: CF.EXISTS.
 //
@@ -3707,12 +3707,12 @@ func (c CfExists) Key(key string) CfExistsKey {
 
 type CfExistsItem Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfExistsItem) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c CfExistsItem) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -3729,7 +3729,7 @@ func (c CfExistsKey) Item(item string) CfExistsItem {
 // Time complexity: O(1)
 type CfInfo Base
 
-// CfInfo start a command to Returns information about a Cuckoo Filter
+// Returns information about a Cuckoo Filter
 //
 // Command: CF.INFO.
 //
@@ -3752,12 +3752,12 @@ func (c CfInfo) Key(key string) CfInfoKey {
 
 type CfInfoKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfInfoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c CfInfoKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -3767,7 +3767,7 @@ func (c CfInfoKey) Cache() Cacheable {
 // Time complexity: O(n * (k + i)), where n is the number of items, k is the number of sub-filters and i is maxIterations
 type CfInsert Base
 
-// CfInsert start a command to Adds one or more items to a Cuckoo Filter. A filter will be created if it does not exist
+// Adds one or more items to a Cuckoo Filter. A filter will be created if it does not exist
 //
 // Command: CF.INSERT.
 //
@@ -3807,7 +3807,7 @@ func (c CfInsertItem) Item(item ...string) CfInsertItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfInsertItem) Build() Completed {
 	return completed(c)
 }
@@ -3848,7 +3848,7 @@ func (c CfInsertNocreate) Items() CfInsertItems {
 // Time complexity: O(n * (k + i)), where n is the number of items, k is the number of sub-filters and i is maxIterations
 type CfInsertnx Base
 
-// CfInsertnx start a command to Adds one or more items to a Cuckoo Filter if the items did not exist previously. A filter will be created if it does not exist
+// Adds one or more items to a Cuckoo Filter if the items did not exist previously. A filter will be created if it does not exist
 //
 // Command: CF.INSERTNX.
 //
@@ -3888,7 +3888,7 @@ func (c CfInsertnxItem) Item(item ...string) CfInsertnxItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfInsertnxItem) Build() Completed {
 	return completed(c)
 }
@@ -3929,7 +3929,7 @@ func (c CfInsertnxNocreate) Items() CfInsertnxItems {
 // Time complexity: O(n), where n is the capacity
 type CfLoadchunk Base
 
-// CfLoadchunk start a command to Restores a filter previously saved using SCANDUMP
+// Restores a filter previously saved using SCANDUMP
 //
 // Command: CF.LOADCHUNK.
 //
@@ -3952,7 +3952,7 @@ func (c CfLoadchunk) Key(key string) CfLoadchunkKey {
 
 type CfLoadchunkData Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfLoadchunkData) Build() Completed {
 	return completed(c)
 }
@@ -3976,7 +3976,7 @@ func (c CfLoadchunkKey) Iterator(iterator int64) CfLoadchunkIterator {
 // Time complexity: O(k * n), where k is the number of sub-filters and n is the number of items
 type CfMexists Base
 
-// CfMexists start a command to Checks whether one or more items exist in a Cuckoo Filter
+// Checks whether one or more items exist in a Cuckoo Filter
 //
 // Command: CF.MEXISTS.
 //
@@ -4004,7 +4004,7 @@ func (c CfMexistsItem) Item(item ...string) CfMexistsItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfMexistsItem) Build() Completed {
 	return completed(c)
 }
@@ -4021,7 +4021,7 @@ func (c CfMexistsKey) Item(item ...string) CfMexistsItem {
 // Time complexity: O(1)
 type CfReserve Base
 
-// CfReserve start a command to Creates a new Cuckoo Filter
+// Creates a new Cuckoo Filter
 //
 // Command: CF.RESERVE.
 //
@@ -4054,7 +4054,7 @@ func (c CfReserveBucketsize) Expansion(expansion int64) CfReserveExpansion {
 	return (CfReserveExpansion)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfReserveBucketsize) Build() Completed {
 	return completed(c)
 }
@@ -4076,14 +4076,14 @@ func (c CfReserveCapacity) Expansion(expansion int64) CfReserveExpansion {
 	return (CfReserveExpansion)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfReserveCapacity) Build() Completed {
 	return completed(c)
 }
 
 type CfReserveExpansion Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfReserveExpansion) Build() Completed {
 	return completed(c)
 }
@@ -4102,7 +4102,7 @@ func (c CfReserveMaxiterations) Expansion(expansion int64) CfReserveExpansion {
 	return (CfReserveExpansion)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfReserveMaxiterations) Build() Completed {
 	return completed(c)
 }
@@ -4112,7 +4112,7 @@ func (c CfReserveMaxiterations) Build() Completed {
 // Time complexity: O(n), where n is the capacity
 type CfScandump Base
 
-// CfScandump start a command to Begins an incremental save of the bloom filter
+// Begins an incremental save of the bloom filter
 //
 // Command: CF.SCANDUMP.
 //
@@ -4135,7 +4135,7 @@ func (c CfScandump) Key(key string) CfScandumpKey {
 
 type CfScandumpIterator Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CfScandumpIterator) Build() Completed {
 	return completed(c)
 }
@@ -4152,7 +4152,7 @@ func (c CfScandumpKey) Iterator(iterator int64) CfScandumpIterator {
 // Time complexity: O(1)
 type ClientCaching Base
 
-// ClientCaching start a command to Instruct the server about tracking or not keys in the next request
+// Instruct the server about tracking or not keys in the next request
 //
 // Command: CLIENT CACHING.
 //
@@ -4175,14 +4175,14 @@ func (c ClientCaching) No() ClientCachingModeNo {
 
 type ClientCachingModeNo Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientCachingModeNo) Build() Completed {
 	return completed(c)
 }
 
 type ClientCachingModeYes Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientCachingModeYes) Build() Completed {
 	return completed(c)
 }
@@ -4192,7 +4192,7 @@ func (c ClientCachingModeYes) Build() Completed {
 // Time complexity: O(1)
 type ClientGetname Base
 
-// ClientGetname start a command to Get the current connection name
+// Get the current connection name
 //
 // Command: CLIENT GETNAME.
 //
@@ -4203,7 +4203,7 @@ func (b Builder) ClientGetname() ClientGetname {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientGetname) Build() Completed {
 	return completed(c)
 }
@@ -4213,7 +4213,7 @@ func (c ClientGetname) Build() Completed {
 // Time complexity: O(1)
 type ClientGetredir Base
 
-// ClientGetredir start a command to Get tracking notifications redirection client ID if any
+// Get tracking notifications redirection client ID if any
 //
 // Command: CLIENT GETREDIR.
 //
@@ -4224,7 +4224,7 @@ func (b Builder) ClientGetredir() ClientGetredir {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientGetredir) Build() Completed {
 	return completed(c)
 }
@@ -4234,7 +4234,7 @@ func (c ClientGetredir) Build() Completed {
 // Time complexity: O(1)
 type ClientId Base
 
-// ClientId start a command to Returns the client ID for the current connection
+// Returns the client ID for the current connection
 //
 // Command: CLIENT ID.
 //
@@ -4245,7 +4245,7 @@ func (b Builder) ClientId() ClientId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientId) Build() Completed {
 	return completed(c)
 }
@@ -4255,7 +4255,7 @@ func (c ClientId) Build() Completed {
 // Time complexity: O(1)
 type ClientInfo Base
 
-// ClientInfo start a command to Returns information about the current client connection.
+// Returns information about the current client connection.
 //
 // Command: CLIENT INFO.
 //
@@ -4266,7 +4266,7 @@ func (b Builder) ClientInfo() ClientInfo {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientInfo) Build() Completed {
 	return completed(c)
 }
@@ -4276,7 +4276,7 @@ func (c ClientInfo) Build() Completed {
 // Time complexity: O(N) where N is the number of client connections
 type ClientKill Base
 
-// ClientKill start a command to Kill the connection of a client
+// Kill the connection of a client
 //
 // Command: CLIENT KILL.
 //
@@ -4337,7 +4337,7 @@ func (c ClientKill) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKill) Build() Completed {
 	return completed(c)
 }
@@ -4354,7 +4354,7 @@ func (c ClientKillAddr) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillAddr) Build() Completed {
 	return completed(c)
 }
@@ -4401,7 +4401,7 @@ func (c ClientKillId) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillId) Build() Completed {
 	return completed(c)
 }
@@ -4453,7 +4453,7 @@ func (c ClientKillIpPort) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillIpPort) Build() Completed {
 	return completed(c)
 }
@@ -4465,14 +4465,14 @@ func (c ClientKillLaddr) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillLaddr) Build() Completed {
 	return completed(c)
 }
 
 type ClientKillSkipme Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillSkipme) Build() Completed {
 	return completed(c)
 }
@@ -4499,7 +4499,7 @@ func (c ClientKillTypeMaster) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillTypeMaster) Build() Completed {
 	return completed(c)
 }
@@ -4526,7 +4526,7 @@ func (c ClientKillTypeNormal) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillTypeNormal) Build() Completed {
 	return completed(c)
 }
@@ -4553,7 +4553,7 @@ func (c ClientKillTypePubsub) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillTypePubsub) Build() Completed {
 	return completed(c)
 }
@@ -4580,7 +4580,7 @@ func (c ClientKillTypeReplica) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillTypeReplica) Build() Completed {
 	return completed(c)
 }
@@ -4602,7 +4602,7 @@ func (c ClientKillUser) Skipme(yesNo string) ClientKillSkipme {
 	return (ClientKillSkipme)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientKillUser) Build() Completed {
 	return completed(c)
 }
@@ -4612,7 +4612,7 @@ func (c ClientKillUser) Build() Completed {
 // Time complexity: O(N) where N is the number of client connections
 type ClientList Base
 
-// ClientList start a command to Get the list of client connections
+// Get the list of client connections
 //
 // Command: CLIENT LIST.
 //
@@ -4648,7 +4648,7 @@ func (c ClientList) Id() ClientListIdId {
 	return (ClientListIdId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientList) Build() Completed {
 	return completed(c)
 }
@@ -4662,7 +4662,7 @@ func (c ClientListIdClientId) ClientId(clientId ...int64) ClientListIdClientId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientListIdClientId) Build() Completed {
 	return completed(c)
 }
@@ -4683,7 +4683,7 @@ func (c ClientListTypeMaster) Id() ClientListIdId {
 	return (ClientListIdId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientListTypeMaster) Build() Completed {
 	return completed(c)
 }
@@ -4695,7 +4695,7 @@ func (c ClientListTypeNormal) Id() ClientListIdId {
 	return (ClientListIdId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientListTypeNormal) Build() Completed {
 	return completed(c)
 }
@@ -4707,7 +4707,7 @@ func (c ClientListTypePubsub) Id() ClientListIdId {
 	return (ClientListIdId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientListTypePubsub) Build() Completed {
 	return completed(c)
 }
@@ -4719,7 +4719,7 @@ func (c ClientListTypeReplica) Id() ClientListIdId {
 	return (ClientListIdId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientListTypeReplica) Build() Completed {
 	return completed(c)
 }
@@ -4729,7 +4729,7 @@ func (c ClientListTypeReplica) Build() Completed {
 // Time complexity: O(1)
 type ClientNoEvict Base
 
-// ClientNoEvict start a command to Set client eviction mode for the current connection
+// Set client eviction mode for the current connection
 //
 // Command: CLIENT NO-EVICT.
 //
@@ -4752,14 +4752,14 @@ func (c ClientNoEvict) Off() ClientNoEvictEnabledOff {
 
 type ClientNoEvictEnabledOff Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientNoEvictEnabledOff) Build() Completed {
 	return completed(c)
 }
 
 type ClientNoEvictEnabledOn Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientNoEvictEnabledOn) Build() Completed {
 	return completed(c)
 }
@@ -4769,7 +4769,7 @@ func (c ClientNoEvictEnabledOn) Build() Completed {
 // Time complexity: O(1)
 type ClientPause Base
 
-// ClientPause start a command to Stop processing commands from clients for some time
+// Stop processing commands from clients for some time
 //
 // Command: CLIENT PAUSE.
 //
@@ -4787,14 +4787,14 @@ func (c ClientPause) Timeout(timeout int64) ClientPauseTimeout {
 
 type ClientPauseModeAll Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientPauseModeAll) Build() Completed {
 	return completed(c)
 }
 
 type ClientPauseModeWrite Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientPauseModeWrite) Build() Completed {
 	return completed(c)
 }
@@ -4811,7 +4811,7 @@ func (c ClientPauseTimeout) All() ClientPauseModeAll {
 	return (ClientPauseModeAll)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientPauseTimeout) Build() Completed {
 	return completed(c)
 }
@@ -4821,7 +4821,7 @@ func (c ClientPauseTimeout) Build() Completed {
 // Time complexity: O(1)
 type ClientReply Base
 
-// ClientReply start a command to Instruct the server whether to reply to commands
+// Instruct the server whether to reply to commands
 //
 // Command: CLIENT REPLY.
 //
@@ -4849,21 +4849,21 @@ func (c ClientReply) Skip() ClientReplyReplyModeSkip {
 
 type ClientReplyReplyModeOff Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientReplyReplyModeOff) Build() Completed {
 	return completed(c)
 }
 
 type ClientReplyReplyModeOn Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientReplyReplyModeOn) Build() Completed {
 	return completed(c)
 }
 
 type ClientReplyReplyModeSkip Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientReplyReplyModeSkip) Build() Completed {
 	return completed(c)
 }
@@ -4873,7 +4873,7 @@ func (c ClientReplyReplyModeSkip) Build() Completed {
 // Time complexity: O(1)
 type ClientSetname Base
 
-// ClientSetname start a command to Set the current connection name
+// Set the current connection name
 //
 // Command: CLIENT SETNAME.
 //
@@ -4891,7 +4891,7 @@ func (c ClientSetname) ConnectionName(connectionName string) ClientSetnameConnec
 
 type ClientSetnameConnectionName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientSetnameConnectionName) Build() Completed {
 	return completed(c)
 }
@@ -4901,7 +4901,7 @@ func (c ClientSetnameConnectionName) Build() Completed {
 // Time complexity: O(1). Some options may introduce additional complexity.
 type ClientTracking Base
 
-// ClientTracking start a command to Enable or disable server assisted client side caching support
+// Enable or disable server assisted client side caching support
 //
 // Command: CLIENT TRACKING.
 //
@@ -4939,14 +4939,14 @@ func (c ClientTrackingBcast) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingBcast) Build() Completed {
 	return completed(c)
 }
 
 type ClientTrackingNoloop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingNoloop) Build() Completed {
 	return completed(c)
 }
@@ -4963,7 +4963,7 @@ func (c ClientTrackingOptin) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingOptin) Build() Completed {
 	return completed(c)
 }
@@ -4975,7 +4975,7 @@ func (c ClientTrackingOptout) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingOptout) Build() Completed {
 	return completed(c)
 }
@@ -5007,7 +5007,7 @@ func (c ClientTrackingPrefix) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingPrefix) Build() Completed {
 	return completed(c)
 }
@@ -5038,7 +5038,7 @@ func (c ClientTrackingRedirect) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingRedirect) Build() Completed {
 	return completed(c)
 }
@@ -5074,7 +5074,7 @@ func (c ClientTrackingStatusOff) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingStatusOff) Build() Completed {
 	return completed(c)
 }
@@ -5110,7 +5110,7 @@ func (c ClientTrackingStatusOn) Noloop() ClientTrackingNoloop {
 	return (ClientTrackingNoloop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackingStatusOn) Build() Completed {
 	return completed(c)
 }
@@ -5120,7 +5120,7 @@ func (c ClientTrackingStatusOn) Build() Completed {
 // Time complexity: O(1)
 type ClientTrackinginfo Base
 
-// ClientTrackinginfo start a command to Return information about server assisted client side caching for the current connection
+// Return information about server assisted client side caching for the current connection
 //
 // Command: CLIENT TRACKINGINFO.
 //
@@ -5131,7 +5131,7 @@ func (b Builder) ClientTrackinginfo() ClientTrackinginfo {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientTrackinginfo) Build() Completed {
 	return completed(c)
 }
@@ -5141,7 +5141,7 @@ func (c ClientTrackinginfo) Build() Completed {
 // Time complexity: O(log N) where N is the number of client connections
 type ClientUnblock Base
 
-// ClientUnblock start a command to Unblock a client blocked in a blocking command from a different connection
+// Unblock a client blocked in a blocking command from a different connection
 //
 // Command: CLIENT UNBLOCK.
 //
@@ -5169,21 +5169,21 @@ func (c ClientUnblockClientId) Error() ClientUnblockUnblockTypeError {
 	return (ClientUnblockUnblockTypeError)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientUnblockClientId) Build() Completed {
 	return completed(c)
 }
 
 type ClientUnblockUnblockTypeError Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientUnblockUnblockTypeError) Build() Completed {
 	return completed(c)
 }
 
 type ClientUnblockUnblockTypeTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientUnblockUnblockTypeTimeout) Build() Completed {
 	return completed(c)
 }
@@ -5193,7 +5193,7 @@ func (c ClientUnblockUnblockTypeTimeout) Build() Completed {
 // Time complexity: O(N) Where N is the number of paused clients
 type ClientUnpause Base
 
-// ClientUnpause start a command to Resume processing of clients that were paused
+// Resume processing of clients that were paused
 //
 // Command: CLIENT UNPAUSE.
 //
@@ -5204,7 +5204,7 @@ func (b Builder) ClientUnpause() ClientUnpause {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClientUnpause) Build() Completed {
 	return completed(c)
 }
@@ -5214,7 +5214,7 @@ func (c ClientUnpause) Build() Completed {
 // Time complexity: O(N) where N is the total number of hash slot arguments
 type ClusterAddslots Base
 
-// ClusterAddslots start a command to Assign new hash slots to receiving node
+// Assign new hash slots to receiving node
 //
 // Command: CLUSTER ADDSLOTS.
 //
@@ -5241,7 +5241,7 @@ func (c ClusterAddslotsSlot) Slot(slot ...int64) ClusterAddslotsSlot {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterAddslotsSlot) Build() Completed {
 	return completed(c)
 }
@@ -5251,7 +5251,7 @@ func (c ClusterAddslotsSlot) Build() Completed {
 // Time complexity: O(N) where N is the total number of the slots between the start slot and end slot arguments.
 type ClusterAddslotsrange Base
 
-// ClusterAddslotsrange start a command to Assign new hash slots to receiving node
+// Assign new hash slots to receiving node
 //
 // Command: CLUSTER ADDSLOTSRANGE.
 //
@@ -5273,7 +5273,7 @@ func (c ClusterAddslotsrangeStartSlotEndSlot) StartSlotEndSlot(startSlot int64, 
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterAddslotsrangeStartSlotEndSlot) Build() Completed {
 	return completed(c)
 }
@@ -5283,7 +5283,7 @@ func (c ClusterAddslotsrangeStartSlotEndSlot) Build() Completed {
 // Time complexity: O(1)
 type ClusterBumpepoch Base
 
-// ClusterBumpepoch start a command to Advance the cluster config epoch
+// Advance the cluster config epoch
 //
 // Command: CLUSTER BUMPEPOCH.
 //
@@ -5294,7 +5294,7 @@ func (b Builder) ClusterBumpepoch() ClusterBumpepoch {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterBumpepoch) Build() Completed {
 	return completed(c)
 }
@@ -5304,7 +5304,7 @@ func (c ClusterBumpepoch) Build() Completed {
 // Time complexity: O(N) where N is the number of failure reports
 type ClusterCountFailureReports Base
 
-// ClusterCountFailureReports start a command to Return the number of failure reports active for a given node
+// Return the number of failure reports active for a given node
 //
 // Command: CLUSTER COUNT-FAILURE-REPORTS.
 //
@@ -5322,7 +5322,7 @@ func (c ClusterCountFailureReports) NodeId(nodeId string) ClusterCountFailureRep
 
 type ClusterCountFailureReportsNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterCountFailureReportsNodeId) Build() Completed {
 	return completed(c)
 }
@@ -5332,7 +5332,7 @@ func (c ClusterCountFailureReportsNodeId) Build() Completed {
 // Time complexity: O(1)
 type ClusterCountkeysinslot Base
 
-// ClusterCountkeysinslot start a command to Return the number of local keys in the specified hash slot
+// Return the number of local keys in the specified hash slot
 //
 // Command: CLUSTER COUNTKEYSINSLOT.
 //
@@ -5350,7 +5350,7 @@ func (c ClusterCountkeysinslot) Slot(slot int64) ClusterCountkeysinslotSlot {
 
 type ClusterCountkeysinslotSlot Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterCountkeysinslotSlot) Build() Completed {
 	return completed(c)
 }
@@ -5360,7 +5360,7 @@ func (c ClusterCountkeysinslotSlot) Build() Completed {
 // Time complexity: O(N) where N is the total number of hash slot arguments
 type ClusterDelslots Base
 
-// ClusterDelslots start a command to Set hash slots as unbound in receiving node
+// Set hash slots as unbound in receiving node
 //
 // Command: CLUSTER DELSLOTS.
 //
@@ -5387,7 +5387,7 @@ func (c ClusterDelslotsSlot) Slot(slot ...int64) ClusterDelslotsSlot {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterDelslotsSlot) Build() Completed {
 	return completed(c)
 }
@@ -5397,7 +5397,7 @@ func (c ClusterDelslotsSlot) Build() Completed {
 // Time complexity: O(N) where N is the total number of the slots between the start slot and end slot arguments.
 type ClusterDelslotsrange Base
 
-// ClusterDelslotsrange start a command to Set hash slots as unbound in receiving node
+// Set hash slots as unbound in receiving node
 //
 // Command: CLUSTER DELSLOTSRANGE.
 //
@@ -5419,7 +5419,7 @@ func (c ClusterDelslotsrangeStartSlotEndSlot) StartSlotEndSlot(startSlot int64, 
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterDelslotsrangeStartSlotEndSlot) Build() Completed {
 	return completed(c)
 }
@@ -5429,7 +5429,7 @@ func (c ClusterDelslotsrangeStartSlotEndSlot) Build() Completed {
 // Time complexity: O(1)
 type ClusterFailover Base
 
-// ClusterFailover start a command to Forces a replica to perform a manual failover of its master.
+// Forces a replica to perform a manual failover of its master.
 //
 // Command: CLUSTER FAILOVER.
 //
@@ -5450,21 +5450,21 @@ func (c ClusterFailover) Takeover() ClusterFailoverOptionsTakeover {
 	return (ClusterFailoverOptionsTakeover)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterFailover) Build() Completed {
 	return completed(c)
 }
 
 type ClusterFailoverOptionsForce Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterFailoverOptionsForce) Build() Completed {
 	return completed(c)
 }
 
 type ClusterFailoverOptionsTakeover Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterFailoverOptionsTakeover) Build() Completed {
 	return completed(c)
 }
@@ -5474,7 +5474,7 @@ func (c ClusterFailoverOptionsTakeover) Build() Completed {
 // Time complexity: O(1)
 type ClusterFlushslots Base
 
-// ClusterFlushslots start a command to Delete a node's own slots information
+// Delete a node's own slots information
 //
 // Command: CLUSTER FLUSHSLOTS.
 //
@@ -5485,7 +5485,7 @@ func (b Builder) ClusterFlushslots() ClusterFlushslots {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterFlushslots) Build() Completed {
 	return completed(c)
 }
@@ -5495,7 +5495,7 @@ func (c ClusterFlushslots) Build() Completed {
 // Time complexity: O(1)
 type ClusterForget Base
 
-// ClusterForget start a command to Remove a node from the nodes table
+// Remove a node from the nodes table
 //
 // Command: CLUSTER FORGET.
 //
@@ -5513,7 +5513,7 @@ func (c ClusterForget) NodeId(nodeId string) ClusterForgetNodeId {
 
 type ClusterForgetNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterForgetNodeId) Build() Completed {
 	return completed(c)
 }
@@ -5523,7 +5523,7 @@ func (c ClusterForgetNodeId) Build() Completed {
 // Time complexity: O(log(N)) where N is the number of requested keys
 type ClusterGetkeysinslot Base
 
-// ClusterGetkeysinslot start a command to Return local key names in the specified hash slot
+// Return local key names in the specified hash slot
 //
 // Command: CLUSTER GETKEYSINSLOT.
 //
@@ -5541,7 +5541,7 @@ func (c ClusterGetkeysinslot) Slot(slot int64) ClusterGetkeysinslotSlot {
 
 type ClusterGetkeysinslotCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterGetkeysinslotCount) Build() Completed {
 	return completed(c)
 }
@@ -5558,7 +5558,7 @@ func (c ClusterGetkeysinslotSlot) Count(count int64) ClusterGetkeysinslotCount {
 // Time complexity: O(1)
 type ClusterInfo Base
 
-// ClusterInfo start a command to Provides info about Redis Cluster node state
+// Provides info about Redis Cluster node state
 //
 // Command: CLUSTER INFO.
 //
@@ -5569,7 +5569,7 @@ func (b Builder) ClusterInfo() ClusterInfo {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterInfo) Build() Completed {
 	return completed(c)
 }
@@ -5579,7 +5579,7 @@ func (c ClusterInfo) Build() Completed {
 // Time complexity: O(N) where N is the number of bytes in the key
 type ClusterKeyslot Base
 
-// ClusterKeyslot start a command to Returns the hash slot of the specified key
+// Returns the hash slot of the specified key
 //
 // Command: CLUSTER KEYSLOT.
 //
@@ -5597,7 +5597,7 @@ func (c ClusterKeyslot) Key(key string) ClusterKeyslotKey {
 
 type ClusterKeyslotKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterKeyslotKey) Build() Completed {
 	return completed(c)
 }
@@ -5607,7 +5607,7 @@ func (c ClusterKeyslotKey) Build() Completed {
 // Time complexity: O(N) where N is the total number of Cluster nodes
 type ClusterLinks Base
 
-// ClusterLinks start a command to Returns a list of all TCP links to and from peer nodes in cluster
+// Returns a list of all TCP links to and from peer nodes in cluster
 //
 // Command: CLUSTER LINKS.
 //
@@ -5618,7 +5618,7 @@ func (b Builder) ClusterLinks() ClusterLinks {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterLinks) Build() Completed {
 	return completed(c)
 }
@@ -5628,7 +5628,7 @@ func (c ClusterLinks) Build() Completed {
 // Time complexity: O(1)
 type ClusterMeet Base
 
-// ClusterMeet start a command to Force a node cluster to handshake with another node
+// Force a node cluster to handshake with another node
 //
 // Command: CLUSTER MEET.
 //
@@ -5646,7 +5646,7 @@ func (c ClusterMeet) Ip(ip string) ClusterMeetIp {
 
 type ClusterMeetClusterBusPort Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterMeetClusterBusPort) Build() Completed {
 	return completed(c)
 }
@@ -5665,7 +5665,7 @@ func (c ClusterMeetPort) ClusterBusPort(clusterBusPort int64) ClusterMeetCluster
 	return (ClusterMeetClusterBusPort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterMeetPort) Build() Completed {
 	return completed(c)
 }
@@ -5675,7 +5675,7 @@ func (c ClusterMeetPort) Build() Completed {
 // Time complexity: O(1)
 type ClusterMyid Base
 
-// ClusterMyid start a command to Return the node id
+// Return the node id
 //
 // Command: CLUSTER MYID.
 //
@@ -5686,7 +5686,7 @@ func (b Builder) ClusterMyid() ClusterMyid {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterMyid) Build() Completed {
 	return completed(c)
 }
@@ -5696,7 +5696,7 @@ func (c ClusterMyid) Build() Completed {
 // Time complexity: O(N) where N is the total number of Cluster nodes
 type ClusterNodes Base
 
-// ClusterNodes start a command to Get Cluster config for the node
+// Get Cluster config for the node
 //
 // Command: CLUSTER NODES.
 //
@@ -5707,7 +5707,7 @@ func (b Builder) ClusterNodes() ClusterNodes {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterNodes) Build() Completed {
 	return completed(c)
 }
@@ -5717,7 +5717,7 @@ func (c ClusterNodes) Build() Completed {
 // Time complexity: O(1)
 type ClusterReplicas Base
 
-// ClusterReplicas start a command to List replica nodes of the specified master node
+// List replica nodes of the specified master node
 //
 // Command: CLUSTER REPLICAS.
 //
@@ -5735,7 +5735,7 @@ func (c ClusterReplicas) NodeId(nodeId string) ClusterReplicasNodeId {
 
 type ClusterReplicasNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterReplicasNodeId) Build() Completed {
 	return completed(c)
 }
@@ -5745,7 +5745,7 @@ func (c ClusterReplicasNodeId) Build() Completed {
 // Time complexity: O(1)
 type ClusterReplicate Base
 
-// ClusterReplicate start a command to Reconfigure a node as a replica of the specified master node
+// Reconfigure a node as a replica of the specified master node
 //
 // Command: CLUSTER REPLICATE.
 //
@@ -5763,7 +5763,7 @@ func (c ClusterReplicate) NodeId(nodeId string) ClusterReplicateNodeId {
 
 type ClusterReplicateNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterReplicateNodeId) Build() Completed {
 	return completed(c)
 }
@@ -5773,7 +5773,7 @@ func (c ClusterReplicateNodeId) Build() Completed {
 // Time complexity: O(N) where N is the number of known nodes. The command may execute a FLUSHALL as a side effect.
 type ClusterReset Base
 
-// ClusterReset start a command to Reset a Redis Cluster node
+// Reset a Redis Cluster node
 //
 // Command: CLUSTER RESET.
 //
@@ -5794,21 +5794,21 @@ func (c ClusterReset) Soft() ClusterResetResetTypeSoft {
 	return (ClusterResetResetTypeSoft)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterReset) Build() Completed {
 	return completed(c)
 }
 
 type ClusterResetResetTypeHard Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterResetResetTypeHard) Build() Completed {
 	return completed(c)
 }
 
 type ClusterResetResetTypeSoft Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterResetResetTypeSoft) Build() Completed {
 	return completed(c)
 }
@@ -5818,7 +5818,7 @@ func (c ClusterResetResetTypeSoft) Build() Completed {
 // Time complexity: O(1)
 type ClusterSaveconfig Base
 
-// ClusterSaveconfig start a command to Forces the node to save cluster state on disk
+// Forces the node to save cluster state on disk
 //
 // Command: CLUSTER SAVECONFIG.
 //
@@ -5829,7 +5829,7 @@ func (b Builder) ClusterSaveconfig() ClusterSaveconfig {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSaveconfig) Build() Completed {
 	return completed(c)
 }
@@ -5839,7 +5839,7 @@ func (c ClusterSaveconfig) Build() Completed {
 // Time complexity: O(1)
 type ClusterSetConfigEpoch Base
 
-// ClusterSetConfigEpoch start a command to Set the configuration epoch in a new node
+// Set the configuration epoch in a new node
 //
 // Command: CLUSTER SET-CONFIG-EPOCH.
 //
@@ -5857,7 +5857,7 @@ func (c ClusterSetConfigEpoch) ConfigEpoch(configEpoch int64) ClusterSetConfigEp
 
 type ClusterSetConfigEpochConfigEpoch Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetConfigEpochConfigEpoch) Build() Completed {
 	return completed(c)
 }
@@ -5867,7 +5867,7 @@ func (c ClusterSetConfigEpochConfigEpoch) Build() Completed {
 // Time complexity: O(1)
 type ClusterSetslot Base
 
-// ClusterSetslot start a command to Bind a hash slot to a specific node
+// Bind a hash slot to a specific node
 //
 // Command: CLUSTER SETSLOT.
 //
@@ -5885,7 +5885,7 @@ func (c ClusterSetslot) Slot(slot int64) ClusterSetslotSlot {
 
 type ClusterSetslotNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetslotNodeId) Build() Completed {
 	return completed(c)
 }
@@ -5919,7 +5919,7 @@ func (c ClusterSetslotSubcommandImporting) NodeId(nodeId string) ClusterSetslotN
 	return (ClusterSetslotNodeId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetslotSubcommandImporting) Build() Completed {
 	return completed(c)
 }
@@ -5931,7 +5931,7 @@ func (c ClusterSetslotSubcommandMigrating) NodeId(nodeId string) ClusterSetslotN
 	return (ClusterSetslotNodeId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetslotSubcommandMigrating) Build() Completed {
 	return completed(c)
 }
@@ -5943,7 +5943,7 @@ func (c ClusterSetslotSubcommandNode) NodeId(nodeId string) ClusterSetslotNodeId
 	return (ClusterSetslotNodeId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetslotSubcommandNode) Build() Completed {
 	return completed(c)
 }
@@ -5955,7 +5955,7 @@ func (c ClusterSetslotSubcommandStable) NodeId(nodeId string) ClusterSetslotNode
 	return (ClusterSetslotNodeId)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSetslotSubcommandStable) Build() Completed {
 	return completed(c)
 }
@@ -5969,7 +5969,7 @@ func (b Builder) ClusterShards() ClusterShards {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterShards) Build() Completed {
 	return completed(c)
 }
@@ -5979,7 +5979,7 @@ func (c ClusterShards) Build() Completed {
 // Time complexity: O(1)
 type ClusterSlaves Base
 
-// ClusterSlaves start a command to List replica nodes of the specified master node
+// List replica nodes of the specified master node
 //
 // Command: CLUSTER SLAVES.
 //
@@ -5997,7 +5997,7 @@ func (c ClusterSlaves) NodeId(nodeId string) ClusterSlavesNodeId {
 
 type ClusterSlavesNodeId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSlavesNodeId) Build() Completed {
 	return completed(c)
 }
@@ -6007,7 +6007,7 @@ func (c ClusterSlavesNodeId) Build() Completed {
 // Time complexity: O(N) where N is the total number of Cluster nodes
 type ClusterSlots Base
 
-// ClusterSlots start a command to Get array of Cluster slot to node mappings
+// Get array of Cluster slot to node mappings
 //
 // Command: CLUSTER SLOTS.
 //
@@ -6018,7 +6018,7 @@ func (b Builder) ClusterSlots() ClusterSlots {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ClusterSlots) Build() Completed {
 	return completed(c)
 }
@@ -6028,7 +6028,7 @@ func (c ClusterSlots) Build() Completed {
 // Time complexity: O(n) where n is the number of items
 type CmsIncrby Base
 
-// CmsIncrby start a command to Increases the count of one or more items by increment
+// Increases the count of one or more items by increment
 //
 // Command: CMS.INCRBY.
 //
@@ -6056,7 +6056,7 @@ func (c CmsIncrbyItemsIncrement) Item(item string) CmsIncrbyItemsItem {
 	return (CmsIncrbyItemsItem)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsIncrbyItemsIncrement) Build() Completed {
 	return completed(c)
 }
@@ -6080,7 +6080,7 @@ func (c CmsIncrbyKey) Item(item string) CmsIncrbyItemsItem {
 // Time complexity: O(1)
 type CmsInfo Base
 
-// CmsInfo start a command to Returns information about a sketch
+// Returns information about a sketch
 //
 // Command: CMS.INFO.
 //
@@ -6103,12 +6103,12 @@ func (c CmsInfo) Key(key string) CmsInfoKey {
 
 type CmsInfoKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsInfoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c CmsInfoKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -6118,7 +6118,7 @@ func (c CmsInfoKey) Cache() Cacheable {
 // Time complexity: O(1)
 type CmsInitbydim Base
 
-// CmsInitbydim start a command to Initializes a Count-Min Sketch to dimensions specified by user
+// Initializes a Count-Min Sketch to dimensions specified by user
 //
 // Command: CMS.INITBYDIM.
 //
@@ -6141,7 +6141,7 @@ func (c CmsInitbydim) Key(key string) CmsInitbydimKey {
 
 type CmsInitbydimDepth Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsInitbydimDepth) Build() Completed {
 	return completed(c)
 }
@@ -6165,7 +6165,7 @@ func (c CmsInitbydimWidth) Depth(depth int64) CmsInitbydimDepth {
 // Time complexity: O(1)
 type CmsInitbyprob Base
 
-// CmsInitbyprob start a command to Initializes a Count-Min Sketch to accommodate requested tolerances.
+// Initializes a Count-Min Sketch to accommodate requested tolerances.
 //
 // Command: CMS.INITBYPROB.
 //
@@ -6202,7 +6202,7 @@ func (c CmsInitbyprobKey) Error(error float64) CmsInitbyprobError {
 
 type CmsInitbyprobProbability Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsInitbyprobProbability) Build() Completed {
 	return completed(c)
 }
@@ -6212,7 +6212,7 @@ func (c CmsInitbyprobProbability) Build() Completed {
 // Time complexity: O(n) where n is the number of sketches
 type CmsMerge Base
 
-// CmsMerge start a command to Merges several sketches into one sketch
+// Merges several sketches into one sketch
 //
 // Command: CMS.MERGE.
 //
@@ -6279,7 +6279,7 @@ func (c CmsMergeSource) Weights() CmsMergeWeightWeights {
 	return (CmsMergeWeightWeights)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsMergeSource) Build() Completed {
 	return completed(c)
 }
@@ -6293,7 +6293,7 @@ func (c CmsMergeWeightWeight) Weight(weight ...float64) CmsMergeWeightWeight {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsMergeWeightWeight) Build() Completed {
 	return completed(c)
 }
@@ -6312,7 +6312,7 @@ func (c CmsMergeWeightWeights) Weight(weight ...float64) CmsMergeWeightWeight {
 // Time complexity: O(n) where n is the number of items
 type CmsQuery Base
 
-// CmsQuery start a command to Returns the count for one or more items in a sketch
+// Returns the count for one or more items in a sketch
 //
 // Command: CMS.QUERY.
 //
@@ -6340,12 +6340,12 @@ func (c CmsQueryItem) Item(item ...string) CmsQueryItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CmsQueryItem) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c CmsQueryItem) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -6362,7 +6362,7 @@ func (c CmsQueryKey) Item(item ...string) CmsQueryItem {
 // Time complexity: O(N) where N is the total number of Redis commands
 type Command Base
 
-// Command start a command to Get array of Redis command details
+// Get array of Redis command details
 //
 // Command: COMMAND.
 //
@@ -6373,7 +6373,7 @@ func (b Builder) Command() Command {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Command) Build() Completed {
 	return completed(c)
 }
@@ -6383,7 +6383,7 @@ func (c Command) Build() Completed {
 // Time complexity: O(1)
 type CommandCount Base
 
-// CommandCount start a command to Get total number of Redis commands
+// Get total number of Redis commands
 //
 // Command: COMMAND COUNT.
 //
@@ -6394,7 +6394,7 @@ func (b Builder) CommandCount() CommandCount {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandCount) Build() Completed {
 	return completed(c)
 }
@@ -6413,7 +6413,7 @@ func (c CommandDocs) CommandName(commandName ...string) CommandDocsCommandName {
 	return (CommandDocsCommandName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandDocs) Build() Completed {
 	return completed(c)
 }
@@ -6425,7 +6425,7 @@ func (c CommandDocsCommandName) CommandName(commandName ...string) CommandDocsCo
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandDocsCommandName) Build() Completed {
 	return completed(c)
 }
@@ -6435,7 +6435,7 @@ func (c CommandDocsCommandName) Build() Completed {
 // Time complexity: O(N) where N is the number of arguments to the command
 type CommandGetkeys Base
 
-// CommandGetkeys start a command to Extract keys given a full Redis command
+// Extract keys given a full Redis command
 //
 // Command: COMMAND GETKEYS.
 //
@@ -6446,7 +6446,7 @@ func (b Builder) CommandGetkeys() CommandGetkeys {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandGetkeys) Build() Completed {
 	return completed(c)
 }
@@ -6456,7 +6456,7 @@ func (c CommandGetkeys) Build() Completed {
 // Time complexity: O(N) where N is the number of arguments to the command
 type CommandGetkeysandflags Base
 
-// CommandGetkeysandflags start a command to Extract keys given a full Redis command
+// Extract keys given a full Redis command
 //
 // Command: COMMAND GETKEYSANDFLAGS.
 //
@@ -6467,7 +6467,7 @@ func (b Builder) CommandGetkeysandflags() CommandGetkeysandflags {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandGetkeysandflags) Build() Completed {
 	return completed(c)
 }
@@ -6477,7 +6477,7 @@ func (c CommandGetkeysandflags) Build() Completed {
 // Time complexity: O(N) when N is number of commands to look up
 type CommandInfo Base
 
-// CommandInfo start a command to Get array of specific Redis command details
+// Get array of specific Redis command details
 //
 // Command: COMMAND INFO.
 //
@@ -6493,7 +6493,7 @@ func (c CommandInfo) CommandName(commandName ...string) CommandInfoCommandName {
 	return (CommandInfoCommandName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandInfo) Build() Completed {
 	return completed(c)
 }
@@ -6505,7 +6505,7 @@ func (c CommandInfoCommandName) CommandName(commandName ...string) CommandInfoCo
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandInfoCommandName) Build() Completed {
 	return completed(c)
 }
@@ -6534,28 +6534,28 @@ func (c CommandList) FilterbyPatternPattern(pattern string) CommandListFilterbyP
 	return (CommandListFilterbyPatternPattern)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandList) Build() Completed {
 	return completed(c)
 }
 
 type CommandListFilterbyAclcatCategory Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandListFilterbyAclcatCategory) Build() Completed {
 	return completed(c)
 }
 
 type CommandListFilterbyModuleName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandListFilterbyModuleName) Build() Completed {
 	return completed(c)
 }
 
 type CommandListFilterbyPatternPattern Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CommandListFilterbyPatternPattern) Build() Completed {
 	return completed(c)
 }
@@ -6563,7 +6563,7 @@ func (c CommandListFilterbyPatternPattern) Build() Completed {
 // Get the values of configuration parameters.
 type ConfigGet Base
 
-// ConfigGet start a command to Get the values of configuration parameters
+// Get the values of configuration parameters
 //
 // Command: CONFIG GET.
 func (b Builder) ConfigGet() ConfigGet {
@@ -6584,7 +6584,7 @@ func (c ConfigGetParameter) Parameter(parameter ...string) ConfigGetParameter {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ConfigGetParameter) Build() Completed {
 	return completed(c)
 }
@@ -6594,7 +6594,7 @@ func (c ConfigGetParameter) Build() Completed {
 // Time complexity: O(1)
 type ConfigResetstat Base
 
-// ConfigResetstat start a command to Reset the stats returned by INFO
+// Reset the stats returned by INFO
 //
 // Command: CONFIG RESETSTAT.
 //
@@ -6605,7 +6605,7 @@ func (b Builder) ConfigResetstat() ConfigResetstat {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ConfigResetstat) Build() Completed {
 	return completed(c)
 }
@@ -6613,7 +6613,7 @@ func (c ConfigResetstat) Build() Completed {
 // Rewrite the configuration file with the in memory configuration.
 type ConfigRewrite Base
 
-// ConfigRewrite start a command to Rewrite the configuration file with the in memory configuration
+// Rewrite the configuration file with the in memory configuration
 //
 // Command: CONFIG REWRITE.
 func (b Builder) ConfigRewrite() ConfigRewrite {
@@ -6622,7 +6622,7 @@ func (b Builder) ConfigRewrite() ConfigRewrite {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ConfigRewrite) Build() Completed {
 	return completed(c)
 }
@@ -6630,7 +6630,7 @@ func (c ConfigRewrite) Build() Completed {
 // Set configuration parameters to the given values.
 type ConfigSet Base
 
-// ConfigSet start a command to Set configuration parameters to the given values
+// Set configuration parameters to the given values
 //
 // Command: CONFIG SET.
 func (b Builder) ConfigSet() ConfigSet {
@@ -6650,7 +6650,7 @@ func (c ConfigSetParameterValue) ParameterValue(parameter string, value string) 
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ConfigSetParameterValue) Build() Completed {
 	return completed(c)
 }
@@ -6660,7 +6660,7 @@ func (c ConfigSetParameterValue) Build() Completed {
 // Time complexity: O(N) worst case for collections, where N is the number of nested items. O(1) for string values.
 type Copy Base
 
-// Copy start a command to Copy a key
+// Copy a key
 //
 // Command: COPY.
 //
@@ -6688,7 +6688,7 @@ func (c CopyDb) Replace() CopyReplace {
 	return (CopyReplace)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CopyDb) Build() Completed {
 	return completed(c)
 }
@@ -6705,14 +6705,14 @@ func (c CopyDestination) Replace() CopyReplace {
 	return (CopyReplace)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CopyDestination) Build() Completed {
 	return completed(c)
 }
 
 type CopyReplace Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c CopyReplace) Build() Completed {
 	return completed(c)
 }
@@ -6732,7 +6732,7 @@ func (c CopySource) Destination(destination string) CopyDestination {
 // Return the number of keys in the selected database.
 type Dbsize Base
 
-// Dbsize start a command to Return the number of keys in the selected database
+// Return the number of keys in the selected database
 //
 // Command: DBSIZE.
 func (b Builder) Dbsize() Dbsize {
@@ -6741,7 +6741,7 @@ func (b Builder) Dbsize() Dbsize {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Dbsize) Build() Completed {
 	return completed(c)
 }
@@ -6749,7 +6749,7 @@ func (c Dbsize) Build() Completed {
 // Get debugging information about a key.
 type DebugObject Base
 
-// DebugObject start a command to Get debugging information about a key
+// Get debugging information about a key
 //
 // Command: DEBUG OBJECT.
 func (b Builder) DebugObject() DebugObject {
@@ -6770,7 +6770,7 @@ func (c DebugObject) Key(key string) DebugObjectKey {
 
 type DebugObjectKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DebugObjectKey) Build() Completed {
 	return completed(c)
 }
@@ -6778,7 +6778,7 @@ func (c DebugObjectKey) Build() Completed {
 // Make the server crash.
 type DebugSegfault Base
 
-// DebugSegfault start a command to Make the server crash
+// Make the server crash
 //
 // Command: DEBUG SEGFAULT.
 func (b Builder) DebugSegfault() DebugSegfault {
@@ -6787,7 +6787,7 @@ func (b Builder) DebugSegfault() DebugSegfault {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DebugSegfault) Build() Completed {
 	return completed(c)
 }
@@ -6797,7 +6797,7 @@ func (c DebugSegfault) Build() Completed {
 // Time complexity: O(1)
 type Decr Base
 
-// Decr start a command to Decrement the integer value of a key by one
+// Decrement the integer value of a key by one
 //
 // Command: DECR.
 //
@@ -6820,7 +6820,7 @@ func (c Decr) Key(key string) DecrKey {
 
 type DecrKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DecrKey) Build() Completed {
 	return completed(c)
 }
@@ -6830,7 +6830,7 @@ func (c DecrKey) Build() Completed {
 // Time complexity: O(1)
 type Decrby Base
 
-// Decrby start a command to Decrement the integer value of a key by the given number
+// Decrement the integer value of a key by the given number
 //
 // Command: DECRBY.
 //
@@ -6853,7 +6853,7 @@ func (c Decrby) Key(key string) DecrbyKey {
 
 type DecrbyDecrement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DecrbyDecrement) Build() Completed {
 	return completed(c)
 }
@@ -6870,7 +6870,7 @@ func (c DecrbyKey) Decrement(decrement int64) DecrbyDecrement {
 // Time complexity: O(N) where N is the number of keys that will be removed. When a key to remove holds a value other than a string, the individual complexity for this key is O(M) where M is the number of elements in the list, set, sorted set or hash. Removing a single key that holds a string value is O(1).
 type Del Base
 
-// Del start a command to Delete a key
+// Delete a key
 //
 // Command: DEL.
 //
@@ -6913,7 +6913,7 @@ func (c DelKey) Key(key ...string) DelKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DelKey) Build() Completed {
 	return completed(c)
 }
@@ -6921,7 +6921,7 @@ func (c DelKey) Build() Completed {
 // Discard all commands issued after MULTI.
 type Discard Base
 
-// Discard start a command to Discard all commands issued after MULTI
+// Discard all commands issued after MULTI
 //
 // Command: DISCARD.
 func (b Builder) Discard() Discard {
@@ -6930,7 +6930,7 @@ func (b Builder) Discard() Discard {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Discard) Build() Completed {
 	return completed(c)
 }
@@ -6940,7 +6940,7 @@ func (c Discard) Build() Completed {
 // Time complexity: O(1) to access the key and additional O(N*M) to serialize it, where N is the number of Redis objects composing the value and M their average size. For small string values the time complexity is thus O(1)+O(1*M) where M is small, so simply O(1).
 type Dump Base
 
-// Dump start a command to Return a serialized version of the value stored at the specified key.
+// Return a serialized version of the value stored at the specified key.
 //
 // Command: DUMP.
 //
@@ -6963,7 +6963,7 @@ func (c Dump) Key(key string) DumpKey {
 
 type DumpKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c DumpKey) Build() Completed {
 	return completed(c)
 }
@@ -6971,7 +6971,7 @@ func (c DumpKey) Build() Completed {
 // Echo the given string.
 type Echo Base
 
-// Echo start a command to Echo the given string
+// Echo the given string
 //
 // Command: ECHO.
 func (b Builder) Echo() Echo {
@@ -6987,7 +6987,7 @@ func (c Echo) Message(message string) EchoMessage {
 
 type EchoMessage Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EchoMessage) Build() Completed {
 	return completed(c)
 }
@@ -6997,7 +6997,7 @@ func (c EchoMessage) Build() Completed {
 // Time complexity: Depends on the script that is executed.
 type Eval Base
 
-// Eval start a command to Execute a Lua script server side
+// Execute a Lua script server side
 //
 // Command: EVAL.
 //
@@ -7020,7 +7020,7 @@ func (c EvalArg) Arg(arg ...string) EvalArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalArg) Build() Completed {
 	return completed(c)
 }
@@ -7047,7 +7047,7 @@ func (c EvalKey) Arg(arg ...string) EvalArg {
 	return (EvalArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalKey) Build() Completed {
 	return completed(c)
 }
@@ -7074,7 +7074,7 @@ func (c EvalNumkeys) Arg(arg ...string) EvalArg {
 	return (EvalArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalNumkeys) Build() Completed {
 	return completed(c)
 }
@@ -7084,7 +7084,7 @@ func (c EvalNumkeys) Build() Completed {
 // Time complexity: Depends on the script that is executed.
 type EvalRo Base
 
-// EvalRo start a command to Execute a read-only Lua script server side
+// Execute a read-only Lua script server side
 //
 // Command: EVAL_RO.
 //
@@ -7107,7 +7107,7 @@ func (c EvalRoArg) Arg(arg ...string) EvalRoArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalRoArg) Build() Completed {
 	return completed(c)
 }
@@ -7134,7 +7134,7 @@ func (c EvalRoKey) Arg(arg ...string) EvalRoArg {
 	return (EvalRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalRoKey) Build() Completed {
 	return completed(c)
 }
@@ -7161,7 +7161,7 @@ func (c EvalRoNumkeys) Arg(arg ...string) EvalRoArg {
 	return (EvalRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalRoNumkeys) Build() Completed {
 	return completed(c)
 }
@@ -7185,7 +7185,7 @@ func (c EvalScript) Numkeys(numkeys int64) EvalNumkeys {
 // Time complexity: Depends on the script that is executed.
 type Evalsha Base
 
-// Evalsha start a command to Execute a Lua script server side
+// Execute a Lua script server side
 //
 // Command: EVALSHA.
 //
@@ -7208,7 +7208,7 @@ func (c EvalshaArg) Arg(arg ...string) EvalshaArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaArg) Build() Completed {
 	return completed(c)
 }
@@ -7235,7 +7235,7 @@ func (c EvalshaKey) Arg(arg ...string) EvalshaArg {
 	return (EvalshaArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaKey) Build() Completed {
 	return completed(c)
 }
@@ -7262,7 +7262,7 @@ func (c EvalshaNumkeys) Arg(arg ...string) EvalshaArg {
 	return (EvalshaArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaNumkeys) Build() Completed {
 	return completed(c)
 }
@@ -7272,7 +7272,7 @@ func (c EvalshaNumkeys) Build() Completed {
 // Time complexity: Depends on the script that is executed.
 type EvalshaRo Base
 
-// EvalshaRo start a command to Execute a read-only Lua script server side
+// Execute a read-only Lua script server side
 //
 // Command: EVALSHA_RO.
 //
@@ -7295,7 +7295,7 @@ func (c EvalshaRoArg) Arg(arg ...string) EvalshaRoArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaRoArg) Build() Completed {
 	return completed(c)
 }
@@ -7322,7 +7322,7 @@ func (c EvalshaRoKey) Arg(arg ...string) EvalshaRoArg {
 	return (EvalshaRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaRoKey) Build() Completed {
 	return completed(c)
 }
@@ -7349,7 +7349,7 @@ func (c EvalshaRoNumkeys) Arg(arg ...string) EvalshaRoArg {
 	return (EvalshaRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c EvalshaRoNumkeys) Build() Completed {
 	return completed(c)
 }
@@ -7371,7 +7371,7 @@ func (c EvalshaSha1) Numkeys(numkeys int64) EvalshaNumkeys {
 // Execute all commands issued after MULTI.
 type Exec Base
 
-// Exec start a command to Execute all commands issued after MULTI
+// Execute all commands issued after MULTI
 //
 // Command: EXEC.
 func (b Builder) Exec() Exec {
@@ -7380,7 +7380,7 @@ func (b Builder) Exec() Exec {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Exec) Build() Completed {
 	return completed(c)
 }
@@ -7390,7 +7390,7 @@ func (c Exec) Build() Completed {
 // Time complexity: O(N) where N is the number of keys to check.
 type Exists Base
 
-// Exists start a command to Determine if a key exists
+// Determine if a key exists
 //
 // Command: EXISTS.
 //
@@ -7433,7 +7433,7 @@ func (c ExistsKey) Key(key ...string) ExistsKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExistsKey) Build() Completed {
 	return completed(c)
 }
@@ -7443,7 +7443,7 @@ func (c ExistsKey) Build() Completed {
 // Time complexity: O(1)
 type Expire Base
 
-// Expire start a command to Set a key's time to live in seconds
+// Set a key's time to live in seconds
 //
 // Command: EXPIRE.
 //
@@ -7466,28 +7466,28 @@ func (c Expire) Key(key string) ExpireKey {
 
 type ExpireConditionGt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireConditionGt) Build() Completed {
 	return completed(c)
 }
 
 type ExpireConditionLt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireConditionLt) Build() Completed {
 	return completed(c)
 }
 
 type ExpireConditionNx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireConditionNx) Build() Completed {
 	return completed(c)
 }
 
 type ExpireConditionXx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireConditionXx) Build() Completed {
 	return completed(c)
 }
@@ -7521,7 +7521,7 @@ func (c ExpireSeconds) Lt() ExpireConditionLt {
 	return (ExpireConditionLt)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireSeconds) Build() Completed {
 	return completed(c)
 }
@@ -7531,7 +7531,7 @@ func (c ExpireSeconds) Build() Completed {
 // Time complexity: O(1)
 type Expireat Base
 
-// Expireat start a command to Set the expiration for a key as a UNIX timestamp
+// Set the expiration for a key as a UNIX timestamp
 //
 // Command: EXPIREAT.
 //
@@ -7554,28 +7554,28 @@ func (c Expireat) Key(key string) ExpireatKey {
 
 type ExpireatConditionGt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireatConditionGt) Build() Completed {
 	return completed(c)
 }
 
 type ExpireatConditionLt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireatConditionLt) Build() Completed {
 	return completed(c)
 }
 
 type ExpireatConditionNx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireatConditionNx) Build() Completed {
 	return completed(c)
 }
 
 type ExpireatConditionXx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireatConditionXx) Build() Completed {
 	return completed(c)
 }
@@ -7609,7 +7609,7 @@ func (c ExpireatTimestamp) Lt() ExpireatConditionLt {
 	return (ExpireatConditionLt)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpireatTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -7619,7 +7619,7 @@ func (c ExpireatTimestamp) Build() Completed {
 // Time complexity: O(1)
 type Expiretime Base
 
-// Expiretime start a command to Get the expiration Unix timestamp for a key
+// Get the expiration Unix timestamp for a key
 //
 // Command: EXPIRETIME.
 //
@@ -7642,12 +7642,12 @@ func (c Expiretime) Key(key string) ExpiretimeKey {
 
 type ExpiretimeKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ExpiretimeKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ExpiretimeKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -7655,7 +7655,7 @@ func (c ExpiretimeKey) Cache() Cacheable {
 // Start a coordinated failover between this server and one of its replicas..
 type Failover Base
 
-// Failover start a command to Start a coordinated failover between this server and one of its replicas.
+// Start a coordinated failover between this server and one of its replicas.
 //
 // Command: FAILOVER.
 func (b Builder) Failover() Failover {
@@ -7679,7 +7679,7 @@ func (c Failover) Timeout(milliseconds int64) FailoverTimeout {
 	return (FailoverTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Failover) Build() Completed {
 	return completed(c)
 }
@@ -7691,7 +7691,7 @@ func (c FailoverAbort) Timeout(milliseconds int64) FailoverTimeout {
 	return (FailoverTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FailoverAbort) Build() Completed {
 	return completed(c)
 }
@@ -7708,7 +7708,7 @@ func (c FailoverTargetForce) Timeout(milliseconds int64) FailoverTimeout {
 	return (FailoverTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FailoverTargetForce) Build() Completed {
 	return completed(c)
 }
@@ -7737,7 +7737,7 @@ func (c FailoverTargetPort) Timeout(milliseconds int64) FailoverTimeout {
 	return (FailoverTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FailoverTargetPort) Build() Completed {
 	return completed(c)
 }
@@ -7751,7 +7751,7 @@ func (c FailoverTargetTo) Host(host string) FailoverTargetHost {
 
 type FailoverTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FailoverTimeout) Build() Completed {
 	return completed(c)
 }
@@ -7777,7 +7777,7 @@ func (c FcallArg) Arg(arg ...string) FcallArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallArg) Build() Completed {
 	return completed(c)
 }
@@ -7811,7 +7811,7 @@ func (c FcallKey) Arg(arg ...string) FcallArg {
 	return (FcallArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallKey) Build() Completed {
 	return completed(c)
 }
@@ -7838,7 +7838,7 @@ func (c FcallNumkeys) Arg(arg ...string) FcallArg {
 	return (FcallArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallNumkeys) Build() Completed {
 	return completed(c)
 }
@@ -7864,12 +7864,12 @@ func (c FcallRoArg) Arg(arg ...string) FcallRoArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallRoArg) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c FcallRoArg) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -7903,12 +7903,12 @@ func (c FcallRoKey) Arg(arg ...string) FcallRoArg {
 	return (FcallRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallRoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c FcallRoKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -7935,12 +7935,12 @@ func (c FcallRoNumkeys) Arg(arg ...string) FcallRoArg {
 	return (FcallRoArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FcallRoNumkeys) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c FcallRoNumkeys) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -7950,7 +7950,7 @@ func (c FcallRoNumkeys) Cache() Cacheable {
 // Time complexity: O(N) where N is the total number of keys in all databases
 type Flushall Base
 
-// Flushall start a command to Remove all keys from all databases
+// Remove all keys from all databases
 //
 // Command: FLUSHALL.
 //
@@ -7971,21 +7971,21 @@ func (c Flushall) Sync() FlushallAsyncSync {
 	return (FlushallAsyncSync)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Flushall) Build() Completed {
 	return completed(c)
 }
 
 type FlushallAsync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FlushallAsync) Build() Completed {
 	return completed(c)
 }
 
 type FlushallAsyncSync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FlushallAsyncSync) Build() Completed {
 	return completed(c)
 }
@@ -7995,7 +7995,7 @@ func (c FlushallAsyncSync) Build() Completed {
 // Time complexity: O(N) where N is the number of keys in the selected database
 type Flushdb Base
 
-// Flushdb start a command to Remove all keys from the current database
+// Remove all keys from the current database
 //
 // Command: FLUSHDB.
 //
@@ -8016,21 +8016,21 @@ func (c Flushdb) Sync() FlushdbAsyncSync {
 	return (FlushdbAsyncSync)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Flushdb) Build() Completed {
 	return completed(c)
 }
 
 type FlushdbAsync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FlushdbAsync) Build() Completed {
 	return completed(c)
 }
 
 type FlushdbAsyncSync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FlushdbAsyncSync) Build() Completed {
 	return completed(c)
 }
@@ -8040,7 +8040,7 @@ func (c FlushdbAsyncSync) Build() Completed {
 // Time complexity: O(1)
 type FtAggregate Base
 
-// FtAggregate start a command to Adds terms to a dictionary
+// Adds terms to a dictionary
 //
 // Command: FT.AGGREGATE.
 //
@@ -8073,7 +8073,7 @@ func (c FtAggregateCursorCount) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateCursorCount) Build() Completed {
 	return completed(c)
 }
@@ -8090,7 +8090,7 @@ func (c FtAggregateCursorMaxidle) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateCursorMaxidle) Build() Completed {
 	return completed(c)
 }
@@ -8117,14 +8117,14 @@ func (c FtAggregateCursorWithcursor) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateCursorWithcursor) Build() Completed {
 	return completed(c)
 }
 
 type FtAggregateDialect Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateDialect) Build() Completed {
 	return completed(c)
 }
@@ -8193,7 +8193,7 @@ func (c FtAggregateLoadField) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateLoadField) Build() Completed {
 	return completed(c)
 }
@@ -8247,7 +8247,7 @@ func (c FtAggregateLoadallLoadAll) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateLoadallLoadAll) Build() Completed {
 	return completed(c)
 }
@@ -8301,7 +8301,7 @@ func (c FtAggregateOpApplyAs) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpApplyAs) Build() Completed {
 	return completed(c)
 }
@@ -8348,7 +8348,7 @@ func (c FtAggregateOpFilter) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpFilter) Build() Completed {
 	return completed(c)
 }
@@ -8405,7 +8405,7 @@ func (c FtAggregateOpGroupbyGroupby) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyGroupby) Build() Completed {
 	return completed(c)
 }
@@ -8462,7 +8462,7 @@ func (c FtAggregateOpGroupbyProperty) Dialect(dialect int64) FtAggregateDialect 
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyProperty) Build() Completed {
 	return completed(c)
 }
@@ -8539,7 +8539,7 @@ func (c FtAggregateOpGroupbyReduceArg) Dialect(dialect int64) FtAggregateDialect
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceArg) Build() Completed {
 	return completed(c)
 }
@@ -8606,7 +8606,7 @@ func (c FtAggregateOpGroupbyReduceAs) Dialect(dialect int64) FtAggregateDialect 
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceAs) Build() Completed {
 	return completed(c)
 }
@@ -8668,7 +8668,7 @@ func (c FtAggregateOpGroupbyReduceBy) Dialect(dialect int64) FtAggregateDialect 
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceBy) Build() Completed {
 	return completed(c)
 }
@@ -8745,7 +8745,7 @@ func (c FtAggregateOpGroupbyReduceNargs) Dialect(dialect int64) FtAggregateDiale
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceNargs) Build() Completed {
 	return completed(c)
 }
@@ -8797,7 +8797,7 @@ func (c FtAggregateOpGroupbyReduceOrderAsc) Dialect(dialect int64) FtAggregateDi
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -8849,7 +8849,7 @@ func (c FtAggregateOpGroupbyReduceOrderDesc) Dialect(dialect int64) FtAggregateD
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpGroupbyReduceOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -8910,7 +8910,7 @@ func (c FtAggregateOpLimitOffsetNum) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpLimitOffsetNum) Build() Completed {
 	return completed(c)
 }
@@ -8967,7 +8967,7 @@ func (c FtAggregateOpSortbyFieldsOrderAsc) Dialect(dialect int64) FtAggregateDia
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpSortbyFieldsOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -9024,7 +9024,7 @@ func (c FtAggregateOpSortbyFieldsOrderDesc) Dialect(dialect int64) FtAggregateDi
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpSortbyFieldsOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -9091,7 +9091,7 @@ func (c FtAggregateOpSortbyFieldsProperty) Dialect(dialect int64) FtAggregateDia
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpSortbyFieldsProperty) Build() Completed {
 	return completed(c)
 }
@@ -9138,7 +9138,7 @@ func (c FtAggregateOpSortbyMax) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpSortbyMax) Build() Completed {
 	return completed(c)
 }
@@ -9195,7 +9195,7 @@ func (c FtAggregateOpSortbySortby) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateOpSortbySortby) Build() Completed {
 	return completed(c)
 }
@@ -9212,7 +9212,7 @@ func (c FtAggregateParamsNameValue) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateParamsNameValue) Build() Completed {
 	return completed(c)
 }
@@ -9292,7 +9292,7 @@ func (c FtAggregateQuery) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateQuery) Build() Completed {
 	return completed(c)
 }
@@ -9344,7 +9344,7 @@ func (c FtAggregateTimeout) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateTimeout) Build() Completed {
 	return completed(c)
 }
@@ -9406,7 +9406,7 @@ func (c FtAggregateVerbatim) Dialect(dialect int64) FtAggregateDialect {
 	return (FtAggregateDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAggregateVerbatim) Build() Completed {
 	return completed(c)
 }
@@ -9416,7 +9416,7 @@ func (c FtAggregateVerbatim) Build() Completed {
 // Time complexity: O(1)
 type FtAliasadd Base
 
-// FtAliasadd start a command to Adds an alias to the index
+// Adds an alias to the index
 //
 // Command: FT.ALIASADD.
 //
@@ -9441,7 +9441,7 @@ func (c FtAliasaddAlias) Index(index string) FtAliasaddIndex {
 
 type FtAliasaddIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAliasaddIndex) Build() Completed {
 	return completed(c)
 }
@@ -9451,7 +9451,7 @@ func (c FtAliasaddIndex) Build() Completed {
 // Time complexity: O(1)
 type FtAliasdel Base
 
-// FtAliasdel start a command to Deletes an alias from the index
+// Deletes an alias from the index
 //
 // Command: FT.ALIASDEL.
 //
@@ -9469,7 +9469,7 @@ func (c FtAliasdel) Alias(alias string) FtAliasdelAlias {
 
 type FtAliasdelAlias Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAliasdelAlias) Build() Completed {
 	return completed(c)
 }
@@ -9479,7 +9479,7 @@ func (c FtAliasdelAlias) Build() Completed {
 // Time complexity: O(1)
 type FtAliasupdate Base
 
-// FtAliasupdate start a command to Adds or updates an alias to the index
+// Adds or updates an alias to the index
 //
 // Command: FT.ALIASUPDATE.
 //
@@ -9504,7 +9504,7 @@ func (c FtAliasupdateAlias) Index(index string) FtAliasupdateIndex {
 
 type FtAliasupdateIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAliasupdateIndex) Build() Completed {
 	return completed(c)
 }
@@ -9514,7 +9514,7 @@ func (c FtAliasupdateIndex) Build() Completed {
 // Time complexity: O(N) where N is the number of keys in the keyspace
 type FtAlter Base
 
-// FtAlter start a command to Adds a new field to the index
+// Adds a new field to the index
 //
 // Command: FT.ALTER.
 //
@@ -9558,7 +9558,7 @@ func (c FtAlterIndex) Schema() FtAlterSchema {
 
 type FtAlterOptions Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtAlterOptions) Build() Completed {
 	return completed(c)
 }
@@ -9582,7 +9582,7 @@ func (c FtAlterSkipinitialscan) Schema() FtAlterSchema {
 // Time complexity: O(1)
 type FtConfigGet Base
 
-// FtConfigGet start a command to Retrieves runtime configuration options
+// Retrieves runtime configuration options
 //
 // Command: FT.CONFIG GET.
 //
@@ -9600,7 +9600,7 @@ func (c FtConfigGet) Option(option string) FtConfigGetOption {
 
 type FtConfigGetOption Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtConfigGetOption) Build() Completed {
 	return completed(c)
 }
@@ -9610,7 +9610,7 @@ func (c FtConfigGetOption) Build() Completed {
 // Time complexity: O(1)
 type FtConfigHelp Base
 
-// FtConfigHelp start a command to Help description of runtime configuration options
+// Help description of runtime configuration options
 //
 // Command: FT.CONFIG HELP.
 //
@@ -9628,7 +9628,7 @@ func (c FtConfigHelp) Option(option string) FtConfigHelpOption {
 
 type FtConfigHelpOption Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtConfigHelpOption) Build() Completed {
 	return completed(c)
 }
@@ -9638,7 +9638,7 @@ func (c FtConfigHelpOption) Build() Completed {
 // Time complexity: O(1)
 type FtConfigSet Base
 
-// FtConfigSet start a command to Sets runtime configuration options
+// Sets runtime configuration options
 //
 // Command: FT.CONFIG SET.
 //
@@ -9663,7 +9663,7 @@ func (c FtConfigSetOption) Value(value string) FtConfigSetValue {
 
 type FtConfigSetValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtConfigSetValue) Build() Completed {
 	return completed(c)
 }
@@ -9675,7 +9675,7 @@ func (c FtConfigSetValue) Build() Completed {
 //   - O(N) if scanning the keyspace is triggered, where N is the number of keys in the keyspace
 type FtCreate Base
 
-// FtCreate start a command to Creates an index with the given spec
+// Creates an index with the given spec
 //
 // Command: FT.CREATE.
 //
@@ -9801,7 +9801,7 @@ func (c FtCreateFieldFieldTypeGeo) FieldName(fieldName string) FtCreateFieldFiel
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldFieldTypeGeo) Build() Completed {
 	return completed(c)
 }
@@ -9853,7 +9853,7 @@ func (c FtCreateFieldFieldTypeNumeric) FieldName(fieldName string) FtCreateField
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldFieldTypeNumeric) Build() Completed {
 	return completed(c)
 }
@@ -9905,7 +9905,7 @@ func (c FtCreateFieldFieldTypeTag) FieldName(fieldName string) FtCreateFieldFiel
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldFieldTypeTag) Build() Completed {
 	return completed(c)
 }
@@ -9957,7 +9957,7 @@ func (c FtCreateFieldFieldTypeText) FieldName(fieldName string) FtCreateFieldFie
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldFieldTypeText) Build() Completed {
 	return completed(c)
 }
@@ -10009,7 +10009,7 @@ func (c FtCreateFieldFieldTypeVector) FieldName(fieldName string) FtCreateFieldF
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldFieldTypeVector) Build() Completed {
 	return completed(c)
 }
@@ -10061,7 +10061,7 @@ func (c FtCreateFieldOptionCasesensitive) FieldName(fieldName string) FtCreateFi
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionCasesensitive) Build() Completed {
 	return completed(c)
 }
@@ -10113,7 +10113,7 @@ func (c FtCreateFieldOptionNoindex) FieldName(fieldName string) FtCreateFieldFie
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionNoindex) Build() Completed {
 	return completed(c)
 }
@@ -10165,7 +10165,7 @@ func (c FtCreateFieldOptionNostem) FieldName(fieldName string) FtCreateFieldFiel
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionNostem) Build() Completed {
 	return completed(c)
 }
@@ -10217,7 +10217,7 @@ func (c FtCreateFieldOptionPhonetic) FieldName(fieldName string) FtCreateFieldFi
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionPhonetic) Build() Completed {
 	return completed(c)
 }
@@ -10269,7 +10269,7 @@ func (c FtCreateFieldOptionSeparator) FieldName(fieldName string) FtCreateFieldF
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionSeparator) Build() Completed {
 	return completed(c)
 }
@@ -10326,7 +10326,7 @@ func (c FtCreateFieldOptionSortableSortable) FieldName(fieldName string) FtCreat
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionSortableSortable) Build() Completed {
 	return completed(c)
 }
@@ -10378,7 +10378,7 @@ func (c FtCreateFieldOptionSortableUnf) FieldName(fieldName string) FtCreateFiel
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionSortableUnf) Build() Completed {
 	return completed(c)
 }
@@ -10430,7 +10430,7 @@ func (c FtCreateFieldOptionWeight) FieldName(fieldName string) FtCreateFieldFiel
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionWeight) Build() Completed {
 	return completed(c)
 }
@@ -10482,7 +10482,7 @@ func (c FtCreateFieldOptionWithsuffixtrie) FieldName(fieldName string) FtCreateF
 	return (FtCreateFieldFieldName)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCreateFieldOptionWithsuffixtrie) Build() Completed {
 	return completed(c)
 }
@@ -11419,7 +11419,7 @@ func (c FtCreateTemporary) Schema() FtCreateSchema {
 // Time complexity: O(1)
 type FtCursorDel Base
 
-// FtCursorDel start a command to Deletes a cursor
+// Deletes a cursor
 //
 // Command: FT.CURSOR DEL.
 //
@@ -11437,7 +11437,7 @@ func (c FtCursorDel) Index(index string) FtCursorDelIndex {
 
 type FtCursorDelCursorId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCursorDelCursorId) Build() Completed {
 	return completed(c)
 }
@@ -11454,7 +11454,7 @@ func (c FtCursorDelIndex) CursorId(cursorId int64) FtCursorDelCursorId {
 // Time complexity: O(1)
 type FtCursorRead Base
 
-// FtCursorRead start a command to Reads from a cursor
+// Reads from a cursor
 //
 // Command: FT.CURSOR READ.
 //
@@ -11472,7 +11472,7 @@ func (c FtCursorRead) Index(index string) FtCursorReadIndex {
 
 type FtCursorReadCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCursorReadCount) Build() Completed {
 	return completed(c)
 }
@@ -11484,7 +11484,7 @@ func (c FtCursorReadCursorId) Count(readSize int64) FtCursorReadCount {
 	return (FtCursorReadCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtCursorReadCursorId) Build() Completed {
 	return completed(c)
 }
@@ -11501,7 +11501,7 @@ func (c FtCursorReadIndex) CursorId(cursorId int64) FtCursorReadCursorId {
 // Time complexity: O(1)
 type FtDictadd Base
 
-// FtDictadd start a command to Adds terms to a dictionary
+// Adds terms to a dictionary
 //
 // Command: FT.DICTADD.
 //
@@ -11531,7 +11531,7 @@ func (c FtDictaddTerm) Term(term ...string) FtDictaddTerm {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtDictaddTerm) Build() Completed {
 	return completed(c)
 }
@@ -11541,7 +11541,7 @@ func (c FtDictaddTerm) Build() Completed {
 // Time complexity: O(1)
 type FtDictdel Base
 
-// FtDictdel start a command to Deletes terms from a dictionary
+// Deletes terms from a dictionary
 //
 // Command: FT.DICTDEL.
 //
@@ -11571,7 +11571,7 @@ func (c FtDictdelTerm) Term(term ...string) FtDictdelTerm {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtDictdelTerm) Build() Completed {
 	return completed(c)
 }
@@ -11581,7 +11581,7 @@ func (c FtDictdelTerm) Build() Completed {
 // Time complexity: O(N), where N is the size of the dictionary
 type FtDictdump Base
 
-// FtDictdump start a command to Dumps all terms in the given dictionary
+// Dumps all terms in the given dictionary
 //
 // Command: FT.DICTDUMP.
 //
@@ -11599,7 +11599,7 @@ func (c FtDictdump) Dict(dict string) FtDictdumpDict {
 
 type FtDictdumpDict Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtDictdumpDict) Build() Completed {
 	return completed(c)
 }
@@ -11609,7 +11609,7 @@ func (c FtDictdumpDict) Build() Completed {
 // Time complexity: O(1) or O(N) if documents are deleted, where N is the number of keys in the keyspace
 type FtDropindex Base
 
-// FtDropindex start a command to Deletes the index
+// Deletes the index
 //
 // Command: FT.DROPINDEX.
 //
@@ -11627,7 +11627,7 @@ func (c FtDropindex) Index(index string) FtDropindexIndex {
 
 type FtDropindexDeleteDocsDd Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtDropindexDeleteDocsDd) Build() Completed {
 	return completed(c)
 }
@@ -11639,7 +11639,7 @@ func (c FtDropindexIndex) Dd() FtDropindexDeleteDocsDd {
 	return (FtDropindexDeleteDocsDd)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtDropindexIndex) Build() Completed {
 	return completed(c)
 }
@@ -11649,7 +11649,7 @@ func (c FtDropindexIndex) Build() Completed {
 // Time complexity: O(1)
 type FtExplain Base
 
-// FtExplain start a command to Returns the execution plan for a complex query
+// Returns the execution plan for a complex query
 //
 // Command: FT.EXPLAIN.
 //
@@ -11667,7 +11667,7 @@ func (c FtExplain) Index(index string) FtExplainIndex {
 
 type FtExplainDialect Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtExplainDialect) Build() Completed {
 	return completed(c)
 }
@@ -11686,7 +11686,7 @@ func (c FtExplainQuery) Dialect(dialect int64) FtExplainDialect {
 	return (FtExplainDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtExplainQuery) Build() Completed {
 	return completed(c)
 }
@@ -11696,7 +11696,7 @@ func (c FtExplainQuery) Build() Completed {
 // Time complexity: O(1)
 type FtExplaincli Base
 
-// FtExplaincli start a command to Returns the execution plan for a complex query
+// Returns the execution plan for a complex query
 //
 // Command: FT.EXPLAINCLI.
 //
@@ -11714,7 +11714,7 @@ func (c FtExplaincli) Index(index string) FtExplaincliIndex {
 
 type FtExplaincliDialect Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtExplaincliDialect) Build() Completed {
 	return completed(c)
 }
@@ -11733,7 +11733,7 @@ func (c FtExplaincliQuery) Dialect(dialect int64) FtExplaincliDialect {
 	return (FtExplaincliDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtExplaincliQuery) Build() Completed {
 	return completed(c)
 }
@@ -11743,7 +11743,7 @@ func (c FtExplaincliQuery) Build() Completed {
 // Time complexity: O(1)
 type FtInfo Base
 
-// FtInfo start a command to Returns information and statistics on the index
+// Returns information and statistics on the index
 //
 // Command: FT.INFO.
 //
@@ -11761,7 +11761,7 @@ func (c FtInfo) Index(index string) FtInfoIndex {
 
 type FtInfoIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtInfoIndex) Build() Completed {
 	return completed(c)
 }
@@ -11771,7 +11771,7 @@ func (c FtInfoIndex) Build() Completed {
 // Time complexity: O(1)
 type FtList Base
 
-// FtList start a command to Returns a list of all existing indexes
+// Returns a list of all existing indexes
 //
 // Command: FT._LIST.
 //
@@ -11782,7 +11782,7 @@ func (b Builder) FtList() FtList {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtList) Build() Completed {
 	return completed(c)
 }
@@ -11822,7 +11822,7 @@ func (c FtProfileLimited) Query(query string) FtProfileQuery {
 
 type FtProfileQuery Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtProfileQuery) Build() Completed {
 	return completed(c)
 }
@@ -11856,7 +11856,7 @@ func (c FtProfileQuerytypeSearch) Query(query string) FtProfileQuery {
 // Time complexity: O(N)
 type FtSearch Base
 
-// FtSearch start a command to Searches the index with a textual query, returning either documents or just ids
+// Searches the index with a textual query, returning either documents or just ids
 //
 // Command: FT.SEARCH.
 //
@@ -11874,7 +11874,7 @@ func (c FtSearch) Index(index string) FtSearchIndex {
 
 type FtSearchDialect Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchDialect) Build() Completed {
 	return completed(c)
 }
@@ -11916,7 +11916,7 @@ func (c FtSearchExpander) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchExpander) Build() Completed {
 	return completed(c)
 }
@@ -11948,7 +11948,7 @@ func (c FtSearchExplainscore) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchExplainscore) Build() Completed {
 	return completed(c)
 }
@@ -12057,7 +12057,7 @@ func (c FtSearchFilterMax) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchFilterMax) Build() Completed {
 	return completed(c)
 }
@@ -12204,7 +12204,7 @@ func (c FtSearchGeoFilterRadiusTypeFt) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchGeoFilterRadiusTypeFt) Build() Completed {
 	return completed(c)
 }
@@ -12301,7 +12301,7 @@ func (c FtSearchGeoFilterRadiusTypeKm) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchGeoFilterRadiusTypeKm) Build() Completed {
 	return completed(c)
 }
@@ -12398,7 +12398,7 @@ func (c FtSearchGeoFilterRadiusTypeM) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchGeoFilterRadiusTypeM) Build() Completed {
 	return completed(c)
 }
@@ -12495,7 +12495,7 @@ func (c FtSearchGeoFilterRadiusTypeMi) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchGeoFilterRadiusTypeMi) Build() Completed {
 	return completed(c)
 }
@@ -12572,7 +12572,7 @@ func (c FtSearchHighlightFieldsField) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchHighlightFieldsField) Build() Completed {
 	return completed(c)
 }
@@ -12656,7 +12656,7 @@ func (c FtSearchHighlightHighlight) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchHighlightHighlight) Build() Completed {
 	return completed(c)
 }
@@ -12723,7 +12723,7 @@ func (c FtSearchHighlightTagsOpenClose) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchHighlightTagsOpenClose) Build() Completed {
 	return completed(c)
 }
@@ -12817,7 +12817,7 @@ func (c FtSearchInFieldsField) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchInFieldsField) Build() Completed {
 	return completed(c)
 }
@@ -12923,7 +12923,7 @@ func (c FtSearchInKeysKey) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchInKeysKey) Build() Completed {
 	return completed(c)
 }
@@ -12977,7 +12977,7 @@ func (c FtSearchLanguage) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchLanguage) Build() Completed {
 	return completed(c)
 }
@@ -13001,7 +13001,7 @@ func (c FtSearchLimitOffsetNum) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchLimitOffsetNum) Build() Completed {
 	return completed(c)
 }
@@ -13128,7 +13128,7 @@ func (c FtSearchNocontent) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchNocontent) Build() Completed {
 	return completed(c)
 }
@@ -13245,7 +13245,7 @@ func (c FtSearchNostopwords) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchNostopwords) Build() Completed {
 	return completed(c)
 }
@@ -13262,7 +13262,7 @@ func (c FtSearchParamsNameValue) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchParamsNameValue) Build() Completed {
 	return completed(c)
 }
@@ -13302,7 +13302,7 @@ func (c FtSearchPayload) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchPayload) Build() Completed {
 	return completed(c)
 }
@@ -13434,7 +13434,7 @@ func (c FtSearchQuery) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchQuery) Build() Completed {
 	return completed(c)
 }
@@ -13516,7 +13516,7 @@ func (c FtSearchReturnIdentifiersAs) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchReturnIdentifiersAs) Build() Completed {
 	return completed(c)
 }
@@ -13603,7 +13603,7 @@ func (c FtSearchReturnIdentifiersIdentifier) Dialect(dialect int64) FtSearchDial
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchReturnIdentifiersIdentifier) Build() Completed {
 	return completed(c)
 }
@@ -13647,7 +13647,7 @@ func (c FtSearchScorer) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchScorer) Build() Completed {
 	return completed(c)
 }
@@ -13709,7 +13709,7 @@ func (c FtSearchSlop) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSlop) Build() Completed {
 	return completed(c)
 }
@@ -13731,7 +13731,7 @@ func (c FtSearchSortbyOrderAsc) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSortbyOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -13753,7 +13753,7 @@ func (c FtSearchSortbyOrderDesc) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSortbyOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -13785,7 +13785,7 @@ func (c FtSearchSortbySortby) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSortbySortby) Build() Completed {
 	return completed(c)
 }
@@ -13877,7 +13877,7 @@ func (c FtSearchSummarizeFieldsField) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSummarizeFieldsField) Build() Completed {
 	return completed(c)
 }
@@ -13966,7 +13966,7 @@ func (c FtSearchSummarizeFrags) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSummarizeFrags) Build() Completed {
 	return completed(c)
 }
@@ -14043,7 +14043,7 @@ func (c FtSearchSummarizeLen) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSummarizeLen) Build() Completed {
 	return completed(c)
 }
@@ -14115,7 +14115,7 @@ func (c FtSearchSummarizeSeparator) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSummarizeSeparator) Build() Completed {
 	return completed(c)
 }
@@ -14207,7 +14207,7 @@ func (c FtSearchSummarizeSummarize) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchSummarizeSummarize) Build() Completed {
 	return completed(c)
 }
@@ -14259,7 +14259,7 @@ func (c FtSearchTagsInorder) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchTagsInorder) Build() Completed {
 	return completed(c)
 }
@@ -14316,7 +14316,7 @@ func (c FtSearchTimeout) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchTimeout) Build() Completed {
 	return completed(c)
 }
@@ -14438,7 +14438,7 @@ func (c FtSearchVerbatim) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchVerbatim) Build() Completed {
 	return completed(c)
 }
@@ -14545,7 +14545,7 @@ func (c FtSearchWithpayloads) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchWithpayloads) Build() Completed {
 	return completed(c)
 }
@@ -14657,7 +14657,7 @@ func (c FtSearchWithscores) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchWithscores) Build() Completed {
 	return completed(c)
 }
@@ -14759,7 +14759,7 @@ func (c FtSearchWithsortkeys) Dialect(dialect int64) FtSearchDialect {
 	return (FtSearchDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSearchWithsortkeys) Build() Completed {
 	return completed(c)
 }
@@ -14769,7 +14769,7 @@ func (c FtSearchWithsortkeys) Build() Completed {
 // Time complexity: O(1)
 type FtSpellcheck Base
 
-// FtSpellcheck start a command to Performs spelling correction on a query, returning suggestions for misspelled terms
+// Performs spelling correction on a query, returning suggestions for misspelled terms
 //
 // Command: FT.SPELLCHECK.
 //
@@ -14787,7 +14787,7 @@ func (c FtSpellcheck) Index(index string) FtSpellcheckIndex {
 
 type FtSpellcheckDialect Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSpellcheckDialect) Build() Completed {
 	return completed(c)
 }
@@ -14809,7 +14809,7 @@ func (c FtSpellcheckDistance) Dialect(dialect int64) FtSpellcheckDialect {
 	return (FtSpellcheckDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSpellcheckDistance) Build() Completed {
 	return completed(c)
 }
@@ -14843,7 +14843,7 @@ func (c FtSpellcheckQuery) Dialect(dialect int64) FtSpellcheckDialect {
 	return (FtSpellcheckDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSpellcheckQuery) Build() Completed {
 	return completed(c)
 }
@@ -14860,7 +14860,7 @@ func (c FtSpellcheckTermsDictionary) Dialect(dialect int64) FtSpellcheckDialect 
 	return (FtSpellcheckDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSpellcheckTermsDictionary) Build() Completed {
 	return completed(c)
 }
@@ -14877,7 +14877,7 @@ func (c FtSpellcheckTermsTerms) Dialect(dialect int64) FtSpellcheckDialect {
 	return (FtSpellcheckDialect)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSpellcheckTermsTerms) Build() Completed {
 	return completed(c)
 }
@@ -14901,7 +14901,7 @@ func (c FtSpellcheckTermsTermsInclude) Dictionary(dictionary string) FtSpellchec
 // Time complexity: O(1)
 type FtSugadd Base
 
-// FtSugadd start a command to Adds a suggestion string to an auto-complete suggestion dictionary
+// Adds a suggestion string to an auto-complete suggestion dictionary
 //
 // Command: FT.SUGADD.
 //
@@ -14924,7 +14924,7 @@ func (c FtSugaddIncrementScoreIncr) Payload(payload string) FtSugaddPayload {
 	return (FtSugaddPayload)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSugaddIncrementScoreIncr) Build() Completed {
 	return completed(c)
 }
@@ -14938,7 +14938,7 @@ func (c FtSugaddKey) String(string string) FtSugaddString {
 
 type FtSugaddPayload Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSugaddPayload) Build() Completed {
 	return completed(c)
 }
@@ -14955,7 +14955,7 @@ func (c FtSugaddScore) Payload(payload string) FtSugaddPayload {
 	return (FtSugaddPayload)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSugaddScore) Build() Completed {
 	return completed(c)
 }
@@ -14972,7 +14972,7 @@ func (c FtSugaddString) Score(score float64) FtSugaddScore {
 // Time complexity: O(1)
 type FtSugdel Base
 
-// FtSugdel start a command to Deletes a string from a suggestion index
+// Deletes a string from a suggestion index
 //
 // Command: FT.SUGDEL.
 //
@@ -14997,7 +14997,7 @@ func (c FtSugdelKey) String(string string) FtSugdelString {
 
 type FtSugdelString Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSugdelString) Build() Completed {
 	return completed(c)
 }
@@ -15007,7 +15007,7 @@ func (c FtSugdelString) Build() Completed {
 // Time complexity: O(1)
 type FtSugget Base
 
-// FtSugget start a command to Gets completion suggestions for a prefix
+// Gets completion suggestions for a prefix
 //
 // Command: FT.SUGGET.
 //
@@ -15040,7 +15040,7 @@ func (c FtSuggetFuzzy) Max(max int64) FtSuggetMax {
 	return (FtSuggetMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuggetFuzzy) Build() Completed {
 	return completed(c)
 }
@@ -15054,7 +15054,7 @@ func (c FtSuggetKey) Prefix(prefix string) FtSuggetPrefix {
 
 type FtSuggetMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuggetMax) Build() Completed {
 	return completed(c)
 }
@@ -15081,7 +15081,7 @@ func (c FtSuggetPrefix) Max(max int64) FtSuggetMax {
 	return (FtSuggetMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuggetPrefix) Build() Completed {
 	return completed(c)
 }
@@ -15093,7 +15093,7 @@ func (c FtSuggetWithpayloads) Max(max int64) FtSuggetMax {
 	return (FtSuggetMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuggetWithpayloads) Build() Completed {
 	return completed(c)
 }
@@ -15110,7 +15110,7 @@ func (c FtSuggetWithscores) Max(max int64) FtSuggetMax {
 	return (FtSuggetMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuggetWithscores) Build() Completed {
 	return completed(c)
 }
@@ -15120,7 +15120,7 @@ func (c FtSuggetWithscores) Build() Completed {
 // Time complexity: O(1)
 type FtSuglen Base
 
-// FtSuglen start a command to Gets the size of an auto-complete suggestion dictionary
+// Gets the size of an auto-complete suggestion dictionary
 //
 // Command: FT.SUGLEN.
 //
@@ -15138,7 +15138,7 @@ func (c FtSuglen) Key(key string) FtSuglenKey {
 
 type FtSuglenKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSuglenKey) Build() Completed {
 	return completed(c)
 }
@@ -15148,7 +15148,7 @@ func (c FtSuglenKey) Build() Completed {
 // Time complexity: O(1)
 type FtSyndump Base
 
-// FtSyndump start a command to Dumps the contents of a synonym group
+// Dumps the contents of a synonym group
 //
 // Command: FT.SYNDUMP.
 //
@@ -15166,7 +15166,7 @@ func (c FtSyndump) Index(index string) FtSyndumpIndex {
 
 type FtSyndumpIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSyndumpIndex) Build() Completed {
 	return completed(c)
 }
@@ -15176,7 +15176,7 @@ func (c FtSyndumpIndex) Build() Completed {
 // Time complexity: O(1)
 type FtSynupdate Base
 
-// FtSynupdate start a command to Creates or updates a synonym group with additional terms
+// Creates or updates a synonym group with additional terms
 //
 // Command: FT.SYNUPDATE.
 //
@@ -15225,7 +15225,7 @@ func (c FtSynupdateTerm) Term(term ...string) FtSynupdateTerm {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtSynupdateTerm) Build() Completed {
 	return completed(c)
 }
@@ -15235,7 +15235,7 @@ func (c FtSynupdateTerm) Build() Completed {
 // Time complexity: O(N)
 type FtTagvals Base
 
-// FtTagvals start a command to Returns the distinct tags indexed in a Tag field
+// Returns the distinct tags indexed in a Tag field
 //
 // Command: FT.TAGVALS.
 //
@@ -15253,7 +15253,7 @@ func (c FtTagvals) Index(index string) FtTagvalsIndex {
 
 type FtTagvalsFieldName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FtTagvalsFieldName) Build() Completed {
 	return completed(c)
 }
@@ -15281,7 +15281,7 @@ func (c FunctionDelete) LibraryName(libraryName string) FunctionDeleteLibraryNam
 
 type FunctionDeleteLibraryName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionDeleteLibraryName) Build() Completed {
 	return completed(c)
 }
@@ -15295,7 +15295,7 @@ func (b Builder) FunctionDump() FunctionDump {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionDump) Build() Completed {
 	return completed(c)
 }
@@ -15319,21 +15319,21 @@ func (c FunctionFlush) Sync() FunctionFlushAsyncSync {
 	return (FunctionFlushAsyncSync)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionFlush) Build() Completed {
 	return completed(c)
 }
 
 type FunctionFlushAsync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionFlushAsync) Build() Completed {
 	return completed(c)
 }
 
 type FunctionFlushAsyncSync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionFlushAsyncSync) Build() Completed {
 	return completed(c)
 }
@@ -15347,7 +15347,7 @@ func (b Builder) FunctionHelp() FunctionHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionHelp) Build() Completed {
 	return completed(c)
 }
@@ -15361,7 +15361,7 @@ func (b Builder) FunctionKill() FunctionKill {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionKill) Build() Completed {
 	return completed(c)
 }
@@ -15385,7 +15385,7 @@ func (c FunctionList) Withcode() FunctionListWithcode {
 	return (FunctionListWithcode)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionList) Build() Completed {
 	return completed(c)
 }
@@ -15397,14 +15397,14 @@ func (c FunctionListLibraryname) Withcode() FunctionListWithcode {
 	return (FunctionListWithcode)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionListLibraryname) Build() Completed {
 	return completed(c)
 }
 
 type FunctionListWithcode Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionListWithcode) Build() Completed {
 	return completed(c)
 }
@@ -15430,7 +15430,7 @@ func (c FunctionLoad) FunctionCode(functionCode string) FunctionLoadFunctionCode
 
 type FunctionLoadFunctionCode Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionLoadFunctionCode) Build() Completed {
 	return completed(c)
 }
@@ -15458,21 +15458,21 @@ func (c FunctionRestore) SerializedValue(serializedValue string) FunctionRestore
 
 type FunctionRestorePolicyAppend Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionRestorePolicyAppend) Build() Completed {
 	return completed(c)
 }
 
 type FunctionRestorePolicyFlush Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionRestorePolicyFlush) Build() Completed {
 	return completed(c)
 }
 
 type FunctionRestorePolicyReplace Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionRestorePolicyReplace) Build() Completed {
 	return completed(c)
 }
@@ -15494,7 +15494,7 @@ func (c FunctionRestoreSerializedValue) Replace() FunctionRestorePolicyReplace {
 	return (FunctionRestorePolicyReplace)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionRestoreSerializedValue) Build() Completed {
 	return completed(c)
 }
@@ -15508,7 +15508,7 @@ func (b Builder) FunctionStats() FunctionStats {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c FunctionStats) Build() Completed {
 	return completed(c)
 }
@@ -15518,7 +15518,7 @@ func (c FunctionStats) Build() Completed {
 // Time complexity: O(log(N)) for each item added, where N is the number of elements in the sorted set.
 type Geoadd Base
 
-// Geoadd start a command to Add one or more geospatial items in the geospatial index represented using a sorted set
+// Add one or more geospatial items in the geospatial index represented using a sorted set
 //
 // Command: GEOADD.
 //
@@ -15595,7 +15595,7 @@ func (c GeoaddLongitudeLatitudeMember) LongitudeLatitudeMember(longitude float64
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoaddLongitudeLatitudeMember) Build() Completed {
 	return completed(c)
 }
@@ -15605,7 +15605,7 @@ func (c GeoaddLongitudeLatitudeMember) Build() Completed {
 // Time complexity: O(log(N))
 type Geodist Base
 
-// Geodist start a command to Returns the distance between two members of a geospatial index
+// Returns the distance between two members of a geospatial index
 //
 // Command: GEODIST.
 //
@@ -15662,60 +15662,60 @@ func (c GeodistMember2) Mi() GeodistUnitMi {
 	return (GeodistUnitMi)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeodistMember2) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeodistMember2) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeodistUnitFt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeodistUnitFt) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeodistUnitFt) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeodistUnitKm Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeodistUnitKm) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeodistUnitKm) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeodistUnitM Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeodistUnitM) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeodistUnitM) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeodistUnitMi Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeodistUnitMi) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeodistUnitMi) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -15725,7 +15725,7 @@ func (c GeodistUnitMi) Cache() Cacheable {
 // Time complexity: O(log(N)) for each member requested, where N is the number of elements in the sorted set.
 type Geohash Base
 
-// Geohash start a command to Returns members of a geospatial index as standard geohash strings
+// Returns members of a geospatial index as standard geohash strings
 //
 // Command: GEOHASH.
 //
@@ -15760,12 +15760,12 @@ func (c GeohashMember) Member(member ...string) GeohashMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeohashMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeohashMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -15775,7 +15775,7 @@ func (c GeohashMember) Cache() Cacheable {
 // Time complexity: O(N) where N is the number of members requested.
 type Geopos Base
 
-// Geopos start a command to Returns longitude and latitude of members of a geospatial index
+// Returns longitude and latitude of members of a geospatial index
 //
 // Command: GEOPOS.
 //
@@ -15810,12 +15810,12 @@ func (c GeoposMember) Member(member ...string) GeoposMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoposMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoposMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -15825,7 +15825,7 @@ func (c GeoposMember) Cache() Cacheable {
 // Time complexity: O(N+log(M)) where N is the number of elements inside the bounding box of the circular area delimited by center and radius and M is the number of items inside the index.
 type Georadius Base
 
-// Georadius start a command to Query a sorted set representing a geospatial index to fetch members matching a given maximum distance from a point
+// Query a sorted set representing a geospatial index to fetch members matching a given maximum distance from a point
 //
 // Command: GEORADIUS.
 //
@@ -15878,7 +15878,7 @@ func (c GeoradiusCountAny) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusCountAny) Build() Completed {
 	return completed(c)
 }
@@ -15920,7 +15920,7 @@ func (c GeoradiusCountCount) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusCountCount) Build() Completed {
 	return completed(c)
 }
@@ -15968,7 +15968,7 @@ func (c GeoradiusOrderAsc) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -15995,7 +15995,7 @@ func (c GeoradiusOrderDesc) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -16053,12 +16053,12 @@ func (c GeoradiusRoCountAny) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoCountAny) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoCountAny) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16080,12 +16080,12 @@ func (c GeoradiusRoCountCount) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoCountCount) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoCountCount) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16113,24 +16113,24 @@ func (c GeoradiusRoLongitude) Latitude(latitude float64) GeoradiusRoLatitude {
 
 type GeoradiusRoOrderAsc Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoOrderAsc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoOrderAsc) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeoradiusRoOrderDesc Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoOrderDesc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoOrderDesc) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16189,12 +16189,12 @@ func (c GeoradiusRoUnitFt) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoUnitFt) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoUnitFt) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16231,12 +16231,12 @@ func (c GeoradiusRoUnitKm) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoUnitKm) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoUnitKm) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16273,12 +16273,12 @@ func (c GeoradiusRoUnitM) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoUnitM) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoUnitM) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16315,12 +16315,12 @@ func (c GeoradiusRoUnitMi) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoUnitMi) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoUnitMi) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16352,12 +16352,12 @@ func (c GeoradiusRoWithcoord) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoWithcoord) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoWithcoord) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16384,12 +16384,12 @@ func (c GeoradiusRoWithdist) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoWithdist) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoWithdist) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16411,12 +16411,12 @@ func (c GeoradiusRoWithhash) Desc() GeoradiusRoOrderDesc {
 	return (GeoradiusRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusRoWithhash) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusRoWithhash) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -16433,14 +16433,14 @@ func (c GeoradiusStore) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusStore) Build() Completed {
 	return completed(c)
 }
 
 type GeoradiusStoredist Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusStoredist) Build() Completed {
 	return completed(c)
 }
@@ -16497,7 +16497,7 @@ func (c GeoradiusUnitFt) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusUnitFt) Build() Completed {
 	return completed(c)
 }
@@ -16554,7 +16554,7 @@ func (c GeoradiusUnitKm) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusUnitKm) Build() Completed {
 	return completed(c)
 }
@@ -16611,7 +16611,7 @@ func (c GeoradiusUnitM) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusUnitM) Build() Completed {
 	return completed(c)
 }
@@ -16668,7 +16668,7 @@ func (c GeoradiusUnitMi) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusUnitMi) Build() Completed {
 	return completed(c)
 }
@@ -16720,7 +16720,7 @@ func (c GeoradiusWithcoord) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusWithcoord) Build() Completed {
 	return completed(c)
 }
@@ -16767,7 +16767,7 @@ func (c GeoradiusWithdist) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusWithdist) Build() Completed {
 	return completed(c)
 }
@@ -16809,7 +16809,7 @@ func (c GeoradiusWithhash) Storedist(key string) GeoradiusStoredist {
 	return (GeoradiusStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusWithhash) Build() Completed {
 	return completed(c)
 }
@@ -16819,7 +16819,7 @@ func (c GeoradiusWithhash) Build() Completed {
 // Time complexity: O(N+log(M)) where N is the number of elements inside the bounding box of the circular area delimited by center and radius and M is the number of items inside the index.
 type Georadiusbymember Base
 
-// Georadiusbymember start a command to Query a sorted set representing a geospatial index to fetch members matching a given maximum distance from a member
+// Query a sorted set representing a geospatial index to fetch members matching a given maximum distance from a member
 //
 // Command: GEORADIUSBYMEMBER.
 //
@@ -16872,7 +16872,7 @@ func (c GeoradiusbymemberCountAny) Storedist(key string) GeoradiusbymemberStored
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberCountAny) Build() Completed {
 	return completed(c)
 }
@@ -16914,7 +16914,7 @@ func (c GeoradiusbymemberCountCount) Storedist(key string) GeoradiusbymemberStor
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberCountCount) Build() Completed {
 	return completed(c)
 }
@@ -16955,7 +16955,7 @@ func (c GeoradiusbymemberOrderAsc) Storedist(key string) GeoradiusbymemberStored
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -16982,7 +16982,7 @@ func (c GeoradiusbymemberOrderDesc) Storedist(key string) GeoradiusbymemberStore
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -17040,12 +17040,12 @@ func (c GeoradiusbymemberRoCountAny) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoCountAny) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoCountAny) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17067,12 +17067,12 @@ func (c GeoradiusbymemberRoCountCount) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoCountCount) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoCountCount) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17093,24 +17093,24 @@ func (c GeoradiusbymemberRoMember) Radius(radius float64) GeoradiusbymemberRoRad
 
 type GeoradiusbymemberRoOrderAsc Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoOrderAsc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoOrderAsc) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeoradiusbymemberRoOrderDesc Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoOrderDesc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoOrderDesc) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17169,12 +17169,12 @@ func (c GeoradiusbymemberRoUnitFt) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoUnitFt) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoUnitFt) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17211,12 +17211,12 @@ func (c GeoradiusbymemberRoUnitKm) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoUnitKm) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoUnitKm) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17253,12 +17253,12 @@ func (c GeoradiusbymemberRoUnitM) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoUnitM) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoUnitM) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17295,12 +17295,12 @@ func (c GeoradiusbymemberRoUnitMi) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoUnitMi) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoUnitMi) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17332,12 +17332,12 @@ func (c GeoradiusbymemberRoWithcoord) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoWithcoord) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoWithcoord) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17364,12 +17364,12 @@ func (c GeoradiusbymemberRoWithdist) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoWithdist) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoWithdist) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17391,12 +17391,12 @@ func (c GeoradiusbymemberRoWithhash) Desc() GeoradiusbymemberRoOrderDesc {
 	return (GeoradiusbymemberRoOrderDesc)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberRoWithhash) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeoradiusbymemberRoWithhash) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17413,14 +17413,14 @@ func (c GeoradiusbymemberStore) Storedist(key string) GeoradiusbymemberStoredist
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberStore) Build() Completed {
 	return completed(c)
 }
 
 type GeoradiusbymemberStoredist Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberStoredist) Build() Completed {
 	return completed(c)
 }
@@ -17477,7 +17477,7 @@ func (c GeoradiusbymemberUnitFt) Storedist(key string) GeoradiusbymemberStoredis
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberUnitFt) Build() Completed {
 	return completed(c)
 }
@@ -17534,7 +17534,7 @@ func (c GeoradiusbymemberUnitKm) Storedist(key string) GeoradiusbymemberStoredis
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberUnitKm) Build() Completed {
 	return completed(c)
 }
@@ -17591,7 +17591,7 @@ func (c GeoradiusbymemberUnitM) Storedist(key string) GeoradiusbymemberStoredist
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberUnitM) Build() Completed {
 	return completed(c)
 }
@@ -17648,7 +17648,7 @@ func (c GeoradiusbymemberUnitMi) Storedist(key string) GeoradiusbymemberStoredis
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberUnitMi) Build() Completed {
 	return completed(c)
 }
@@ -17700,7 +17700,7 @@ func (c GeoradiusbymemberWithcoord) Storedist(key string) GeoradiusbymemberStore
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberWithcoord) Build() Completed {
 	return completed(c)
 }
@@ -17747,7 +17747,7 @@ func (c GeoradiusbymemberWithdist) Storedist(key string) GeoradiusbymemberStored
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberWithdist) Build() Completed {
 	return completed(c)
 }
@@ -17789,7 +17789,7 @@ func (c GeoradiusbymemberWithhash) Storedist(key string) GeoradiusbymemberStored
 	return (GeoradiusbymemberStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeoradiusbymemberWithhash) Build() Completed {
 	return completed(c)
 }
@@ -17799,7 +17799,7 @@ func (c GeoradiusbymemberWithhash) Build() Completed {
 // Time complexity: O(N+log(M)) where N is the number of elements in the grid-aligned bounding box area around the shape provided as the filter and M is the number of items inside the shape
 type Geosearch Base
 
-// Geosearch start a command to Query a sorted set representing a geospatial index to fetch members inside an area of a box or a circle.
+// Query a sorted set representing a geospatial index to fetch members inside an area of a box or a circle.
 //
 // Command: GEOSEARCH.
 //
@@ -17881,12 +17881,12 @@ func (c GeosearchCircleBoxUnitFt) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleBoxUnitFt) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleBoxUnitFt) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17923,12 +17923,12 @@ func (c GeosearchCircleBoxUnitKm) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleBoxUnitKm) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleBoxUnitKm) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -17965,12 +17965,12 @@ func (c GeosearchCircleBoxUnitM) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleBoxUnitM) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleBoxUnitM) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18007,12 +18007,12 @@ func (c GeosearchCircleBoxUnitMi) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleBoxUnitMi) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleBoxUnitMi) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18076,12 +18076,12 @@ func (c GeosearchCircleCircleUnitFt) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleCircleUnitFt) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleCircleUnitFt) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18123,12 +18123,12 @@ func (c GeosearchCircleCircleUnitKm) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleCircleUnitKm) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleCircleUnitKm) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18170,12 +18170,12 @@ func (c GeosearchCircleCircleUnitM) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleCircleUnitM) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleCircleUnitM) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18217,12 +18217,12 @@ func (c GeosearchCircleCircleUnitMi) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCircleCircleUnitMi) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCircleCircleUnitMi) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18244,12 +18244,12 @@ func (c GeosearchCountAny) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCountAny) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCountAny) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18276,12 +18276,12 @@ func (c GeosearchCountCount) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchCountCount) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchCountCount) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18349,12 +18349,12 @@ func (c GeosearchOrderAsc) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchOrderAsc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchOrderAsc) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18381,12 +18381,12 @@ func (c GeosearchOrderDesc) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchOrderDesc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchOrderDesc) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18403,12 +18403,12 @@ func (c GeosearchWithcoord) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchWithcoord) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchWithcoord) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18420,24 +18420,24 @@ func (c GeosearchWithdist) Withhash() GeosearchWithhash {
 	return (GeosearchWithhash)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchWithdist) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchWithdist) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GeosearchWithhash Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchWithhash) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GeosearchWithhash) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18447,7 +18447,7 @@ func (c GeosearchWithhash) Cache() Cacheable {
 // Time complexity: O(N+log(M)) where N is the number of elements in the grid-aligned bounding box area around the shape provided as the filter and M is the number of items inside the shape
 type Geosearchstore Base
 
-// Geosearchstore start a command to Query a sorted set representing a geospatial index to fetch members inside an area of a box or a circle, and store the result in another key.
+// Query a sorted set representing a geospatial index to fetch members inside an area of a box or a circle, and store the result in another key.
 //
 // Command: GEOSEARCHSTORE.
 //
@@ -18519,7 +18519,7 @@ func (c GeosearchstoreCircleBoxUnitFt) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleBoxUnitFt) Build() Completed {
 	return completed(c)
 }
@@ -18546,7 +18546,7 @@ func (c GeosearchstoreCircleBoxUnitKm) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleBoxUnitKm) Build() Completed {
 	return completed(c)
 }
@@ -18573,7 +18573,7 @@ func (c GeosearchstoreCircleBoxUnitM) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleBoxUnitM) Build() Completed {
 	return completed(c)
 }
@@ -18600,7 +18600,7 @@ func (c GeosearchstoreCircleBoxUnitMi) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleBoxUnitMi) Build() Completed {
 	return completed(c)
 }
@@ -18654,7 +18654,7 @@ func (c GeosearchstoreCircleCircleUnitFt) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleCircleUnitFt) Build() Completed {
 	return completed(c)
 }
@@ -18686,7 +18686,7 @@ func (c GeosearchstoreCircleCircleUnitKm) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleCircleUnitKm) Build() Completed {
 	return completed(c)
 }
@@ -18718,7 +18718,7 @@ func (c GeosearchstoreCircleCircleUnitM) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleCircleUnitM) Build() Completed {
 	return completed(c)
 }
@@ -18750,7 +18750,7 @@ func (c GeosearchstoreCircleCircleUnitMi) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCircleCircleUnitMi) Build() Completed {
 	return completed(c)
 }
@@ -18762,7 +18762,7 @@ func (c GeosearchstoreCountAny) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCountAny) Build() Completed {
 	return completed(c)
 }
@@ -18779,7 +18779,7 @@ func (c GeosearchstoreCountCount) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreCountCount) Build() Completed {
 	return completed(c)
 }
@@ -18837,7 +18837,7 @@ func (c GeosearchstoreOrderAsc) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -18854,7 +18854,7 @@ func (c GeosearchstoreOrderDesc) Storedist() GeosearchstoreStoredist {
 	return (GeosearchstoreStoredist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -18873,7 +18873,7 @@ func (c GeosearchstoreSource) Fromlonlat(longitude float64, latitude float64) Ge
 
 type GeosearchstoreStoredist Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GeosearchstoreStoredist) Build() Completed {
 	return completed(c)
 }
@@ -18883,7 +18883,7 @@ func (c GeosearchstoreStoredist) Build() Completed {
 // Time complexity: O(1)
 type Get Base
 
-// Get start a command to Get the value of a key
+// Get the value of a key
 //
 // Command: GET.
 //
@@ -18906,12 +18906,12 @@ func (c Get) Key(key string) GetKey {
 
 type GetKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GetKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18921,7 +18921,7 @@ func (c GetKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Getbit Base
 
-// Getbit start a command to Returns the bit value at offset in the string value stored at key
+// Returns the bit value at offset in the string value stored at key
 //
 // Command: GETBIT.
 //
@@ -18951,12 +18951,12 @@ func (c GetbitKey) Offset(offset int64) GetbitOffset {
 
 type GetbitOffset Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetbitOffset) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GetbitOffset) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -18966,7 +18966,7 @@ func (c GetbitOffset) Cache() Cacheable {
 // Time complexity: O(1)
 type Getdel Base
 
-// Getdel start a command to Get the value of a key and delete the key
+// Get the value of a key and delete the key
 //
 // Command: GETDEL.
 //
@@ -18989,7 +18989,7 @@ func (c Getdel) Key(key string) GetdelKey {
 
 type GetdelKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetdelKey) Build() Completed {
 	return completed(c)
 }
@@ -18999,7 +18999,7 @@ func (c GetdelKey) Build() Completed {
 // Time complexity: O(1)
 type Getex Base
 
-// Getex start a command to Get the value of a key and optionally set its expiration
+// Get the value of a key and optionally set its expiration
 //
 // Command: GETEX.
 //
@@ -19022,35 +19022,35 @@ func (c Getex) Key(key string) GetexKey {
 
 type GetexExpirationExSeconds Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexExpirationExSeconds) Build() Completed {
 	return completed(c)
 }
 
 type GetexExpirationExatTimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexExpirationExatTimestamp) Build() Completed {
 	return completed(c)
 }
 
 type GetexExpirationPersist Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexExpirationPersist) Build() Completed {
 	return completed(c)
 }
 
 type GetexExpirationPxMilliseconds Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexExpirationPxMilliseconds) Build() Completed {
 	return completed(c)
 }
 
 type GetexExpirationPxatMillisecondsTimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexExpirationPxatMillisecondsTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -19082,7 +19082,7 @@ func (c GetexKey) Persist() GetexExpirationPersist {
 	return (GetexExpirationPersist)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetexKey) Build() Completed {
 	return completed(c)
 }
@@ -19092,7 +19092,7 @@ func (c GetexKey) Build() Completed {
 // Time complexity: O(N) where N is the length of the returned string. The complexity is ultimately determined by the returned length, but because creating a substring from an existing string is very cheap, it can be considered O(1) for small strings.
 type Getrange Base
 
-// Getrange start a command to Get a substring of the string stored at a key
+// Get a substring of the string stored at a key
 //
 // Command: GETRANGE.
 //
@@ -19115,12 +19115,12 @@ func (c Getrange) Key(key string) GetrangeKey {
 
 type GetrangeEnd Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetrangeEnd) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GetrangeEnd) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19144,7 +19144,7 @@ func (c GetrangeStart) End(end int64) GetrangeEnd {
 // Time complexity: O(1)
 type Getset Base
 
-// Getset start a command to Set the string value of a key and return its old value
+// Set the string value of a key and return its old value
 //
 // Command: GETSET.
 //
@@ -19174,7 +19174,7 @@ func (c GetsetKey) Value(value string) GetsetValue {
 
 type GetsetValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GetsetValue) Build() Completed {
 	return completed(c)
 }
@@ -19182,7 +19182,7 @@ func (c GetsetValue) Build() Completed {
 // Retrieves a RedisGraph configuration.
 type GraphConfigGet Base
 
-// GraphConfigGet start a command to Retrieves a RedisGraph configuration
+// Retrieves a RedisGraph configuration
 //
 // Command: GRAPH.CONFIG GET.
 func (b Builder) GraphConfigGet() GraphConfigGet {
@@ -19198,7 +19198,7 @@ func (c GraphConfigGet) Name(name string) GraphConfigGetName {
 
 type GraphConfigGetName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphConfigGetName) Build() Completed {
 	return completed(c)
 }
@@ -19206,7 +19206,7 @@ func (c GraphConfigGetName) Build() Completed {
 // Updates a RedisGraph configuration.
 type GraphConfigSet Base
 
-// GraphConfigSet start a command to Updates a RedisGraph configuration
+// Updates a RedisGraph configuration
 //
 // Command: GRAPH.CONFIG SET.
 func (b Builder) GraphConfigSet() GraphConfigSet {
@@ -19229,7 +19229,7 @@ func (c GraphConfigSetName) Value(value string) GraphConfigSetValue {
 
 type GraphConfigSetValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphConfigSetValue) Build() Completed {
 	return completed(c)
 }
@@ -19237,7 +19237,7 @@ func (c GraphConfigSetValue) Build() Completed {
 // Completely removes the graph and all of its entities.
 type GraphDelete Base
 
-// GraphDelete start a command to Completely removes the graph and all of its entities
+// Completely removes the graph and all of its entities
 //
 // Command: GRAPH.DELETE.
 func (b Builder) GraphDelete() GraphDelete {
@@ -19258,7 +19258,7 @@ func (c GraphDelete) Graph(graph string) GraphDeleteGraph {
 
 type GraphDeleteGraph Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphDeleteGraph) Build() Completed {
 	return completed(c)
 }
@@ -19266,7 +19266,7 @@ func (c GraphDeleteGraph) Build() Completed {
 // Returns a query execution plan without running the query.
 type GraphExplain Base
 
-// GraphExplain start a command to Returns a query execution plan without running the query
+// Returns a query execution plan without running the query
 //
 // Command: GRAPH.EXPLAIN.
 func (b Builder) GraphExplain() GraphExplain {
@@ -19294,7 +19294,7 @@ func (c GraphExplainGraph) Query(query string) GraphExplainQuery {
 
 type GraphExplainQuery Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphExplainQuery) Build() Completed {
 	return completed(c)
 }
@@ -19302,7 +19302,7 @@ func (c GraphExplainQuery) Build() Completed {
 // Lists all graph keys in the keyspace.
 type GraphList Base
 
-// GraphList start a command to Lists all graph keys in the keyspace
+// Lists all graph keys in the keyspace
 //
 // Command: GRAPH.LIST.
 func (b Builder) GraphList() GraphList {
@@ -19311,7 +19311,7 @@ func (b Builder) GraphList() GraphList {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphList) Build() Completed {
 	return completed(c)
 }
@@ -19319,7 +19319,7 @@ func (c GraphList) Build() Completed {
 // Executes a query and returns an execution plan augmented with metrics for each operation's execution.
 type GraphProfile Base
 
-// GraphProfile start a command to Executes a query and returns an execution plan augmented with metrics for each operation's execution
+// Executes a query and returns an execution plan augmented with metrics for each operation's execution
 //
 // Command: GRAPH.PROFILE.
 func (b Builder) GraphProfile() GraphProfile {
@@ -19352,14 +19352,14 @@ func (c GraphProfileQuery) Timeout(timeout int64) GraphProfileTimeout {
 	return (GraphProfileTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphProfileQuery) Build() Completed {
 	return completed(c)
 }
 
 type GraphProfileTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphProfileTimeout) Build() Completed {
 	return completed(c)
 }
@@ -19367,7 +19367,7 @@ func (c GraphProfileTimeout) Build() Completed {
 // Executes the given query against a specified graph.
 type GraphQuery Base
 
-// GraphQuery start a command to Executes the given query against a specified graph
+// Executes the given query against a specified graph
 //
 // Command: GRAPH.QUERY.
 func (b Builder) GraphQuery() GraphQuery {
@@ -19400,14 +19400,14 @@ func (c GraphQueryQuery) Timeout(timeout int64) GraphQueryTimeout {
 	return (GraphQueryTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphQueryQuery) Build() Completed {
 	return completed(c)
 }
 
 type GraphQueryTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphQueryTimeout) Build() Completed {
 	return completed(c)
 }
@@ -19415,7 +19415,7 @@ func (c GraphQueryTimeout) Build() Completed {
 // Executes a given read only query against a specified graph.
 type GraphRoQuery Base
 
-// GraphRoQuery start a command to Executes a given read only query against a specified graph
+// Executes a given read only query against a specified graph
 //
 // Command: GRAPH.RO_QUERY.
 func (b Builder) GraphRoQuery() GraphRoQuery {
@@ -19448,24 +19448,24 @@ func (c GraphRoQueryQuery) Timeout(timeout int64) GraphRoQueryTimeout {
 	return (GraphRoQueryTimeout)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphRoQueryQuery) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GraphRoQueryQuery) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type GraphRoQueryTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphRoQueryTimeout) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c GraphRoQueryTimeout) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19473,7 +19473,7 @@ func (c GraphRoQueryTimeout) Cache() Cacheable {
 // Returns a list containing up to 10 of the slowest queries issued against the given graph.
 type GraphSlowlog Base
 
-// GraphSlowlog start a command to Returns a list containing up to 10 of the slowest queries issued against the given graph
+// Returns a list containing up to 10 of the slowest queries issued against the given graph
 //
 // Command: GRAPH.SLOWLOG.
 func (b Builder) GraphSlowlog() GraphSlowlog {
@@ -19494,7 +19494,7 @@ func (c GraphSlowlog) Graph(graph string) GraphSlowlogGraph {
 
 type GraphSlowlogGraph Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c GraphSlowlogGraph) Build() Completed {
 	return completed(c)
 }
@@ -19504,7 +19504,7 @@ func (c GraphSlowlogGraph) Build() Completed {
 // Time complexity: O(N) where N is the number of fields to be removed.
 type Hdel Base
 
-// Hdel start a command to Delete one or more hash fields
+// Delete one or more hash fields
 //
 // Command: HDEL.
 //
@@ -19532,7 +19532,7 @@ func (c HdelField) Field(field ...string) HdelField {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HdelField) Build() Completed {
 	return completed(c)
 }
@@ -19549,7 +19549,7 @@ func (c HdelKey) Field(field ...string) HdelField {
 // Time complexity: O(1)
 type Hello Base
 
-// Hello start a command to Handshake with Redis
+// Handshake with Redis
 //
 // Command: HELLO.
 //
@@ -19565,7 +19565,7 @@ func (c Hello) Protover(protover int64) HelloArgumentsProtover {
 	return (HelloArgumentsProtover)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Hello) Build() Completed {
 	return completed(c)
 }
@@ -19577,7 +19577,7 @@ func (c HelloArgumentsAuth) Setname(clientname string) HelloArgumentsSetname {
 	return (HelloArgumentsSetname)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HelloArgumentsAuth) Build() Completed {
 	return completed(c)
 }
@@ -19594,14 +19594,14 @@ func (c HelloArgumentsProtover) Setname(clientname string) HelloArgumentsSetname
 	return (HelloArgumentsSetname)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HelloArgumentsProtover) Build() Completed {
 	return completed(c)
 }
 
 type HelloArgumentsSetname Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HelloArgumentsSetname) Build() Completed {
 	return completed(c)
 }
@@ -19611,7 +19611,7 @@ func (c HelloArgumentsSetname) Build() Completed {
 // Time complexity: O(1)
 type Hexists Base
 
-// Hexists start a command to Determine if a hash field exists
+// Determine if a hash field exists
 //
 // Command: HEXISTS.
 //
@@ -19634,12 +19634,12 @@ func (c Hexists) Key(key string) HexistsKey {
 
 type HexistsField Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HexistsField) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HexistsField) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19656,7 +19656,7 @@ func (c HexistsKey) Field(field string) HexistsField {
 // Time complexity: O(1)
 type Hget Base
 
-// Hget start a command to Get the value of a hash field
+// Get the value of a hash field
 //
 // Command: HGET.
 //
@@ -19679,12 +19679,12 @@ func (c Hget) Key(key string) HgetKey {
 
 type HgetField Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HgetField) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HgetField) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19701,7 +19701,7 @@ func (c HgetKey) Field(field string) HgetField {
 // Time complexity: O(N) where N is the size of the hash.
 type Hgetall Base
 
-// Hgetall start a command to Get all the fields and values in a hash
+// Get all the fields and values in a hash
 //
 // Command: HGETALL.
 //
@@ -19724,12 +19724,12 @@ func (c Hgetall) Key(key string) HgetallKey {
 
 type HgetallKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HgetallKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HgetallKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19739,7 +19739,7 @@ func (c HgetallKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Hincrby Base
 
-// Hincrby start a command to Increment the integer value of a hash field by the given number
+// Increment the integer value of a hash field by the given number
 //
 // Command: HINCRBY.
 //
@@ -19769,7 +19769,7 @@ func (c HincrbyField) Increment(increment int64) HincrbyIncrement {
 
 type HincrbyIncrement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HincrbyIncrement) Build() Completed {
 	return completed(c)
 }
@@ -19786,7 +19786,7 @@ func (c HincrbyKey) Field(field string) HincrbyField {
 // Time complexity: O(1)
 type Hincrbyfloat Base
 
-// Hincrbyfloat start a command to Increment the float value of a hash field by the given amount
+// Increment the float value of a hash field by the given amount
 //
 // Command: HINCRBYFLOAT.
 //
@@ -19816,7 +19816,7 @@ func (c HincrbyfloatField) Increment(increment float64) HincrbyfloatIncrement {
 
 type HincrbyfloatIncrement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HincrbyfloatIncrement) Build() Completed {
 	return completed(c)
 }
@@ -19833,7 +19833,7 @@ func (c HincrbyfloatKey) Field(field string) HincrbyfloatField {
 // Time complexity: O(N) where N is the size of the hash.
 type Hkeys Base
 
-// Hkeys start a command to Get all the fields in a hash
+// Get all the fields in a hash
 //
 // Command: HKEYS.
 //
@@ -19856,12 +19856,12 @@ func (c Hkeys) Key(key string) HkeysKey {
 
 type HkeysKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HkeysKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HkeysKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19871,7 +19871,7 @@ func (c HkeysKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Hlen Base
 
-// Hlen start a command to Get the number of fields in a hash
+// Get the number of fields in a hash
 //
 // Command: HLEN.
 //
@@ -19894,12 +19894,12 @@ func (c Hlen) Key(key string) HlenKey {
 
 type HlenKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19909,7 +19909,7 @@ func (c HlenKey) Cache() Cacheable {
 // Time complexity: O(N) where N is the number of fields being requested.
 type Hmget Base
 
-// Hmget start a command to Get the values of all the given hash fields
+// Get the values of all the given hash fields
 //
 // Command: HMGET.
 //
@@ -19937,12 +19937,12 @@ func (c HmgetField) Field(field ...string) HmgetField {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HmgetField) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HmgetField) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -19959,7 +19959,7 @@ func (c HmgetKey) Field(field ...string) HmgetField {
 // Time complexity: O(N) where N is the number of fields being set.
 type Hmset Base
 
-// Hmset start a command to Set multiple hash fields to multiple values
+// Set multiple hash fields to multiple values
 //
 // Command: HMSET.
 //
@@ -19987,7 +19987,7 @@ func (c HmsetFieldValue) FieldValue(field string, value string) HmsetFieldValue 
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HmsetFieldValue) Build() Completed {
 	return completed(c)
 }
@@ -20003,7 +20003,7 @@ func (c HmsetKey) FieldValue() HmsetFieldValue {
 // Time complexity: O(N) where N is the number of fields returned
 type Hrandfield Base
 
-// Hrandfield start a command to Get one or multiple random fields from a hash
+// Get one or multiple random fields from a hash
 //
 // Command: HRANDFIELD.
 //
@@ -20031,7 +20031,7 @@ func (c HrandfieldKey) Count(count int64) HrandfieldOptionsCount {
 	return (HrandfieldOptionsCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HrandfieldKey) Build() Completed {
 	return completed(c)
 }
@@ -20043,14 +20043,14 @@ func (c HrandfieldOptionsCount) Withvalues() HrandfieldOptionsWithvalues {
 	return (HrandfieldOptionsWithvalues)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HrandfieldOptionsCount) Build() Completed {
 	return completed(c)
 }
 
 type HrandfieldOptionsWithvalues Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HrandfieldOptionsWithvalues) Build() Completed {
 	return completed(c)
 }
@@ -20060,7 +20060,7 @@ func (c HrandfieldOptionsWithvalues) Build() Completed {
 // Time complexity: O(1) for every call. O(N) for a complete iteration, including enough command calls for the cursor to return back to 0. N is the number of elements inside the collection..
 type Hscan Base
 
-// Hscan start a command to Incrementally iterate hash fields and associated values
+// Incrementally iterate hash fields and associated values
 //
 // Command: HSCAN.
 //
@@ -20083,7 +20083,7 @@ func (c Hscan) Key(key string) HscanKey {
 
 type HscanCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HscanCount) Build() Completed {
 	return completed(c)
 }
@@ -20100,7 +20100,7 @@ func (c HscanCursor) Count(count int64) HscanCount {
 	return (HscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HscanCursor) Build() Completed {
 	return completed(c)
 }
@@ -20119,7 +20119,7 @@ func (c HscanMatch) Count(count int64) HscanCount {
 	return (HscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HscanMatch) Build() Completed {
 	return completed(c)
 }
@@ -20129,7 +20129,7 @@ func (c HscanMatch) Build() Completed {
 // Time complexity: O(1) for each field/value pair added, so O(N) to add N field/value pairs when the command is called with multiple field/value pairs.
 type Hset Base
 
-// Hset start a command to Set the string value of a hash field
+// Set the string value of a hash field
 //
 // Command: HSET.
 //
@@ -20157,7 +20157,7 @@ func (c HsetFieldValue) FieldValue(field string, value string) HsetFieldValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HsetFieldValue) Build() Completed {
 	return completed(c)
 }
@@ -20173,7 +20173,7 @@ func (c HsetKey) FieldValue() HsetFieldValue {
 // Time complexity: O(1)
 type Hsetnx Base
 
-// Hsetnx start a command to Set the value of a hash field, only if the field does not exist
+// Set the value of a hash field, only if the field does not exist
 //
 // Command: HSETNX.
 //
@@ -20210,7 +20210,7 @@ func (c HsetnxKey) Field(field string) HsetnxField {
 
 type HsetnxValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HsetnxValue) Build() Completed {
 	return completed(c)
 }
@@ -20220,7 +20220,7 @@ func (c HsetnxValue) Build() Completed {
 // Time complexity: O(1)
 type Hstrlen Base
 
-// Hstrlen start a command to Get the length of the value of a hash field
+// Get the length of the value of a hash field
 //
 // Command: HSTRLEN.
 //
@@ -20243,12 +20243,12 @@ func (c Hstrlen) Key(key string) HstrlenKey {
 
 type HstrlenField Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HstrlenField) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HstrlenField) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -20265,7 +20265,7 @@ func (c HstrlenKey) Field(field string) HstrlenField {
 // Time complexity: O(N) where N is the size of the hash.
 type Hvals Base
 
-// Hvals start a command to Get all the values in a hash
+// Get all the values in a hash
 //
 // Command: HVALS.
 //
@@ -20288,12 +20288,12 @@ func (c Hvals) Key(key string) HvalsKey {
 
 type HvalsKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c HvalsKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c HvalsKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -20303,7 +20303,7 @@ func (c HvalsKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Incr Base
 
-// Incr start a command to Increment the integer value of a key by one
+// Increment the integer value of a key by one
 //
 // Command: INCR.
 //
@@ -20326,7 +20326,7 @@ func (c Incr) Key(key string) IncrKey {
 
 type IncrKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c IncrKey) Build() Completed {
 	return completed(c)
 }
@@ -20336,7 +20336,7 @@ func (c IncrKey) Build() Completed {
 // Time complexity: O(1)
 type Incrby Base
 
-// Incrby start a command to Increment the integer value of a key by the given amount
+// Increment the integer value of a key by the given amount
 //
 // Command: INCRBY.
 //
@@ -20359,7 +20359,7 @@ func (c Incrby) Key(key string) IncrbyKey {
 
 type IncrbyIncrement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c IncrbyIncrement) Build() Completed {
 	return completed(c)
 }
@@ -20376,7 +20376,7 @@ func (c IncrbyKey) Increment(increment int64) IncrbyIncrement {
 // Time complexity: O(1)
 type Incrbyfloat Base
 
-// Incrbyfloat start a command to Increment the float value of a key by the given amount
+// Increment the float value of a key by the given amount
 //
 // Command: INCRBYFLOAT.
 //
@@ -20399,7 +20399,7 @@ func (c Incrbyfloat) Key(key string) IncrbyfloatKey {
 
 type IncrbyfloatIncrement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c IncrbyfloatIncrement) Build() Completed {
 	return completed(c)
 }
@@ -20414,7 +20414,7 @@ func (c IncrbyfloatKey) Increment(increment float64) IncrbyfloatIncrement {
 // Get information and statistics about the server.
 type Info Base
 
-// Info start a command to Get information and statistics about the server
+// Get information and statistics about the server
 //
 // Command: INFO.
 func (b Builder) Info() Info {
@@ -20428,7 +20428,7 @@ func (c Info) Section(section ...string) InfoSection {
 	return (InfoSection)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Info) Build() Completed {
 	return completed(c)
 }
@@ -20440,7 +20440,7 @@ func (c InfoSection) Section(section ...string) InfoSection {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c InfoSection) Build() Completed {
 	return completed(c)
 }
@@ -20450,7 +20450,7 @@ func (c InfoSection) Build() Completed {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonArrappend Base
 
-// JsonArrappend start a command to Appends JSON value(s) to the JSON array at path
+// Appends JSON value(s) to the JSON array at path
 //
 // Command: JSON.ARRAPPEND.
 //
@@ -20497,7 +20497,7 @@ func (c JsonArrappendValue) Value(value ...string) JsonArrappendValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrappendValue) Build() Completed {
 	return completed(c)
 }
@@ -20507,7 +20507,7 @@ func (c JsonArrappendValue) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the array, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonArrindex Base
 
-// JsonArrindex start a command to Returns the index of the first occurrence of a JSON scalar value in the array at path
+// Returns the index of the first occurrence of a JSON scalar value in the array at path
 //
 // Command: JSON.ARRINDEX.
 //
@@ -20549,24 +20549,24 @@ func (c JsonArrindexStartStart) Stop(stop int64) JsonArrindexStartStop {
 	return (JsonArrindexStartStop)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrindexStartStart) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonArrindexStartStart) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonArrindexStartStop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrindexStartStop) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonArrindexStartStop) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -20578,12 +20578,12 @@ func (c JsonArrindexValue) Start(start int64) JsonArrindexStartStart {
 	return (JsonArrindexStartStart)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrindexValue) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonArrindexValue) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -20593,7 +20593,7 @@ func (c JsonArrindexValue) Cache() Cacheable {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the array, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonArrinsert Base
 
-// JsonArrinsert start a command to Inserts the JSON scalar(s) value at the specified index in the array at path
+// Inserts the JSON scalar(s) value at the specified index in the array at path
 //
 // Command: JSON.ARRINSERT.
 //
@@ -20642,7 +20642,7 @@ func (c JsonArrinsertValue) Value(value ...string) JsonArrinsertValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrinsertValue) Build() Completed {
 	return completed(c)
 }
@@ -20652,7 +20652,7 @@ func (c JsonArrinsertValue) Build() Completed {
 // Time complexity: O(1) where path is evaluated to a single value, O(N) where path is evaluated to multiple values, where N is the size of the key
 type JsonArrlen Base
 
-// JsonArrlen start a command to Returns the length of the array at path
+// Returns the length of the array at path
 //
 // Command: JSON.ARRLEN.
 //
@@ -20680,24 +20680,24 @@ func (c JsonArrlenKey) Path(path string) JsonArrlenPath {
 	return (JsonArrlenPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonArrlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonArrlenPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrlenPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonArrlenPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -20707,7 +20707,7 @@ func (c JsonArrlenPath) Cache() Cacheable {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the array and the specified index is not the last element, O(1) when path is evaluated to a single value and the specified index is the last element, or O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonArrpop Base
 
-// JsonArrpop start a command to Removes and returns the element at the specified index in the array at path
+// Removes and returns the element at the specified index in the array at path
 //
 // Command: JSON.ARRPOP.
 //
@@ -20735,14 +20735,14 @@ func (c JsonArrpopKey) Path(path string) JsonArrpopPathPath {
 	return (JsonArrpopPathPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrpopKey) Build() Completed {
 	return completed(c)
 }
 
 type JsonArrpopPathIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrpopPathIndex) Build() Completed {
 	return completed(c)
 }
@@ -20754,7 +20754,7 @@ func (c JsonArrpopPathPath) Index(index int64) JsonArrpopPathIndex {
 	return (JsonArrpopPathIndex)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrpopPathPath) Build() Completed {
 	return completed(c)
 }
@@ -20764,7 +20764,7 @@ func (c JsonArrpopPathPath) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the array, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonArrtrim Base
 
-// JsonArrtrim start a command to Trims the array at path to contain only the specified inclusive range of indices from start to stop
+// Trims the array at path to contain only the specified inclusive range of indices from start to stop
 //
 // Command: JSON.ARRTRIM.
 //
@@ -20808,7 +20808,7 @@ func (c JsonArrtrimStart) Stop(stop int64) JsonArrtrimStop {
 
 type JsonArrtrimStop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonArrtrimStop) Build() Completed {
 	return completed(c)
 }
@@ -20818,7 +20818,7 @@ func (c JsonArrtrimStop) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the values, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonClear Base
 
-// JsonClear start a command to Clears all values from an array or an object, sets numeric values to `0`, sets string values to empty, and sets boolean values to `false`
+// Clears all values from an array or an object, sets numeric values to `0`, sets string values to empty, and sets boolean values to `false`
 //
 // Command: JSON.CLEAR.
 //
@@ -20846,14 +20846,14 @@ func (c JsonClearKey) Path(path string) JsonClearPath {
 	return (JsonClearPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonClearKey) Build() Completed {
 	return completed(c)
 }
 
 type JsonClearPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonClearPath) Build() Completed {
 	return completed(c)
 }
@@ -20867,7 +20867,7 @@ func (b Builder) JsonDebugHelp() JsonDebugHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonDebugHelp) Build() Completed {
 	return completed(c)
 }
@@ -20898,14 +20898,14 @@ func (c JsonDebugMemoryKey) Path(path string) JsonDebugMemoryPath {
 	return (JsonDebugMemoryPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonDebugMemoryKey) Build() Completed {
 	return completed(c)
 }
 
 type JsonDebugMemoryPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonDebugMemoryPath) Build() Completed {
 	return completed(c)
 }
@@ -20915,7 +20915,7 @@ func (c JsonDebugMemoryPath) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the deleted value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonDel Base
 
-// JsonDel start a command to Deletes a value
+// Deletes a value
 //
 // Command: JSON.DEL.
 //
@@ -20943,14 +20943,14 @@ func (c JsonDelKey) Path(path string) JsonDelPath {
 	return (JsonDelPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonDelKey) Build() Completed {
 	return completed(c)
 }
 
 type JsonDelPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonDelPath) Build() Completed {
 	return completed(c)
 }
@@ -20981,14 +20981,14 @@ func (c JsonForgetKey) Path(path string) JsonForgetPath {
 	return (JsonForgetPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonForgetKey) Build() Completed {
 	return completed(c)
 }
 
 type JsonForgetPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonForgetPath) Build() Completed {
 	return completed(c)
 }
@@ -20998,7 +20998,7 @@ func (c JsonForgetPath) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value where N is the size of the value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonGet Base
 
-// JsonGet start a command to Gets the value at one or more paths in JSON serialized form
+// Gets the value at one or more paths in JSON serialized form
 //
 // Command: JSON.GET.
 //
@@ -21036,12 +21036,12 @@ func (c JsonGetIndent) Paths(paths ...string) JsonGetPaths {
 	return (JsonGetPaths)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonGetIndent) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonGetIndent) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21068,12 +21068,12 @@ func (c JsonGetKey) Paths(paths ...string) JsonGetPaths {
 	return (JsonGetPaths)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonGetKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonGetKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21090,12 +21090,12 @@ func (c JsonGetNewline) Paths(paths ...string) JsonGetPaths {
 	return (JsonGetPaths)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonGetNewline) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonGetNewline) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21107,12 +21107,12 @@ func (c JsonGetPaths) Paths(paths ...string) JsonGetPaths {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonGetPaths) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonGetPaths) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21124,12 +21124,12 @@ func (c JsonGetSpace) Paths(paths ...string) JsonGetPaths {
 	return (JsonGetPaths)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonGetSpace) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonGetSpace) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21139,7 +21139,7 @@ func (c JsonGetSpace) Cache() Cacheable {
 // Time complexity: O(M*N) when path is evaluated to a single value where M is the number of keys and N is the size of the value, O(N1+N2+...+Nm) when path is evaluated to multiple values where m is the number of keys and Ni is the size of the i-th key
 type JsonMget Base
 
-// JsonMget start a command to Returns the values at a path from one or more keys
+// Returns the values at a path from one or more keys
 //
 // Command: JSON.MGET.
 //
@@ -21189,12 +21189,12 @@ func (c JsonMgetKey) Path(path string) JsonMgetPath {
 
 type JsonMgetPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonMgetPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonMgetPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21204,7 +21204,7 @@ func (c JsonMgetPath) Cache() Cacheable {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonNumincrby Base
 
-// JsonNumincrby start a command to Increments the numeric value at path by a value
+// Increments the numeric value at path by a value
 //
 // Command: JSON.NUMINCRBY.
 //
@@ -21241,7 +21241,7 @@ func (c JsonNumincrbyPath) Value(value float64) JsonNumincrbyValue {
 
 type JsonNumincrbyValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonNumincrbyValue) Build() Completed {
 	return completed(c)
 }
@@ -21281,7 +21281,7 @@ func (c JsonNummultbyPath) Value(value float64) JsonNummultbyValue {
 
 type JsonNummultbyValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonNummultbyValue) Build() Completed {
 	return completed(c)
 }
@@ -21291,7 +21291,7 @@ func (c JsonNummultbyValue) Build() Completed {
 // Time complexity: O(N) when path is evaluated to a single value, where N is the number of keys in the object, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonObjkeys Base
 
-// JsonObjkeys start a command to Returns the JSON keys of the object at path
+// Returns the JSON keys of the object at path
 //
 // Command: JSON.OBJKEYS.
 //
@@ -21319,24 +21319,24 @@ func (c JsonObjkeysKey) Path(path string) JsonObjkeysPath {
 	return (JsonObjkeysPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonObjkeysKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonObjkeysKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonObjkeysPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonObjkeysPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonObjkeysPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21346,7 +21346,7 @@ func (c JsonObjkeysPath) Cache() Cacheable {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonObjlen Base
 
-// JsonObjlen start a command to Returns the number of keys of the object at path
+// Returns the number of keys of the object at path
 //
 // Command: JSON.OBJLEN.
 //
@@ -21374,24 +21374,24 @@ func (c JsonObjlenKey) Path(path string) JsonObjlenPath {
 	return (JsonObjlenPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonObjlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonObjlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonObjlenPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonObjlenPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonObjlenPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21401,7 +21401,7 @@ func (c JsonObjlenPath) Cache() Cacheable {
 // Time complexity: O(N) when path is evaluated to a single value, where N is the size of the value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonResp Base
 
-// JsonResp start a command to Returns the JSON value at path in Redis Serialization Protocol (RESP)
+// Returns the JSON value at path in Redis Serialization Protocol (RESP)
 //
 // Command: JSON.RESP.
 //
@@ -21429,24 +21429,24 @@ func (c JsonRespKey) Path(path string) JsonRespPath {
 	return (JsonRespPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonRespKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonRespKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonRespPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonRespPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonRespPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21456,7 +21456,7 @@ func (c JsonRespPath) Cache() Cacheable {
 // Time complexity: O(M+N) when path is evaluated to a single value where M is the size of the original value (if it exists) and N is the size of the new value, O(M+N) when path is evaluated to multiple values where M is the size of the key and N is the size of the new value
 type JsonSet Base
 
-// JsonSet start a command to Sets or updates the JSON value at a path
+// Sets or updates the JSON value at a path
 //
 // Command: JSON.SET.
 //
@@ -21479,14 +21479,14 @@ func (c JsonSet) Key(key string) JsonSetKey {
 
 type JsonSetConditionNx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonSetConditionNx) Build() Completed {
 	return completed(c)
 }
 
 type JsonSetConditionXx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonSetConditionXx) Build() Completed {
 	return completed(c)
 }
@@ -21517,7 +21517,7 @@ func (c JsonSetValue) Xx() JsonSetConditionXx {
 	return (JsonSetConditionXx)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonSetValue) Build() Completed {
 	return completed(c)
 }
@@ -21527,7 +21527,7 @@ func (c JsonSetValue) Build() Completed {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonStrappend Base
 
-// JsonStrappend start a command to Appends a string to a JSON string value at path
+// Appends a string to a JSON string value at path
 //
 // Command: JSON.STRAPPEND.
 //
@@ -21569,7 +21569,7 @@ func (c JsonStrappendPath) Value(value string) JsonStrappendValue {
 
 type JsonStrappendValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonStrappendValue) Build() Completed {
 	return completed(c)
 }
@@ -21579,7 +21579,7 @@ func (c JsonStrappendValue) Build() Completed {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonStrlen Base
 
-// JsonStrlen start a command to Returns the length of the JSON String at path in key
+// Returns the length of the JSON String at path in key
 //
 // Command: JSON.STRLEN.
 //
@@ -21607,24 +21607,24 @@ func (c JsonStrlenKey) Path(path string) JsonStrlenPath {
 	return (JsonStrlenPath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonStrlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonStrlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonStrlenPath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonStrlenPath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonStrlenPath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21634,7 +21634,7 @@ func (c JsonStrlenPath) Cache() Cacheable {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonToggle Base
 
-// JsonToggle start a command to Toggles a boolean value
+// Toggles a boolean value
 //
 // Command: JSON.TOGGLE.
 //
@@ -21664,7 +21664,7 @@ func (c JsonToggleKey) Path(path string) JsonTogglePath {
 
 type JsonTogglePath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonTogglePath) Build() Completed {
 	return completed(c)
 }
@@ -21674,7 +21674,7 @@ func (c JsonTogglePath) Build() Completed {
 // Time complexity: O(1) when path is evaluated to a single value, O(N) when path is evaluated to multiple values, where N is the size of the key
 type JsonType Base
 
-// JsonType start a command to Returns the type of the JSON value at path
+// Returns the type of the JSON value at path
 //
 // Command: JSON.TYPE.
 //
@@ -21702,24 +21702,24 @@ func (c JsonTypeKey) Path(path string) JsonTypePath {
 	return (JsonTypePath)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonTypeKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonTypeKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type JsonTypePath Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c JsonTypePath) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c JsonTypePath) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -21729,7 +21729,7 @@ func (c JsonTypePath) Cache() Cacheable {
 // Time complexity: O(N) with N being the number of keys in the database, under the assumption that the key names in the database and the given pattern have limited length.
 type Keys Base
 
-// Keys start a command to Find all keys matching the given pattern
+// Find all keys matching the given pattern
 //
 // Command: KEYS.
 //
@@ -21747,7 +21747,7 @@ func (c Keys) Pattern(pattern string) KeysPattern {
 
 type KeysPattern Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c KeysPattern) Build() Completed {
 	return completed(c)
 }
@@ -21755,7 +21755,7 @@ func (c KeysPattern) Build() Completed {
 // Get the UNIX time stamp of the last successful save to disk.
 type Lastsave Base
 
-// Lastsave start a command to Get the UNIX time stamp of the last successful save to disk
+// Get the UNIX time stamp of the last successful save to disk
 //
 // Command: LASTSAVE.
 func (b Builder) Lastsave() Lastsave {
@@ -21764,7 +21764,7 @@ func (b Builder) Lastsave() Lastsave {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Lastsave) Build() Completed {
 	return completed(c)
 }
@@ -21772,7 +21772,7 @@ func (c Lastsave) Build() Completed {
 // Return a human readable latency analysis report..
 type LatencyDoctor Base
 
-// LatencyDoctor start a command to Return a human readable latency analysis report.
+// Return a human readable latency analysis report.
 //
 // Command: LATENCY DOCTOR.
 func (b Builder) LatencyDoctor() LatencyDoctor {
@@ -21781,7 +21781,7 @@ func (b Builder) LatencyDoctor() LatencyDoctor {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyDoctor) Build() Completed {
 	return completed(c)
 }
@@ -21789,7 +21789,7 @@ func (c LatencyDoctor) Build() Completed {
 // Return a latency graph for the event..
 type LatencyGraph Base
 
-// LatencyGraph start a command to Return a latency graph for the event.
+// Return a latency graph for the event.
 //
 // Command: LATENCY GRAPH.
 func (b Builder) LatencyGraph() LatencyGraph {
@@ -21805,7 +21805,7 @@ func (c LatencyGraph) Event(event string) LatencyGraphEvent {
 
 type LatencyGraphEvent Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyGraphEvent) Build() Completed {
 	return completed(c)
 }
@@ -21813,7 +21813,7 @@ func (c LatencyGraphEvent) Build() Completed {
 // Show helpful text about the different subcommands..
 type LatencyHelp Base
 
-// LatencyHelp start a command to Show helpful text about the different subcommands.
+// Show helpful text about the different subcommands.
 //
 // Command: LATENCY HELP.
 func (b Builder) LatencyHelp() LatencyHelp {
@@ -21822,7 +21822,7 @@ func (b Builder) LatencyHelp() LatencyHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyHelp) Build() Completed {
 	return completed(c)
 }
@@ -21841,7 +21841,7 @@ func (c LatencyHistogram) Command(command ...string) LatencyHistogramCommand {
 	return (LatencyHistogramCommand)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyHistogram) Build() Completed {
 	return completed(c)
 }
@@ -21853,7 +21853,7 @@ func (c LatencyHistogramCommand) Command(command ...string) LatencyHistogramComm
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyHistogramCommand) Build() Completed {
 	return completed(c)
 }
@@ -21861,7 +21861,7 @@ func (c LatencyHistogramCommand) Build() Completed {
 // Return timestamp-latency samples for the event..
 type LatencyHistory Base
 
-// LatencyHistory start a command to Return timestamp-latency samples for the event.
+// Return timestamp-latency samples for the event.
 //
 // Command: LATENCY HISTORY.
 func (b Builder) LatencyHistory() LatencyHistory {
@@ -21877,7 +21877,7 @@ func (c LatencyHistory) Event(event string) LatencyHistoryEvent {
 
 type LatencyHistoryEvent Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyHistoryEvent) Build() Completed {
 	return completed(c)
 }
@@ -21885,7 +21885,7 @@ func (c LatencyHistoryEvent) Build() Completed {
 // Return the latest latency samples for all events..
 type LatencyLatest Base
 
-// LatencyLatest start a command to Return the latest latency samples for all events.
+// Return the latest latency samples for all events.
 //
 // Command: LATENCY LATEST.
 func (b Builder) LatencyLatest() LatencyLatest {
@@ -21894,7 +21894,7 @@ func (b Builder) LatencyLatest() LatencyLatest {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyLatest) Build() Completed {
 	return completed(c)
 }
@@ -21902,7 +21902,7 @@ func (c LatencyLatest) Build() Completed {
 // Reset latency data for one or more events..
 type LatencyReset Base
 
-// LatencyReset start a command to Reset latency data for one or more events.
+// Reset latency data for one or more events.
 //
 // Command: LATENCY RESET.
 func (b Builder) LatencyReset() LatencyReset {
@@ -21916,7 +21916,7 @@ func (c LatencyReset) Event(event ...string) LatencyResetEvent {
 	return (LatencyResetEvent)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyReset) Build() Completed {
 	return completed(c)
 }
@@ -21928,7 +21928,7 @@ func (c LatencyResetEvent) Event(event ...string) LatencyResetEvent {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LatencyResetEvent) Build() Completed {
 	return completed(c)
 }
@@ -21938,7 +21938,7 @@ func (c LatencyResetEvent) Build() Completed {
 // Time complexity: O(N*M) where N and M are the lengths of s1 and s2, respectively
 type Lcs Base
 
-// Lcs start a command to Find longest common substring
+// Find longest common substring
 //
 // Command: LCS.
 //
@@ -21971,7 +21971,7 @@ func (c LcsIdx) Withmatchlen() LcsWithmatchlen {
 	return (LcsWithmatchlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LcsIdx) Build() Completed {
 	return completed(c)
 }
@@ -22010,7 +22010,7 @@ func (c LcsKey2) Withmatchlen() LcsWithmatchlen {
 	return (LcsWithmatchlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LcsKey2) Build() Completed {
 	return completed(c)
 }
@@ -22032,7 +22032,7 @@ func (c LcsLen) Withmatchlen() LcsWithmatchlen {
 	return (LcsWithmatchlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LcsLen) Build() Completed {
 	return completed(c)
 }
@@ -22044,14 +22044,14 @@ func (c LcsMinmatchlen) Withmatchlen() LcsWithmatchlen {
 	return (LcsWithmatchlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LcsMinmatchlen) Build() Completed {
 	return completed(c)
 }
 
 type LcsWithmatchlen Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LcsWithmatchlen) Build() Completed {
 	return completed(c)
 }
@@ -22061,7 +22061,7 @@ func (c LcsWithmatchlen) Build() Completed {
 // Time complexity: O(N) where N is the number of elements to traverse to get to the element at index. This makes asking for the first or the last element of the list O(1).
 type Lindex Base
 
-// Lindex start a command to Get an element from a list by its index
+// Get an element from a list by its index
 //
 // Command: LINDEX.
 //
@@ -22084,12 +22084,12 @@ func (c Lindex) Key(key string) LindexKey {
 
 type LindexIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LindexIndex) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LindexIndex) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22106,7 +22106,7 @@ func (c LindexKey) Index(index int64) LindexIndex {
 // Time complexity: O(N) where N is the number of elements to traverse before seeing the value pivot. This means that inserting somewhere on the left end on the list (head) can be considered O(1) and inserting somewhere on the right end (tail) is O(N).
 type Linsert Base
 
-// Linsert start a command to Insert an element before or after another element in a list
+// Insert an element before or after another element in a list
 //
 // Command: LINSERT.
 //
@@ -22129,7 +22129,7 @@ func (c Linsert) Key(key string) LinsertKey {
 
 type LinsertElement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LinsertElement) Build() Completed {
 	return completed(c)
 }
@@ -22172,7 +22172,7 @@ func (c LinsertWhereBefore) Pivot(pivot string) LinsertPivot {
 // Time complexity: O(1)
 type Llen Base
 
-// Llen start a command to Get the length of a list
+// Get the length of a list
 //
 // Command: LLEN.
 //
@@ -22195,12 +22195,12 @@ func (c Llen) Key(key string) LlenKey {
 
 type LlenKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22210,7 +22210,7 @@ func (c LlenKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Lmove Base
 
-// Lmove start a command to Pop an element from a list, push it to another list and return it
+// Pop an element from a list, push it to another list and return it
 //
 // Command: LMOVE.
 //
@@ -22281,14 +22281,14 @@ func (c LmoveWherefromRight) Right() LmoveWheretoRight {
 
 type LmoveWheretoLeft Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LmoveWheretoLeft) Build() Completed {
 	return completed(c)
 }
 
 type LmoveWheretoRight Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LmoveWheretoRight) Build() Completed {
 	return completed(c)
 }
@@ -22298,7 +22298,7 @@ func (c LmoveWheretoRight) Build() Completed {
 // Time complexity: O(N+M) where N is the number of provided keys and M is the number of elements returned.
 type Lmpop Base
 
-// Lmpop start a command to Pop elements from a list
+// Pop elements from a list
 //
 // Command: LMPOP.
 //
@@ -22316,7 +22316,7 @@ func (c Lmpop) Numkeys(numkeys int64) LmpopNumkeys {
 
 type LmpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LmpopCount) Build() Completed {
 	return completed(c)
 }
@@ -22372,7 +22372,7 @@ func (c LmpopWhereLeft) Count(count int64) LmpopCount {
 	return (LmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LmpopWhereLeft) Build() Completed {
 	return completed(c)
 }
@@ -22384,7 +22384,7 @@ func (c LmpopWhereRight) Count(count int64) LmpopCount {
 	return (LmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LmpopWhereRight) Build() Completed {
 	return completed(c)
 }
@@ -22392,7 +22392,7 @@ func (c LmpopWhereRight) Build() Completed {
 // Display some computer art and the Redis version.
 type Lolwut Base
 
-// Lolwut start a command to Display some computer art and the Redis version
+// Display some computer art and the Redis version
 //
 // Command: LOLWUT.
 func (b Builder) Lolwut() Lolwut {
@@ -22406,14 +22406,14 @@ func (c Lolwut) Version(version int64) LolwutVersion {
 	return (LolwutVersion)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Lolwut) Build() Completed {
 	return completed(c)
 }
 
 type LolwutVersion Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LolwutVersion) Build() Completed {
 	return completed(c)
 }
@@ -22423,7 +22423,7 @@ func (c LolwutVersion) Build() Completed {
 // Time complexity: O(N) where N is the number of elements returned
 type Lpop Base
 
-// Lpop start a command to Remove and get the first elements in a list
+// Remove and get the first elements in a list
 //
 // Command: LPOP.
 //
@@ -22446,7 +22446,7 @@ func (c Lpop) Key(key string) LpopKey {
 
 type LpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LpopCount) Build() Completed {
 	return completed(c)
 }
@@ -22458,7 +22458,7 @@ func (c LpopKey) Count(count int64) LpopCount {
 	return (LpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LpopKey) Build() Completed {
 	return completed(c)
 }
@@ -22468,7 +22468,7 @@ func (c LpopKey) Build() Completed {
 // Time complexity: O(N) where N is the number of elements in the list, for the average case. When searching for elements near the head or the tail of the list, or when the MAXLEN option is provided, the command may run in constant time.
 type Lpos Base
 
-// Lpos start a command to Return the index of matching elements on a list
+// Return the index of matching elements on a list
 //
 // Command: LPOS.
 //
@@ -22496,12 +22496,12 @@ func (c LposCount) Maxlen(len int64) LposMaxlen {
 	return (LposMaxlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LposCount) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LposCount) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22523,12 +22523,12 @@ func (c LposElement) Maxlen(len int64) LposMaxlen {
 	return (LposMaxlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LposElement) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LposElement) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22542,12 +22542,12 @@ func (c LposKey) Element(element string) LposElement {
 
 type LposMaxlen Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LposMaxlen) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LposMaxlen) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22564,12 +22564,12 @@ func (c LposRank) Maxlen(len int64) LposMaxlen {
 	return (LposMaxlen)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LposRank) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LposRank) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22579,7 +22579,7 @@ func (c LposRank) Cache() Cacheable {
 // Time complexity: O(1) for each element added, so O(N) to add N elements when the command is called with multiple arguments.
 type Lpush Base
 
-// Lpush start a command to Prepend one or multiple elements to a list
+// Prepend one or multiple elements to a list
 //
 // Command: LPUSH.
 //
@@ -22607,7 +22607,7 @@ func (c LpushElement) Element(element ...string) LpushElement {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LpushElement) Build() Completed {
 	return completed(c)
 }
@@ -22624,7 +22624,7 @@ func (c LpushKey) Element(element ...string) LpushElement {
 // Time complexity: O(1) for each element added, so O(N) to add N elements when the command is called with multiple arguments.
 type Lpushx Base
 
-// Lpushx start a command to Prepend an element to a list, only if the list exists
+// Prepend an element to a list, only if the list exists
 //
 // Command: LPUSHX.
 //
@@ -22652,7 +22652,7 @@ func (c LpushxElement) Element(element ...string) LpushxElement {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LpushxElement) Build() Completed {
 	return completed(c)
 }
@@ -22669,7 +22669,7 @@ func (c LpushxKey) Element(element ...string) LpushxElement {
 // Time complexity: O(S+N) where S is the distance of start offset from HEAD for small lists, from nearest end (HEAD or TAIL) for large lists; and N is the number of elements in the specified range.
 type Lrange Base
 
-// Lrange start a command to Get a range of elements from a list
+// Get a range of elements from a list
 //
 // Command: LRANGE.
 //
@@ -22706,12 +22706,12 @@ func (c LrangeStart) Stop(stop int64) LrangeStop {
 
 type LrangeStop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LrangeStop) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c LrangeStop) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -22721,7 +22721,7 @@ func (c LrangeStop) Cache() Cacheable {
 // Time complexity: O(N+M) where N is the length of the list and M is the number of elements removed.
 type Lrem Base
 
-// Lrem start a command to Remove elements from a list
+// Remove elements from a list
 //
 // Command: LREM.
 //
@@ -22751,7 +22751,7 @@ func (c LremCount) Element(element string) LremElement {
 
 type LremElement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LremElement) Build() Completed {
 	return completed(c)
 }
@@ -22768,7 +22768,7 @@ func (c LremKey) Count(count int64) LremCount {
 // Time complexity: O(N) where N is the length of the list. Setting either the first or the last element of the list is O(1).
 type Lset Base
 
-// Lset start a command to Set the value of an element in a list by its index
+// Set the value of an element in a list by its index
 //
 // Command: LSET.
 //
@@ -22791,7 +22791,7 @@ func (c Lset) Key(key string) LsetKey {
 
 type LsetElement Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LsetElement) Build() Completed {
 	return completed(c)
 }
@@ -22815,7 +22815,7 @@ func (c LsetKey) Index(index int64) LsetIndex {
 // Time complexity: O(N) where N is the number of elements to be removed by the operation.
 type Ltrim Base
 
-// Ltrim start a command to Trim a list to the specified range
+// Trim a list to the specified range
 //
 // Command: LTRIM.
 //
@@ -22852,7 +22852,7 @@ func (c LtrimStart) Stop(stop int64) LtrimStop {
 
 type LtrimStop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c LtrimStop) Build() Completed {
 	return completed(c)
 }
@@ -22860,7 +22860,7 @@ func (c LtrimStop) Build() Completed {
 // Outputs memory problems report.
 type MemoryDoctor Base
 
-// MemoryDoctor start a command to Outputs memory problems report
+// Outputs memory problems report
 //
 // Command: MEMORY DOCTOR.
 func (b Builder) MemoryDoctor() MemoryDoctor {
@@ -22869,7 +22869,7 @@ func (b Builder) MemoryDoctor() MemoryDoctor {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryDoctor) Build() Completed {
 	return completed(c)
 }
@@ -22877,7 +22877,7 @@ func (c MemoryDoctor) Build() Completed {
 // Show helpful text about the different subcommands.
 type MemoryHelp Base
 
-// MemoryHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: MEMORY HELP.
 func (b Builder) MemoryHelp() MemoryHelp {
@@ -22886,7 +22886,7 @@ func (b Builder) MemoryHelp() MemoryHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryHelp) Build() Completed {
 	return completed(c)
 }
@@ -22894,7 +22894,7 @@ func (c MemoryHelp) Build() Completed {
 // Show allocator internal stats.
 type MemoryMallocStats Base
 
-// MemoryMallocStats start a command to Show allocator internal stats
+// Show allocator internal stats
 //
 // Command: MEMORY MALLOC-STATS.
 func (b Builder) MemoryMallocStats() MemoryMallocStats {
@@ -22903,7 +22903,7 @@ func (b Builder) MemoryMallocStats() MemoryMallocStats {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryMallocStats) Build() Completed {
 	return completed(c)
 }
@@ -22911,7 +22911,7 @@ func (c MemoryMallocStats) Build() Completed {
 // Ask the allocator to release memory.
 type MemoryPurge Base
 
-// MemoryPurge start a command to Ask the allocator to release memory
+// Ask the allocator to release memory
 //
 // Command: MEMORY PURGE.
 func (b Builder) MemoryPurge() MemoryPurge {
@@ -22920,7 +22920,7 @@ func (b Builder) MemoryPurge() MemoryPurge {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryPurge) Build() Completed {
 	return completed(c)
 }
@@ -22928,7 +22928,7 @@ func (c MemoryPurge) Build() Completed {
 // Show memory usage details.
 type MemoryStats Base
 
-// MemoryStats start a command to Show memory usage details
+// Show memory usage details
 //
 // Command: MEMORY STATS.
 func (b Builder) MemoryStats() MemoryStats {
@@ -22937,7 +22937,7 @@ func (b Builder) MemoryStats() MemoryStats {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryStats) Build() Completed {
 	return completed(c)
 }
@@ -22947,7 +22947,7 @@ func (c MemoryStats) Build() Completed {
 // Time complexity: O(N) where N is the number of samples.
 type MemoryUsage Base
 
-// MemoryUsage start a command to Estimate the memory usage of a key
+// Estimate the memory usage of a key
 //
 // Command: MEMORY USAGE.
 //
@@ -22975,14 +22975,14 @@ func (c MemoryUsageKey) Samples(count int64) MemoryUsageSamples {
 	return (MemoryUsageSamples)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryUsageKey) Build() Completed {
 	return completed(c)
 }
 
 type MemoryUsageSamples Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MemoryUsageSamples) Build() Completed {
 	return completed(c)
 }
@@ -22992,7 +22992,7 @@ func (c MemoryUsageSamples) Build() Completed {
 // Time complexity: O(N) where N is the number of keys to retrieve.
 type Mget Base
 
-// Mget start a command to Get the values of all the given keys
+// Get the values of all the given keys
 //
 // Command: MGET.
 //
@@ -23035,12 +23035,12 @@ func (c MgetKey) Key(key ...string) MgetKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MgetKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c MgetKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -23050,7 +23050,7 @@ func (c MgetKey) Cache() Cacheable {
 // Time complexity: This command actually executes a DUMP+DEL in the source instance, and a RESTORE in the target instance. See the pages of these commands for time complexity. Also an O(N) data transfer between the two instances is performed.
 type Migrate Base
 
-// Migrate start a command to Atomically transfer a key from a Redis instance to another one.
+// Atomically transfer a key from a Redis instance to another one.
 //
 // Command: MIGRATE.
 //
@@ -23089,7 +23089,7 @@ func (c MigrateAuthAuth) Keys(key ...string) MigrateKeys {
 	return (MigrateKeys)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateAuthAuth) Build() Completed {
 	return completed(c)
 }
@@ -23112,7 +23112,7 @@ func (c MigrateAuthAuth2) Keys(key ...string) MigrateKeys {
 	return (MigrateKeys)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateAuthAuth2) Build() Completed {
 	return completed(c)
 }
@@ -23150,7 +23150,7 @@ func (c MigrateCopy) Keys(key ...string) MigrateKeys {
 	return (MigrateKeys)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateCopy) Build() Completed {
 	return completed(c)
 }
@@ -23194,7 +23194,7 @@ func (c MigrateKeys) Keys(key ...string) MigrateKeys {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateKeys) Build() Completed {
 	return completed(c)
 }
@@ -23239,7 +23239,7 @@ func (c MigrateReplace) Keys(key ...string) MigrateKeys {
 	return (MigrateKeys)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateReplace) Build() Completed {
 	return completed(c)
 }
@@ -23282,7 +23282,7 @@ func (c MigrateTimeout) Keys(key ...string) MigrateKeys {
 	return (MigrateKeys)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MigrateTimeout) Build() Completed {
 	return completed(c)
 }
@@ -23292,7 +23292,7 @@ func (c MigrateTimeout) Build() Completed {
 // Time complexity: O(N) where N is the number of loaded modules.
 type ModuleList Base
 
-// ModuleList start a command to List all modules loaded by the server
+// List all modules loaded by the server
 //
 // Command: MODULE LIST.
 //
@@ -23303,7 +23303,7 @@ func (b Builder) ModuleList() ModuleList {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleList) Build() Completed {
 	return completed(c)
 }
@@ -23313,7 +23313,7 @@ func (c ModuleList) Build() Completed {
 // Time complexity: O(1)
 type ModuleLoad Base
 
-// ModuleLoad start a command to Load a module
+// Load a module
 //
 // Command: MODULE LOAD.
 //
@@ -23336,7 +23336,7 @@ func (c ModuleLoadArg) Arg(arg ...string) ModuleLoadArg {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleLoadArg) Build() Completed {
 	return completed(c)
 }
@@ -23348,7 +23348,7 @@ func (c ModuleLoadPath) Arg(arg ...string) ModuleLoadArg {
 	return (ModuleLoadArg)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleLoadPath) Build() Completed {
 	return completed(c)
 }
@@ -23375,7 +23375,7 @@ func (c ModuleLoadexArgs) Args(args ...string) ModuleLoadexArgs {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleLoadexArgs) Build() Completed {
 	return completed(c)
 }
@@ -23393,7 +23393,7 @@ func (c ModuleLoadexConfig) Args(args ...string) ModuleLoadexArgs {
 	return (ModuleLoadexArgs)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleLoadexConfig) Build() Completed {
 	return completed(c)
 }
@@ -23410,7 +23410,7 @@ func (c ModuleLoadexPath) Args(args ...string) ModuleLoadexArgs {
 	return (ModuleLoadexArgs)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleLoadexPath) Build() Completed {
 	return completed(c)
 }
@@ -23420,7 +23420,7 @@ func (c ModuleLoadexPath) Build() Completed {
 // Time complexity: O(1)
 type ModuleUnload Base
 
-// ModuleUnload start a command to Unload a module
+// Unload a module
 //
 // Command: MODULE UNLOAD.
 //
@@ -23438,7 +23438,7 @@ func (c ModuleUnload) Name(name string) ModuleUnloadName {
 
 type ModuleUnloadName Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ModuleUnloadName) Build() Completed {
 	return completed(c)
 }
@@ -23446,7 +23446,7 @@ func (c ModuleUnloadName) Build() Completed {
 // Listen for all requests received by the server in real time.
 type Monitor Base
 
-// Monitor start a command to Listen for all requests received by the server in real time
+// Listen for all requests received by the server in real time
 //
 // Command: MONITOR.
 func (b Builder) Monitor() Monitor {
@@ -23455,7 +23455,7 @@ func (b Builder) Monitor() Monitor {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Monitor) Build() Completed {
 	return completed(c)
 }
@@ -23465,7 +23465,7 @@ func (c Monitor) Build() Completed {
 // Time complexity: O(1)
 type Move Base
 
-// Move start a command to Move a key to another database
+// Move a key to another database
 //
 // Command: MOVE.
 //
@@ -23488,7 +23488,7 @@ func (c Move) Key(key string) MoveKey {
 
 type MoveDb Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MoveDb) Build() Completed {
 	return completed(c)
 }
@@ -23505,7 +23505,7 @@ func (c MoveKey) Db(db int64) MoveDb {
 // Time complexity: O(N) where N is the number of keys to set.
 type Mset Base
 
-// Mset start a command to Set multiple keys to multiple values
+// Set multiple keys to multiple values
 //
 // Command: MSET.
 //
@@ -23532,7 +23532,7 @@ func (c MsetKeyValue) KeyValue(key string, value string) MsetKeyValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MsetKeyValue) Build() Completed {
 	return completed(c)
 }
@@ -23542,7 +23542,7 @@ func (c MsetKeyValue) Build() Completed {
 // Time complexity: O(N) where N is the number of keys to set.
 type Msetnx Base
 
-// Msetnx start a command to Set multiple keys to multiple values, only if none of the keys exist
+// Set multiple keys to multiple values, only if none of the keys exist
 //
 // Command: MSETNX.
 //
@@ -23569,7 +23569,7 @@ func (c MsetnxKeyValue) KeyValue(key string, value string) MsetnxKeyValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c MsetnxKeyValue) Build() Completed {
 	return completed(c)
 }
@@ -23577,7 +23577,7 @@ func (c MsetnxKeyValue) Build() Completed {
 // Mark the start of a transaction block.
 type Multi Base
 
-// Multi start a command to Mark the start of a transaction block
+// Mark the start of a transaction block
 //
 // Command: MULTI.
 func (b Builder) Multi() Multi {
@@ -23586,7 +23586,7 @@ func (b Builder) Multi() Multi {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Multi) Build() Completed {
 	return completed(c)
 }
@@ -23596,7 +23596,7 @@ func (c Multi) Build() Completed {
 // Time complexity: O(1)
 type ObjectEncoding Base
 
-// ObjectEncoding start a command to Inspect the internal encoding of a Redis object
+// Inspect the internal encoding of a Redis object
 //
 // Command: OBJECT ENCODING.
 //
@@ -23619,7 +23619,7 @@ func (c ObjectEncoding) Key(key string) ObjectEncodingKey {
 
 type ObjectEncodingKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ObjectEncodingKey) Build() Completed {
 	return completed(c)
 }
@@ -23629,7 +23629,7 @@ func (c ObjectEncodingKey) Build() Completed {
 // Time complexity: O(1)
 type ObjectFreq Base
 
-// ObjectFreq start a command to Get the logarithmic access frequency counter of a Redis object
+// Get the logarithmic access frequency counter of a Redis object
 //
 // Command: OBJECT FREQ.
 //
@@ -23652,7 +23652,7 @@ func (c ObjectFreq) Key(key string) ObjectFreqKey {
 
 type ObjectFreqKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ObjectFreqKey) Build() Completed {
 	return completed(c)
 }
@@ -23662,7 +23662,7 @@ func (c ObjectFreqKey) Build() Completed {
 // Time complexity: O(1)
 type ObjectHelp Base
 
-// ObjectHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: OBJECT HELP.
 //
@@ -23673,7 +23673,7 @@ func (b Builder) ObjectHelp() ObjectHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ObjectHelp) Build() Completed {
 	return completed(c)
 }
@@ -23683,7 +23683,7 @@ func (c ObjectHelp) Build() Completed {
 // Time complexity: O(1)
 type ObjectIdletime Base
 
-// ObjectIdletime start a command to Get the time since a Redis object was last accessed
+// Get the time since a Redis object was last accessed
 //
 // Command: OBJECT IDLETIME.
 //
@@ -23706,7 +23706,7 @@ func (c ObjectIdletime) Key(key string) ObjectIdletimeKey {
 
 type ObjectIdletimeKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ObjectIdletimeKey) Build() Completed {
 	return completed(c)
 }
@@ -23716,7 +23716,7 @@ func (c ObjectIdletimeKey) Build() Completed {
 // Time complexity: O(1)
 type ObjectRefcount Base
 
-// ObjectRefcount start a command to Get the number of references to the value of the key
+// Get the number of references to the value of the key
 //
 // Command: OBJECT REFCOUNT.
 //
@@ -23739,7 +23739,7 @@ func (c ObjectRefcount) Key(key string) ObjectRefcountKey {
 
 type ObjectRefcountKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ObjectRefcountKey) Build() Completed {
 	return completed(c)
 }
@@ -23749,7 +23749,7 @@ func (c ObjectRefcountKey) Build() Completed {
 // Time complexity: O(1)
 type Persist Base
 
-// Persist start a command to Remove the expiration from a key
+// Remove the expiration from a key
 //
 // Command: PERSIST.
 //
@@ -23772,7 +23772,7 @@ func (c Persist) Key(key string) PersistKey {
 
 type PersistKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PersistKey) Build() Completed {
 	return completed(c)
 }
@@ -23782,7 +23782,7 @@ func (c PersistKey) Build() Completed {
 // Time complexity: O(1)
 type Pexpire Base
 
-// Pexpire start a command to Set a key's time to live in milliseconds
+// Set a key's time to live in milliseconds
 //
 // Command: PEXPIRE.
 //
@@ -23805,28 +23805,28 @@ func (c Pexpire) Key(key string) PexpireKey {
 
 type PexpireConditionGt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireConditionGt) Build() Completed {
 	return completed(c)
 }
 
 type PexpireConditionLt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireConditionLt) Build() Completed {
 	return completed(c)
 }
 
 type PexpireConditionNx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireConditionNx) Build() Completed {
 	return completed(c)
 }
 
 type PexpireConditionXx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireConditionXx) Build() Completed {
 	return completed(c)
 }
@@ -23860,7 +23860,7 @@ func (c PexpireMilliseconds) Lt() PexpireConditionLt {
 	return (PexpireConditionLt)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireMilliseconds) Build() Completed {
 	return completed(c)
 }
@@ -23870,7 +23870,7 @@ func (c PexpireMilliseconds) Build() Completed {
 // Time complexity: O(1)
 type Pexpireat Base
 
-// Pexpireat start a command to Set the expiration for a key as a UNIX timestamp specified in milliseconds
+// Set the expiration for a key as a UNIX timestamp specified in milliseconds
 //
 // Command: PEXPIREAT.
 //
@@ -23893,28 +23893,28 @@ func (c Pexpireat) Key(key string) PexpireatKey {
 
 type PexpireatConditionGt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireatConditionGt) Build() Completed {
 	return completed(c)
 }
 
 type PexpireatConditionLt Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireatConditionLt) Build() Completed {
 	return completed(c)
 }
 
 type PexpireatConditionNx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireatConditionNx) Build() Completed {
 	return completed(c)
 }
 
 type PexpireatConditionXx Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireatConditionXx) Build() Completed {
 	return completed(c)
 }
@@ -23948,7 +23948,7 @@ func (c PexpireatMillisecondsTimestamp) Lt() PexpireatConditionLt {
 	return (PexpireatConditionLt)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpireatMillisecondsTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -23958,7 +23958,7 @@ func (c PexpireatMillisecondsTimestamp) Build() Completed {
 // Time complexity: O(1)
 type Pexpiretime Base
 
-// Pexpiretime start a command to Get the expiration Unix timestamp for a key in milliseconds
+// Get the expiration Unix timestamp for a key in milliseconds
 //
 // Command: PEXPIRETIME.
 //
@@ -23981,12 +23981,12 @@ func (c Pexpiretime) Key(key string) PexpiretimeKey {
 
 type PexpiretimeKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PexpiretimeKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c PexpiretimeKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -23996,7 +23996,7 @@ func (c PexpiretimeKey) Cache() Cacheable {
 // Time complexity: O(1) to add every element.
 type Pfadd Base
 
-// Pfadd start a command to Adds the specified elements to the specified HyperLogLog.
+// Adds the specified elements to the specified HyperLogLog.
 //
 // Command: PFADD.
 //
@@ -24024,7 +24024,7 @@ func (c PfaddElement) Element(element ...string) PfaddElement {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PfaddElement) Build() Completed {
 	return completed(c)
 }
@@ -24036,7 +24036,7 @@ func (c PfaddKey) Element(element ...string) PfaddElement {
 	return (PfaddElement)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PfaddKey) Build() Completed {
 	return completed(c)
 }
@@ -24046,7 +24046,7 @@ func (c PfaddKey) Build() Completed {
 // Time complexity: O(1) with a very small average constant time when called with a single key. O(N) with N being the number of keys, and much bigger constant times, when called with multiple keys.
 type Pfcount Base
 
-// Pfcount start a command to Return the approximated cardinality of the set(s) observed by the HyperLogLog at key(s).
+// Return the approximated cardinality of the set(s) observed by the HyperLogLog at key(s).
 //
 // Command: PFCOUNT.
 //
@@ -24089,7 +24089,7 @@ func (c PfcountKey) Key(key ...string) PfcountKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PfcountKey) Build() Completed {
 	return completed(c)
 }
@@ -24099,7 +24099,7 @@ func (c PfcountKey) Build() Completed {
 // Time complexity: O(N) to merge N HyperLogLogs, but with high constant times.
 type Pfmerge Base
 
-// Pfmerge start a command to Merge N different HyperLogLogs into a single one.
+// Merge N different HyperLogLogs into a single one.
 //
 // Command: PFMERGE.
 //
@@ -24154,7 +24154,7 @@ func (c PfmergeSourcekey) Sourcekey(sourcekey ...string) PfmergeSourcekey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PfmergeSourcekey) Build() Completed {
 	return completed(c)
 }
@@ -24162,7 +24162,7 @@ func (c PfmergeSourcekey) Build() Completed {
 // Ping the server.
 type Ping Base
 
-// Ping start a command to Ping the server
+// Ping the server
 //
 // Command: PING.
 func (b Builder) Ping() Ping {
@@ -24176,14 +24176,14 @@ func (c Ping) Message(message string) PingMessage {
 	return (PingMessage)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Ping) Build() Completed {
 	return completed(c)
 }
 
 type PingMessage Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PingMessage) Build() Completed {
 	return completed(c)
 }
@@ -24193,7 +24193,7 @@ func (c PingMessage) Build() Completed {
 // Time complexity: O(1)
 type Psetex Base
 
-// Psetex start a command to Set the value and expiration in milliseconds of a key
+// Set the value and expiration in milliseconds of a key
 //
 // Command: PSETEX.
 //
@@ -24230,7 +24230,7 @@ func (c PsetexMilliseconds) Value(value string) PsetexValue {
 
 type PsetexValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PsetexValue) Build() Completed {
 	return completed(c)
 }
@@ -24240,7 +24240,7 @@ func (c PsetexValue) Build() Completed {
 // Time complexity: O(N) where N is the number of patterns the client is already subscribed to.
 type Psubscribe Base
 
-// Psubscribe start a command to Listen for messages published to channels matching the given patterns
+// Listen for messages published to channels matching the given patterns
 //
 // Command: PSUBSCRIBE.
 //
@@ -24263,7 +24263,7 @@ func (c PsubscribePattern) Pattern(pattern ...string) PsubscribePattern {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PsubscribePattern) Build() Completed {
 	return completed(c)
 }
@@ -24271,7 +24271,7 @@ func (c PsubscribePattern) Build() Completed {
 // Internal command used for replication.
 type Psync Base
 
-// Psync start a command to Internal command used for replication
+// Internal command used for replication
 //
 // Command: PSYNC.
 func (b Builder) Psync() Psync {
@@ -24287,7 +24287,7 @@ func (c Psync) Replicationid(replicationid string) PsyncReplicationid {
 
 type PsyncOffset Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PsyncOffset) Build() Completed {
 	return completed(c)
 }
@@ -24304,7 +24304,7 @@ func (c PsyncReplicationid) Offset(offset int64) PsyncOffset {
 // Time complexity: O(1)
 type Pttl Base
 
-// Pttl start a command to Get the time to live for a key in milliseconds
+// Get the time to live for a key in milliseconds
 //
 // Command: PTTL.
 //
@@ -24327,12 +24327,12 @@ func (c Pttl) Key(key string) PttlKey {
 
 type PttlKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PttlKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c PttlKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -24342,7 +24342,7 @@ func (c PttlKey) Cache() Cacheable {
 // Time complexity: O(N+M) where N is the number of clients subscribed to the receiving channel and M is the total number of subscribed patterns (by any client).
 type Publish Base
 
-// Publish start a command to Post a message to a channel
+// Post a message to a channel
 //
 // Command: PUBLISH.
 //
@@ -24367,7 +24367,7 @@ func (c PublishChannel) Message(message string) PublishMessage {
 
 type PublishMessage Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PublishMessage) Build() Completed {
 	return completed(c)
 }
@@ -24377,7 +24377,7 @@ func (c PublishMessage) Build() Completed {
 // Time complexity: O(N) where N is the number of active channels, and assuming constant time pattern matching (relatively short channels and patterns)
 type PubsubChannels Base
 
-// PubsubChannels start a command to List active channels
+// List active channels
 //
 // Command: PUBSUB CHANNELS.
 //
@@ -24393,14 +24393,14 @@ func (c PubsubChannels) Pattern(pattern string) PubsubChannelsPattern {
 	return (PubsubChannelsPattern)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubChannels) Build() Completed {
 	return completed(c)
 }
 
 type PubsubChannelsPattern Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubChannelsPattern) Build() Completed {
 	return completed(c)
 }
@@ -24410,7 +24410,7 @@ func (c PubsubChannelsPattern) Build() Completed {
 // Time complexity: O(1)
 type PubsubHelp Base
 
-// PubsubHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: PUBSUB HELP.
 //
@@ -24421,7 +24421,7 @@ func (b Builder) PubsubHelp() PubsubHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubHelp) Build() Completed {
 	return completed(c)
 }
@@ -24431,7 +24431,7 @@ func (c PubsubHelp) Build() Completed {
 // Time complexity: O(1)
 type PubsubNumpat Base
 
-// PubsubNumpat start a command to Get the count of unique patterns pattern subscriptions
+// Get the count of unique patterns pattern subscriptions
 //
 // Command: PUBSUB NUMPAT.
 //
@@ -24442,7 +24442,7 @@ func (b Builder) PubsubNumpat() PubsubNumpat {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubNumpat) Build() Completed {
 	return completed(c)
 }
@@ -24452,7 +24452,7 @@ func (c PubsubNumpat) Build() Completed {
 // Time complexity: O(N) for the NUMSUB subcommand, where N is the number of requested channels
 type PubsubNumsub Base
 
-// PubsubNumsub start a command to Get the count of subscribers for channels
+// Get the count of subscribers for channels
 //
 // Command: PUBSUB NUMSUB.
 //
@@ -24468,7 +24468,7 @@ func (c PubsubNumsub) Channel(channel ...string) PubsubNumsubChannel {
 	return (PubsubNumsubChannel)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubNumsub) Build() Completed {
 	return completed(c)
 }
@@ -24480,7 +24480,7 @@ func (c PubsubNumsubChannel) Channel(channel ...string) PubsubNumsubChannel {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubNumsubChannel) Build() Completed {
 	return completed(c)
 }
@@ -24499,14 +24499,14 @@ func (c PubsubShardchannels) Pattern(pattern string) PubsubShardchannelsPattern 
 	return (PubsubShardchannelsPattern)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubShardchannels) Build() Completed {
 	return completed(c)
 }
 
 type PubsubShardchannelsPattern Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubShardchannelsPattern) Build() Completed {
 	return completed(c)
 }
@@ -24525,7 +24525,7 @@ func (c PubsubShardnumsub) Channel(channel ...string) PubsubShardnumsubChannel {
 	return (PubsubShardnumsubChannel)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubShardnumsub) Build() Completed {
 	return completed(c)
 }
@@ -24537,7 +24537,7 @@ func (c PubsubShardnumsubChannel) Channel(channel ...string) PubsubShardnumsubCh
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PubsubShardnumsubChannel) Build() Completed {
 	return completed(c)
 }
@@ -24547,7 +24547,7 @@ func (c PubsubShardnumsubChannel) Build() Completed {
 // Time complexity: O(N+M) where N is the number of patterns the client is already subscribed and M is the number of total patterns subscribed in the system (by any client).
 type Punsubscribe Base
 
-// Punsubscribe start a command to Stop listening for messages posted to channels matching the given patterns
+// Stop listening for messages posted to channels matching the given patterns
 //
 // Command: PUNSUBSCRIBE.
 //
@@ -24563,7 +24563,7 @@ func (c Punsubscribe) Pattern(pattern ...string) PunsubscribePattern {
 	return (PunsubscribePattern)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Punsubscribe) Build() Completed {
 	return completed(c)
 }
@@ -24575,7 +24575,7 @@ func (c PunsubscribePattern) Pattern(pattern ...string) PunsubscribePattern {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c PunsubscribePattern) Build() Completed {
 	return completed(c)
 }
@@ -24583,7 +24583,7 @@ func (c PunsubscribePattern) Build() Completed {
 // Close the connection.
 type Quit Base
 
-// Quit start a command to Close the connection
+// Close the connection
 //
 // Command: QUIT.
 func (b Builder) Quit() Quit {
@@ -24592,7 +24592,7 @@ func (b Builder) Quit() Quit {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Quit) Build() Completed {
 	return completed(c)
 }
@@ -24602,7 +24602,7 @@ func (c Quit) Build() Completed {
 // Time complexity: O(1)
 type Randomkey Base
 
-// Randomkey start a command to Return a random key from the keyspace
+// Return a random key from the keyspace
 //
 // Command: RANDOMKEY.
 //
@@ -24613,7 +24613,7 @@ func (b Builder) Randomkey() Randomkey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Randomkey) Build() Completed {
 	return completed(c)
 }
@@ -24623,7 +24623,7 @@ func (c Randomkey) Build() Completed {
 // Time complexity: O(1)
 type Readonly Base
 
-// Readonly start a command to Enables read queries for a connection to a cluster replica node
+// Enables read queries for a connection to a cluster replica node
 //
 // Command: READONLY.
 //
@@ -24634,7 +24634,7 @@ func (b Builder) Readonly() Readonly {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Readonly) Build() Completed {
 	return completed(c)
 }
@@ -24644,7 +24644,7 @@ func (c Readonly) Build() Completed {
 // Time complexity: O(1)
 type Readwrite Base
 
-// Readwrite start a command to Disables read queries for a connection to a cluster replica node
+// Disables read queries for a connection to a cluster replica node
 //
 // Command: READWRITE.
 //
@@ -24655,7 +24655,7 @@ func (b Builder) Readwrite() Readwrite {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Readwrite) Build() Completed {
 	return completed(c)
 }
@@ -24665,7 +24665,7 @@ func (c Readwrite) Build() Completed {
 // Time complexity: O(1)
 type Rename Base
 
-// Rename start a command to Rename a key
+// Rename a key
 //
 // Command: RENAME.
 //
@@ -24700,7 +24700,7 @@ func (c RenameKey) Newkey(newkey string) RenameNewkey {
 
 type RenameNewkey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RenameNewkey) Build() Completed {
 	return completed(c)
 }
@@ -24710,7 +24710,7 @@ func (c RenameNewkey) Build() Completed {
 // Time complexity: O(1)
 type Renamenx Base
 
-// Renamenx start a command to Rename a key, only if the new key does not exist
+// Rename a key, only if the new key does not exist
 //
 // Command: RENAMENX.
 //
@@ -24745,7 +24745,7 @@ func (c RenamenxKey) Newkey(newkey string) RenamenxNewkey {
 
 type RenamenxNewkey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RenamenxNewkey) Build() Completed {
 	return completed(c)
 }
@@ -24753,7 +24753,7 @@ func (c RenamenxNewkey) Build() Completed {
 // Make the server a replica of another instance, or promote it as master..
 type Replicaof Base
 
-// Replicaof start a command to Make the server a replica of another instance, or promote it as master.
+// Make the server a replica of another instance, or promote it as master.
 //
 // Command: REPLICAOF.
 func (b Builder) Replicaof() Replicaof {
@@ -24776,7 +24776,7 @@ func (c ReplicaofHost) Port(port int64) ReplicaofPort {
 
 type ReplicaofPort Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ReplicaofPort) Build() Completed {
 	return completed(c)
 }
@@ -24784,7 +24784,7 @@ func (c ReplicaofPort) Build() Completed {
 // Reset the connection.
 type Reset Base
 
-// Reset start a command to Reset the connection
+// Reset the connection
 //
 // Command: RESET.
 func (b Builder) Reset() Reset {
@@ -24793,7 +24793,7 @@ func (b Builder) Reset() Reset {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Reset) Build() Completed {
 	return completed(c)
 }
@@ -24803,7 +24803,7 @@ func (c Reset) Build() Completed {
 // Time complexity: O(1) to create the new key and additional O(N*M) to reconstruct the serialized value, where N is the number of Redis objects composing the value and M their average size. For small string values the time complexity is thus O(1)+O(1*M) where M is small, so simply O(1). However for sorted set values the complexity is O(N*M*log(N)) because inserting values into sorted sets is O(log(N)).
 type Restore Base
 
-// Restore start a command to Create a key using the provided serialized value, previously obtained using DUMP.
+// Create a key using the provided serialized value, previously obtained using DUMP.
 //
 // Command: RESTORE.
 //
@@ -24836,14 +24836,14 @@ func (c RestoreAbsttl) Freq(frequency int64) RestoreFreq {
 	return (RestoreFreq)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RestoreAbsttl) Build() Completed {
 	return completed(c)
 }
 
 type RestoreFreq Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RestoreFreq) Build() Completed {
 	return completed(c)
 }
@@ -24855,7 +24855,7 @@ func (c RestoreIdletime) Freq(frequency int64) RestoreFreq {
 	return (RestoreFreq)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RestoreIdletime) Build() Completed {
 	return completed(c)
 }
@@ -24884,7 +24884,7 @@ func (c RestoreReplace) Freq(frequency int64) RestoreFreq {
 	return (RestoreFreq)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RestoreReplace) Build() Completed {
 	return completed(c)
 }
@@ -24911,7 +24911,7 @@ func (c RestoreSerializedValue) Freq(frequency int64) RestoreFreq {
 	return (RestoreFreq)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RestoreSerializedValue) Build() Completed {
 	return completed(c)
 }
@@ -24928,7 +24928,7 @@ func (c RestoreTtl) SerializedValue(serializedValue string) RestoreSerializedVal
 // Time complexity: O(1)
 type RgAbortexecution Base
 
-// RgAbortexecution start a command to The RG.ABORTEXECUTION command aborts the execution of a function in mid-flight.
+// The RG.ABORTEXECUTION command aborts the execution of a function in mid-flight.
 //
 // Command: RG.ABORTEXECUTION.
 //
@@ -24946,7 +24946,7 @@ func (c RgAbortexecution) Id(id string) RgAbortexecutionId {
 
 type RgAbortexecutionId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgAbortexecutionId) Build() Completed {
 	return completed(c)
 }
@@ -24956,7 +24956,7 @@ func (c RgAbortexecutionId) Build() Completed {
 // Time complexity: O(1)
 type RgConfigget Base
 
-// RgConfigget start a command to The RG.CONFIGGET command returns the value of one or more built-in configuration or a user-defined options.
+// The RG.CONFIGGET command returns the value of one or more built-in configuration or a user-defined options.
 //
 // Command: RG.CONFIGGET.
 //
@@ -24979,7 +24979,7 @@ func (c RgConfiggetKey) Key(key ...string) RgConfiggetKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgConfiggetKey) Build() Completed {
 	return completed(c)
 }
@@ -24989,7 +24989,7 @@ func (c RgConfiggetKey) Build() Completed {
 // Time complexity: O(1)
 type RgConfigset Base
 
-// RgConfigset start a command to The RG.CONFIGGET command sets the value of one ore more built-in configuration or a user-defined options.
+// The RG.CONFIGGET command sets the value of one ore more built-in configuration or a user-defined options.
 //
 // Command: RG.CONFIGSET.
 //
@@ -25011,7 +25011,7 @@ func (c RgConfigsetKeyValue) KeyValue(key string, value string) RgConfigsetKeyVa
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgConfigsetKeyValue) Build() Completed {
 	return completed(c)
 }
@@ -25021,7 +25021,7 @@ func (c RgConfigsetKeyValue) Build() Completed {
 // Time complexity: O(1)
 type RgDropexecution Base
 
-// RgDropexecution start a command to The RG.DROPEXECUTION command removes the execution of a function from the executions list.
+// The RG.DROPEXECUTION command removes the execution of a function from the executions list.
 //
 // Command: RG.DROPEXECUTION.
 //
@@ -25039,7 +25039,7 @@ func (c RgDropexecution) Id(id string) RgDropexecutionId {
 
 type RgDropexecutionId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgDropexecutionId) Build() Completed {
 	return completed(c)
 }
@@ -25049,7 +25049,7 @@ func (c RgDropexecutionId) Build() Completed {
 // Time complexity: O(n) where n is the number of executions returned
 type RgDumpexecutions Base
 
-// RgDumpexecutions start a command to The RG.DUMPEXECUTIONS command outputs the list of function executions. The executions list's length is capped by the MaxExecutions configuration option.
+// The RG.DUMPEXECUTIONS command outputs the list of function executions. The executions list's length is capped by the MaxExecutions configuration option.
 //
 // Command: RG.DUMPEXECUTIONS.
 //
@@ -25060,7 +25060,7 @@ func (b Builder) RgDumpexecutions() RgDumpexecutions {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgDumpexecutions) Build() Completed {
 	return completed(c)
 }
@@ -25070,7 +25070,7 @@ func (c RgDumpexecutions) Build() Completed {
 // Time complexity: O(n) where n is the number of registrations returned
 type RgDumpregistrations Base
 
-// RgDumpregistrations start a command to The RG.DUMPREGISTRATIONS command outputs the list of function registrations.
+// The RG.DUMPREGISTRATIONS command outputs the list of function registrations.
 //
 // Command: RG.DUMPREGISTRATIONS.
 //
@@ -25081,7 +25081,7 @@ func (b Builder) RgDumpregistrations() RgDumpregistrations {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgDumpregistrations) Build() Completed {
 	return completed(c)
 }
@@ -25091,7 +25091,7 @@ func (c RgDumpregistrations) Build() Completed {
 // Time complexity: O(1)
 type RgGetexecution Base
 
-// RgGetexecution start a command to The RG.GETEXECUTION command returns the execution details of a function that's in the executions list.
+// The RG.GETEXECUTION command returns the execution details of a function that's in the executions list.
 //
 // Command: RG.GETEXECUTION.
 //
@@ -25119,21 +25119,21 @@ func (c RgGetexecutionId) Cluster() RgGetexecutionModeCluster {
 	return (RgGetexecutionModeCluster)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgGetexecutionId) Build() Completed {
 	return completed(c)
 }
 
 type RgGetexecutionModeCluster Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgGetexecutionModeCluster) Build() Completed {
 	return completed(c)
 }
 
 type RgGetexecutionModeShard Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgGetexecutionModeShard) Build() Completed {
 	return completed(c)
 }
@@ -25143,7 +25143,7 @@ func (c RgGetexecutionModeShard) Build() Completed {
 // Time complexity: O(1)
 type RgGetresults Base
 
-// RgGetresults start a command to The RG.GETRESULTS command returns the results and errors from of the execution execution details of a function that's in the executions list.
+// The RG.GETRESULTS command returns the results and errors from of the execution execution details of a function that's in the executions list.
 //
 // Command: RG.GETRESULTS.
 //
@@ -25161,7 +25161,7 @@ func (c RgGetresults) Id(id string) RgGetresultsId {
 
 type RgGetresultsId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgGetresultsId) Build() Completed {
 	return completed(c)
 }
@@ -25171,7 +25171,7 @@ func (c RgGetresultsId) Build() Completed {
 // Time complexity: O(1)
 type RgGetresultsblocking Base
 
-// RgGetresultsblocking start a command to The RG.GETRESULTSBLOCKING command cancels the UNBLOCKING argument of the RG.PYEXECUTE command. The calling client is blocked until execution ends and is sent with any results and errors then.
+// The RG.GETRESULTSBLOCKING command cancels the UNBLOCKING argument of the RG.PYEXECUTE command. The calling client is blocked until execution ends and is sent with any results and errors then.
 //
 // Command: RG.GETRESULTSBLOCKING.
 //
@@ -25189,7 +25189,7 @@ func (c RgGetresultsblocking) Id(id string) RgGetresultsblockingId {
 
 type RgGetresultsblockingId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgGetresultsblockingId) Build() Completed {
 	return completed(c)
 }
@@ -25199,7 +25199,7 @@ func (c RgGetresultsblockingId) Build() Completed {
 // Time complexity: O(1)
 type RgInfocluster Base
 
-// RgInfocluster start a command to The RG.INFOCLUSTER command outputs information about the cluster.
+// The RG.INFOCLUSTER command outputs information about the cluster.
 //
 // Command: RG.INFOCLUSTER.
 //
@@ -25210,7 +25210,7 @@ func (b Builder) RgInfocluster() RgInfocluster {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgInfocluster) Build() Completed {
 	return completed(c)
 }
@@ -25220,7 +25220,7 @@ func (c RgInfocluster) Build() Completed {
 // Time complexity: O(n) when n is the number of requirements
 type RgPydumpreqs Base
 
-// RgPydumpreqs start a command to The RG.PYDUMPREQS command returns a list of all the python requirements available (with information about each requirement).
+// The RG.PYDUMPREQS command returns a list of all the python requirements available (with information about each requirement).
 //
 // Command: RG.PYDUMPREQS.
 //
@@ -25231,7 +25231,7 @@ func (b Builder) RgPydumpreqs() RgPydumpreqs {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPydumpreqs) Build() Completed {
 	return completed(c)
 }
@@ -25241,7 +25241,7 @@ func (c RgPydumpreqs) Build() Completed {
 // Time complexity: Depends on what the python code does
 type RgPyexecute Base
 
-// RgPyexecute start a command to The RG.PYEXECUTE command executes a Python function.
+// The RG.PYEXECUTE command executes a Python function.
 //
 // Command: RG.PYEXECUTE.
 //
@@ -25275,7 +25275,7 @@ func (c RgPyexecuteDescription) Requirements(requirement ...string) RgPyexecuteR
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteDescription) Build() Completed {
 	return completed(c)
 }
@@ -25313,7 +25313,7 @@ func (c RgPyexecuteFunction) Requirements(requirement ...string) RgPyexecuteRequ
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteFunction) Build() Completed {
 	return completed(c)
 }
@@ -25341,7 +25341,7 @@ func (c RgPyexecuteId) Requirements(requirement ...string) RgPyexecuteRequiremen
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteId) Build() Completed {
 	return completed(c)
 }
@@ -25354,7 +25354,7 @@ func (c RgPyexecuteReplaceWith) Requirements(requirement ...string) RgPyexecuteR
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteReplaceWith) Build() Completed {
 	return completed(c)
 }
@@ -25367,7 +25367,7 @@ func (c RgPyexecuteRequirementsRequirements) Requirements(requirement ...string)
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteRequirementsRequirements) Build() Completed {
 	return completed(c)
 }
@@ -25400,7 +25400,7 @@ func (c RgPyexecuteUnblocking) Requirements(requirement ...string) RgPyexecuteRe
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteUnblocking) Build() Completed {
 	return completed(c)
 }
@@ -25418,7 +25418,7 @@ func (c RgPyexecuteUpgrade) Requirements(requirement ...string) RgPyexecuteRequi
 	return (RgPyexecuteRequirementsRequirements)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPyexecuteUpgrade) Build() Completed {
 	return completed(c)
 }
@@ -25428,7 +25428,7 @@ func (c RgPyexecuteUpgrade) Build() Completed {
 // Time complexity: O(1)
 type RgPystats Base
 
-// RgPystats start a command to The RG.PYSTATS command returns memory usage statistics from the Python interpreter.
+// The RG.PYSTATS command returns memory usage statistics from the Python interpreter.
 //
 // Command: RG.PYSTATS.
 //
@@ -25439,7 +25439,7 @@ func (b Builder) RgPystats() RgPystats {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgPystats) Build() Completed {
 	return completed(c)
 }
@@ -25449,7 +25449,7 @@ func (c RgPystats) Build() Completed {
 // Time complexity: O(1)
 type RgRefreshcluster Base
 
-// RgRefreshcluster start a command to The RG.REFRESHCLUSTER command refreshes the node's view of the cluster's topology.
+// The RG.REFRESHCLUSTER command refreshes the node's view of the cluster's topology.
 //
 // Command: RG.REFRESHCLUSTER.
 //
@@ -25460,7 +25460,7 @@ func (b Builder) RgRefreshcluster() RgRefreshcluster {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgRefreshcluster) Build() Completed {
 	return completed(c)
 }
@@ -25470,7 +25470,7 @@ func (c RgRefreshcluster) Build() Completed {
 // Time complexity: Depends on the function triggered
 type RgTrigger Base
 
-// RgTrigger start a command to The RG.TRIGGER command triggers the execution of a registered CommandReader function.
+// The RG.TRIGGER command triggers the execution of a registered CommandReader function.
 //
 // Command: RG.TRIGGER.
 //
@@ -25493,7 +25493,7 @@ func (c RgTriggerArgument) Argument(argument ...string) RgTriggerArgument {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgTriggerArgument) Build() Completed {
 	return completed(c)
 }
@@ -25510,7 +25510,7 @@ func (c RgTriggerTrigger) Argument(argument ...string) RgTriggerArgument {
 // Time complexity: O(1)
 type RgUnregister Base
 
-// RgUnregister start a command to The RG.UNREGISTER command removes the registration of a function.
+// The RG.UNREGISTER command removes the registration of a function.
 //
 // Command: RG.UNREGISTER.
 //
@@ -25528,7 +25528,7 @@ func (c RgUnregister) Id(id string) RgUnregisterId {
 
 type RgUnregisterId Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RgUnregisterId) Build() Completed {
 	return completed(c)
 }
@@ -25536,7 +25536,7 @@ func (c RgUnregisterId) Build() Completed {
 // Return the role of the instance in the context of replication.
 type Role Base
 
-// Role start a command to Return the role of the instance in the context of replication
+// Return the role of the instance in the context of replication
 //
 // Command: ROLE.
 func (b Builder) Role() Role {
@@ -25545,7 +25545,7 @@ func (b Builder) Role() Role {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Role) Build() Completed {
 	return completed(c)
 }
@@ -25555,7 +25555,7 @@ func (c Role) Build() Completed {
 // Time complexity: O(N) where N is the number of elements returned
 type Rpop Base
 
-// Rpop start a command to Remove and get the last elements in a list
+// Remove and get the last elements in a list
 //
 // Command: RPOP.
 //
@@ -25578,7 +25578,7 @@ func (c Rpop) Key(key string) RpopKey {
 
 type RpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RpopCount) Build() Completed {
 	return completed(c)
 }
@@ -25590,7 +25590,7 @@ func (c RpopKey) Count(count int64) RpopCount {
 	return (RpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RpopKey) Build() Completed {
 	return completed(c)
 }
@@ -25600,7 +25600,7 @@ func (c RpopKey) Build() Completed {
 // Time complexity: O(1)
 type Rpoplpush Base
 
-// Rpoplpush start a command to Remove the last element in a list, prepend it to another list and return it
+// Remove the last element in a list, prepend it to another list and return it
 //
 // Command: RPOPLPUSH.
 //
@@ -25623,7 +25623,7 @@ func (c Rpoplpush) Source(source string) RpoplpushSource {
 
 type RpoplpushDestination Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RpoplpushDestination) Build() Completed {
 	return completed(c)
 }
@@ -25645,7 +25645,7 @@ func (c RpoplpushSource) Destination(destination string) RpoplpushDestination {
 // Time complexity: O(1) for each element added, so O(N) to add N elements when the command is called with multiple arguments.
 type Rpush Base
 
-// Rpush start a command to Append one or multiple elements to a list
+// Append one or multiple elements to a list
 //
 // Command: RPUSH.
 //
@@ -25673,7 +25673,7 @@ func (c RpushElement) Element(element ...string) RpushElement {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RpushElement) Build() Completed {
 	return completed(c)
 }
@@ -25690,7 +25690,7 @@ func (c RpushKey) Element(element ...string) RpushElement {
 // Time complexity: O(1) for each element added, so O(N) to add N elements when the command is called with multiple arguments.
 type Rpushx Base
 
-// Rpushx start a command to Append an element to a list, only if the list exists
+// Append an element to a list, only if the list exists
 //
 // Command: RPUSHX.
 //
@@ -25718,7 +25718,7 @@ func (c RpushxElement) Element(element ...string) RpushxElement {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c RpushxElement) Build() Completed {
 	return completed(c)
 }
@@ -25735,7 +25735,7 @@ func (c RpushxKey) Element(element ...string) RpushxElement {
 // Time complexity: O(1) for each element added, so O(N) to add N elements when the command is called with multiple arguments.
 type Sadd Base
 
-// Sadd start a command to Add one or more members to a set
+// Add one or more members to a set
 //
 // Command: SADD.
 //
@@ -25770,7 +25770,7 @@ func (c SaddMember) Member(member ...string) SaddMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SaddMember) Build() Completed {
 	return completed(c)
 }
@@ -25778,7 +25778,7 @@ func (c SaddMember) Build() Completed {
 // Synchronously save the dataset to disk.
 type Save Base
 
-// Save start a command to Synchronously save the dataset to disk
+// Synchronously save the dataset to disk
 //
 // Command: SAVE.
 func (b Builder) Save() Save {
@@ -25787,7 +25787,7 @@ func (b Builder) Save() Save {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Save) Build() Completed {
 	return completed(c)
 }
@@ -25797,7 +25797,7 @@ func (c Save) Build() Completed {
 // Time complexity: O(1) for every call. O(N) for a complete iteration, including enough command calls for the cursor to return back to 0. N is the number of elements inside the collection.
 type Scan Base
 
-// Scan start a command to Incrementally iterate the keys space
+// Incrementally iterate the keys space
 //
 // Command: SCAN.
 //
@@ -25820,7 +25820,7 @@ func (c ScanCount) Type(typ string) ScanType {
 	return (ScanType)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScanCount) Build() Completed {
 	return completed(c)
 }
@@ -25842,7 +25842,7 @@ func (c ScanCursor) Type(typ string) ScanType {
 	return (ScanType)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScanCursor) Build() Completed {
 	return completed(c)
 }
@@ -25859,14 +25859,14 @@ func (c ScanMatch) Type(typ string) ScanType {
 	return (ScanType)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScanMatch) Build() Completed {
 	return completed(c)
 }
 
 type ScanType Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScanType) Build() Completed {
 	return completed(c)
 }
@@ -25876,7 +25876,7 @@ func (c ScanType) Build() Completed {
 // Time complexity: O(1)
 type Scard Base
 
-// Scard start a command to Get the number of members in a set
+// Get the number of members in a set
 //
 // Command: SCARD.
 //
@@ -25899,12 +25899,12 @@ func (c Scard) Key(key string) ScardKey {
 
 type ScardKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScardKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ScardKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -25914,7 +25914,7 @@ func (c ScardKey) Cache() Cacheable {
 // Time complexity: O(1)
 type ScriptDebug Base
 
-// ScriptDebug start a command to Set the debug mode for executed scripts.
+// Set the debug mode for executed scripts.
 //
 // Command: SCRIPT DEBUG.
 //
@@ -25942,21 +25942,21 @@ func (c ScriptDebug) No() ScriptDebugModeNo {
 
 type ScriptDebugModeNo Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptDebugModeNo) Build() Completed {
 	return completed(c)
 }
 
 type ScriptDebugModeSync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptDebugModeSync) Build() Completed {
 	return completed(c)
 }
 
 type ScriptDebugModeYes Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptDebugModeYes) Build() Completed {
 	return completed(c)
 }
@@ -25966,7 +25966,7 @@ func (c ScriptDebugModeYes) Build() Completed {
 // Time complexity: O(N) with N being the number of scripts to check (so checking a single script is an O(1) operation).
 type ScriptExists Base
 
-// ScriptExists start a command to Check existence of scripts in the script cache.
+// Check existence of scripts in the script cache.
 //
 // Command: SCRIPT EXISTS.
 //
@@ -25989,7 +25989,7 @@ func (c ScriptExistsSha1) Sha1(sha1 ...string) ScriptExistsSha1 {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptExistsSha1) Build() Completed {
 	return completed(c)
 }
@@ -25999,7 +25999,7 @@ func (c ScriptExistsSha1) Build() Completed {
 // Time complexity: O(N) with N being the number of scripts in cache
 type ScriptFlush Base
 
-// ScriptFlush start a command to Remove all the scripts from the script cache.
+// Remove all the scripts from the script cache.
 //
 // Command: SCRIPT FLUSH.
 //
@@ -26020,21 +26020,21 @@ func (c ScriptFlush) Sync() ScriptFlushAsyncSync {
 	return (ScriptFlushAsyncSync)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptFlush) Build() Completed {
 	return completed(c)
 }
 
 type ScriptFlushAsync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptFlushAsync) Build() Completed {
 	return completed(c)
 }
 
 type ScriptFlushAsyncSync Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptFlushAsyncSync) Build() Completed {
 	return completed(c)
 }
@@ -26044,7 +26044,7 @@ func (c ScriptFlushAsyncSync) Build() Completed {
 // Time complexity: O(1)
 type ScriptKill Base
 
-// ScriptKill start a command to Kill the script currently in execution.
+// Kill the script currently in execution.
 //
 // Command: SCRIPT KILL.
 //
@@ -26055,7 +26055,7 @@ func (b Builder) ScriptKill() ScriptKill {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptKill) Build() Completed {
 	return completed(c)
 }
@@ -26065,7 +26065,7 @@ func (c ScriptKill) Build() Completed {
 // Time complexity: O(N) with N being the length in bytes of the script body.
 type ScriptLoad Base
 
-// ScriptLoad start a command to Load the specified Lua script into the script cache.
+// Load the specified Lua script into the script cache.
 //
 // Command: SCRIPT LOAD.
 //
@@ -26083,7 +26083,7 @@ func (c ScriptLoad) Script(script string) ScriptLoadScript {
 
 type ScriptLoadScript Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ScriptLoadScript) Build() Completed {
 	return completed(c)
 }
@@ -26093,7 +26093,7 @@ func (c ScriptLoadScript) Build() Completed {
 // Time complexity: O(N) where N is the total number of elements in all given sets.
 type Sdiff Base
 
-// Sdiff start a command to Subtract multiple sets
+// Subtract multiple sets
 //
 // Command: SDIFF.
 //
@@ -26136,7 +26136,7 @@ func (c SdiffKey) Key(key ...string) SdiffKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SdiffKey) Build() Completed {
 	return completed(c)
 }
@@ -26146,7 +26146,7 @@ func (c SdiffKey) Build() Completed {
 // Time complexity: O(N) where N is the total number of elements in all given sets.
 type Sdiffstore Base
 
-// Sdiffstore start a command to Subtract multiple sets and store the resulting set in a key
+// Subtract multiple sets and store the resulting set in a key
 //
 // Command: SDIFFSTORE.
 //
@@ -26201,7 +26201,7 @@ func (c SdiffstoreKey) Key(key ...string) SdiffstoreKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SdiffstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -26209,7 +26209,7 @@ func (c SdiffstoreKey) Build() Completed {
 // Change the selected database for the current connection.
 type Select Base
 
-// Select start a command to Change the selected database for the current connection
+// Change the selected database for the current connection
 //
 // Command: SELECT.
 func (b Builder) Select() Select {
@@ -26225,7 +26225,7 @@ func (c Select) Index(index int64) SelectIndex {
 
 type SelectIndex Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SelectIndex) Build() Completed {
 	return completed(c)
 }
@@ -26246,7 +26246,7 @@ func (c SentinelFailover) Master(master string) SentinelFailoverMaster {
 
 type SentinelFailoverMaster Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SentinelFailoverMaster) Build() Completed {
 	return completed(c)
 }
@@ -26267,7 +26267,7 @@ func (c SentinelGetMasterAddrByName) Master(master string) SentinelGetMasterAddr
 
 type SentinelGetMasterAddrByNameMaster Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SentinelGetMasterAddrByNameMaster) Build() Completed {
 	return completed(c)
 }
@@ -26288,7 +26288,7 @@ func (c SentinelSentinels) Master(master string) SentinelSentinelsMaster {
 
 type SentinelSentinelsMaster Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SentinelSentinelsMaster) Build() Completed {
 	return completed(c)
 }
@@ -26298,7 +26298,7 @@ func (c SentinelSentinelsMaster) Build() Completed {
 // Time complexity: O(1)
 type Set Base
 
-// Set start a command to Set the string value of a key
+// Set the string value of a key
 //
 // Command: SET.
 //
@@ -26351,7 +26351,7 @@ func (c SetConditionNx) Keepttl() SetExpirationKeepttl {
 	return (SetExpirationKeepttl)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetConditionNx) Build() Completed {
 	return completed(c)
 }
@@ -26388,42 +26388,42 @@ func (c SetConditionXx) Keepttl() SetExpirationKeepttl {
 	return (SetExpirationKeepttl)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetConditionXx) Build() Completed {
 	return completed(c)
 }
 
 type SetExpirationExSeconds Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetExpirationExSeconds) Build() Completed {
 	return completed(c)
 }
 
 type SetExpirationExatTimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetExpirationExatTimestamp) Build() Completed {
 	return completed(c)
 }
 
 type SetExpirationKeepttl Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetExpirationKeepttl) Build() Completed {
 	return completed(c)
 }
 
 type SetExpirationPxMilliseconds Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetExpirationPxMilliseconds) Build() Completed {
 	return completed(c)
 }
 
 type SetExpirationPxatMillisecondsTimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetExpirationPxatMillisecondsTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -26455,7 +26455,7 @@ func (c SetGet) Keepttl() SetExpirationKeepttl {
 	return (SetExpirationKeepttl)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetGet) Build() Completed {
 	return completed(c)
 }
@@ -26509,7 +26509,7 @@ func (c SetValue) Keepttl() SetExpirationKeepttl {
 	return (SetExpirationKeepttl)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetValue) Build() Completed {
 	return completed(c)
 }
@@ -26519,7 +26519,7 @@ func (c SetValue) Build() Completed {
 // Time complexity: O(1)
 type Setbit Base
 
-// Setbit start a command to Sets or clears the bit at offset in the string value stored at key
+// Sets or clears the bit at offset in the string value stored at key
 //
 // Command: SETBIT.
 //
@@ -26556,7 +26556,7 @@ func (c SetbitOffset) Value(value int64) SetbitValue {
 
 type SetbitValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetbitValue) Build() Completed {
 	return completed(c)
 }
@@ -26566,7 +26566,7 @@ func (c SetbitValue) Build() Completed {
 // Time complexity: O(1)
 type Setex Base
 
-// Setex start a command to Set the value and expiration of a key
+// Set the value and expiration of a key
 //
 // Command: SETEX.
 //
@@ -26603,7 +26603,7 @@ func (c SetexSeconds) Value(value string) SetexValue {
 
 type SetexValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetexValue) Build() Completed {
 	return completed(c)
 }
@@ -26613,7 +26613,7 @@ func (c SetexValue) Build() Completed {
 // Time complexity: O(1)
 type Setnx Base
 
-// Setnx start a command to Set the value of a key, only if the key does not exist
+// Set the value of a key, only if the key does not exist
 //
 // Command: SETNX.
 //
@@ -26643,7 +26643,7 @@ func (c SetnxKey) Value(value string) SetnxValue {
 
 type SetnxValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetnxValue) Build() Completed {
 	return completed(c)
 }
@@ -26653,7 +26653,7 @@ func (c SetnxValue) Build() Completed {
 // Time complexity: O(1), not counting the time taken to copy the new string in place. Usually, this string is very small so the amortized complexity is O(1). Otherwise, complexity is O(M) with M being the length of the value argument.
 type Setrange Base
 
-// Setrange start a command to Overwrite part of a string at key starting at the specified offset
+// Overwrite part of a string at key starting at the specified offset
 //
 // Command: SETRANGE.
 //
@@ -26690,7 +26690,7 @@ func (c SetrangeOffset) Value(value string) SetrangeValue {
 
 type SetrangeValue Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SetrangeValue) Build() Completed {
 	return completed(c)
 }
@@ -26698,7 +26698,7 @@ func (c SetrangeValue) Build() Completed {
 // Synchronously save the dataset to disk and then shut down the server.
 type Shutdown Base
 
-// Shutdown start a command to Synchronously save the dataset to disk and then shut down the server
+// Synchronously save the dataset to disk and then shut down the server
 //
 // Command: SHUTDOWN.
 func (b Builder) Shutdown() Shutdown {
@@ -26732,14 +26732,14 @@ func (c Shutdown) Abort() ShutdownAbort {
 	return (ShutdownAbort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Shutdown) Build() Completed {
 	return completed(c)
 }
 
 type ShutdownAbort Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ShutdownAbort) Build() Completed {
 	return completed(c)
 }
@@ -26751,7 +26751,7 @@ func (c ShutdownForce) Abort() ShutdownAbort {
 	return (ShutdownAbort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ShutdownForce) Build() Completed {
 	return completed(c)
 }
@@ -26768,7 +26768,7 @@ func (c ShutdownNow) Abort() ShutdownAbort {
 	return (ShutdownAbort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ShutdownNow) Build() Completed {
 	return completed(c)
 }
@@ -26790,7 +26790,7 @@ func (c ShutdownSaveModeNosave) Abort() ShutdownAbort {
 	return (ShutdownAbort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ShutdownSaveModeNosave) Build() Completed {
 	return completed(c)
 }
@@ -26812,7 +26812,7 @@ func (c ShutdownSaveModeSave) Abort() ShutdownAbort {
 	return (ShutdownAbort)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ShutdownSaveModeSave) Build() Completed {
 	return completed(c)
 }
@@ -26822,7 +26822,7 @@ func (c ShutdownSaveModeSave) Build() Completed {
 // Time complexity: O(N*M) worst case where N is the cardinality of the smallest set and M is the number of sets.
 type Sinter Base
 
-// Sinter start a command to Intersect multiple sets
+// Intersect multiple sets
 //
 // Command: SINTER.
 //
@@ -26865,7 +26865,7 @@ func (c SinterKey) Key(key ...string) SinterKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SinterKey) Build() Completed {
 	return completed(c)
 }
@@ -26875,7 +26875,7 @@ func (c SinterKey) Build() Completed {
 // Time complexity: O(N*M) worst case where N is the cardinality of the smallest set and M is the number of sets.
 type Sintercard Base
 
-// Sintercard start a command to Intersect multiple sets and return the cardinality of the result
+// Intersect multiple sets and return the cardinality of the result
 //
 // Command: SINTERCARD.
 //
@@ -26913,14 +26913,14 @@ func (c SintercardKey) Limit(limit int64) SintercardLimit {
 	return (SintercardLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SintercardKey) Build() Completed {
 	return completed(c)
 }
 
 type SintercardLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SintercardLimit) Build() Completed {
 	return completed(c)
 }
@@ -26947,7 +26947,7 @@ func (c SintercardNumkeys) Key(key ...string) SintercardKey {
 // Time complexity: O(N*M) worst case where N is the cardinality of the smallest set and M is the number of sets.
 type Sinterstore Base
 
-// Sinterstore start a command to Intersect multiple sets and store the resulting set in a key
+// Intersect multiple sets and store the resulting set in a key
 //
 // Command: SINTERSTORE.
 //
@@ -27002,7 +27002,7 @@ func (c SinterstoreKey) Key(key ...string) SinterstoreKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SinterstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -27012,7 +27012,7 @@ func (c SinterstoreKey) Build() Completed {
 // Time complexity: O(1)
 type Sismember Base
 
-// Sismember start a command to Determine if a given value is a member of a set
+// Determine if a given value is a member of a set
 //
 // Command: SISMEMBER.
 //
@@ -27042,12 +27042,12 @@ func (c SismemberKey) Member(member string) SismemberMember {
 
 type SismemberMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SismemberMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SismemberMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27055,7 +27055,7 @@ func (c SismemberMember) Cache() Cacheable {
 // Make the server a replica of another instance, or promote it as master. Deprecated starting with Redis 5. Use REPLICAOF instead..
 type Slaveof Base
 
-// Slaveof start a command to Make the server a replica of another instance, or promote it as master. Deprecated starting with Redis 5. Use REPLICAOF instead.
+// Make the server a replica of another instance, or promote it as master. Deprecated starting with Redis 5. Use REPLICAOF instead.
 //
 // Command: SLAVEOF.
 func (b Builder) Slaveof() Slaveof {
@@ -27078,7 +27078,7 @@ func (c SlaveofHost) Port(port int64) SlaveofPort {
 
 type SlaveofPort Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlaveofPort) Build() Completed {
 	return completed(c)
 }
@@ -27088,7 +27088,7 @@ func (c SlaveofPort) Build() Completed {
 // Time complexity: O(N) where N is the number of entries returned
 type SlowlogGet Base
 
-// SlowlogGet start a command to Get the slow log's entries
+// Get the slow log's entries
 //
 // Command: SLOWLOG GET.
 //
@@ -27104,14 +27104,14 @@ func (c SlowlogGet) Count(count int64) SlowlogGetCount {
 	return (SlowlogGetCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlowlogGet) Build() Completed {
 	return completed(c)
 }
 
 type SlowlogGetCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlowlogGetCount) Build() Completed {
 	return completed(c)
 }
@@ -27121,7 +27121,7 @@ func (c SlowlogGetCount) Build() Completed {
 // Time complexity: O(1)
 type SlowlogHelp Base
 
-// SlowlogHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: SLOWLOG HELP.
 //
@@ -27132,7 +27132,7 @@ func (b Builder) SlowlogHelp() SlowlogHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlowlogHelp) Build() Completed {
 	return completed(c)
 }
@@ -27142,7 +27142,7 @@ func (c SlowlogHelp) Build() Completed {
 // Time complexity: O(1)
 type SlowlogLen Base
 
-// SlowlogLen start a command to Get the slow log's length
+// Get the slow log's length
 //
 // Command: SLOWLOG LEN.
 //
@@ -27153,7 +27153,7 @@ func (b Builder) SlowlogLen() SlowlogLen {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlowlogLen) Build() Completed {
 	return completed(c)
 }
@@ -27163,7 +27163,7 @@ func (c SlowlogLen) Build() Completed {
 // Time complexity: O(N) where N is the number of entries in the slowlog
 type SlowlogReset Base
 
-// SlowlogReset start a command to Clear all entries from the slow log
+// Clear all entries from the slow log
 //
 // Command: SLOWLOG RESET.
 //
@@ -27174,7 +27174,7 @@ func (b Builder) SlowlogReset() SlowlogReset {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SlowlogReset) Build() Completed {
 	return completed(c)
 }
@@ -27184,7 +27184,7 @@ func (c SlowlogReset) Build() Completed {
 // Time complexity: O(N) where N is the set cardinality.
 type Smembers Base
 
-// Smembers start a command to Get all the members in a set
+// Get all the members in a set
 //
 // Command: SMEMBERS.
 //
@@ -27207,12 +27207,12 @@ func (c Smembers) Key(key string) SmembersKey {
 
 type SmembersKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SmembersKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SmembersKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27222,7 +27222,7 @@ func (c SmembersKey) Cache() Cacheable {
 // Time complexity: O(N) where N is the number of elements being checked for membership
 type Smismember Base
 
-// Smismember start a command to Returns the membership associated with the given elements for a set
+// Returns the membership associated with the given elements for a set
 //
 // Command: SMISMEMBER.
 //
@@ -27257,12 +27257,12 @@ func (c SmismemberMember) Member(member ...string) SmismemberMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SmismemberMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SmismemberMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27272,7 +27272,7 @@ func (c SmismemberMember) Cache() Cacheable {
 // Time complexity: O(1)
 type Smove Base
 
-// Smove start a command to Move a member from one set to another
+// Move a member from one set to another
 //
 // Command: SMOVE.
 //
@@ -27302,7 +27302,7 @@ func (c SmoveDestination) Member(member string) SmoveMember {
 
 type SmoveMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SmoveMember) Build() Completed {
 	return completed(c)
 }
@@ -27324,7 +27324,7 @@ func (c SmoveSource) Destination(destination string) SmoveDestination {
 // Time complexity: O(N+M*log(M)) where N is the number of elements in the list or set to sort, and M the number of returned elements. When the elements are not sorted, complexity is O(N).
 type Sort Base
 
-// Sort start a command to Sort the elements in a list, set or sorted set
+// Sort the elements in a list, set or sorted set
 //
 // Command: SORT.
 //
@@ -27381,7 +27381,7 @@ func (c SortBy) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortBy) Build() Completed {
 	return completed(c)
 }
@@ -27418,7 +27418,7 @@ func (c SortGet) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortGet) Build() Completed {
 	return completed(c)
 }
@@ -27464,7 +27464,7 @@ func (c SortKey) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortKey) Build() Completed {
 	return completed(c)
 }
@@ -27500,7 +27500,7 @@ func (c SortLimit) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortLimit) Build() Completed {
 	return completed(c)
 }
@@ -27522,7 +27522,7 @@ func (c SortOrderAsc) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortOrderAsc) Build() Completed {
 	return completed(c)
 }
@@ -27544,7 +27544,7 @@ func (c SortOrderDesc) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortOrderDesc) Build() Completed {
 	return completed(c)
 }
@@ -27554,7 +27554,7 @@ func (c SortOrderDesc) Build() Completed {
 // Time complexity: O(N+M*log(M)) where N is the number of elements in the list or set to sort, and M the number of returned elements. When the elements are not sorted, complexity is O(N).
 type SortRo Base
 
-// SortRo start a command to Sort the elements in a list, set or sorted set. Read-only variant of SORT.
+// Sort the elements in a list, set or sorted set. Read-only variant of SORT.
 //
 // Command: SORT_RO.
 //
@@ -27601,12 +27601,12 @@ func (c SortRoBy) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoBy) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoBy) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27633,12 +27633,12 @@ func (c SortRoGet) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoGet) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoGet) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27674,12 +27674,12 @@ func (c SortRoKey) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27705,12 +27705,12 @@ func (c SortRoLimit) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27722,12 +27722,12 @@ func (c SortRoOrderAsc) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoOrderAsc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoOrderAsc) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27739,24 +27739,24 @@ func (c SortRoOrderDesc) Alpha() SortRoSortingAlpha {
 	return (SortRoSortingAlpha)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoOrderDesc) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoOrderDesc) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type SortRoSortingAlpha Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortRoSortingAlpha) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c SortRoSortingAlpha) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -27773,14 +27773,14 @@ func (c SortSortingAlpha) Store(destination string) SortStore {
 	return (SortStore)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortSortingAlpha) Build() Completed {
 	return completed(c)
 }
 
 type SortStore Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SortStore) Build() Completed {
 	return completed(c)
 }
@@ -27790,7 +27790,7 @@ func (c SortStore) Build() Completed {
 // Time complexity: Without the count argument O(1), otherwise O(N) where N is the value of the passed count.
 type Spop Base
 
-// Spop start a command to Remove and return one or multiple random members from a set
+// Remove and return one or multiple random members from a set
 //
 // Command: SPOP.
 //
@@ -27813,7 +27813,7 @@ func (c Spop) Key(key string) SpopKey {
 
 type SpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SpopCount) Build() Completed {
 	return completed(c)
 }
@@ -27825,7 +27825,7 @@ func (c SpopKey) Count(count int64) SpopCount {
 	return (SpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SpopKey) Build() Completed {
 	return completed(c)
 }
@@ -27858,7 +27858,7 @@ func (c SpublishChannel) Message(message string) SpublishMessage {
 
 type SpublishMessage Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SpublishMessage) Build() Completed {
 	return completed(c)
 }
@@ -27868,7 +27868,7 @@ func (c SpublishMessage) Build() Completed {
 // Time complexity: Without the count argument O(1), otherwise O(N) where N is the absolute value of the passed count.
 type Srandmember Base
 
-// Srandmember start a command to Get one or multiple random members from a set
+// Get one or multiple random members from a set
 //
 // Command: SRANDMEMBER.
 //
@@ -27891,7 +27891,7 @@ func (c Srandmember) Key(key string) SrandmemberKey {
 
 type SrandmemberCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SrandmemberCount) Build() Completed {
 	return completed(c)
 }
@@ -27903,7 +27903,7 @@ func (c SrandmemberKey) Count(count int64) SrandmemberCount {
 	return (SrandmemberCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SrandmemberKey) Build() Completed {
 	return completed(c)
 }
@@ -27913,7 +27913,7 @@ func (c SrandmemberKey) Build() Completed {
 // Time complexity: O(N) where N is the number of members to be removed.
 type Srem Base
 
-// Srem start a command to Remove one or more members from a set
+// Remove one or more members from a set
 //
 // Command: SREM.
 //
@@ -27948,7 +27948,7 @@ func (c SremMember) Member(member ...string) SremMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SremMember) Build() Completed {
 	return completed(c)
 }
@@ -27958,7 +27958,7 @@ func (c SremMember) Build() Completed {
 // Time complexity: O(1) for every call. O(N) for a complete iteration, including enough command calls for the cursor to return back to 0. N is the number of elements inside the collection..
 type Sscan Base
 
-// Sscan start a command to Incrementally iterate Set elements
+// Incrementally iterate Set elements
 //
 // Command: SSCAN.
 //
@@ -27981,7 +27981,7 @@ func (c Sscan) Key(key string) SscanKey {
 
 type SscanCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SscanCount) Build() Completed {
 	return completed(c)
 }
@@ -27998,7 +27998,7 @@ func (c SscanCursor) Count(count int64) SscanCount {
 	return (SscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SscanCursor) Build() Completed {
 	return completed(c)
 }
@@ -28017,7 +28017,7 @@ func (c SscanMatch) Count(count int64) SscanCount {
 	return (SscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SscanMatch) Build() Completed {
 	return completed(c)
 }
@@ -28063,7 +28063,7 @@ func (c SsubscribeChannel) Channel(channel ...string) SsubscribeChannel {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SsubscribeChannel) Build() Completed {
 	return completed(c)
 }
@@ -28073,7 +28073,7 @@ func (c SsubscribeChannel) Build() Completed {
 // Time complexity: O(1)
 type Strlen Base
 
-// Strlen start a command to Get the length of the value stored in a key
+// Get the length of the value stored in a key
 //
 // Command: STRLEN.
 //
@@ -28096,12 +28096,12 @@ func (c Strlen) Key(key string) StrlenKey {
 
 type StrlenKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c StrlenKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c StrlenKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -28111,7 +28111,7 @@ func (c StrlenKey) Cache() Cacheable {
 // Time complexity: O(N) where N is the number of channels to subscribe to.
 type Subscribe Base
 
-// Subscribe start a command to Listen for messages published to the given channels
+// Listen for messages published to the given channels
 //
 // Command: SUBSCRIBE.
 //
@@ -28134,7 +28134,7 @@ func (c SubscribeChannel) Channel(channel ...string) SubscribeChannel {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SubscribeChannel) Build() Completed {
 	return completed(c)
 }
@@ -28144,7 +28144,7 @@ func (c SubscribeChannel) Build() Completed {
 // Time complexity: O(N) where N is the total number of elements in all given sets.
 type Sunion Base
 
-// Sunion start a command to Add multiple sets
+// Add multiple sets
 //
 // Command: SUNION.
 //
@@ -28187,7 +28187,7 @@ func (c SunionKey) Key(key ...string) SunionKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SunionKey) Build() Completed {
 	return completed(c)
 }
@@ -28197,7 +28197,7 @@ func (c SunionKey) Build() Completed {
 // Time complexity: O(N) where N is the total number of elements in all given sets.
 type Sunionstore Base
 
-// Sunionstore start a command to Add multiple sets and store the resulting set in a key
+// Add multiple sets and store the resulting set in a key
 //
 // Command: SUNIONSTORE.
 //
@@ -28252,7 +28252,7 @@ func (c SunionstoreKey) Key(key ...string) SunionstoreKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SunionstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -28281,7 +28281,7 @@ func (c Sunsubscribe) Channel(channel ...string) SunsubscribeChannel {
 	return (SunsubscribeChannel)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Sunsubscribe) Build() Completed {
 	return completed(c)
 }
@@ -28303,7 +28303,7 @@ func (c SunsubscribeChannel) Channel(channel ...string) SunsubscribeChannel {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SunsubscribeChannel) Build() Completed {
 	return completed(c)
 }
@@ -28313,7 +28313,7 @@ func (c SunsubscribeChannel) Build() Completed {
 // Time complexity: O(N) where N is the count of clients watching or blocking on keys from both databases.
 type Swapdb Base
 
-// Swapdb start a command to Swaps two Redis databases
+// Swaps two Redis databases
 //
 // Command: SWAPDB.
 //
@@ -28338,7 +28338,7 @@ func (c SwapdbIndex1) Index2(index2 int64) SwapdbIndex2 {
 
 type SwapdbIndex2 Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c SwapdbIndex2) Build() Completed {
 	return completed(c)
 }
@@ -28346,7 +28346,7 @@ func (c SwapdbIndex2) Build() Completed {
 // Internal command used for replication.
 type Sync Base
 
-// Sync start a command to Internal command used for replication
+// Internal command used for replication
 //
 // Command: SYNC.
 func (b Builder) Sync() Sync {
@@ -28355,7 +28355,7 @@ func (b Builder) Sync() Sync {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Sync) Build() Completed {
 	return completed(c)
 }
@@ -28365,7 +28365,7 @@ func (c Sync) Build() Completed {
 // Time complexity: O(N) , where N is the number of samples to add
 type TdigestAdd Base
 
-// TdigestAdd start a command to Adds one or more samples to a sketch
+// Adds one or more samples to a sketch
 //
 // Command: TDIGEST.ADD.
 //
@@ -28400,7 +28400,7 @@ func (c TdigestAddValuesValue) Value(value float64) TdigestAddValuesValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestAddValuesValue) Build() Completed {
 	return completed(c)
 }
@@ -28410,7 +28410,7 @@ func (c TdigestAddValuesValue) Build() Completed {
 // Time complexity: O(1)
 type TdigestByrank Base
 
-// TdigestByrank start a command to Retrieve an estimation of the value with the given the rank. Multiple estimations can be returned with one call.
+// Retrieve an estimation of the value with the given the rank. Multiple estimations can be returned with one call.
 //
 // Command: TDIGEST.BYRANK.
 //
@@ -28449,7 +28449,7 @@ func (c TdigestByrankRank) Rank(rank ...float64) TdigestByrankRank {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestByrankRank) Build() Completed {
 	return completed(c)
 }
@@ -28459,7 +28459,7 @@ func (c TdigestByrankRank) Build() Completed {
 // Time complexity: O(1)
 type TdigestByrevrank Base
 
-// TdigestByrevrank start a command to Retrieve an estimation of the value with the given the reverse rank. Multiple estimations can be returned with one call.
+// Retrieve an estimation of the value with the given the reverse rank. Multiple estimations can be returned with one call.
 //
 // Command: TDIGEST.BYREVRANK.
 //
@@ -28498,7 +28498,7 @@ func (c TdigestByrevrankReverseRank) ReverseRank(reverseRank ...float64) Tdigest
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestByrevrankReverseRank) Build() Completed {
 	return completed(c)
 }
@@ -28508,7 +28508,7 @@ func (c TdigestByrevrankReverseRank) Build() Completed {
 // Time complexity: O(1)
 type TdigestCdf Base
 
-// TdigestCdf start a command to Returns the fraction of all points added which are <= value. Multiple fractions can be returned with one call.
+// Returns the fraction of all points added which are <= value. Multiple fractions can be returned with one call.
 //
 // Command: TDIGEST.CDF.
 //
@@ -28547,7 +28547,7 @@ func (c TdigestCdfValue) Value(value ...float64) TdigestCdfValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestCdfValue) Build() Completed {
 	return completed(c)
 }
@@ -28557,7 +28557,7 @@ func (c TdigestCdfValue) Build() Completed {
 // Time complexity: O(1)
 type TdigestCreate Base
 
-// TdigestCreate start a command to Allocate the memory and initialize the t-digest
+// Allocate the memory and initialize the t-digest
 //
 // Command: TDIGEST.CREATE.
 //
@@ -28580,7 +28580,7 @@ func (c TdigestCreate) Key(key string) TdigestCreateKey {
 
 type TdigestCreateCompression Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestCreateCompression) Build() Completed {
 	return completed(c)
 }
@@ -28592,7 +28592,7 @@ func (c TdigestCreateKey) Compression(compression int64) TdigestCreateCompressio
 	return (TdigestCreateCompression)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestCreateKey) Build() Completed {
 	return completed(c)
 }
@@ -28602,7 +28602,7 @@ func (c TdigestCreateKey) Build() Completed {
 // Time complexity: O(1)
 type TdigestInfo Base
 
-// TdigestInfo start a command to Returns information about a sketch
+// Returns information about a sketch
 //
 // Command: TDIGEST.INFO.
 //
@@ -28625,7 +28625,7 @@ func (c TdigestInfo) Key(key string) TdigestInfoKey {
 
 type TdigestInfoKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestInfoKey) Build() Completed {
 	return completed(c)
 }
@@ -28635,7 +28635,7 @@ func (c TdigestInfoKey) Build() Completed {
 // Time complexity: O(1)
 type TdigestMax Base
 
-// TdigestMax start a command to Get maximum value from the sketch
+// Get maximum value from the sketch
 //
 // Command: TDIGEST.MAX.
 //
@@ -28658,7 +28658,7 @@ func (c TdigestMax) Key(key string) TdigestMaxKey {
 
 type TdigestMaxKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestMaxKey) Build() Completed {
 	return completed(c)
 }
@@ -28668,7 +28668,7 @@ func (c TdigestMaxKey) Build() Completed {
 // Time complexity: O(N*K), where N is the number of centroids and K being the number of input sketches
 type TdigestMerge Base
 
-// TdigestMerge start a command to Merges all of the values from 'source-key' keys to 'destination-key' sketch
+// Merges all of the values from 'source-key' keys to 'destination-key' sketch
 //
 // Command: TDIGEST.MERGE.
 //
@@ -28696,7 +28696,7 @@ func (c TdigestMergeConfigCompression) Override() TdigestMergeOverride {
 	return (TdigestMergeOverride)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestMergeConfigCompression) Build() Completed {
 	return completed(c)
 }
@@ -28727,7 +28727,7 @@ func (c TdigestMergeNumkeys) SourceKey(sourceKey ...string) TdigestMergeSourceKe
 
 type TdigestMergeOverride Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestMergeOverride) Build() Completed {
 	return completed(c)
 }
@@ -28759,7 +28759,7 @@ func (c TdigestMergeSourceKey) Override() TdigestMergeOverride {
 	return (TdigestMergeOverride)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestMergeSourceKey) Build() Completed {
 	return completed(c)
 }
@@ -28769,7 +28769,7 @@ func (c TdigestMergeSourceKey) Build() Completed {
 // Time complexity: O(1)
 type TdigestMin Base
 
-// TdigestMin start a command to Get minimum value from the sketch
+// Get minimum value from the sketch
 //
 // Command: TDIGEST.MIN.
 //
@@ -28792,7 +28792,7 @@ func (c TdigestMin) Key(key string) TdigestMinKey {
 
 type TdigestMinKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestMinKey) Build() Completed {
 	return completed(c)
 }
@@ -28802,7 +28802,7 @@ func (c TdigestMinKey) Build() Completed {
 // Time complexity: O(1)
 type TdigestQuantile Base
 
-// TdigestQuantile start a command to Returns an estimate of the cutoff such that a specified fraction of the data added to this TDigest would be less than or equal to the specified cutoffs. Multiple quantiles can be returned with one call.
+// Returns an estimate of the cutoff such that a specified fraction of the data added to this TDigest would be less than or equal to the specified cutoffs. Multiple quantiles can be returned with one call.
 //
 // Command: TDIGEST.QUANTILE.
 //
@@ -28841,7 +28841,7 @@ func (c TdigestQuantileQuantile) Quantile(quantile ...float64) TdigestQuantileQu
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestQuantileQuantile) Build() Completed {
 	return completed(c)
 }
@@ -28851,7 +28851,7 @@ func (c TdigestQuantileQuantile) Build() Completed {
 // Time complexity: O(1)
 type TdigestRank Base
 
-// TdigestRank start a command to Retrieve the estimated rank of value (the number of observations in the sketch that are smaller than value + half the number of observations that are equal to value). Multiple ranks can be returned with one call.
+// Retrieve the estimated rank of value (the number of observations in the sketch that are smaller than value + half the number of observations that are equal to value). Multiple ranks can be returned with one call.
 //
 // Command: TDIGEST.RANK.
 //
@@ -28890,7 +28890,7 @@ func (c TdigestRankValue) Value(value ...float64) TdigestRankValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestRankValue) Build() Completed {
 	return completed(c)
 }
@@ -28900,7 +28900,7 @@ func (c TdigestRankValue) Build() Completed {
 // Time complexity: O(1)
 type TdigestReset Base
 
-// TdigestReset start a command to Reset the sketch to zero - empty out the sketch and re-initialize it
+// Reset the sketch to zero - empty out the sketch and re-initialize it
 //
 // Command: TDIGEST.RESET.
 //
@@ -28923,7 +28923,7 @@ func (c TdigestReset) Key(key string) TdigestResetKey {
 
 type TdigestResetKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestResetKey) Build() Completed {
 	return completed(c)
 }
@@ -28933,7 +28933,7 @@ func (c TdigestResetKey) Build() Completed {
 // Time complexity: O(1)
 type TdigestRevrank Base
 
-// TdigestRevrank start a command to Retrieve the estimated rank of value (the number of observations in the sketch that are larger than value + half the number of observations that are equal to value). Multiple ranks can be returned with one call.
+// Retrieve the estimated rank of value (the number of observations in the sketch that are larger than value + half the number of observations that are equal to value). Multiple ranks can be returned with one call.
 //
 // Command: TDIGEST.REVRANK.
 //
@@ -28972,7 +28972,7 @@ func (c TdigestRevrankValue) Value(value ...float64) TdigestRevrankValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestRevrankValue) Build() Completed {
 	return completed(c)
 }
@@ -28982,7 +28982,7 @@ func (c TdigestRevrankValue) Build() Completed {
 // Time complexity: O(n)
 type TdigestTrimmedMean Base
 
-// TdigestTrimmedMean start a command to Returns the trimmed mean ignoring values outside given cutoff upper and lower limits
+// Returns the trimmed mean ignoring values outside given cutoff upper and lower limits
 //
 // Command: TDIGEST.TRIMMED_MEAN.
 //
@@ -29005,7 +29005,7 @@ func (c TdigestTrimmedMean) Key(key string) TdigestTrimmedMeanKey {
 
 type TdigestTrimmedMeanHighCutQuantile Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TdigestTrimmedMeanHighCutQuantile) Build() Completed {
 	return completed(c)
 }
@@ -29029,7 +29029,7 @@ func (c TdigestTrimmedMeanLowCutQuantile) HighCutQuantile(highCutQuantile float6
 // Time complexity: O(1)
 type Time Base
 
-// Time start a command to Return the current server time
+// Return the current server time
 //
 // Command: TIME.
 //
@@ -29040,7 +29040,7 @@ func (b Builder) Time() Time {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Time) Build() Completed {
 	return completed(c)
 }
@@ -29050,7 +29050,7 @@ func (c Time) Build() Completed {
 // Time complexity: O(n * k) where n is the number of items and k is the depth
 type TopkAdd Base
 
-// TopkAdd start a command to Increases the count of one or more items by increment
+// Increases the count of one or more items by increment
 //
 // Command: TOPK.ADD.
 //
@@ -29078,7 +29078,7 @@ func (c TopkAddItems) Items(items ...string) TopkAddItems {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkAddItems) Build() Completed {
 	return completed(c)
 }
@@ -29097,7 +29097,7 @@ func (c TopkAddKey) Items(items ...string) TopkAddItems {
 // Deprecated: [since 2.4]
 type TopkCount Base
 
-// TopkCount start a command to Return the count for one or more items are in a sketch
+// Return the count for one or more items are in a sketch
 //
 // Command: TOPK.COUNT.
 //
@@ -29127,7 +29127,7 @@ func (c TopkCountItem) Item(item ...string) TopkCountItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkCountItem) Build() Completed {
 	return completed(c)
 }
@@ -29144,7 +29144,7 @@ func (c TopkCountKey) Item(item ...string) TopkCountItem {
 // Time complexity: O(n * k * incr) where n is the number of items, k is the depth and incr is the increment
 type TopkIncrby Base
 
-// TopkIncrby start a command to Increases the count of one or more items by increment
+// Increases the count of one or more items by increment
 //
 // Command: TOPK.INCRBY.
 //
@@ -29172,7 +29172,7 @@ func (c TopkIncrbyItemsIncrement) Item(item string) TopkIncrbyItemsItem {
 	return (TopkIncrbyItemsItem)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkIncrbyItemsIncrement) Build() Completed {
 	return completed(c)
 }
@@ -29196,7 +29196,7 @@ func (c TopkIncrbyKey) Item(item string) TopkIncrbyItemsItem {
 // Time complexity: O(1)
 type TopkInfo Base
 
-// TopkInfo start a command to Returns information about a sketch
+// Returns information about a sketch
 //
 // Command: TOPK.INFO.
 //
@@ -29219,12 +29219,12 @@ func (c TopkInfo) Key(key string) TopkInfoKey {
 
 type TopkInfoKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkInfoKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TopkInfoKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -29234,7 +29234,7 @@ func (c TopkInfoKey) Cache() Cacheable {
 // Time complexity: O(k) where k is the value of top-k
 type TopkList Base
 
-// TopkList start a command to Return full list of items in Top K list
+// Return full list of items in Top K list
 //
 // Command: TOPK.LIST.
 //
@@ -29262,24 +29262,24 @@ func (c TopkListKey) Withcount() TopkListWithcount {
 	return (TopkListWithcount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkListKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TopkListKey) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type TopkListWithcount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkListWithcount) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TopkListWithcount) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -29289,7 +29289,7 @@ func (c TopkListWithcount) Cache() Cacheable {
 // Time complexity: O(n) where n is the number of items
 type TopkQuery Base
 
-// TopkQuery start a command to Checks whether one or more items are in a sketch
+// Checks whether one or more items are in a sketch
 //
 // Command: TOPK.QUERY.
 //
@@ -29317,12 +29317,12 @@ func (c TopkQueryItem) Item(item ...string) TopkQueryItem {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkQueryItem) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TopkQueryItem) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -29339,7 +29339,7 @@ func (c TopkQueryKey) Item(item ...string) TopkQueryItem {
 // Time complexity: O(1)
 type TopkReserve Base
 
-// TopkReserve start a command to Initializes a TopK with specified parameters
+// Initializes a TopK with specified parameters
 //
 // Command: TOPK.RESERVE.
 //
@@ -29369,7 +29369,7 @@ func (c TopkReserveKey) Topk(topk int64) TopkReserveTopk {
 
 type TopkReserveParamsDecay Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkReserveParamsDecay) Build() Completed {
 	return completed(c)
 }
@@ -29395,7 +29395,7 @@ func (c TopkReserveTopk) Width(width int64) TopkReserveParamsWidth {
 	return (TopkReserveParamsWidth)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TopkReserveTopk) Build() Completed {
 	return completed(c)
 }
@@ -29405,7 +29405,7 @@ func (c TopkReserveTopk) Build() Completed {
 // Time complexity: O(N) where N is the number of keys that will be touched.
 type Touch Base
 
-// Touch start a command to Alters the last access time of a key(s). Returns the number of existing keys specified.
+// Alters the last access time of a key(s). Returns the number of existing keys specified.
 //
 // Command: TOUCH.
 //
@@ -29448,7 +29448,7 @@ func (c TouchKey) Key(key ...string) TouchKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TouchKey) Build() Completed {
 	return completed(c)
 }
@@ -29458,7 +29458,7 @@ func (c TouchKey) Build() Completed {
 // Time complexity: O(M) when M is the amount of compaction rules or O(1) with no compaction
 type TsAdd Base
 
-// TsAdd start a command to Append a new sample to the series. If the series has not been created yet with TS.CREATE it will be automatically created.
+// Append a new sample to the series. If the series has not been created yet with TS.CREATE it will be automatically created.
 //
 // Command: TS.ADD.
 //
@@ -29517,7 +29517,7 @@ func (c TsAddChunkSize) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddChunkSize) Build() Completed {
 	return completed(c)
 }
@@ -29565,7 +29565,7 @@ func (c TsAddEncodingCompressed) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddEncodingCompressed) Build() Completed {
 	return completed(c)
 }
@@ -29613,7 +29613,7 @@ func (c TsAddEncodingUncompressed) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddEncodingUncompressed) Build() Completed {
 	return completed(c)
 }
@@ -29632,7 +29632,7 @@ func (c TsAddLabels) Labels(label string, value string) TsAddLabels {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddLabels) Build() Completed {
 	return completed(c)
 }
@@ -29644,7 +29644,7 @@ func (c TsAddOnDuplicateBlock) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateBlock) Build() Completed {
 	return completed(c)
 }
@@ -29656,7 +29656,7 @@ func (c TsAddOnDuplicateFirst) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateFirst) Build() Completed {
 	return completed(c)
 }
@@ -29668,7 +29668,7 @@ func (c TsAddOnDuplicateLast) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateLast) Build() Completed {
 	return completed(c)
 }
@@ -29680,7 +29680,7 @@ func (c TsAddOnDuplicateMax) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateMax) Build() Completed {
 	return completed(c)
 }
@@ -29692,7 +29692,7 @@ func (c TsAddOnDuplicateMin) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateMin) Build() Completed {
 	return completed(c)
 }
@@ -29704,7 +29704,7 @@ func (c TsAddOnDuplicateSum) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddOnDuplicateSum) Build() Completed {
 	return completed(c)
 }
@@ -29762,7 +29762,7 @@ func (c TsAddRetention) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddRetention) Build() Completed {
 	return completed(c)
 }
@@ -29832,7 +29832,7 @@ func (c TsAddValue) Labels() TsAddLabels {
 	return (TsAddLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAddValue) Build() Completed {
 	return completed(c)
 }
@@ -29842,7 +29842,7 @@ func (c TsAddValue) Build() Completed {
 // Time complexity: O(N) where N is the number of labels requested to update
 type TsAlter Base
 
-// TsAlter start a command to Update the retention, labels of an existing key
+// Update the retention, labels of an existing key
 //
 // Command: TS.ALTER.
 //
@@ -29901,7 +29901,7 @@ func (c TsAlterChunkSize) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterChunkSize) Build() Completed {
 	return completed(c)
 }
@@ -29913,7 +29913,7 @@ func (c TsAlterDuplicatePolicyBlock) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicyBlock) Build() Completed {
 	return completed(c)
 }
@@ -29925,7 +29925,7 @@ func (c TsAlterDuplicatePolicyFirst) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicyFirst) Build() Completed {
 	return completed(c)
 }
@@ -29937,7 +29937,7 @@ func (c TsAlterDuplicatePolicyLast) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicyLast) Build() Completed {
 	return completed(c)
 }
@@ -29949,7 +29949,7 @@ func (c TsAlterDuplicatePolicyMax) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicyMax) Build() Completed {
 	return completed(c)
 }
@@ -29961,7 +29961,7 @@ func (c TsAlterDuplicatePolicyMin) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicyMin) Build() Completed {
 	return completed(c)
 }
@@ -29973,7 +29973,7 @@ func (c TsAlterDuplicatePolicySum) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterDuplicatePolicySum) Build() Completed {
 	return completed(c)
 }
@@ -30026,7 +30026,7 @@ func (c TsAlterKey) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterKey) Build() Completed {
 	return completed(c)
 }
@@ -30038,7 +30038,7 @@ func (c TsAlterLabels) Labels(label string, value string) TsAlterLabels {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterLabels) Build() Completed {
 	return completed(c)
 }
@@ -30086,7 +30086,7 @@ func (c TsAlterRetention) Labels() TsAlterLabels {
 	return (TsAlterLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsAlterRetention) Build() Completed {
 	return completed(c)
 }
@@ -30096,7 +30096,7 @@ func (c TsAlterRetention) Build() Completed {
 // Time complexity: O(1)
 type TsCreate Base
 
-// TsCreate start a command to Create a new time-series
+// Create a new time-series
 //
 // Command: TS.CREATE.
 //
@@ -30155,7 +30155,7 @@ func (c TsCreateChunkSize) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateChunkSize) Build() Completed {
 	return completed(c)
 }
@@ -30167,7 +30167,7 @@ func (c TsCreateDuplicatePolicyBlock) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicyBlock) Build() Completed {
 	return completed(c)
 }
@@ -30179,7 +30179,7 @@ func (c TsCreateDuplicatePolicyFirst) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicyFirst) Build() Completed {
 	return completed(c)
 }
@@ -30191,7 +30191,7 @@ func (c TsCreateDuplicatePolicyLast) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicyLast) Build() Completed {
 	return completed(c)
 }
@@ -30203,7 +30203,7 @@ func (c TsCreateDuplicatePolicyMax) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicyMax) Build() Completed {
 	return completed(c)
 }
@@ -30215,7 +30215,7 @@ func (c TsCreateDuplicatePolicyMin) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicyMin) Build() Completed {
 	return completed(c)
 }
@@ -30227,7 +30227,7 @@ func (c TsCreateDuplicatePolicySum) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateDuplicatePolicySum) Build() Completed {
 	return completed(c)
 }
@@ -30275,7 +30275,7 @@ func (c TsCreateEncodingCompressed) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateEncodingCompressed) Build() Completed {
 	return completed(c)
 }
@@ -30323,7 +30323,7 @@ func (c TsCreateEncodingUncompressed) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateEncodingUncompressed) Build() Completed {
 	return completed(c)
 }
@@ -30386,7 +30386,7 @@ func (c TsCreateKey) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateKey) Build() Completed {
 	return completed(c)
 }
@@ -30398,7 +30398,7 @@ func (c TsCreateLabels) Labels(label string, value string) TsCreateLabels {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateLabels) Build() Completed {
 	return completed(c)
 }
@@ -30456,7 +30456,7 @@ func (c TsCreateRetention) Labels() TsCreateLabels {
 	return (TsCreateLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateRetention) Build() Completed {
 	return completed(c)
 }
@@ -30466,7 +30466,7 @@ func (c TsCreateRetention) Build() Completed {
 // Time complexity: O(1)
 type TsCreaterule Base
 
-// TsCreaterule start a command to Create a compaction rule
+// Create a compaction rule
 //
 // Command: TS.CREATERULE.
 //
@@ -30580,7 +30580,7 @@ func (c TsCreateruleAggregationVarS) Bucketduration(bucketduration int64) TsCrea
 
 type TsCreateruleAligntimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateruleAligntimestamp) Build() Completed {
 	return completed(c)
 }
@@ -30592,7 +30592,7 @@ func (c TsCreateruleBucketduration) Aligntimestamp(aligntimestamp int64) TsCreat
 	return (TsCreateruleAligntimestamp)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsCreateruleBucketduration) Build() Completed {
 	return completed(c)
 }
@@ -30681,7 +30681,7 @@ func (c TsCreateruleSourcekey) Destkey(destkey string) TsCreateruleDestkey {
 // Time complexity: O(M) when M is the amount of compaction rules or O(1) with no compaction
 type TsDecrby Base
 
-// TsDecrby start a command to Creates a new sample that decrements the latest sample's value
+// Creates a new sample that decrements the latest sample's value
 //
 // Command: TS.DECRBY.
 //
@@ -30709,7 +30709,7 @@ func (c TsDecrbyChunkSize) Labels() TsDecrbyLabels {
 	return (TsDecrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyChunkSize) Build() Completed {
 	return completed(c)
 }
@@ -30728,7 +30728,7 @@ func (c TsDecrbyLabels) Labels(label string, value string) TsDecrbyLabels {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyLabels) Build() Completed {
 	return completed(c)
 }
@@ -30750,7 +30750,7 @@ func (c TsDecrbyRetention) Labels() TsDecrbyLabels {
 	return (TsDecrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyRetention) Build() Completed {
 	return completed(c)
 }
@@ -30777,7 +30777,7 @@ func (c TsDecrbyTimestamp) Labels() TsDecrbyLabels {
 	return (TsDecrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -30794,7 +30794,7 @@ func (c TsDecrbyUncompressed) Labels() TsDecrbyLabels {
 	return (TsDecrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyUncompressed) Build() Completed {
 	return completed(c)
 }
@@ -30826,7 +30826,7 @@ func (c TsDecrbyValue) Labels() TsDecrbyLabels {
 	return (TsDecrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDecrbyValue) Build() Completed {
 	return completed(c)
 }
@@ -30836,7 +30836,7 @@ func (c TsDecrbyValue) Build() Completed {
 // Time complexity: O(N) where N is the number of data points that will be removed
 type TsDel Base
 
-// TsDel start a command to Delete samples between two timestamps for a given key
+// Delete samples between two timestamps for a given key
 //
 // Command: TS.DEL.
 //
@@ -30873,7 +30873,7 @@ func (c TsDelKey) FromTimestamp(fromTimestamp int64) TsDelFromTimestamp {
 
 type TsDelToTimestamp Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDelToTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -30883,7 +30883,7 @@ func (c TsDelToTimestamp) Build() Completed {
 // Time complexity: O(1)
 type TsDeleterule Base
 
-// TsDeleterule start a command to Delete a compaction rule
+// Delete a compaction rule
 //
 // Command: TS.DELETERULE.
 //
@@ -30906,7 +30906,7 @@ func (c TsDeleterule) Sourcekey(sourcekey string) TsDeleteruleSourcekey {
 
 type TsDeleteruleDestkey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsDeleteruleDestkey) Build() Completed {
 	return completed(c)
 }
@@ -30928,7 +30928,7 @@ func (c TsDeleteruleSourcekey) Destkey(destkey string) TsDeleteruleDestkey {
 // Time complexity: O(1)
 type TsGet Base
 
-// TsGet start a command to Get the last sample
+// Get the last sample
 //
 // Command: TS.GET.
 //
@@ -30956,14 +30956,14 @@ func (c TsGetKey) Latest() TsGetLatest {
 	return (TsGetLatest)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsGetKey) Build() Completed {
 	return completed(c)
 }
 
 type TsGetLatest Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsGetLatest) Build() Completed {
 	return completed(c)
 }
@@ -30973,7 +30973,7 @@ func (c TsGetLatest) Build() Completed {
 // Time complexity: O(M) when M is the amount of compaction rules or O(1) with no compaction
 type TsIncrby Base
 
-// TsIncrby start a command to Creates a new sample that increments the latest sample's value
+// Creates a new sample that increments the latest sample's value
 //
 // Command: TS.INCRBY.
 //
@@ -31001,7 +31001,7 @@ func (c TsIncrbyChunkSize) Labels() TsIncrbyLabels {
 	return (TsIncrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyChunkSize) Build() Completed {
 	return completed(c)
 }
@@ -31020,7 +31020,7 @@ func (c TsIncrbyLabels) Labels(label string, value string) TsIncrbyLabels {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyLabels) Build() Completed {
 	return completed(c)
 }
@@ -31042,7 +31042,7 @@ func (c TsIncrbyRetention) Labels() TsIncrbyLabels {
 	return (TsIncrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyRetention) Build() Completed {
 	return completed(c)
 }
@@ -31069,7 +31069,7 @@ func (c TsIncrbyTimestamp) Labels() TsIncrbyLabels {
 	return (TsIncrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyTimestamp) Build() Completed {
 	return completed(c)
 }
@@ -31086,7 +31086,7 @@ func (c TsIncrbyUncompressed) Labels() TsIncrbyLabels {
 	return (TsIncrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyUncompressed) Build() Completed {
 	return completed(c)
 }
@@ -31118,7 +31118,7 @@ func (c TsIncrbyValue) Labels() TsIncrbyLabels {
 	return (TsIncrbyLabels)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsIncrbyValue) Build() Completed {
 	return completed(c)
 }
@@ -31128,7 +31128,7 @@ func (c TsIncrbyValue) Build() Completed {
 // Time complexity: O(1)
 type TsInfo Base
 
-// TsInfo start a command to Returns information and statistics on the time-series
+// Returns information and statistics on the time-series
 //
 // Command: TS.INFO.
 //
@@ -31151,7 +31151,7 @@ func (c TsInfo) Key(key string) TsInfoKey {
 
 type TsInfoDebug Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsInfoDebug) Build() Completed {
 	return completed(c)
 }
@@ -31163,7 +31163,7 @@ func (c TsInfoKey) Debug(debug string) TsInfoDebug {
 	return (TsInfoDebug)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsInfoKey) Build() Completed {
 	return completed(c)
 }
@@ -31173,7 +31173,7 @@ func (c TsInfoKey) Build() Completed {
 // Time complexity: O(N*M) when N is the amount of series updated and M is the amount of compaction rules or O(N) with no compaction
 type TsMadd Base
 
-// TsMadd start a command to Append new samples to a list of series
+// Append new samples to a list of series
 //
 // Command: TS.MADD.
 //
@@ -31200,7 +31200,7 @@ func (c TsMaddKeyTimestampValue) KeyTimestampValue(key string, timestamp int64, 
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMaddKeyTimestampValue) Build() Completed {
 	return completed(c)
 }
@@ -31210,7 +31210,7 @@ func (c TsMaddKeyTimestampValue) Build() Completed {
 // Time complexity: O(n) where n is the number of time-series that match the filters
 type TsMget Base
 
-// TsMget start a command to Get the last samples matching the specific filter
+// Get the last samples matching the specific filter
 //
 // Command: TS.MGET.
 //
@@ -31251,7 +31251,7 @@ func (c TsMgetFilter) Filter(filter ...string) TsMgetFilter {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMgetFilter) Build() Completed {
 	return completed(c)
 }
@@ -31296,7 +31296,7 @@ func (c TsMgetWithlabels) Filter(filter ...string) TsMgetFilter {
 // Time complexity: O(n/m+k) where n = Number of data points, m = Chunk size (data points per chunk), k = Number of data points that are in the requested ranges
 type TsMrange Base
 
-// TsMrange start a command to Query a range across multiple time-series by filters in forward direction
+// Query a range across multiple time-series by filters in forward direction
 //
 // Command: TS.MRANGE.
 //
@@ -31606,7 +31606,7 @@ func (c TsMrangeFilter) Groupby(label string, reduce string, reducer string) TsM
 	return (TsMrangeGroupby)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMrangeFilter) Build() Completed {
 	return completed(c)
 }
@@ -31821,7 +31821,7 @@ func (c TsMrangeFromtimestamp) Totimestamp(totimestamp int64) TsMrangeTotimestam
 
 type TsMrangeGroupby Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMrangeGroupby) Build() Completed {
 	return completed(c)
 }
@@ -32216,7 +32216,7 @@ func (c TsMrangeWithlabels) Filter(filter ...string) TsMrangeFilter {
 // Time complexity: O(n/m+k) where n = Number of data points, m = Chunk size (data points per chunk), k = Number of data points that are in the requested ranges
 type TsMrevrange Base
 
-// TsMrevrange start a command to Query a range across multiple time-series by filters in reverse direction
+// Query a range across multiple time-series by filters in reverse direction
 //
 // Command: TS.MREVRANGE.
 //
@@ -32526,7 +32526,7 @@ func (c TsMrevrangeFilter) Groupby(label string, reduce string, reducer string) 
 	return (TsMrevrangeGroupby)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMrevrangeFilter) Build() Completed {
 	return completed(c)
 }
@@ -32741,7 +32741,7 @@ func (c TsMrevrangeFromtimestamp) Totimestamp(totimestamp int64) TsMrevrangeToti
 
 type TsMrevrangeGroupby Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsMrevrangeGroupby) Build() Completed {
 	return completed(c)
 }
@@ -33136,7 +33136,7 @@ func (c TsMrevrangeWithlabels) Filter(filter ...string) TsMrevrangeFilter {
 // Time complexity: O(n) where n is the number of time-series that match the filters
 type TsQueryindex Base
 
-// TsQueryindex start a command to Get all the keys matching the filter list
+// Get all the keys matching the filter list
 //
 // Command: TS.QUERYINDEX.
 //
@@ -33159,7 +33159,7 @@ func (c TsQueryindexFilter) Filter(filter ...string) TsQueryindexFilter {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsQueryindexFilter) Build() Completed {
 	return completed(c)
 }
@@ -33169,7 +33169,7 @@ func (c TsQueryindexFilter) Build() Completed {
 // Time complexity: O(n/m+k) where n = Number of data points, m = Chunk size (data points per chunk), k = Number of data points that are in the requested range
 type TsRange Base
 
-// TsRange start a command to Query a range in forward direction
+// Query a range in forward direction
 //
 // Command: TS.RANGE.
 //
@@ -33293,7 +33293,7 @@ func (c TsRangeAggregationBucketduration) Empty() TsRangeAggregationEmpty {
 	return (TsRangeAggregationEmpty)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeAggregationBucketduration) Build() Completed {
 	return completed(c)
 }
@@ -33305,14 +33305,14 @@ func (c TsRangeAggregationBuckettimestamp) Empty() TsRangeAggregationEmpty {
 	return (TsRangeAggregationEmpty)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeAggregationBuckettimestamp) Build() Completed {
 	return completed(c)
 }
 
 type TsRangeAggregationEmpty Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeAggregationEmpty) Build() Completed {
 	return completed(c)
 }
@@ -33384,7 +33384,7 @@ func (c TsRangeAlign) AggregationTwa() TsRangeAggregationAggregationTwa {
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeAlign) Build() Completed {
 	return completed(c)
 }
@@ -33461,7 +33461,7 @@ func (c TsRangeCount) AggregationTwa() TsRangeAggregationAggregationTwa {
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeCount) Build() Completed {
 	return completed(c)
 }
@@ -33556,7 +33556,7 @@ func (c TsRangeFilterByTs) AggregationTwa() TsRangeAggregationAggregationTwa {
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeFilterByTs) Build() Completed {
 	return completed(c)
 }
@@ -33638,7 +33638,7 @@ func (c TsRangeFilterByValue) AggregationTwa() TsRangeAggregationAggregationTwa 
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeFilterByValue) Build() Completed {
 	return completed(c)
 }
@@ -33747,7 +33747,7 @@ func (c TsRangeLatest) AggregationTwa() TsRangeAggregationAggregationTwa {
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeLatest) Build() Completed {
 	return completed(c)
 }
@@ -33847,7 +33847,7 @@ func (c TsRangeTotimestamp) AggregationTwa() TsRangeAggregationAggregationTwa {
 	return (TsRangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRangeTotimestamp) Build() Completed {
 	return completed(c)
 }
@@ -33857,7 +33857,7 @@ func (c TsRangeTotimestamp) Build() Completed {
 // Time complexity: O(n/m+k) where n = Number of data points, m = Chunk size (data points per chunk), k = Number of data points that are in the requested range
 type TsRevrange Base
 
-// TsRevrange start a command to Query a range in reverse direction
+// Query a range in reverse direction
 //
 // Command: TS.REVRANGE.
 //
@@ -33981,7 +33981,7 @@ func (c TsRevrangeAggregationBucketduration) Empty() TsRevrangeAggregationEmpty 
 	return (TsRevrangeAggregationEmpty)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeAggregationBucketduration) Build() Completed {
 	return completed(c)
 }
@@ -33993,14 +33993,14 @@ func (c TsRevrangeAggregationBuckettimestamp) Empty() TsRevrangeAggregationEmpty
 	return (TsRevrangeAggregationEmpty)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeAggregationBuckettimestamp) Build() Completed {
 	return completed(c)
 }
 
 type TsRevrangeAggregationEmpty Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeAggregationEmpty) Build() Completed {
 	return completed(c)
 }
@@ -34072,7 +34072,7 @@ func (c TsRevrangeAlign) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeAlign) Build() Completed {
 	return completed(c)
 }
@@ -34149,7 +34149,7 @@ func (c TsRevrangeCount) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeCount) Build() Completed {
 	return completed(c)
 }
@@ -34244,7 +34244,7 @@ func (c TsRevrangeFilterByTs) AggregationTwa() TsRevrangeAggregationAggregationT
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeFilterByTs) Build() Completed {
 	return completed(c)
 }
@@ -34326,7 +34326,7 @@ func (c TsRevrangeFilterByValue) AggregationTwa() TsRevrangeAggregationAggregati
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeFilterByValue) Build() Completed {
 	return completed(c)
 }
@@ -34435,7 +34435,7 @@ func (c TsRevrangeLatest) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeLatest) Build() Completed {
 	return completed(c)
 }
@@ -34535,7 +34535,7 @@ func (c TsRevrangeTotimestamp) AggregationTwa() TsRevrangeAggregationAggregation
 	return (TsRevrangeAggregationAggregationTwa)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TsRevrangeTotimestamp) Build() Completed {
 	return completed(c)
 }
@@ -34545,7 +34545,7 @@ func (c TsRevrangeTotimestamp) Build() Completed {
 // Time complexity: O(1)
 type Ttl Base
 
-// Ttl start a command to Get the time to live for a key in seconds
+// Get the time to live for a key in seconds
 //
 // Command: TTL.
 //
@@ -34568,12 +34568,12 @@ func (c Ttl) Key(key string) TtlKey {
 
 type TtlKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TtlKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TtlKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -34583,7 +34583,7 @@ func (c TtlKey) Cache() Cacheable {
 // Time complexity: O(1)
 type Type Base
 
-// Type start a command to Determine the type stored at key
+// Determine the type stored at key
 //
 // Command: TYPE.
 //
@@ -34606,12 +34606,12 @@ func (c Type) Key(key string) TypeKey {
 
 type TypeKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c TypeKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c TypeKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -34621,7 +34621,7 @@ func (c TypeKey) Cache() Cacheable {
 // Time complexity: O(1) for each key removed regardless of its size. Then the command does O(N) work in a different thread in order to reclaim memory, where N is the number of allocations the deleted objects where composed of.
 type Unlink Base
 
-// Unlink start a command to Delete a key asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
+// Delete a key asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
 //
 // Command: UNLINK.
 //
@@ -34664,7 +34664,7 @@ func (c UnlinkKey) Key(key ...string) UnlinkKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c UnlinkKey) Build() Completed {
 	return completed(c)
 }
@@ -34674,7 +34674,7 @@ func (c UnlinkKey) Build() Completed {
 // Time complexity: O(N) where N is the number of clients already subscribed to a channel.
 type Unsubscribe Base
 
-// Unsubscribe start a command to Stop listening for messages posted to the given channels
+// Stop listening for messages posted to the given channels
 //
 // Command: UNSUBSCRIBE.
 //
@@ -34690,7 +34690,7 @@ func (c Unsubscribe) Channel(channel ...string) UnsubscribeChannel {
 	return (UnsubscribeChannel)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Unsubscribe) Build() Completed {
 	return completed(c)
 }
@@ -34702,7 +34702,7 @@ func (c UnsubscribeChannel) Channel(channel ...string) UnsubscribeChannel {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c UnsubscribeChannel) Build() Completed {
 	return completed(c)
 }
@@ -34712,7 +34712,7 @@ func (c UnsubscribeChannel) Build() Completed {
 // Time complexity: O(1)
 type Unwatch Base
 
-// Unwatch start a command to Forget about all watched keys
+// Forget about all watched keys
 //
 // Command: UNWATCH.
 //
@@ -34723,7 +34723,7 @@ func (b Builder) Unwatch() Unwatch {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c Unwatch) Build() Completed {
 	return completed(c)
 }
@@ -34733,7 +34733,7 @@ func (c Unwatch) Build() Completed {
 // Time complexity: O(1)
 type Wait Base
 
-// Wait start a command to Wait for the synchronous replication of all the write commands sent in the context of the current connection
+// Wait for the synchronous replication of all the write commands sent in the context of the current connection
 //
 // Command: WAIT.
 //
@@ -34758,7 +34758,7 @@ func (c WaitNumreplicas) Timeout(timeout int64) WaitTimeout {
 
 type WaitTimeout Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c WaitTimeout) Build() Completed {
 	return completed(c)
 }
@@ -34768,7 +34768,7 @@ func (c WaitTimeout) Build() Completed {
 // Time complexity: O(1) for every key.
 type Watch Base
 
-// Watch start a command to Watch the given keys to determine execution of the MULTI/EXEC block
+// Watch the given keys to determine execution of the MULTI/EXEC block
 //
 // Command: WATCH.
 //
@@ -34811,7 +34811,7 @@ func (c WatchKey) Key(key ...string) WatchKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c WatchKey) Build() Completed {
 	return completed(c)
 }
@@ -34821,7 +34821,7 @@ func (c WatchKey) Build() Completed {
 // Time complexity: O(1) for each message ID processed.
 type Xack Base
 
-// Xack start a command to Marks a pending message as correctly processed, effectively removing it from the pending entries list of the consumer group. Return value of the command is the number of messages successfully acknowledged, that is, the IDs we were actually able to resolve in the PEL.
+// Marks a pending message as correctly processed, effectively removing it from the pending entries list of the consumer group. Return value of the command is the number of messages successfully acknowledged, that is, the IDs we were actually able to resolve in the PEL.
 //
 // Command: XACK.
 //
@@ -34856,7 +34856,7 @@ func (c XackId) Id(id ...string) XackId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XackId) Build() Completed {
 	return completed(c)
 }
@@ -34873,7 +34873,7 @@ func (c XackKey) Group(group string) XackGroup {
 // Time complexity: O(1) when adding a new entry, O(N) when trimming where N being the number of entries evicted.
 type Xadd Base
 
-// Xadd start a command to Appends a new entry to a stream
+// Appends a new entry to a stream
 //
 // Command: XADD.
 //
@@ -34901,7 +34901,7 @@ func (c XaddFieldValue) FieldValue(field string, value string) XaddFieldValue {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XaddFieldValue) Build() Completed {
 	return completed(c)
 }
@@ -35023,7 +35023,7 @@ func (c XaddTrimThreshold) Id(id string) XaddId {
 // Time complexity: O(1) if COUNT is small.
 type Xautoclaim Base
 
-// Xautoclaim start a command to Changes (or acquires) ownership of messages in a consumer group, as if the messages were delivered to the specified consumer.
+// Changes (or acquires) ownership of messages in a consumer group, as if the messages were delivered to the specified consumer.
 //
 // Command: XAUTOCLAIM.
 //
@@ -35058,7 +35058,7 @@ func (c XautoclaimCount) Justid() XautoclaimJustid {
 	return (XautoclaimJustid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XautoclaimCount) Build() Completed {
 	return completed(c)
 }
@@ -35072,7 +35072,7 @@ func (c XautoclaimGroup) Consumer(consumer string) XautoclaimConsumer {
 
 type XautoclaimJustid Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XautoclaimJustid) Build() Completed {
 	return completed(c)
 }
@@ -35103,7 +35103,7 @@ func (c XautoclaimStart) Justid() XautoclaimJustid {
 	return (XautoclaimJustid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XautoclaimStart) Build() Completed {
 	return completed(c)
 }
@@ -35113,7 +35113,7 @@ func (c XautoclaimStart) Build() Completed {
 // Time complexity: O(log N) with N being the number of messages in the PEL of the consumer group.
 type Xclaim Base
 
-// Xclaim start a command to Changes (or acquires) ownership of a message in a consumer group, as if the message was delivered to the specified consumer.
+// Changes (or acquires) ownership of a message in a consumer group, as if the message was delivered to the specified consumer.
 //
 // Command: XCLAIM.
 //
@@ -35153,7 +35153,7 @@ func (c XclaimForce) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimForce) Build() Completed {
 	return completed(c)
 }
@@ -35202,7 +35202,7 @@ func (c XclaimId) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimId) Build() Completed {
 	return completed(c)
 }
@@ -35234,7 +35234,7 @@ func (c XclaimIdle) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimIdle) Build() Completed {
 	return completed(c)
 }
@@ -35246,7 +35246,7 @@ func (c XclaimJustid) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimJustid) Build() Completed {
 	return completed(c)
 }
@@ -35260,7 +35260,7 @@ func (c XclaimKey) Group(group string) XclaimGroup {
 
 type XclaimLastid Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimLastid) Build() Completed {
 	return completed(c)
 }
@@ -35289,7 +35289,7 @@ func (c XclaimRetrycount) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimRetrycount) Build() Completed {
 	return completed(c)
 }
@@ -35316,7 +35316,7 @@ func (c XclaimTime) Lastid() XclaimLastid {
 	return (XclaimLastid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XclaimTime) Build() Completed {
 	return completed(c)
 }
@@ -35326,7 +35326,7 @@ func (c XclaimTime) Build() Completed {
 // Time complexity: O(1) for each single item to delete in the stream, regardless of the stream size.
 type Xdel Base
 
-// Xdel start a command to Removes the specified entries from the stream. Returns the number of items actually deleted, that may be different from the number of IDs passed in case certain IDs do not exist.
+// Removes the specified entries from the stream. Returns the number of items actually deleted, that may be different from the number of IDs passed in case certain IDs do not exist.
 //
 // Command: XDEL.
 //
@@ -35354,7 +35354,7 @@ func (c XdelId) Id(id ...string) XdelId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XdelId) Build() Completed {
 	return completed(c)
 }
@@ -35371,7 +35371,7 @@ func (c XdelKey) Id(id ...string) XdelId {
 // Time complexity: O(1)
 type XgroupCreate Base
 
-// XgroupCreate start a command to Create a consumer group.
+// Create a consumer group.
 //
 // Command: XGROUP CREATE.
 //
@@ -35394,7 +35394,7 @@ func (c XgroupCreate) Key(key string) XgroupCreateKey {
 
 type XgroupCreateEntriesread Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupCreateEntriesread) Build() Completed {
 	return completed(c)
 }
@@ -35418,7 +35418,7 @@ func (c XgroupCreateId) Entriesread(entriesRead int64) XgroupCreateEntriesread {
 	return (XgroupCreateEntriesread)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupCreateId) Build() Completed {
 	return completed(c)
 }
@@ -35437,7 +35437,7 @@ func (c XgroupCreateMkstream) Entriesread(entriesRead int64) XgroupCreateEntries
 	return (XgroupCreateEntriesread)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupCreateMkstream) Build() Completed {
 	return completed(c)
 }
@@ -35447,7 +35447,7 @@ func (c XgroupCreateMkstream) Build() Completed {
 // Time complexity: O(1)
 type XgroupCreateconsumer Base
 
-// XgroupCreateconsumer start a command to Create a consumer in a consumer group.
+// Create a consumer in a consumer group.
 //
 // Command: XGROUP CREATECONSUMER.
 //
@@ -35470,7 +35470,7 @@ func (c XgroupCreateconsumer) Key(key string) XgroupCreateconsumerKey {
 
 type XgroupCreateconsumerConsumername Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupCreateconsumerConsumername) Build() Completed {
 	return completed(c)
 }
@@ -35494,7 +35494,7 @@ func (c XgroupCreateconsumerKey) Groupname(groupname string) XgroupCreateconsume
 // Time complexity: O(1)
 type XgroupDelconsumer Base
 
-// XgroupDelconsumer start a command to Delete a consumer from a consumer group.
+// Delete a consumer from a consumer group.
 //
 // Command: XGROUP DELCONSUMER.
 //
@@ -35517,7 +35517,7 @@ func (c XgroupDelconsumer) Key(key string) XgroupDelconsumerKey {
 
 type XgroupDelconsumerConsumername Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupDelconsumerConsumername) Build() Completed {
 	return completed(c)
 }
@@ -35541,7 +35541,7 @@ func (c XgroupDelconsumerKey) Groupname(groupname string) XgroupDelconsumerGroup
 // Time complexity: O(N) where N is the number of entries in the group's pending entries list (PEL).
 type XgroupDestroy Base
 
-// XgroupDestroy start a command to Destroy a consumer group.
+// Destroy a consumer group.
 //
 // Command: XGROUP DESTROY.
 //
@@ -35564,7 +35564,7 @@ func (c XgroupDestroy) Key(key string) XgroupDestroyKey {
 
 type XgroupDestroyGroupname Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupDestroyGroupname) Build() Completed {
 	return completed(c)
 }
@@ -35581,7 +35581,7 @@ func (c XgroupDestroyKey) Groupname(groupname string) XgroupDestroyGroupname {
 // Time complexity: O(1)
 type XgroupHelp Base
 
-// XgroupHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: XGROUP HELP.
 //
@@ -35592,7 +35592,7 @@ func (b Builder) XgroupHelp() XgroupHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupHelp) Build() Completed {
 	return completed(c)
 }
@@ -35602,7 +35602,7 @@ func (c XgroupHelp) Build() Completed {
 // Time complexity: O(1)
 type XgroupSetid Base
 
-// XgroupSetid start a command to Set a consumer group to an arbitrary last delivered ID value.
+// Set a consumer group to an arbitrary last delivered ID value.
 //
 // Command: XGROUP SETID.
 //
@@ -35625,7 +35625,7 @@ func (c XgroupSetid) Key(key string) XgroupSetidKey {
 
 type XgroupSetidEntriesread Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupSetidEntriesread) Build() Completed {
 	return completed(c)
 }
@@ -35644,7 +35644,7 @@ func (c XgroupSetidId) Entriesread(entriesRead int64) XgroupSetidEntriesread {
 	return (XgroupSetidEntriesread)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XgroupSetidId) Build() Completed {
 	return completed(c)
 }
@@ -35661,7 +35661,7 @@ func (c XgroupSetidKey) Groupname(groupname string) XgroupSetidGroupname {
 // Time complexity: O(1)
 type XinfoConsumers Base
 
-// XinfoConsumers start a command to List the consumers in a consumer group
+// List the consumers in a consumer group
 //
 // Command: XINFO CONSUMERS.
 //
@@ -35684,7 +35684,7 @@ func (c XinfoConsumers) Key(key string) XinfoConsumersKey {
 
 type XinfoConsumersGroupname Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoConsumersGroupname) Build() Completed {
 	return completed(c)
 }
@@ -35701,7 +35701,7 @@ func (c XinfoConsumersKey) Groupname(groupname string) XinfoConsumersGroupname {
 // Time complexity: O(1)
 type XinfoGroups Base
 
-// XinfoGroups start a command to List the consumer groups of a stream
+// List the consumer groups of a stream
 //
 // Command: XINFO GROUPS.
 //
@@ -35724,7 +35724,7 @@ func (c XinfoGroups) Key(key string) XinfoGroupsKey {
 
 type XinfoGroupsKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoGroupsKey) Build() Completed {
 	return completed(c)
 }
@@ -35734,7 +35734,7 @@ func (c XinfoGroupsKey) Build() Completed {
 // Time complexity: O(1)
 type XinfoHelp Base
 
-// XinfoHelp start a command to Show helpful text about the different subcommands
+// Show helpful text about the different subcommands
 //
 // Command: XINFO HELP.
 //
@@ -35745,7 +35745,7 @@ func (b Builder) XinfoHelp() XinfoHelp {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoHelp) Build() Completed {
 	return completed(c)
 }
@@ -35755,7 +35755,7 @@ func (c XinfoHelp) Build() Completed {
 // Time complexity: O(1)
 type XinfoStream Base
 
-// XinfoStream start a command to Get information about a stream
+// Get information about a stream
 //
 // Command: XINFO STREAM.
 //
@@ -35778,7 +35778,7 @@ func (c XinfoStream) Key(key string) XinfoStreamKey {
 
 type XinfoStreamFullCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoStreamFullCount) Build() Completed {
 	return completed(c)
 }
@@ -35790,7 +35790,7 @@ func (c XinfoStreamFullFull) Count(count int64) XinfoStreamFullCount {
 	return (XinfoStreamFullCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoStreamFullFull) Build() Completed {
 	return completed(c)
 }
@@ -35802,7 +35802,7 @@ func (c XinfoStreamKey) Full() XinfoStreamFullFull {
 	return (XinfoStreamFullFull)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XinfoStreamKey) Build() Completed {
 	return completed(c)
 }
@@ -35812,7 +35812,7 @@ func (c XinfoStreamKey) Build() Completed {
 // Time complexity: O(1)
 type Xlen Base
 
-// Xlen start a command to Return the number of entries in a stream
+// Return the number of entries in a stream
 //
 // Command: XLEN.
 //
@@ -35835,7 +35835,7 @@ func (c Xlen) Key(key string) XlenKey {
 
 type XlenKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XlenKey) Build() Completed {
 	return completed(c)
 }
@@ -35845,7 +35845,7 @@ func (c XlenKey) Build() Completed {
 // Time complexity: O(N) with N being the number of elements returned, so asking for a small fixed number of entries per call is O(1). O(M), where M is the total number of entries scanned when used with the IDLE filter. When the command returns just the summary and the list of consumers is small, it runs in O(1) time; otherwise, an additional O(N) time for iterating every consumer.
 type Xpending Base
 
-// Xpending start a command to Return information and entries from a stream consumer group pending entries list, that are messages fetched but never acknowledged.
+// Return information and entries from a stream consumer group pending entries list, that are messages fetched but never acknowledged.
 //
 // Command: XPENDING.
 //
@@ -35868,7 +35868,7 @@ func (c Xpending) Key(key string) XpendingKey {
 
 type XpendingFiltersConsumer Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XpendingFiltersConsumer) Build() Completed {
 	return completed(c)
 }
@@ -35880,7 +35880,7 @@ func (c XpendingFiltersCount) Consumer(consumer string) XpendingFiltersConsumer 
 	return (XpendingFiltersConsumer)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XpendingFiltersCount) Build() Completed {
 	return completed(c)
 }
@@ -35918,7 +35918,7 @@ func (c XpendingGroup) Start(start string) XpendingFiltersStart {
 	return (XpendingFiltersStart)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XpendingGroup) Build() Completed {
 	return completed(c)
 }
@@ -35935,7 +35935,7 @@ func (c XpendingKey) Group(group string) XpendingGroup {
 // Time complexity: O(N) with N being the number of elements being returned. If N is constant (e.g. always asking for the first 10 elements with COUNT), you can consider it O(1).
 type Xrange Base
 
-// Xrange start a command to Return a range of elements in a stream, with IDs matching the specified IDs interval
+// Return a range of elements in a stream, with IDs matching the specified IDs interval
 //
 // Command: XRANGE.
 //
@@ -35958,7 +35958,7 @@ func (c Xrange) Key(key string) XrangeKey {
 
 type XrangeCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XrangeCount) Build() Completed {
 	return completed(c)
 }
@@ -35970,7 +35970,7 @@ func (c XrangeEnd) Count(count int64) XrangeCount {
 	return (XrangeCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XrangeEnd) Build() Completed {
 	return completed(c)
 }
@@ -35994,7 +35994,7 @@ func (c XrangeStart) End(end string) XrangeEnd {
 // Time complexity: For each stream mentioned: O(N) with N being the number of elements being returned, it means that XREAD-ing with a fixed COUNT is O(1). Note that when the BLOCK option is used, XADD will pay O(M) time in order to serve the M clients blocked on the stream getting new data.
 type Xread Base
 
-// Xread start a command to Return never seen elements in multiple streams, with IDs greater than the ones reported by the caller for each stream. Can block.
+// Return never seen elements in multiple streams, with IDs greater than the ones reported by the caller for each stream. Can block.
 //
 // Command: XREAD.
 //
@@ -36048,7 +36048,7 @@ func (c XreadId) Id(id ...string) XreadId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XreadId) Build() Completed {
 	return completed(c)
 }
@@ -36097,7 +36097,7 @@ func (c XreadStreams) Key(key ...string) XreadKey {
 // Time complexity: For each stream mentioned: O(M) with M being the number of elements returned. If M is constant (e.g. always asking for the first 10 elements with COUNT), you can consider it O(1). On the other side when XREADGROUP blocks, XADD will pay the O(N) time in order to serve the N clients blocked on the stream getting new data.
 type Xreadgroup Base
 
-// Xreadgroup start a command to Return new entries from a stream using a consumer group, or access the history of the pending entries for a given consumer. Can block.
+// Return new entries from a stream using a consumer group, or access the history of the pending entries for a given consumer. Can block.
 //
 // Command: XREADGROUP.
 //
@@ -36173,7 +36173,7 @@ func (c XreadgroupId) Id(id ...string) XreadgroupId {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XreadgroupId) Build() Completed {
 	return completed(c)
 }
@@ -36229,7 +36229,7 @@ func (c XreadgroupStreams) Key(key ...string) XreadgroupKey {
 // Time complexity: O(N) with N being the number of elements returned. If N is constant (e.g. always asking for the first 10 elements with COUNT), you can consider it O(1).
 type Xrevrange Base
 
-// Xrevrange start a command to Return a range of elements in a stream, with IDs matching the specified IDs interval, in reverse order (from greater to smaller IDs) compared to XRANGE
+// Return a range of elements in a stream, with IDs matching the specified IDs interval, in reverse order (from greater to smaller IDs) compared to XRANGE
 //
 // Command: XREVRANGE.
 //
@@ -36252,7 +36252,7 @@ func (c Xrevrange) Key(key string) XrevrangeKey {
 
 type XrevrangeCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XrevrangeCount) Build() Completed {
 	return completed(c)
 }
@@ -36278,7 +36278,7 @@ func (c XrevrangeStart) Count(count int64) XrevrangeCount {
 	return (XrevrangeCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XrevrangeStart) Build() Completed {
 	return completed(c)
 }
@@ -36288,7 +36288,7 @@ func (c XrevrangeStart) Build() Completed {
 // Time complexity: O(1)
 type Xsetid Base
 
-// Xsetid start a command to An internal command for replicating stream values
+// An internal command for replicating stream values
 //
 // Command: XSETID.
 //
@@ -36316,7 +36316,7 @@ func (c XsetidEntriesadded) Maxdeletedid(maxDeletedEntryId string) XsetidMaxdele
 	return (XsetidMaxdeletedid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XsetidEntriesadded) Build() Completed {
 	return completed(c)
 }
@@ -36340,14 +36340,14 @@ func (c XsetidLastId) Maxdeletedid(maxDeletedEntryId string) XsetidMaxdeletedid 
 	return (XsetidMaxdeletedid)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XsetidLastId) Build() Completed {
 	return completed(c)
 }
 
 type XsetidMaxdeletedid Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XsetidMaxdeletedid) Build() Completed {
 	return completed(c)
 }
@@ -36357,7 +36357,7 @@ func (c XsetidMaxdeletedid) Build() Completed {
 // Time complexity: O(N), with N being the number of evicted entries. Constant times are very small however, since entries are organized in macro nodes containing multiple entries that can be released with a single deallocation.
 type Xtrim Base
 
-// Xtrim start a command to Trims the stream to (approximately if '~' is passed) a certain size
+// Trims the stream to (approximately if '~' is passed) a certain size
 //
 // Command: XTRIM.
 //
@@ -36392,7 +36392,7 @@ func (c XtrimKey) Minid() XtrimTrimStrategyMinid {
 
 type XtrimTrimLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XtrimTrimLimit) Build() Completed {
 	return completed(c)
 }
@@ -36452,7 +36452,7 @@ func (c XtrimTrimThreshold) Limit(count int64) XtrimTrimLimit {
 	return (XtrimTrimLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c XtrimTrimThreshold) Build() Completed {
 	return completed(c)
 }
@@ -36462,7 +36462,7 @@ func (c XtrimTrimThreshold) Build() Completed {
 // Time complexity: O(log(N)) for each item added, where N is the number of elements in the sorted set.
 type Zadd Base
 
-// Zadd start a command to Add one or more members to a sorted set, or update its score if it already exists
+// Add one or more members to a sorted set, or update its score if it already exists
 //
 // Command: ZADD.
 //
@@ -36627,7 +36627,7 @@ func (c ZaddScoreMember) ScoreMember(score float64, member string) ZaddScoreMemb
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZaddScoreMember) Build() Completed {
 	return completed(c)
 }
@@ -36637,7 +36637,7 @@ func (c ZaddScoreMember) Build() Completed {
 // Time complexity: O(1)
 type Zcard Base
 
-// Zcard start a command to Get the number of members in a sorted set
+// Get the number of members in a sorted set
 //
 // Command: ZCARD.
 //
@@ -36660,12 +36660,12 @@ func (c Zcard) Key(key string) ZcardKey {
 
 type ZcardKey Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZcardKey) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZcardKey) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -36675,7 +36675,7 @@ func (c ZcardKey) Cache() Cacheable {
 // Time complexity: O(log(N)) with N being the number of elements in the sorted set.
 type Zcount Base
 
-// Zcount start a command to Count the members in a sorted set with scores within the given values
+// Count the members in a sorted set with scores within the given values
 //
 // Command: ZCOUNT.
 //
@@ -36705,12 +36705,12 @@ func (c ZcountKey) Min(min string) ZcountMin {
 
 type ZcountMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZcountMax) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZcountMax) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -36727,7 +36727,7 @@ func (c ZcountMin) Max(max string) ZcountMax {
 // Time complexity: O(L + (N-K)log(N)) worst case where L is the total number of elements in all the sets, N is the size of the first set, and K is the size of the result set.
 type Zdiff Base
 
-// Zdiff start a command to Subtract multiple sorted sets
+// Subtract multiple sorted sets
 //
 // Command: ZDIFF.
 //
@@ -36765,7 +36765,7 @@ func (c ZdiffKey) Withscores() ZdiffWithscores {
 	return (ZdiffWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZdiffKey) Build() Completed {
 	return completed(c)
 }
@@ -36789,7 +36789,7 @@ func (c ZdiffNumkeys) Key(key ...string) ZdiffKey {
 
 type ZdiffWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZdiffWithscores) Build() Completed {
 	return completed(c)
 }
@@ -36799,7 +36799,7 @@ func (c ZdiffWithscores) Build() Completed {
 // Time complexity: O(L + (N-K)log(N)) worst case where L is the total number of elements in all the sets, N is the size of the first set, and K is the size of the result set.
 type Zdiffstore Base
 
-// Zdiffstore start a command to Subtract multiple sorted sets and store the resulting sorted set in a new key
+// Subtract multiple sorted sets and store the resulting sorted set in a new key
 //
 // Command: ZDIFFSTORE.
 //
@@ -36844,7 +36844,7 @@ func (c ZdiffstoreKey) Key(key ...string) ZdiffstoreKey {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZdiffstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -36871,7 +36871,7 @@ func (c ZdiffstoreNumkeys) Key(key ...string) ZdiffstoreKey {
 // Time complexity: O(log(N)) where N is the number of elements in the sorted set.
 type Zincrby Base
 
-// Zincrby start a command to Increment the score of a member in a sorted set
+// Increment the score of a member in a sorted set
 //
 // Command: ZINCRBY.
 //
@@ -36908,7 +36908,7 @@ func (c ZincrbyKey) Increment(increment float64) ZincrbyIncrement {
 
 type ZincrbyMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZincrbyMember) Build() Completed {
 	return completed(c)
 }
@@ -36918,7 +36918,7 @@ func (c ZincrbyMember) Build() Completed {
 // Time complexity: O(N*K)+O(M*log(M)) worst case with N being the smallest input sorted set, K being the number of input sorted sets and M being the number of elements in the resulting sorted set.
 type Zinter Base
 
-// Zinter start a command to Intersect multiple sorted sets
+// Intersect multiple sorted sets
 //
 // Command: ZINTER.
 //
@@ -36941,7 +36941,7 @@ func (c ZinterAggregateMax) Withscores() ZinterWithscores {
 	return (ZinterWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterAggregateMax) Build() Completed {
 	return completed(c)
 }
@@ -36953,7 +36953,7 @@ func (c ZinterAggregateMin) Withscores() ZinterWithscores {
 	return (ZinterWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterAggregateMin) Build() Completed {
 	return completed(c)
 }
@@ -36965,7 +36965,7 @@ func (c ZinterAggregateSum) Withscores() ZinterWithscores {
 	return (ZinterWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterAggregateSum) Build() Completed {
 	return completed(c)
 }
@@ -37015,7 +37015,7 @@ func (c ZinterKey) Withscores() ZinterWithscores {
 	return (ZinterWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterKey) Build() Completed {
 	return completed(c)
 }
@@ -37067,14 +37067,14 @@ func (c ZinterWeights) Withscores() ZinterWithscores {
 	return (ZinterWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterWeights) Build() Completed {
 	return completed(c)
 }
 
 type ZinterWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterWithscores) Build() Completed {
 	return completed(c)
 }
@@ -37084,7 +37084,7 @@ func (c ZinterWithscores) Build() Completed {
 // Time complexity: O(N*K) worst case with N being the smallest input sorted set, K being the number of input sorted sets.
 type Zintercard Base
 
-// Zintercard start a command to Intersect multiple sorted sets and return the cardinality of the result
+// Intersect multiple sorted sets and return the cardinality of the result
 //
 // Command: ZINTERCARD.
 //
@@ -37122,14 +37122,14 @@ func (c ZintercardKey) Limit(limit int64) ZintercardLimit {
 	return (ZintercardLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZintercardKey) Build() Completed {
 	return completed(c)
 }
 
 type ZintercardLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZintercardLimit) Build() Completed {
 	return completed(c)
 }
@@ -37156,7 +37156,7 @@ func (c ZintercardNumkeys) Key(key ...string) ZintercardKey {
 // Time complexity: O(N*K)+O(M*log(M)) worst case with N being the smallest input sorted set, K being the number of input sorted sets and M being the number of elements in the resulting sorted set.
 type Zinterstore Base
 
-// Zinterstore start a command to Intersect multiple sorted sets and store the resulting sorted set in a new key
+// Intersect multiple sorted sets and store the resulting sorted set in a new key
 //
 // Command: ZINTERSTORE.
 //
@@ -37179,21 +37179,21 @@ func (c Zinterstore) Destination(destination string) ZinterstoreDestination {
 
 type ZinterstoreAggregateMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterstoreAggregateMax) Build() Completed {
 	return completed(c)
 }
 
 type ZinterstoreAggregateMin Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterstoreAggregateMin) Build() Completed {
 	return completed(c)
 }
 
 type ZinterstoreAggregateSum Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterstoreAggregateSum) Build() Completed {
 	return completed(c)
 }
@@ -37245,7 +37245,7 @@ func (c ZinterstoreKey) AggregateMax() ZinterstoreAggregateMax {
 	return (ZinterstoreAggregateMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -37292,7 +37292,7 @@ func (c ZinterstoreWeights) AggregateMax() ZinterstoreAggregateMax {
 	return (ZinterstoreAggregateMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZinterstoreWeights) Build() Completed {
 	return completed(c)
 }
@@ -37302,7 +37302,7 @@ func (c ZinterstoreWeights) Build() Completed {
 // Time complexity: O(log(N)) with N being the number of elements in the sorted set.
 type Zlexcount Base
 
-// Zlexcount start a command to Count the number of members in a sorted set between a given lexicographical range
+// Count the number of members in a sorted set between a given lexicographical range
 //
 // Command: ZLEXCOUNT.
 //
@@ -37332,12 +37332,12 @@ func (c ZlexcountKey) Min(min string) ZlexcountMin {
 
 type ZlexcountMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZlexcountMax) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZlexcountMax) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37354,7 +37354,7 @@ func (c ZlexcountMin) Max(max string) ZlexcountMax {
 // Time complexity: O(K) + O(N*log(M)) where K is the number of provided keys, N being the number of elements in the sorted set, and M being the number of elements popped.
 type Zmpop Base
 
-// Zmpop start a command to Remove and return members with scores in a sorted set
+// Remove and return members with scores in a sorted set
 //
 // Command: ZMPOP.
 //
@@ -37372,7 +37372,7 @@ func (c Zmpop) Numkeys(numkeys int64) ZmpopNumkeys {
 
 type ZmpopCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZmpopCount) Build() Completed {
 	return completed(c)
 }
@@ -37428,7 +37428,7 @@ func (c ZmpopWhereMax) Count(count int64) ZmpopCount {
 	return (ZmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZmpopWhereMax) Build() Completed {
 	return completed(c)
 }
@@ -37440,7 +37440,7 @@ func (c ZmpopWhereMin) Count(count int64) ZmpopCount {
 	return (ZmpopCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZmpopWhereMin) Build() Completed {
 	return completed(c)
 }
@@ -37450,7 +37450,7 @@ func (c ZmpopWhereMin) Build() Completed {
 // Time complexity: O(N) where N is the number of members being requested.
 type Zmscore Base
 
-// Zmscore start a command to Get the score associated with the given members in a sorted set
+// Get the score associated with the given members in a sorted set
 //
 // Command: ZMSCORE.
 //
@@ -37485,12 +37485,12 @@ func (c ZmscoreMember) Member(member ...string) ZmscoreMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZmscoreMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZmscoreMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37500,7 +37500,7 @@ func (c ZmscoreMember) Cache() Cacheable {
 // Time complexity: O(log(N)*M) with N being the number of elements in the sorted set, and M being the number of elements popped.
 type Zpopmax Base
 
-// Zpopmax start a command to Remove and return members with the highest scores in a sorted set
+// Remove and return members with the highest scores in a sorted set
 //
 // Command: ZPOPMAX.
 //
@@ -37523,7 +37523,7 @@ func (c Zpopmax) Key(key string) ZpopmaxKey {
 
 type ZpopmaxCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZpopmaxCount) Build() Completed {
 	return completed(c)
 }
@@ -37535,7 +37535,7 @@ func (c ZpopmaxKey) Count(count int64) ZpopmaxCount {
 	return (ZpopmaxCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZpopmaxKey) Build() Completed {
 	return completed(c)
 }
@@ -37545,7 +37545,7 @@ func (c ZpopmaxKey) Build() Completed {
 // Time complexity: O(log(N)*M) with N being the number of elements in the sorted set, and M being the number of elements popped.
 type Zpopmin Base
 
-// Zpopmin start a command to Remove and return members with the lowest scores in a sorted set
+// Remove and return members with the lowest scores in a sorted set
 //
 // Command: ZPOPMIN.
 //
@@ -37568,7 +37568,7 @@ func (c Zpopmin) Key(key string) ZpopminKey {
 
 type ZpopminCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZpopminCount) Build() Completed {
 	return completed(c)
 }
@@ -37580,7 +37580,7 @@ func (c ZpopminKey) Count(count int64) ZpopminCount {
 	return (ZpopminCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZpopminKey) Build() Completed {
 	return completed(c)
 }
@@ -37590,7 +37590,7 @@ func (c ZpopminKey) Build() Completed {
 // Time complexity: O(N) where N is the number of elements returned
 type Zrandmember Base
 
-// Zrandmember start a command to Get one or multiple random elements from a sorted set
+// Get one or multiple random elements from a sorted set
 //
 // Command: ZRANDMEMBER.
 //
@@ -37618,7 +37618,7 @@ func (c ZrandmemberKey) Count(count int64) ZrandmemberOptionsCount {
 	return (ZrandmemberOptionsCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrandmemberKey) Build() Completed {
 	return completed(c)
 }
@@ -37630,14 +37630,14 @@ func (c ZrandmemberOptionsCount) Withscores() ZrandmemberOptionsWithscores {
 	return (ZrandmemberOptionsWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrandmemberOptionsCount) Build() Completed {
 	return completed(c)
 }
 
 type ZrandmemberOptionsWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrandmemberOptionsWithscores) Build() Completed {
 	return completed(c)
 }
@@ -37647,7 +37647,7 @@ func (c ZrandmemberOptionsWithscores) Build() Completed {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements returned.
 type Zrange Base
 
-// Zrange start a command to Return a range of members in a sorted set
+// Return a range of members in a sorted set
 //
 // Command: ZRANGE.
 //
@@ -37682,12 +37682,12 @@ func (c ZrangeLimit) Withscores() ZrangeWithscores {
 	return (ZrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37719,12 +37719,12 @@ func (c ZrangeMax) Withscores() ZrangeWithscores {
 	return (ZrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeMax) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeMax) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37748,12 +37748,12 @@ func (c ZrangeRev) Withscores() ZrangeWithscores {
 	return (ZrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeRev) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeRev) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37775,12 +37775,12 @@ func (c ZrangeSortbyBylex) Withscores() ZrangeWithscores {
 	return (ZrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeSortbyBylex) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeSortbyBylex) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37802,24 +37802,24 @@ func (c ZrangeSortbyByscore) Withscores() ZrangeWithscores {
 	return (ZrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeSortbyByscore) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeSortbyByscore) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type ZrangeWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangeWithscores) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangeWithscores) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37829,7 +37829,7 @@ func (c ZrangeWithscores) Cache() Cacheable {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements being returned. If M is constant (e.g. always asking for the first 10 elements with LIMIT), you can consider it O(log(N)).
 type Zrangebylex Base
 
-// Zrangebylex start a command to Return a range of members in a sorted set, by lexicographical range
+// Return a range of members in a sorted set, by lexicographical range
 //
 // Command: ZRANGEBYLEX.
 //
@@ -37859,12 +37859,12 @@ func (c ZrangebylexKey) Min(min string) ZrangebylexMin {
 
 type ZrangebylexLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangebylexLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangebylexLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37876,12 +37876,12 @@ func (c ZrangebylexMax) Limit(offset int64, count int64) ZrangebylexLimit {
 	return (ZrangebylexLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangebylexMax) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangebylexMax) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37898,7 +37898,7 @@ func (c ZrangebylexMin) Max(max string) ZrangebylexMax {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements being returned. If M is constant (e.g. always asking for the first 10 elements with LIMIT), you can consider it O(log(N)).
 type Zrangebyscore Base
 
-// Zrangebyscore start a command to Return a range of members in a sorted set, by score
+// Return a range of members in a sorted set, by score
 //
 // Command: ZRANGEBYSCORE.
 //
@@ -37928,12 +37928,12 @@ func (c ZrangebyscoreKey) Min(min string) ZrangebyscoreMin {
 
 type ZrangebyscoreLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangebyscoreLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangebyscoreLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37950,12 +37950,12 @@ func (c ZrangebyscoreMax) Limit(offset int64, count int64) ZrangebyscoreLimit {
 	return (ZrangebyscoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangebyscoreMax) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangebyscoreMax) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37974,12 +37974,12 @@ func (c ZrangebyscoreWithscores) Limit(offset int64, count int64) ZrangebyscoreL
 	return (ZrangebyscoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangebyscoreWithscores) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrangebyscoreWithscores) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -37989,7 +37989,7 @@ func (c ZrangebyscoreWithscores) Cache() Cacheable {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements stored into the destination key.
 type Zrangestore Base
 
-// Zrangestore start a command to Store a range of members from sorted set into another key
+// Store a range of members from sorted set into another key
 //
 // Command: ZRANGESTORE.
 //
@@ -38024,7 +38024,7 @@ func (c ZrangestoreDst) Src(src string) ZrangestoreSrc {
 
 type ZrangestoreLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangestoreLimit) Build() Completed {
 	return completed(c)
 }
@@ -38051,7 +38051,7 @@ func (c ZrangestoreMax) Limit(offset int64, count int64) ZrangestoreLimit {
 	return (ZrangestoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangestoreMax) Build() Completed {
 	return completed(c)
 }
@@ -38070,7 +38070,7 @@ func (c ZrangestoreRev) Limit(offset int64, count int64) ZrangestoreLimit {
 	return (ZrangestoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangestoreRev) Build() Completed {
 	return completed(c)
 }
@@ -38087,7 +38087,7 @@ func (c ZrangestoreSortbyBylex) Limit(offset int64, count int64) ZrangestoreLimi
 	return (ZrangestoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangestoreSortbyBylex) Build() Completed {
 	return completed(c)
 }
@@ -38104,7 +38104,7 @@ func (c ZrangestoreSortbyByscore) Limit(offset int64, count int64) ZrangestoreLi
 	return (ZrangestoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrangestoreSortbyByscore) Build() Completed {
 	return completed(c)
 }
@@ -38121,7 +38121,7 @@ func (c ZrangestoreSrc) Min(min string) ZrangestoreMin {
 // Time complexity: O(log(N))
 type Zrank Base
 
-// Zrank start a command to Determine the index of a member in a sorted set
+// Determine the index of a member in a sorted set
 //
 // Command: ZRANK.
 //
@@ -38151,12 +38151,12 @@ func (c ZrankKey) Member(member string) ZrankMember {
 
 type ZrankMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrankMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrankMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38166,7 +38166,7 @@ func (c ZrankMember) Cache() Cacheable {
 // Time complexity: O(M*log(N)) with N being the number of elements in the sorted set and M the number of elements to be removed.
 type Zrem Base
 
-// Zrem start a command to Remove one or more members from a sorted set
+// Remove one or more members from a sorted set
 //
 // Command: ZREM.
 //
@@ -38201,7 +38201,7 @@ func (c ZremMember) Member(member ...string) ZremMember {
 	return c
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZremMember) Build() Completed {
 	return completed(c)
 }
@@ -38211,7 +38211,7 @@ func (c ZremMember) Build() Completed {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements removed by the operation.
 type Zremrangebylex Base
 
-// Zremrangebylex start a command to Remove all members in a sorted set between the given lexicographical range
+// Remove all members in a sorted set between the given lexicographical range
 //
 // Command: ZREMRANGEBYLEX.
 //
@@ -38241,7 +38241,7 @@ func (c ZremrangebylexKey) Min(min string) ZremrangebylexMin {
 
 type ZremrangebylexMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZremrangebylexMax) Build() Completed {
 	return completed(c)
 }
@@ -38258,7 +38258,7 @@ func (c ZremrangebylexMin) Max(max string) ZremrangebylexMax {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements removed by the operation.
 type Zremrangebyrank Base
 
-// Zremrangebyrank start a command to Remove all members in a sorted set within the given indexes
+// Remove all members in a sorted set within the given indexes
 //
 // Command: ZREMRANGEBYRANK.
 //
@@ -38295,7 +38295,7 @@ func (c ZremrangebyrankStart) Stop(stop int64) ZremrangebyrankStop {
 
 type ZremrangebyrankStop Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZremrangebyrankStop) Build() Completed {
 	return completed(c)
 }
@@ -38305,7 +38305,7 @@ func (c ZremrangebyrankStop) Build() Completed {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements removed by the operation.
 type Zremrangebyscore Base
 
-// Zremrangebyscore start a command to Remove all members in a sorted set within the given scores
+// Remove all members in a sorted set within the given scores
 //
 // Command: ZREMRANGEBYSCORE.
 //
@@ -38335,7 +38335,7 @@ func (c ZremrangebyscoreKey) Min(min string) ZremrangebyscoreMin {
 
 type ZremrangebyscoreMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZremrangebyscoreMax) Build() Completed {
 	return completed(c)
 }
@@ -38352,7 +38352,7 @@ func (c ZremrangebyscoreMin) Max(max string) ZremrangebyscoreMax {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements returned.
 type Zrevrange Base
 
-// Zrevrange start a command to Return a range of members in a sorted set, by index, with scores ordered from high to low
+// Return a range of members in a sorted set, by index, with scores ordered from high to low
 //
 // Command: ZREVRANGE.
 //
@@ -38394,24 +38394,24 @@ func (c ZrevrangeStop) Withscores() ZrevrangeWithscores {
 	return (ZrevrangeWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangeStop) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangeStop) Cache() Cacheable {
 	return cacheable(c)
 }
 
 type ZrevrangeWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangeWithscores) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangeWithscores) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38421,7 +38421,7 @@ func (c ZrevrangeWithscores) Cache() Cacheable {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements being returned. If M is constant (e.g. always asking for the first 10 elements with LIMIT), you can consider it O(log(N)).
 type Zrevrangebylex Base
 
-// Zrevrangebylex start a command to Return a range of members in a sorted set, by lexicographical range, ordered from higher to lower strings.
+// Return a range of members in a sorted set, by lexicographical range, ordered from higher to lower strings.
 //
 // Command: ZREVRANGEBYLEX.
 //
@@ -38451,12 +38451,12 @@ func (c ZrevrangebylexKey) Max(max string) ZrevrangebylexMax {
 
 type ZrevrangebylexLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangebylexLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangebylexLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38475,12 +38475,12 @@ func (c ZrevrangebylexMin) Limit(offset int64, count int64) ZrevrangebylexLimit 
 	return (ZrevrangebylexLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangebylexMin) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangebylexMin) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38490,7 +38490,7 @@ func (c ZrevrangebylexMin) Cache() Cacheable {
 // Time complexity: O(log(N)+M) with N being the number of elements in the sorted set and M the number of elements being returned. If M is constant (e.g. always asking for the first 10 elements with LIMIT), you can consider it O(log(N)).
 type Zrevrangebyscore Base
 
-// Zrevrangebyscore start a command to Return a range of members in a sorted set, by score, with scores ordered from high to low
+// Return a range of members in a sorted set, by score, with scores ordered from high to low
 //
 // Command: ZREVRANGEBYSCORE.
 //
@@ -38520,12 +38520,12 @@ func (c ZrevrangebyscoreKey) Max(max string) ZrevrangebyscoreMax {
 
 type ZrevrangebyscoreLimit Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangebyscoreLimit) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangebyscoreLimit) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38549,12 +38549,12 @@ func (c ZrevrangebyscoreMin) Limit(offset int64, count int64) ZrevrangebyscoreLi
 	return (ZrevrangebyscoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangebyscoreMin) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangebyscoreMin) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38566,12 +38566,12 @@ func (c ZrevrangebyscoreWithscores) Limit(offset int64, count int64) Zrevrangeby
 	return (ZrevrangebyscoreLimit)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrangebyscoreWithscores) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrangebyscoreWithscores) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38581,7 +38581,7 @@ func (c ZrevrangebyscoreWithscores) Cache() Cacheable {
 // Time complexity: O(log(N))
 type Zrevrank Base
 
-// Zrevrank start a command to Determine the index of a member in a sorted set, with scores ordered from high to low
+// Determine the index of a member in a sorted set, with scores ordered from high to low
 //
 // Command: ZREVRANK.
 //
@@ -38611,12 +38611,12 @@ func (c ZrevrankKey) Member(member string) ZrevrankMember {
 
 type ZrevrankMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZrevrankMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZrevrankMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38626,7 +38626,7 @@ func (c ZrevrankMember) Cache() Cacheable {
 // Time complexity: O(1) for every call. O(N) for a complete iteration, including enough command calls for the cursor to return back to 0. N is the number of elements inside the collection..
 type Zscan Base
 
-// Zscan start a command to Incrementally iterate sorted sets elements and associated scores
+// Incrementally iterate sorted sets elements and associated scores
 //
 // Command: ZSCAN.
 //
@@ -38649,7 +38649,7 @@ func (c Zscan) Key(key string) ZscanKey {
 
 type ZscanCount Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZscanCount) Build() Completed {
 	return completed(c)
 }
@@ -38666,7 +38666,7 @@ func (c ZscanCursor) Count(count int64) ZscanCount {
 	return (ZscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZscanCursor) Build() Completed {
 	return completed(c)
 }
@@ -38685,7 +38685,7 @@ func (c ZscanMatch) Count(count int64) ZscanCount {
 	return (ZscanCount)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZscanMatch) Build() Completed {
 	return completed(c)
 }
@@ -38695,7 +38695,7 @@ func (c ZscanMatch) Build() Completed {
 // Time complexity: O(1)
 type Zscore Base
 
-// Zscore start a command to Get the score associated with the given member in a sorted set
+// Get the score associated with the given member in a sorted set
 //
 // Command: ZSCORE.
 //
@@ -38725,12 +38725,12 @@ func (c ZscoreKey) Member(member string) ZscoreMember {
 
 type ZscoreMember Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZscoreMember) Build() Completed {
 	return completed(c)
 }
 
-// Return completed cacheable command.
+// Return Completed Cacheable Redis command.
 func (c ZscoreMember) Cache() Cacheable {
 	return cacheable(c)
 }
@@ -38740,7 +38740,7 @@ func (c ZscoreMember) Cache() Cacheable {
 // Time complexity: O(N)+O(M*log(M)) with N being the sum of the sizes of the input sorted sets, and M being the number of elements in the resulting sorted set.
 type Zunion Base
 
-// Zunion start a command to Add multiple sorted sets
+// Add multiple sorted sets
 //
 // Command: ZUNION.
 //
@@ -38763,7 +38763,7 @@ func (c ZunionAggregateMax) Withscores() ZunionWithscores {
 	return (ZunionWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionAggregateMax) Build() Completed {
 	return completed(c)
 }
@@ -38775,7 +38775,7 @@ func (c ZunionAggregateMin) Withscores() ZunionWithscores {
 	return (ZunionWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionAggregateMin) Build() Completed {
 	return completed(c)
 }
@@ -38787,7 +38787,7 @@ func (c ZunionAggregateSum) Withscores() ZunionWithscores {
 	return (ZunionWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionAggregateSum) Build() Completed {
 	return completed(c)
 }
@@ -38837,7 +38837,7 @@ func (c ZunionKey) Withscores() ZunionWithscores {
 	return (ZunionWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionKey) Build() Completed {
 	return completed(c)
 }
@@ -38889,14 +38889,14 @@ func (c ZunionWeights) Withscores() ZunionWithscores {
 	return (ZunionWithscores)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionWeights) Build() Completed {
 	return completed(c)
 }
 
 type ZunionWithscores Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionWithscores) Build() Completed {
 	return completed(c)
 }
@@ -38906,7 +38906,7 @@ func (c ZunionWithscores) Build() Completed {
 // Time complexity: O(N)+O(M log(M)) with N being the sum of the sizes of the input sorted sets, and M being the number of elements in the resulting sorted set.
 type Zunionstore Base
 
-// Zunionstore start a command to Add multiple sorted sets and store the resulting sorted set in a new key
+// Add multiple sorted sets and store the resulting sorted set in a new key
 //
 // Command: ZUNIONSTORE.
 //
@@ -38929,21 +38929,21 @@ func (c Zunionstore) Destination(destination string) ZunionstoreDestination {
 
 type ZunionstoreAggregateMax Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionstoreAggregateMax) Build() Completed {
 	return completed(c)
 }
 
 type ZunionstoreAggregateMin Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionstoreAggregateMin) Build() Completed {
 	return completed(c)
 }
 
 type ZunionstoreAggregateSum Base
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionstoreAggregateSum) Build() Completed {
 	return completed(c)
 }
@@ -38995,7 +38995,7 @@ func (c ZunionstoreKey) AggregateMax() ZunionstoreAggregateMax {
 	return (ZunionstoreAggregateMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionstoreKey) Build() Completed {
 	return completed(c)
 }
@@ -39042,7 +39042,7 @@ func (c ZunionstoreWeights) AggregateMax() ZunionstoreAggregateMax {
 	return (ZunionstoreAggregateMax)(c)
 }
 
-// Return completed command.
+// Return Completed Redis command.
 func (c ZunionstoreWeights) Build() Completed {
 	return completed(c)
 }

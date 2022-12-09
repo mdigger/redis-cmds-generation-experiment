@@ -680,7 +680,7 @@ func toGoName(paramName string) string {
 
 func printRootBuilder(w io.Writer, root goStruct) {
 	if root.Node.Cmd.Summary != "" {
-		fmt.Fprintf(w, "// %s start a command to %s\n//\n", root.FullName, root.Node.Cmd.Summary)
+		fmt.Fprintf(w, "// %s\n//\n", root.Node.Cmd.Summary)
 	}
 
 	fmt.Fprintf(w, "// Command: %s.\n", root.Node.Arg.Command)
