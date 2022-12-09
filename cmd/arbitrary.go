@@ -76,10 +76,10 @@ func (c Arbitrary) MultiGet() Completed {
 	return c.Build()
 }
 
-// IsZero is used to test if Arbitrary is initialized
-func (c Arbitrary) IsZero() bool {
-	return c.command == nil
-}
+// // IsZero is used to test if Arbitrary is initialized
+// func (c Arbitrary) IsZero() bool {
+// 	return c.command == nil
+// }
 
 var (
 	arbitraryNoCommand = "Arbitrary should be provided with redis command"
