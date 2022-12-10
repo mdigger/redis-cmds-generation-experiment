@@ -31,7 +31,7 @@ type Completed interface {
 // completed represents a internal completed Redis command.
 type completed Base
 
-func (completed) mustBeCompleted()
+func (completed) mustBeCompleted() {}
 
 var _ Completed = (*completed)(nil)
 

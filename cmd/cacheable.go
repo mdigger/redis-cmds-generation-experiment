@@ -20,7 +20,7 @@ type Cacheable interface {
 // and it should be created by the Cache() of command builder.
 type cacheable Base
 
-func (cacheable) mustBeCacheable()
+func (cacheable) mustBeCacheable() {}
 
 var _ Cacheable = (*cacheable)(nil)
 
