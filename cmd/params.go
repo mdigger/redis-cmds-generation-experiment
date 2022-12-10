@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"strings"
 	"sync"
 )
@@ -44,12 +45,8 @@ func emptyCommand() *command {
 
 // free recycles the Commands.
 func (c *command) free() {
-	c.clear()
-	pool.Put(c)
-}
-
-func (c *command) clear() {
 	c.params = c.params[:0]
+	pool.Put(c)
 }
 
 // list returns the commands as []string.
@@ -61,17 +58,13 @@ func (c *command) append(keys ...string) {
 	c.params = append(c.params, keys...)
 }
 
-func (c command) len() int {
-	return len(c.params)
-}
-
 func (c command) get(i int) string {
 	if i < 0 {
 		i += len(c.params)
 	}
 
 	if i < 0 || i >= len(c.params) {
-		return ""
+		panic(fmt.Errorf("command: %d out of slice bounds", i))
 	}
 
 	return c.params[i]
