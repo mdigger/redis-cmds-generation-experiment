@@ -32,7 +32,8 @@ func (c command) IsEmpty() bool {
 var pool = &sync.Pool{
 	New: func() any {
 		return &command{
-			params: make([]string, 0, 2),
+			// FIXME: command definition length
+			params: make([]string, 0, 12),
 		}
 	},
 }
