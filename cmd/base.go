@@ -7,6 +7,11 @@ type Base struct {
 	cslot   cslot
 }
 
+// String return the command string.
+func (c Base) String() string {
+	return c.command.String()
+}
+
 // func NewBase(tags ctags, ss ...string) Base {
 // 	return Base{
 // 		command: newCommand(ss...),
