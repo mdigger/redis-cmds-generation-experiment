@@ -64,7 +64,7 @@ func (c command) get(i int) string {
 	}
 
 	if i < 0 || i >= len(c.params) {
-		panic(fmt.Errorf("command: %d out of slice bounds", i))
+		panic(fmt.Sprintf("command: %d out of slice bounds", i))
 	}
 
 	return c.params[i]
