@@ -22,7 +22,7 @@ func (b Builder) AclCat() AclCat {
 
 func (c AclCat) Categoryname(categoryname string) AclCatCategoryname {
 	c.command.append(categoryname)
-	return (AclCatCategoryname)(c)
+	return AclCatCategoryname(c)
 }
 
 // Return Completed Redis command.
@@ -55,7 +55,7 @@ func (b Builder) AclDeluser() AclDeluser {
 
 func (c AclDeluser) Username(username ...string) AclDeluserUsername {
 	c.command.append(username...)
-	return (AclDeluserUsername)(c)
+	return AclDeluserUsername(c)
 }
 
 type AclDeluserUsername Base
@@ -81,7 +81,7 @@ func (b Builder) AclDryrun() AclDryrun {
 
 func (c AclDryrun) Username(username string) AclDryrunUsername {
 	c.command.append(username)
-	return (AclDryrunUsername)(c)
+	return AclDryrunUsername(c)
 }
 
 type AclDryrunArg Base
@@ -100,7 +100,7 @@ type AclDryrunCommand Base
 
 func (c AclDryrunCommand) Arg(arg ...string) AclDryrunArg {
 	c.command.append(arg...)
-	return (AclDryrunArg)(c)
+	return AclDryrunArg(c)
 }
 
 // Return Completed Redis command.
@@ -112,7 +112,7 @@ type AclDryrunUsername Base
 
 func (c AclDryrunUsername) Command(command string) AclDryrunCommand {
 	c.command.append(command)
-	return (AclDryrunCommand)(c)
+	return AclDryrunCommand(c)
 }
 
 // Generate a pseudorandom secure password to use for ACL users.
@@ -133,7 +133,7 @@ func (b Builder) AclGenpass() AclGenpass {
 
 func (c AclGenpass) Bits(bits int64) AclGenpassBits {
 	c.command.append(strconv.FormatInt(bits, 10))
-	return (AclGenpassBits)(c)
+	return AclGenpassBits(c)
 }
 
 // Return Completed Redis command.
@@ -166,7 +166,7 @@ func (b Builder) AclGetuser() AclGetuser {
 
 func (c AclGetuser) Username(username string) AclGetuserUsername {
 	c.command.append(username)
-	return (AclGetuserUsername)(c)
+	return AclGetuserUsername(c)
 }
 
 type AclGetuserUsername Base
@@ -257,19 +257,19 @@ func (b Builder) AclLog() AclLog {
 
 func (c AclLog) Count(count int64) AclLogCountCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (AclLogCountCount)(c)
+	return AclLogCountCount(c)
 }
 
 func (c AclLog) Reset() AclLogCountReset {
 	c.command.append("RESET")
-	return (AclLogCountReset)(c)
+	return AclLogCountReset(c)
 }
 
 type AclLogCountCount Base
 
 func (c AclLogCountCount) Reset() AclLogCountReset {
 	c.command.append("RESET")
-	return (AclLogCountReset)(c)
+	return AclLogCountReset(c)
 }
 
 // Return Completed Redis command.
@@ -323,7 +323,7 @@ func (b Builder) AclSetuser() AclSetuser {
 
 func (c AclSetuser) Username(username string) AclSetuserUsername {
 	c.command.append(username)
-	return (AclSetuserUsername)(c)
+	return AclSetuserUsername(c)
 }
 
 type AclSetuserRule Base
@@ -342,7 +342,7 @@ type AclSetuserUsername Base
 
 func (c AclSetuserUsername) Rule(rule ...string) AclSetuserRule {
 	c.command.append(rule...)
-	return (AclSetuserRule)(c)
+	return AclSetuserRule(c)
 }
 
 // Return Completed Redis command.
@@ -415,7 +415,7 @@ func (c AiModeldel) Key(key string) AiModeldelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiModeldelKey)(c)
+	return AiModeldelKey(c)
 }
 
 type AiModeldelKey Base
@@ -448,7 +448,7 @@ func (c AiModelexecute) Key(key string) AiModelexecuteKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiModelexecuteKey)(c)
+	return AiModelexecuteKey(c)
 }
 
 type AiModelexecuteInputsInput Base
@@ -460,21 +460,21 @@ func (c AiModelexecuteInputsInput) Input(input ...string) AiModelexecuteInputsIn
 
 func (c AiModelexecuteInputsInput) Outputs(outputCount int64) AiModelexecuteOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelexecuteOutputsOutputs)(c)
+	return AiModelexecuteOutputsOutputs(c)
 }
 
 type AiModelexecuteInputsInputs Base
 
 func (c AiModelexecuteInputsInputs) Input(input ...string) AiModelexecuteInputsInput {
 	c.command.append(input...)
-	return (AiModelexecuteInputsInput)(c)
+	return AiModelexecuteInputsInput(c)
 }
 
 type AiModelexecuteKey Base
 
 func (c AiModelexecuteKey) Inputs(inputCount int64) AiModelexecuteInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelexecuteInputsInputs)(c)
+	return AiModelexecuteInputsInputs(c)
 }
 
 type AiModelexecuteOutputsOutput Base
@@ -486,7 +486,7 @@ func (c AiModelexecuteOutputsOutput) Output(output ...string) AiModelexecuteOutp
 
 func (c AiModelexecuteOutputsOutput) Timeout(timeout int64) AiModelexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiModelexecuteTimeout)(c)
+	return AiModelexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -503,7 +503,7 @@ type AiModelexecuteOutputsOutputs Base
 
 func (c AiModelexecuteOutputsOutputs) Output(output ...string) AiModelexecuteOutputsOutput {
 	c.command.append(output...)
-	return (AiModelexecuteOutputsOutput)(c)
+	return AiModelexecuteOutputsOutput(c)
 }
 
 type AiModelexecuteTimeout Base
@@ -541,7 +541,7 @@ func (c AiModelget) Key(key string) AiModelgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiModelgetKey)(c)
+	return AiModelgetKey(c)
 }
 
 type AiModelgetBlob Base
@@ -560,12 +560,12 @@ type AiModelgetKey Base
 
 func (c AiModelgetKey) Meta() AiModelgetMeta {
 	c.command.append("META")
-	return (AiModelgetMeta)(c)
+	return AiModelgetMeta(c)
 }
 
 func (c AiModelgetKey) Blob() AiModelgetBlob {
 	c.command.append("BLOB")
-	return (AiModelgetBlob)(c)
+	return AiModelgetBlob(c)
 }
 
 // Return Completed Redis command.
@@ -582,7 +582,7 @@ type AiModelgetMeta Base
 
 func (c AiModelgetMeta) Blob() AiModelgetBlob {
 	c.command.append("BLOB")
-	return (AiModelgetBlob)(c)
+	return AiModelgetBlob(c)
 }
 
 // Return Completed Redis command.
@@ -618,70 +618,70 @@ func (c AiModelstore) Key(key string) AiModelstoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiModelstoreKey)(c)
+	return AiModelstoreKey(c)
 }
 
 type AiModelstoreBackendOnnx Base
 
 func (c AiModelstoreBackendOnnx) Cpu() AiModelstoreDeviceCpu {
 	c.command.append("CPU")
-	return (AiModelstoreDeviceCpu)(c)
+	return AiModelstoreDeviceCpu(c)
 }
 
 func (c AiModelstoreBackendOnnx) Gpu() AiModelstoreDeviceGpu {
 	c.command.append("GPU")
-	return (AiModelstoreDeviceGpu)(c)
+	return AiModelstoreDeviceGpu(c)
 }
 
 type AiModelstoreBackendTf Base
 
 func (c AiModelstoreBackendTf) Cpu() AiModelstoreDeviceCpu {
 	c.command.append("CPU")
-	return (AiModelstoreDeviceCpu)(c)
+	return AiModelstoreDeviceCpu(c)
 }
 
 func (c AiModelstoreBackendTf) Gpu() AiModelstoreDeviceGpu {
 	c.command.append("GPU")
-	return (AiModelstoreDeviceGpu)(c)
+	return AiModelstoreDeviceGpu(c)
 }
 
 type AiModelstoreBackendTorch Base
 
 func (c AiModelstoreBackendTorch) Cpu() AiModelstoreDeviceCpu {
 	c.command.append("CPU")
-	return (AiModelstoreDeviceCpu)(c)
+	return AiModelstoreDeviceCpu(c)
 }
 
 func (c AiModelstoreBackendTorch) Gpu() AiModelstoreDeviceGpu {
 	c.command.append("GPU")
-	return (AiModelstoreDeviceGpu)(c)
+	return AiModelstoreDeviceGpu(c)
 }
 
 type AiModelstoreBatchsize Base
 
 func (c AiModelstoreBatchsize) Minbatchsize(minbatchsize int64) AiModelstoreMinbatchsize {
 	c.command.append("MINBATCHSIZE", strconv.FormatInt(minbatchsize, 10))
-	return (AiModelstoreMinbatchsize)(c)
+	return AiModelstoreMinbatchsize(c)
 }
 
 func (c AiModelstoreBatchsize) Minbatchtimeout(minbatchtimeout int64) AiModelstoreMinbatchtimeout {
 	c.command.append("MINBATCHTIMEOUT", strconv.FormatInt(minbatchtimeout, 10))
-	return (AiModelstoreMinbatchtimeout)(c)
+	return AiModelstoreMinbatchtimeout(c)
 }
 
 func (c AiModelstoreBatchsize) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreBatchsize) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreBatchsize) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -700,37 +700,37 @@ type AiModelstoreDeviceCpu Base
 
 func (c AiModelstoreDeviceCpu) Tag(tag string) AiModelstoreTag {
 	c.command.append("TAG", tag)
-	return (AiModelstoreTag)(c)
+	return AiModelstoreTag(c)
 }
 
 func (c AiModelstoreDeviceCpu) Batchsize(batchsize int64) AiModelstoreBatchsize {
 	c.command.append("BATCHSIZE", strconv.FormatInt(batchsize, 10))
-	return (AiModelstoreBatchsize)(c)
+	return AiModelstoreBatchsize(c)
 }
 
 func (c AiModelstoreDeviceCpu) Minbatchsize(minbatchsize int64) AiModelstoreMinbatchsize {
 	c.command.append("MINBATCHSIZE", strconv.FormatInt(minbatchsize, 10))
-	return (AiModelstoreMinbatchsize)(c)
+	return AiModelstoreMinbatchsize(c)
 }
 
 func (c AiModelstoreDeviceCpu) Minbatchtimeout(minbatchtimeout int64) AiModelstoreMinbatchtimeout {
 	c.command.append("MINBATCHTIMEOUT", strconv.FormatInt(minbatchtimeout, 10))
-	return (AiModelstoreMinbatchtimeout)(c)
+	return AiModelstoreMinbatchtimeout(c)
 }
 
 func (c AiModelstoreDeviceCpu) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreDeviceCpu) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreDeviceCpu) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -742,37 +742,37 @@ type AiModelstoreDeviceGpu Base
 
 func (c AiModelstoreDeviceGpu) Tag(tag string) AiModelstoreTag {
 	c.command.append("TAG", tag)
-	return (AiModelstoreTag)(c)
+	return AiModelstoreTag(c)
 }
 
 func (c AiModelstoreDeviceGpu) Batchsize(batchsize int64) AiModelstoreBatchsize {
 	c.command.append("BATCHSIZE", strconv.FormatInt(batchsize, 10))
-	return (AiModelstoreBatchsize)(c)
+	return AiModelstoreBatchsize(c)
 }
 
 func (c AiModelstoreDeviceGpu) Minbatchsize(minbatchsize int64) AiModelstoreMinbatchsize {
 	c.command.append("MINBATCHSIZE", strconv.FormatInt(minbatchsize, 10))
-	return (AiModelstoreMinbatchsize)(c)
+	return AiModelstoreMinbatchsize(c)
 }
 
 func (c AiModelstoreDeviceGpu) Minbatchtimeout(minbatchtimeout int64) AiModelstoreMinbatchtimeout {
 	c.command.append("MINBATCHTIMEOUT", strconv.FormatInt(minbatchtimeout, 10))
-	return (AiModelstoreMinbatchtimeout)(c)
+	return AiModelstoreMinbatchtimeout(c)
 }
 
 func (c AiModelstoreDeviceGpu) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreDeviceGpu) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreDeviceGpu) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -789,12 +789,12 @@ func (c AiModelstoreInputsInput) Input(input ...string) AiModelstoreInputsInput 
 
 func (c AiModelstoreInputsInput) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreInputsInput) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -806,46 +806,46 @@ type AiModelstoreInputsInputs Base
 
 func (c AiModelstoreInputsInputs) Input(input ...string) AiModelstoreInputsInput {
 	c.command.append(input...)
-	return (AiModelstoreInputsInput)(c)
+	return AiModelstoreInputsInput(c)
 }
 
 type AiModelstoreKey Base
 
 func (c AiModelstoreKey) Tf() AiModelstoreBackendTf {
 	c.command.append("TF")
-	return (AiModelstoreBackendTf)(c)
+	return AiModelstoreBackendTf(c)
 }
 
 func (c AiModelstoreKey) Torch() AiModelstoreBackendTorch {
 	c.command.append("TORCH")
-	return (AiModelstoreBackendTorch)(c)
+	return AiModelstoreBackendTorch(c)
 }
 
 func (c AiModelstoreKey) Onnx() AiModelstoreBackendOnnx {
 	c.command.append("ONNX")
-	return (AiModelstoreBackendOnnx)(c)
+	return AiModelstoreBackendOnnx(c)
 }
 
 type AiModelstoreMinbatchsize Base
 
 func (c AiModelstoreMinbatchsize) Minbatchtimeout(minbatchtimeout int64) AiModelstoreMinbatchtimeout {
 	c.command.append("MINBATCHTIMEOUT", strconv.FormatInt(minbatchtimeout, 10))
-	return (AiModelstoreMinbatchtimeout)(c)
+	return AiModelstoreMinbatchtimeout(c)
 }
 
 func (c AiModelstoreMinbatchsize) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreMinbatchsize) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreMinbatchsize) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -857,17 +857,17 @@ type AiModelstoreMinbatchtimeout Base
 
 func (c AiModelstoreMinbatchtimeout) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreMinbatchtimeout) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreMinbatchtimeout) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -884,7 +884,7 @@ func (c AiModelstoreOutputsOutput) Output(output ...string) AiModelstoreOutputsO
 
 func (c AiModelstoreOutputsOutput) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -896,39 +896,39 @@ type AiModelstoreOutputsOutputs Base
 
 func (c AiModelstoreOutputsOutputs) Output(output ...string) AiModelstoreOutputsOutput {
 	c.command.append(output...)
-	return (AiModelstoreOutputsOutput)(c)
+	return AiModelstoreOutputsOutput(c)
 }
 
 type AiModelstoreTag Base
 
 func (c AiModelstoreTag) Batchsize(batchsize int64) AiModelstoreBatchsize {
 	c.command.append("BATCHSIZE", strconv.FormatInt(batchsize, 10))
-	return (AiModelstoreBatchsize)(c)
+	return AiModelstoreBatchsize(c)
 }
 
 func (c AiModelstoreTag) Minbatchsize(minbatchsize int64) AiModelstoreMinbatchsize {
 	c.command.append("MINBATCHSIZE", strconv.FormatInt(minbatchsize, 10))
-	return (AiModelstoreMinbatchsize)(c)
+	return AiModelstoreMinbatchsize(c)
 }
 
 func (c AiModelstoreTag) Minbatchtimeout(minbatchtimeout int64) AiModelstoreMinbatchtimeout {
 	c.command.append("MINBATCHTIMEOUT", strconv.FormatInt(minbatchtimeout, 10))
-	return (AiModelstoreMinbatchtimeout)(c)
+	return AiModelstoreMinbatchtimeout(c)
 }
 
 func (c AiModelstoreTag) Inputs(inputCount int64) AiModelstoreInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiModelstoreInputsInputs)(c)
+	return AiModelstoreInputsInputs(c)
 }
 
 func (c AiModelstoreTag) Outputs(outputCount int64) AiModelstoreOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiModelstoreOutputsOutputs)(c)
+	return AiModelstoreOutputsOutputs(c)
 }
 
 func (c AiModelstoreTag) Blob(blob string) AiModelstoreBlob {
 	c.command.append("BLOB", blob)
-	return (AiModelstoreBlob)(c)
+	return AiModelstoreBlob(c)
 }
 
 // Return Completed Redis command.
@@ -959,7 +959,7 @@ func (c AiScriptdel) Key(key string) AiScriptdelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiScriptdelKey)(c)
+	return AiScriptdelKey(c)
 }
 
 type AiScriptdelKey Base
@@ -992,7 +992,7 @@ func (c AiScriptexecute) Key(key string) AiScriptexecuteKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiScriptexecuteKey)(c)
+	return AiScriptexecuteKey(c)
 }
 
 type AiScriptexecuteArgsArg Base
@@ -1004,12 +1004,12 @@ func (c AiScriptexecuteArgsArg) Arg(arg ...string) AiScriptexecuteArgsArg {
 
 func (c AiScriptexecuteArgsArg) Outputs(outputCount int64) AiScriptexecuteOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiScriptexecuteOutputsOutputs)(c)
+	return AiScriptexecuteOutputsOutputs(c)
 }
 
 func (c AiScriptexecuteArgsArg) Timeout(timeout int64) AiScriptexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiScriptexecuteTimeout)(c)
+	return AiScriptexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -1021,34 +1021,34 @@ type AiScriptexecuteArgsArgs Base
 
 func (c AiScriptexecuteArgsArgs) Arg(arg ...string) AiScriptexecuteArgsArg {
 	c.command.append(arg...)
-	return (AiScriptexecuteArgsArg)(c)
+	return AiScriptexecuteArgsArg(c)
 }
 
 type AiScriptexecuteFunction Base
 
 func (c AiScriptexecuteFunction) Keys(keyCount int64) AiScriptexecuteKeysKeys {
 	c.command.append("KEYS", strconv.FormatInt(keyCount, 10))
-	return (AiScriptexecuteKeysKeys)(c)
+	return AiScriptexecuteKeysKeys(c)
 }
 
 func (c AiScriptexecuteFunction) Inputs(inputCount int64) AiScriptexecuteInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiScriptexecuteInputsInputs)(c)
+	return AiScriptexecuteInputsInputs(c)
 }
 
 func (c AiScriptexecuteFunction) Args(argCount int64) AiScriptexecuteArgsArgs {
 	c.command.append("ARGS", strconv.FormatInt(argCount, 10))
-	return (AiScriptexecuteArgsArgs)(c)
+	return AiScriptexecuteArgsArgs(c)
 }
 
 func (c AiScriptexecuteFunction) Outputs(outputCount int64) AiScriptexecuteOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiScriptexecuteOutputsOutputs)(c)
+	return AiScriptexecuteOutputsOutputs(c)
 }
 
 func (c AiScriptexecuteFunction) Timeout(timeout int64) AiScriptexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiScriptexecuteTimeout)(c)
+	return AiScriptexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -1065,17 +1065,17 @@ func (c AiScriptexecuteInputsInput) Input(input ...string) AiScriptexecuteInputs
 
 func (c AiScriptexecuteInputsInput) Args(argCount int64) AiScriptexecuteArgsArgs {
 	c.command.append("ARGS", strconv.FormatInt(argCount, 10))
-	return (AiScriptexecuteArgsArgs)(c)
+	return AiScriptexecuteArgsArgs(c)
 }
 
 func (c AiScriptexecuteInputsInput) Outputs(outputCount int64) AiScriptexecuteOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiScriptexecuteOutputsOutputs)(c)
+	return AiScriptexecuteOutputsOutputs(c)
 }
 
 func (c AiScriptexecuteInputsInput) Timeout(timeout int64) AiScriptexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiScriptexecuteTimeout)(c)
+	return AiScriptexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -1087,14 +1087,14 @@ type AiScriptexecuteInputsInputs Base
 
 func (c AiScriptexecuteInputsInputs) Input(input ...string) AiScriptexecuteInputsInput {
 	c.command.append(input...)
-	return (AiScriptexecuteInputsInput)(c)
+	return AiScriptexecuteInputsInput(c)
 }
 
 type AiScriptexecuteKey Base
 
 func (c AiScriptexecuteKey) Function(function string) AiScriptexecuteFunction {
 	c.command.append(function)
-	return (AiScriptexecuteFunction)(c)
+	return AiScriptexecuteFunction(c)
 }
 
 type AiScriptexecuteKeysKey Base
@@ -1106,22 +1106,22 @@ func (c AiScriptexecuteKeysKey) Key(key ...string) AiScriptexecuteKeysKey {
 
 func (c AiScriptexecuteKeysKey) Inputs(inputCount int64) AiScriptexecuteInputsInputs {
 	c.command.append("INPUTS", strconv.FormatInt(inputCount, 10))
-	return (AiScriptexecuteInputsInputs)(c)
+	return AiScriptexecuteInputsInputs(c)
 }
 
 func (c AiScriptexecuteKeysKey) Args(argCount int64) AiScriptexecuteArgsArgs {
 	c.command.append("ARGS", strconv.FormatInt(argCount, 10))
-	return (AiScriptexecuteArgsArgs)(c)
+	return AiScriptexecuteArgsArgs(c)
 }
 
 func (c AiScriptexecuteKeysKey) Outputs(outputCount int64) AiScriptexecuteOutputsOutputs {
 	c.command.append("OUTPUTS", strconv.FormatInt(outputCount, 10))
-	return (AiScriptexecuteOutputsOutputs)(c)
+	return AiScriptexecuteOutputsOutputs(c)
 }
 
 func (c AiScriptexecuteKeysKey) Timeout(timeout int64) AiScriptexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiScriptexecuteTimeout)(c)
+	return AiScriptexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -1133,7 +1133,7 @@ type AiScriptexecuteKeysKeys Base
 
 func (c AiScriptexecuteKeysKeys) Key(key ...string) AiScriptexecuteKeysKey {
 	c.command.append(key...)
-	return (AiScriptexecuteKeysKey)(c)
+	return AiScriptexecuteKeysKey(c)
 }
 
 type AiScriptexecuteOutputsOutput Base
@@ -1145,7 +1145,7 @@ func (c AiScriptexecuteOutputsOutput) Output(output ...string) AiScriptexecuteOu
 
 func (c AiScriptexecuteOutputsOutput) Timeout(timeout int64) AiScriptexecuteTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (AiScriptexecuteTimeout)(c)
+	return AiScriptexecuteTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -1157,7 +1157,7 @@ type AiScriptexecuteOutputsOutputs Base
 
 func (c AiScriptexecuteOutputsOutputs) Output(output ...string) AiScriptexecuteOutputsOutput {
 	c.command.append(output...)
-	return (AiScriptexecuteOutputsOutput)(c)
+	return AiScriptexecuteOutputsOutput(c)
 }
 
 type AiScriptexecuteTimeout Base
@@ -1190,19 +1190,19 @@ func (c AiScriptget) Key(key string) AiScriptgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiScriptgetKey)(c)
+	return AiScriptgetKey(c)
 }
 
 type AiScriptgetKey Base
 
 func (c AiScriptgetKey) Meta() AiScriptgetMeta {
 	c.command.append("META")
-	return (AiScriptgetMeta)(c)
+	return AiScriptgetMeta(c)
 }
 
 func (c AiScriptgetKey) Source() AiScriptgetSource {
 	c.command.append("SOURCE")
-	return (AiScriptgetSource)(c)
+	return AiScriptgetSource(c)
 }
 
 // Return Completed Redis command.
@@ -1219,7 +1219,7 @@ type AiScriptgetMeta Base
 
 func (c AiScriptgetMeta) Source() AiScriptgetSource {
 	c.command.append("SOURCE")
-	return (AiScriptgetSource)(c)
+	return AiScriptgetSource(c)
 }
 
 // Return Completed Redis command.
@@ -1267,31 +1267,31 @@ func (c AiScriptstore) Key(key string) AiScriptstoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiScriptstoreKey)(c)
+	return AiScriptstoreKey(c)
 }
 
 type AiScriptstoreDeviceCpu Base
 
 func (c AiScriptstoreDeviceCpu) Tag(tag string) AiScriptstoreTag {
 	c.command.append("TAG", tag)
-	return (AiScriptstoreTag)(c)
+	return AiScriptstoreTag(c)
 }
 
 func (c AiScriptstoreDeviceCpu) EntryPoints(entryPointCount int64) AiScriptstoreEntryPointsEntryPoints {
 	c.command.append("ENTRY_POINTS", strconv.FormatInt(entryPointCount, 10))
-	return (AiScriptstoreEntryPointsEntryPoints)(c)
+	return AiScriptstoreEntryPointsEntryPoints(c)
 }
 
 type AiScriptstoreDeviceGpu Base
 
 func (c AiScriptstoreDeviceGpu) Tag(tag string) AiScriptstoreTag {
 	c.command.append("TAG", tag)
-	return (AiScriptstoreTag)(c)
+	return AiScriptstoreTag(c)
 }
 
 func (c AiScriptstoreDeviceGpu) EntryPoints(entryPointCount int64) AiScriptstoreEntryPointsEntryPoints {
 	c.command.append("ENTRY_POINTS", strconv.FormatInt(entryPointCount, 10))
-	return (AiScriptstoreEntryPointsEntryPoints)(c)
+	return AiScriptstoreEntryPointsEntryPoints(c)
 }
 
 type AiScriptstoreEntryPointsEntryPoint Base
@@ -1310,26 +1310,26 @@ type AiScriptstoreEntryPointsEntryPoints Base
 
 func (c AiScriptstoreEntryPointsEntryPoints) EntryPoint(entryPoint ...string) AiScriptstoreEntryPointsEntryPoint {
 	c.command.append(entryPoint...)
-	return (AiScriptstoreEntryPointsEntryPoint)(c)
+	return AiScriptstoreEntryPointsEntryPoint(c)
 }
 
 type AiScriptstoreKey Base
 
 func (c AiScriptstoreKey) Cpu() AiScriptstoreDeviceCpu {
 	c.command.append("CPU")
-	return (AiScriptstoreDeviceCpu)(c)
+	return AiScriptstoreDeviceCpu(c)
 }
 
 func (c AiScriptstoreKey) Gpu() AiScriptstoreDeviceGpu {
 	c.command.append("GPU")
-	return (AiScriptstoreDeviceGpu)(c)
+	return AiScriptstoreDeviceGpu(c)
 }
 
 type AiScriptstoreTag Base
 
 func (c AiScriptstoreTag) EntryPoints(entryPointCount int64) AiScriptstoreEntryPointsEntryPoints {
 	c.command.append("ENTRY_POINTS", strconv.FormatInt(entryPointCount, 10))
-	return (AiScriptstoreEntryPointsEntryPoints)(c)
+	return AiScriptstoreEntryPointsEntryPoints(c)
 }
 
 // returns a tensor stored as key's value..
@@ -1355,7 +1355,7 @@ func (c AiTensorget) Key(key string) AiTensorgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiTensorgetKey)(c)
+	return AiTensorgetKey(c)
 }
 
 type AiTensorgetFormatBlob Base
@@ -1386,19 +1386,19 @@ type AiTensorgetKey Base
 
 func (c AiTensorgetKey) Meta() AiTensorgetMeta {
 	c.command.append("META")
-	return (AiTensorgetMeta)(c)
+	return AiTensorgetMeta(c)
 }
 
 type AiTensorgetMeta Base
 
 func (c AiTensorgetMeta) Blob() AiTensorgetFormatBlob {
 	c.command.append("BLOB")
-	return (AiTensorgetFormatBlob)(c)
+	return AiTensorgetFormatBlob(c)
 }
 
 func (c AiTensorgetMeta) Values() AiTensorgetFormatValues {
 	c.command.append("VALUES")
-	return (AiTensorgetFormatValues)(c)
+	return AiTensorgetFormatValues(c)
 }
 
 // Return Completed Redis command.
@@ -1434,7 +1434,7 @@ func (c AiTensorset) Key(key string) AiTensorsetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AiTensorsetKey)(c)
+	return AiTensorsetKey(c)
 }
 
 type AiTensorsetBlob Base
@@ -1442,7 +1442,7 @@ type AiTensorsetBlob Base
 func (c AiTensorsetBlob) Values(value ...string) AiTensorsetValues {
 	c.command.append("VALUES")
 	c.command.append(value...)
-	return (AiTensorsetValues)(c)
+	return AiTensorsetValues(c)
 }
 
 // Return Completed Redis command.
@@ -1454,52 +1454,52 @@ type AiTensorsetKey Base
 
 func (c AiTensorsetKey) Float() AiTensorsetTypeFloat {
 	c.command.append("FLOAT")
-	return (AiTensorsetTypeFloat)(c)
+	return AiTensorsetTypeFloat(c)
 }
 
 func (c AiTensorsetKey) Double() AiTensorsetTypeDouble {
 	c.command.append("DOUBLE")
-	return (AiTensorsetTypeDouble)(c)
+	return AiTensorsetTypeDouble(c)
 }
 
 func (c AiTensorsetKey) Int8() AiTensorsetTypeInt8 {
 	c.command.append("INT8")
-	return (AiTensorsetTypeInt8)(c)
+	return AiTensorsetTypeInt8(c)
 }
 
 func (c AiTensorsetKey) Int16() AiTensorsetTypeInt16 {
 	c.command.append("INT16")
-	return (AiTensorsetTypeInt16)(c)
+	return AiTensorsetTypeInt16(c)
 }
 
 func (c AiTensorsetKey) Int32() AiTensorsetTypeInt32 {
 	c.command.append("INT32")
-	return (AiTensorsetTypeInt32)(c)
+	return AiTensorsetTypeInt32(c)
 }
 
 func (c AiTensorsetKey) Int64() AiTensorsetTypeInt64 {
 	c.command.append("INT64")
-	return (AiTensorsetTypeInt64)(c)
+	return AiTensorsetTypeInt64(c)
 }
 
 func (c AiTensorsetKey) Uint8() AiTensorsetTypeUint8 {
 	c.command.append("UINT8")
-	return (AiTensorsetTypeUint8)(c)
+	return AiTensorsetTypeUint8(c)
 }
 
 func (c AiTensorsetKey) Uint16() AiTensorsetTypeUint16 {
 	c.command.append("UINT16")
-	return (AiTensorsetTypeUint16)(c)
+	return AiTensorsetTypeUint16(c)
 }
 
 func (c AiTensorsetKey) String() AiTensorsetTypeString {
 	c.command.append("STRING")
-	return (AiTensorsetTypeString)(c)
+	return AiTensorsetTypeString(c)
 }
 
 func (c AiTensorsetKey) Bool() AiTensorsetTypeBool {
 	c.command.append("BOOL")
-	return (AiTensorsetTypeBool)(c)
+	return AiTensorsetTypeBool(c)
 }
 
 type AiTensorsetShape Base
@@ -1513,13 +1513,13 @@ func (c AiTensorsetShape) Shape(shape ...int64) AiTensorsetShape {
 
 func (c AiTensorsetShape) Blob(blob string) AiTensorsetBlob {
 	c.command.append("BLOB", blob)
-	return (AiTensorsetBlob)(c)
+	return AiTensorsetBlob(c)
 }
 
 func (c AiTensorsetShape) Values(value ...string) AiTensorsetValues {
 	c.command.append("VALUES")
 	c.command.append(value...)
-	return (AiTensorsetValues)(c)
+	return AiTensorsetValues(c)
 }
 
 // Return Completed Redis command.
@@ -1533,7 +1533,7 @@ func (c AiTensorsetTypeBool) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeDouble Base
@@ -1542,7 +1542,7 @@ func (c AiTensorsetTypeDouble) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeFloat Base
@@ -1551,7 +1551,7 @@ func (c AiTensorsetTypeFloat) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeInt16 Base
@@ -1560,7 +1560,7 @@ func (c AiTensorsetTypeInt16) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeInt32 Base
@@ -1569,7 +1569,7 @@ func (c AiTensorsetTypeInt32) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeInt64 Base
@@ -1578,7 +1578,7 @@ func (c AiTensorsetTypeInt64) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeInt8 Base
@@ -1587,7 +1587,7 @@ func (c AiTensorsetTypeInt8) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeString Base
@@ -1596,7 +1596,7 @@ func (c AiTensorsetTypeString) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeUint16 Base
@@ -1605,7 +1605,7 @@ func (c AiTensorsetTypeUint16) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetTypeUint8 Base
@@ -1614,7 +1614,7 @@ func (c AiTensorsetTypeUint8) Shape(shape ...int64) AiTensorsetShape {
 	for _, n := range shape {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (AiTensorsetShape)(c)
+	return AiTensorsetShape(c)
 }
 
 type AiTensorsetValues Base
@@ -1653,14 +1653,14 @@ func (c Append) Key(key string) AppendKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (AppendKey)(c)
+	return AppendKey(c)
 }
 
 type AppendKey Base
 
 func (c AppendKey) Value(value string) AppendValue {
 	c.command.append(value)
-	return (AppendValue)(c)
+	return AppendValue(c)
 }
 
 type AppendValue Base
@@ -1705,12 +1705,12 @@ func (b Builder) Auth() Auth {
 
 func (c Auth) Username(username string) AuthUsername {
 	c.command.append(username)
-	return (AuthUsername)(c)
+	return AuthUsername(c)
 }
 
 func (c Auth) Password(password string) AuthPassword {
 	c.command.append(password)
-	return (AuthPassword)(c)
+	return AuthPassword(c)
 }
 
 type AuthPassword Base
@@ -1724,7 +1724,7 @@ type AuthUsername Base
 
 func (c AuthUsername) Password(password string) AuthPassword {
 	c.command.append(password)
-	return (AuthPassword)(c)
+	return AuthPassword(c)
 }
 
 // Adds an item to a Bloom Filter.
@@ -1750,7 +1750,7 @@ func (c BfAdd) Key(key string) BfAddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfAddKey)(c)
+	return BfAddKey(c)
 }
 
 type BfAddItem Base
@@ -1764,7 +1764,7 @@ type BfAddKey Base
 
 func (c BfAddKey) Item(item string) BfAddItem {
 	c.command.append(item)
-	return (BfAddItem)(c)
+	return BfAddItem(c)
 }
 
 // Checks whether an item exists in a Bloom Filter.
@@ -1790,7 +1790,7 @@ func (c BfExists) Key(key string) BfExistsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfExistsKey)(c)
+	return BfExistsKey(c)
 }
 
 type BfExistsItem Base
@@ -1809,7 +1809,7 @@ type BfExistsKey Base
 
 func (c BfExistsKey) Item(item string) BfExistsItem {
 	c.command.append(item)
-	return (BfExistsItem)(c)
+	return BfExistsItem(c)
 }
 
 // Returns information about a Bloom Filter.
@@ -1835,34 +1835,34 @@ func (c BfInfo) Key(key string) BfInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfInfoKey)(c)
+	return BfInfoKey(c)
 }
 
 type BfInfoKey Base
 
 func (c BfInfoKey) Capacity() BfInfoSingleValueCapacity {
 	c.command.append("CAPACITY")
-	return (BfInfoSingleValueCapacity)(c)
+	return BfInfoSingleValueCapacity(c)
 }
 
 func (c BfInfoKey) Size() BfInfoSingleValueSize {
 	c.command.append("SIZE")
-	return (BfInfoSingleValueSize)(c)
+	return BfInfoSingleValueSize(c)
 }
 
 func (c BfInfoKey) Filters() BfInfoSingleValueFilters {
 	c.command.append("FILTERS")
-	return (BfInfoSingleValueFilters)(c)
+	return BfInfoSingleValueFilters(c)
 }
 
 func (c BfInfoKey) Items() BfInfoSingleValueItems {
 	c.command.append("ITEMS")
-	return (BfInfoSingleValueItems)(c)
+	return BfInfoSingleValueItems(c)
 }
 
 func (c BfInfoKey) Expansion() BfInfoSingleValueExpansion {
 	c.command.append("EXPANSION")
-	return (BfInfoSingleValueExpansion)(c)
+	return BfInfoSingleValueExpansion(c)
 }
 
 // Return Completed Redis command.
@@ -1958,73 +1958,73 @@ func (c BfInsert) Key(key string) BfInsertKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfInsertKey)(c)
+	return BfInsertKey(c)
 }
 
 type BfInsertCapacity Base
 
 func (c BfInsertCapacity) Error(error float64) BfInsertError {
 	c.command.append("ERROR", strconv.FormatFloat(error, 'f', -1, 64))
-	return (BfInsertError)(c)
+	return BfInsertError(c)
 }
 
 func (c BfInsertCapacity) Expansion(expansion int64) BfInsertExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (BfInsertExpansion)(c)
+	return BfInsertExpansion(c)
 }
 
 func (c BfInsertCapacity) Nocreate() BfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (BfInsertNocreate)(c)
+	return BfInsertNocreate(c)
 }
 
 func (c BfInsertCapacity) Nonscaling() BfInsertNonscaling {
 	c.command.append("NONSCALING")
-	return (BfInsertNonscaling)(c)
+	return BfInsertNonscaling(c)
 }
 
 func (c BfInsertCapacity) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 type BfInsertError Base
 
 func (c BfInsertError) Expansion(expansion int64) BfInsertExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (BfInsertExpansion)(c)
+	return BfInsertExpansion(c)
 }
 
 func (c BfInsertError) Nocreate() BfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (BfInsertNocreate)(c)
+	return BfInsertNocreate(c)
 }
 
 func (c BfInsertError) Nonscaling() BfInsertNonscaling {
 	c.command.append("NONSCALING")
-	return (BfInsertNonscaling)(c)
+	return BfInsertNonscaling(c)
 }
 
 func (c BfInsertError) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 type BfInsertExpansion Base
 
 func (c BfInsertExpansion) Nocreate() BfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (BfInsertNocreate)(c)
+	return BfInsertNocreate(c)
 }
 
 func (c BfInsertExpansion) Nonscaling() BfInsertNonscaling {
 	c.command.append("NONSCALING")
-	return (BfInsertNonscaling)(c)
+	return BfInsertNonscaling(c)
 }
 
 func (c BfInsertExpansion) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 type BfInsertItem Base
@@ -2043,58 +2043,58 @@ type BfInsertItems Base
 
 func (c BfInsertItems) Item(item ...string) BfInsertItem {
 	c.command.append(item...)
-	return (BfInsertItem)(c)
+	return BfInsertItem(c)
 }
 
 type BfInsertKey Base
 
 func (c BfInsertKey) Capacity(capacity int64) BfInsertCapacity {
 	c.command.append("CAPACITY", strconv.FormatInt(capacity, 10))
-	return (BfInsertCapacity)(c)
+	return BfInsertCapacity(c)
 }
 
 func (c BfInsertKey) Error(error float64) BfInsertError {
 	c.command.append("ERROR", strconv.FormatFloat(error, 'f', -1, 64))
-	return (BfInsertError)(c)
+	return BfInsertError(c)
 }
 
 func (c BfInsertKey) Expansion(expansion int64) BfInsertExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (BfInsertExpansion)(c)
+	return BfInsertExpansion(c)
 }
 
 func (c BfInsertKey) Nocreate() BfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (BfInsertNocreate)(c)
+	return BfInsertNocreate(c)
 }
 
 func (c BfInsertKey) Nonscaling() BfInsertNonscaling {
 	c.command.append("NONSCALING")
-	return (BfInsertNonscaling)(c)
+	return BfInsertNonscaling(c)
 }
 
 func (c BfInsertKey) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 type BfInsertNocreate Base
 
 func (c BfInsertNocreate) Nonscaling() BfInsertNonscaling {
 	c.command.append("NONSCALING")
-	return (BfInsertNonscaling)(c)
+	return BfInsertNonscaling(c)
 }
 
 func (c BfInsertNocreate) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 type BfInsertNonscaling Base
 
 func (c BfInsertNonscaling) Items() BfInsertItems {
 	c.command.append("ITEMS")
-	return (BfInsertItems)(c)
+	return BfInsertItems(c)
 }
 
 // Restores a filter previously saved using SCANDUMP.
@@ -2120,7 +2120,7 @@ func (c BfLoadchunk) Key(key string) BfLoadchunkKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfLoadchunkKey)(c)
+	return BfLoadchunkKey(c)
 }
 
 type BfLoadchunkData Base
@@ -2134,14 +2134,14 @@ type BfLoadchunkIterator Base
 
 func (c BfLoadchunkIterator) Data(data string) BfLoadchunkData {
 	c.command.append(data)
-	return (BfLoadchunkData)(c)
+	return BfLoadchunkData(c)
 }
 
 type BfLoadchunkKey Base
 
 func (c BfLoadchunkKey) Iterator(iterator int64) BfLoadchunkIterator {
 	c.command.append(strconv.FormatInt(iterator, 10))
-	return (BfLoadchunkIterator)(c)
+	return BfLoadchunkIterator(c)
 }
 
 // Adds one or more items to a Bloom Filter. A filter will be created if it does not exist.
@@ -2167,7 +2167,7 @@ func (c BfMadd) Key(key string) BfMaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfMaddKey)(c)
+	return BfMaddKey(c)
 }
 
 type BfMaddItem Base
@@ -2186,7 +2186,7 @@ type BfMaddKey Base
 
 func (c BfMaddKey) Item(item ...string) BfMaddItem {
 	c.command.append(item...)
-	return (BfMaddItem)(c)
+	return BfMaddItem(c)
 }
 
 // Checks whether one or more items exist in a Bloom Filter.
@@ -2212,7 +2212,7 @@ func (c BfMexists) Key(key string) BfMexistsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfMexistsKey)(c)
+	return BfMexistsKey(c)
 }
 
 type BfMexistsItem Base
@@ -2231,7 +2231,7 @@ type BfMexistsKey Base
 
 func (c BfMexistsKey) Item(item ...string) BfMexistsItem {
 	c.command.append(item...)
-	return (BfMexistsItem)(c)
+	return BfMexistsItem(c)
 }
 
 // Creates a new Bloom Filter.
@@ -2257,19 +2257,19 @@ func (c BfReserve) Key(key string) BfReserveKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfReserveKey)(c)
+	return BfReserveKey(c)
 }
 
 type BfReserveCapacity Base
 
 func (c BfReserveCapacity) Expansion(expansion int64) BfReserveExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (BfReserveExpansion)(c)
+	return BfReserveExpansion(c)
 }
 
 func (c BfReserveCapacity) Nonscaling() BfReserveNonscaling {
 	c.command.append("NONSCALING")
-	return (BfReserveNonscaling)(c)
+	return BfReserveNonscaling(c)
 }
 
 // Return Completed Redis command.
@@ -2281,14 +2281,14 @@ type BfReserveErrorRate Base
 
 func (c BfReserveErrorRate) Capacity(capacity int64) BfReserveCapacity {
 	c.command.append(strconv.FormatInt(capacity, 10))
-	return (BfReserveCapacity)(c)
+	return BfReserveCapacity(c)
 }
 
 type BfReserveExpansion Base
 
 func (c BfReserveExpansion) Nonscaling() BfReserveNonscaling {
 	c.command.append("NONSCALING")
-	return (BfReserveNonscaling)(c)
+	return BfReserveNonscaling(c)
 }
 
 // Return Completed Redis command.
@@ -2300,7 +2300,7 @@ type BfReserveKey Base
 
 func (c BfReserveKey) ErrorRate(errorRate float64) BfReserveErrorRate {
 	c.command.append(strconv.FormatFloat(errorRate, 'f', -1, 64))
-	return (BfReserveErrorRate)(c)
+	return BfReserveErrorRate(c)
 }
 
 type BfReserveNonscaling Base
@@ -2333,7 +2333,7 @@ func (c BfScandump) Key(key string) BfScandumpKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BfScandumpKey)(c)
+	return BfScandumpKey(c)
 }
 
 type BfScandumpIterator Base
@@ -2347,7 +2347,7 @@ type BfScandumpKey Base
 
 func (c BfScandumpKey) Iterator(iterator int64) BfScandumpIterator {
 	c.command.append(strconv.FormatInt(iterator, 10))
-	return (BfScandumpIterator)(c)
+	return BfScandumpIterator(c)
 }
 
 // Asynchronously rewrite the append-only file.
@@ -2381,7 +2381,7 @@ func (b Builder) Bgsave() Bgsave {
 
 func (c Bgsave) Schedule() BgsaveSchedule {
 	c.command.append("SCHEDULE")
-	return (BgsaveSchedule)(c)
+	return BgsaveSchedule(c)
 }
 
 // Return Completed Redis command.
@@ -2419,19 +2419,19 @@ func (c Bitcount) Key(key string) BitcountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BitcountKey)(c)
+	return BitcountKey(c)
 }
 
 type BitcountIndexEnd Base
 
 func (c BitcountIndexEnd) Byte() BitcountIndexIndexUnitByte {
 	c.command.append("BYTE")
-	return (BitcountIndexIndexUnitByte)(c)
+	return BitcountIndexIndexUnitByte(c)
 }
 
 func (c BitcountIndexEnd) Bit() BitcountIndexIndexUnitBit {
 	c.command.append("BIT")
-	return (BitcountIndexIndexUnitBit)(c)
+	return BitcountIndexIndexUnitBit(c)
 }
 
 // Return Completed Redis command.
@@ -2472,14 +2472,14 @@ type BitcountIndexStart Base
 
 func (c BitcountIndexStart) End(end int64) BitcountIndexEnd {
 	c.command.append(strconv.FormatInt(end, 10))
-	return (BitcountIndexEnd)(c)
+	return BitcountIndexEnd(c)
 }
 
 type BitcountKey Base
 
 func (c BitcountKey) Start(start int64) BitcountIndexStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (BitcountIndexStart)(c)
+	return BitcountIndexStart(c)
 }
 
 // Return Completed Redis command.
@@ -2515,129 +2515,129 @@ func (c Bitfield) Key(key string) BitfieldKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BitfieldKey)(c)
+	return BitfieldKey(c)
 }
 
 type BitfieldKey Base
 
 func (c BitfieldKey) Get(encoding string, offset int64) BitfieldOperationGet {
 	c.command.append("GET", encoding, strconv.FormatInt(offset, 10))
-	return (BitfieldOperationGet)(c)
+	return BitfieldOperationGet(c)
 }
 
 func (c BitfieldKey) OverflowWrap() BitfieldOperationWriteOverflowWrap {
 	c.command.append("OVERFLOW", "WRAP")
-	return (BitfieldOperationWriteOverflowWrap)(c)
+	return BitfieldOperationWriteOverflowWrap(c)
 }
 
 func (c BitfieldKey) OverflowSat() BitfieldOperationWriteOverflowSat {
 	c.command.append("OVERFLOW", "SAT")
-	return (BitfieldOperationWriteOverflowSat)(c)
+	return BitfieldOperationWriteOverflowSat(c)
 }
 
 func (c BitfieldKey) OverflowFail() BitfieldOperationWriteOverflowFail {
 	c.command.append("OVERFLOW", "FAIL")
-	return (BitfieldOperationWriteOverflowFail)(c)
+	return BitfieldOperationWriteOverflowFail(c)
 }
 
 func (c BitfieldKey) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldKey) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 type BitfieldOperationGet Base
 
 func (c BitfieldOperationGet) OverflowWrap() BitfieldOperationWriteOverflowWrap {
 	c.command.append("OVERFLOW", "WRAP")
-	return (BitfieldOperationWriteOverflowWrap)(c)
+	return BitfieldOperationWriteOverflowWrap(c)
 }
 
 func (c BitfieldOperationGet) OverflowSat() BitfieldOperationWriteOverflowSat {
 	c.command.append("OVERFLOW", "SAT")
-	return (BitfieldOperationWriteOverflowSat)(c)
+	return BitfieldOperationWriteOverflowSat(c)
 }
 
 func (c BitfieldOperationGet) OverflowFail() BitfieldOperationWriteOverflowFail {
 	c.command.append("OVERFLOW", "FAIL")
-	return (BitfieldOperationWriteOverflowFail)(c)
+	return BitfieldOperationWriteOverflowFail(c)
 }
 
 func (c BitfieldOperationGet) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldOperationGet) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 type BitfieldOperationWriteOverflowFail Base
 
 func (c BitfieldOperationWriteOverflowFail) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldOperationWriteOverflowFail) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 type BitfieldOperationWriteOverflowSat Base
 
 func (c BitfieldOperationWriteOverflowSat) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldOperationWriteOverflowSat) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 type BitfieldOperationWriteOverflowWrap Base
 
 func (c BitfieldOperationWriteOverflowWrap) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldOperationWriteOverflowWrap) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 type BitfieldOperationWriteSetIncrby Base
 
 func (c BitfieldOperationWriteSetIncrby) Get(encoding string, offset int64) BitfieldOperationGet {
 	c.command.append("GET", encoding, strconv.FormatInt(offset, 10))
-	return (BitfieldOperationGet)(c)
+	return BitfieldOperationGet(c)
 }
 
 func (c BitfieldOperationWriteSetIncrby) OverflowWrap() BitfieldOperationWriteOverflowWrap {
 	c.command.append("OVERFLOW", "WRAP")
-	return (BitfieldOperationWriteOverflowWrap)(c)
+	return BitfieldOperationWriteOverflowWrap(c)
 }
 
 func (c BitfieldOperationWriteSetIncrby) OverflowSat() BitfieldOperationWriteOverflowSat {
 	c.command.append("OVERFLOW", "SAT")
-	return (BitfieldOperationWriteOverflowSat)(c)
+	return BitfieldOperationWriteOverflowSat(c)
 }
 
 func (c BitfieldOperationWriteSetIncrby) OverflowFail() BitfieldOperationWriteOverflowFail {
 	c.command.append("OVERFLOW", "FAIL")
-	return (BitfieldOperationWriteOverflowFail)(c)
+	return BitfieldOperationWriteOverflowFail(c)
 }
 
 func (c BitfieldOperationWriteSetIncrby) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
 	c.command.append("SET", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(value, 10))
-	return (BitfieldOperationWriteSetSet)(c)
+	return BitfieldOperationWriteSetSet(c)
 }
 
 func (c BitfieldOperationWriteSetIncrby) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
@@ -2654,27 +2654,27 @@ type BitfieldOperationWriteSetSet Base
 
 func (c BitfieldOperationWriteSetSet) Incrby(encoding string, offset int64, increment int64) BitfieldOperationWriteSetIncrby {
 	c.command.append("INCRBY", encoding, strconv.FormatInt(offset, 10), strconv.FormatInt(increment, 10))
-	return (BitfieldOperationWriteSetIncrby)(c)
+	return BitfieldOperationWriteSetIncrby(c)
 }
 
 func (c BitfieldOperationWriteSetSet) Get(encoding string, offset int64) BitfieldOperationGet {
 	c.command.append("GET", encoding, strconv.FormatInt(offset, 10))
-	return (BitfieldOperationGet)(c)
+	return BitfieldOperationGet(c)
 }
 
 func (c BitfieldOperationWriteSetSet) OverflowWrap() BitfieldOperationWriteOverflowWrap {
 	c.command.append("OVERFLOW", "WRAP")
-	return (BitfieldOperationWriteOverflowWrap)(c)
+	return BitfieldOperationWriteOverflowWrap(c)
 }
 
 func (c BitfieldOperationWriteSetSet) OverflowSat() BitfieldOperationWriteOverflowSat {
 	c.command.append("OVERFLOW", "SAT")
-	return (BitfieldOperationWriteOverflowSat)(c)
+	return BitfieldOperationWriteOverflowSat(c)
 }
 
 func (c BitfieldOperationWriteSetSet) OverflowFail() BitfieldOperationWriteOverflowFail {
 	c.command.append("OVERFLOW", "FAIL")
-	return (BitfieldOperationWriteOverflowFail)(c)
+	return BitfieldOperationWriteOverflowFail(c)
 }
 
 func (c BitfieldOperationWriteSetSet) Set(encoding string, offset int64, value int64) BitfieldOperationWriteSetSet {
@@ -2710,7 +2710,7 @@ func (c BitfieldRo) Key(key string) BitfieldRoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BitfieldRoKey)(c)
+	return BitfieldRoKey(c)
 }
 
 type BitfieldRoGet Base
@@ -2733,7 +2733,7 @@ func (c BitfieldRoGet) Cache() Cacheable {
 type BitfieldRoKey Base
 
 func (c BitfieldRoKey) Get() BitfieldRoGet {
-	return (BitfieldRoGet)(c)
+	return BitfieldRoGet(c)
 }
 
 // Perform bitwise operations between strings.
@@ -2754,7 +2754,7 @@ func (b Builder) Bitop() Bitop {
 
 func (c Bitop) Operation(operation string) BitopOperation {
 	c.command.append(operation)
-	return (BitopOperation)(c)
+	return BitopOperation(c)
 }
 
 type BitopDestkey Base
@@ -2771,7 +2771,7 @@ func (c BitopDestkey) Key(key ...string) BitopKey {
 		}
 	}
 	c.command.append(key...)
-	return (BitopKey)(c)
+	return BitopKey(c)
 }
 
 type BitopKey Base
@@ -2805,7 +2805,7 @@ func (c BitopOperation) Destkey(destkey string) BitopDestkey {
 		c.cslot.set(getSlot(destkey))
 	}
 	c.command.append(destkey)
-	return (BitopDestkey)(c)
+	return BitopDestkey(c)
 }
 
 // Find first bit set or clear in a string.
@@ -2831,14 +2831,14 @@ func (c Bitpos) Key(key string) BitposKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (BitposKey)(c)
+	return BitposKey(c)
 }
 
 type BitposBit Base
 
 func (c BitposBit) Start(start int64) BitposIndexStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (BitposIndexStart)(c)
+	return BitposIndexStart(c)
 }
 
 // Return Completed Redis command.
@@ -2855,12 +2855,12 @@ type BitposIndexEndIndexEnd Base
 
 func (c BitposIndexEndIndexEnd) Byte() BitposIndexEndIndexIndexUnitByte {
 	c.command.append("BYTE")
-	return (BitposIndexEndIndexIndexUnitByte)(c)
+	return BitposIndexEndIndexIndexUnitByte(c)
 }
 
 func (c BitposIndexEndIndexEnd) Bit() BitposIndexEndIndexIndexUnitBit {
 	c.command.append("BIT")
-	return (BitposIndexEndIndexIndexUnitBit)(c)
+	return BitposIndexEndIndexIndexUnitBit(c)
 }
 
 // Return Completed Redis command.
@@ -2901,7 +2901,7 @@ type BitposIndexStart Base
 
 func (c BitposIndexStart) End(end int64) BitposIndexEndIndexEnd {
 	c.command.append(strconv.FormatInt(end, 10))
-	return (BitposIndexEndIndexEnd)(c)
+	return BitposIndexEndIndexEnd(c)
 }
 
 // Return Completed Redis command.
@@ -2918,7 +2918,7 @@ type BitposKey Base
 
 func (c BitposKey) Bit(bit int64) BitposBit {
 	c.command.append(strconv.FormatInt(bit, 10))
-	return (BitposBit)(c)
+	return BitposBit(c)
 }
 
 // Pop an element from a list, push it to another list and return it; or block until one is available.
@@ -2944,19 +2944,19 @@ func (c Blmove) Source(source string) BlmoveSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (BlmoveSource)(c)
+	return BlmoveSource(c)
 }
 
 type BlmoveDestination Base
 
 func (c BlmoveDestination) Left() BlmoveWherefromLeft {
 	c.command.append("LEFT")
-	return (BlmoveWherefromLeft)(c)
+	return BlmoveWherefromLeft(c)
 }
 
 func (c BlmoveDestination) Right() BlmoveWherefromRight {
 	c.command.append("RIGHT")
-	return (BlmoveWherefromRight)(c)
+	return BlmoveWherefromRight(c)
 }
 
 type BlmoveSource Base
@@ -2968,7 +2968,7 @@ func (c BlmoveSource) Destination(destination string) BlmoveDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (BlmoveDestination)(c)
+	return BlmoveDestination(c)
 }
 
 type BlmoveTimeout Base
@@ -2982,38 +2982,38 @@ type BlmoveWherefromLeft Base
 
 func (c BlmoveWherefromLeft) Left() BlmoveWheretoLeft {
 	c.command.append("LEFT")
-	return (BlmoveWheretoLeft)(c)
+	return BlmoveWheretoLeft(c)
 }
 
 func (c BlmoveWherefromLeft) Right() BlmoveWheretoRight {
 	c.command.append("RIGHT")
-	return (BlmoveWheretoRight)(c)
+	return BlmoveWheretoRight(c)
 }
 
 type BlmoveWherefromRight Base
 
 func (c BlmoveWherefromRight) Left() BlmoveWheretoLeft {
 	c.command.append("LEFT")
-	return (BlmoveWheretoLeft)(c)
+	return BlmoveWheretoLeft(c)
 }
 
 func (c BlmoveWherefromRight) Right() BlmoveWheretoRight {
 	c.command.append("RIGHT")
-	return (BlmoveWheretoRight)(c)
+	return BlmoveWheretoRight(c)
 }
 
 type BlmoveWheretoLeft Base
 
 func (c BlmoveWheretoLeft) Timeout(timeout float64) BlmoveTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BlmoveTimeout)(c)
+	return BlmoveTimeout(c)
 }
 
 type BlmoveWheretoRight Base
 
 func (c BlmoveWheretoRight) Timeout(timeout float64) BlmoveTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BlmoveTimeout)(c)
+	return BlmoveTimeout(c)
 }
 
 // Pop elements from a list, or block until one is available.
@@ -3034,7 +3034,7 @@ func (b Builder) Blmpop() Blmpop {
 
 func (c Blmpop) Timeout(timeout float64) BlmpopTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BlmpopTimeout)(c)
+	return BlmpopTimeout(c)
 }
 
 type BlmpopCount Base
@@ -3063,12 +3063,12 @@ func (c BlmpopKey) Key(key ...string) BlmpopKey {
 
 func (c BlmpopKey) Left() BlmpopWhereLeft {
 	c.command.append("LEFT")
-	return (BlmpopWhereLeft)(c)
+	return BlmpopWhereLeft(c)
 }
 
 func (c BlmpopKey) Right() BlmpopWhereRight {
 	c.command.append("RIGHT")
-	return (BlmpopWhereRight)(c)
+	return BlmpopWhereRight(c)
 }
 
 type BlmpopNumkeys Base
@@ -3085,21 +3085,21 @@ func (c BlmpopNumkeys) Key(key ...string) BlmpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (BlmpopKey)(c)
+	return BlmpopKey(c)
 }
 
 type BlmpopTimeout Base
 
 func (c BlmpopTimeout) Numkeys(numkeys int64) BlmpopNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (BlmpopNumkeys)(c)
+	return BlmpopNumkeys(c)
 }
 
 type BlmpopWhereLeft Base
 
 func (c BlmpopWhereLeft) Count(count int64) BlmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (BlmpopCount)(c)
+	return BlmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -3111,7 +3111,7 @@ type BlmpopWhereRight Base
 
 func (c BlmpopWhereRight) Count(count int64) BlmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (BlmpopCount)(c)
+	return BlmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -3147,7 +3147,7 @@ func (c Blpop) Key(key ...string) BlpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (BlpopKey)(c)
+	return BlpopKey(c)
 }
 
 type BlpopKey Base
@@ -3169,7 +3169,7 @@ func (c BlpopKey) Key(key ...string) BlpopKey {
 
 func (c BlpopKey) Timeout(timeout float64) BlpopTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BlpopTimeout)(c)
+	return BlpopTimeout(c)
 }
 
 type BlpopTimeout Base
@@ -3207,7 +3207,7 @@ func (c Brpop) Key(key ...string) BrpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (BrpopKey)(c)
+	return BrpopKey(c)
 }
 
 type BrpopKey Base
@@ -3229,7 +3229,7 @@ func (c BrpopKey) Key(key ...string) BrpopKey {
 
 func (c BrpopKey) Timeout(timeout float64) BrpopTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BrpopTimeout)(c)
+	return BrpopTimeout(c)
 }
 
 type BrpopTimeout Base
@@ -3262,14 +3262,14 @@ func (c Brpoplpush) Source(source string) BrpoplpushSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (BrpoplpushSource)(c)
+	return BrpoplpushSource(c)
 }
 
 type BrpoplpushDestination Base
 
 func (c BrpoplpushDestination) Timeout(timeout float64) BrpoplpushTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BrpoplpushTimeout)(c)
+	return BrpoplpushTimeout(c)
 }
 
 type BrpoplpushSource Base
@@ -3281,7 +3281,7 @@ func (c BrpoplpushSource) Destination(destination string) BrpoplpushDestination 
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (BrpoplpushDestination)(c)
+	return BrpoplpushDestination(c)
 }
 
 type BrpoplpushTimeout Base
@@ -3309,7 +3309,7 @@ func (b Builder) Bzmpop() Bzmpop {
 
 func (c Bzmpop) Timeout(timeout float64) BzmpopTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BzmpopTimeout)(c)
+	return BzmpopTimeout(c)
 }
 
 type BzmpopCount Base
@@ -3338,12 +3338,12 @@ func (c BzmpopKey) Key(key ...string) BzmpopKey {
 
 func (c BzmpopKey) Min() BzmpopWhereMin {
 	c.command.append("MIN")
-	return (BzmpopWhereMin)(c)
+	return BzmpopWhereMin(c)
 }
 
 func (c BzmpopKey) Max() BzmpopWhereMax {
 	c.command.append("MAX")
-	return (BzmpopWhereMax)(c)
+	return BzmpopWhereMax(c)
 }
 
 type BzmpopNumkeys Base
@@ -3360,21 +3360,21 @@ func (c BzmpopNumkeys) Key(key ...string) BzmpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (BzmpopKey)(c)
+	return BzmpopKey(c)
 }
 
 type BzmpopTimeout Base
 
 func (c BzmpopTimeout) Numkeys(numkeys int64) BzmpopNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (BzmpopNumkeys)(c)
+	return BzmpopNumkeys(c)
 }
 
 type BzmpopWhereMax Base
 
 func (c BzmpopWhereMax) Count(count int64) BzmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (BzmpopCount)(c)
+	return BzmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -3386,7 +3386,7 @@ type BzmpopWhereMin Base
 
 func (c BzmpopWhereMin) Count(count int64) BzmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (BzmpopCount)(c)
+	return BzmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -3422,7 +3422,7 @@ func (c Bzpopmax) Key(key ...string) BzpopmaxKey {
 		}
 	}
 	c.command.append(key...)
-	return (BzpopmaxKey)(c)
+	return BzpopmaxKey(c)
 }
 
 type BzpopmaxKey Base
@@ -3444,7 +3444,7 @@ func (c BzpopmaxKey) Key(key ...string) BzpopmaxKey {
 
 func (c BzpopmaxKey) Timeout(timeout float64) BzpopmaxTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BzpopmaxTimeout)(c)
+	return BzpopmaxTimeout(c)
 }
 
 type BzpopmaxTimeout Base
@@ -3482,7 +3482,7 @@ func (c Bzpopmin) Key(key ...string) BzpopminKey {
 		}
 	}
 	c.command.append(key...)
-	return (BzpopminKey)(c)
+	return BzpopminKey(c)
 }
 
 type BzpopminKey Base
@@ -3504,7 +3504,7 @@ func (c BzpopminKey) Key(key ...string) BzpopminKey {
 
 func (c BzpopminKey) Timeout(timeout float64) BzpopminTimeout {
 	c.command.append(strconv.FormatFloat(timeout, 'f', -1, 64))
-	return (BzpopminTimeout)(c)
+	return BzpopminTimeout(c)
 }
 
 type BzpopminTimeout Base
@@ -3537,7 +3537,7 @@ func (c CfAdd) Key(key string) CfAddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfAddKey)(c)
+	return CfAddKey(c)
 }
 
 type CfAddItem Base
@@ -3551,7 +3551,7 @@ type CfAddKey Base
 
 func (c CfAddKey) Item(item string) CfAddItem {
 	c.command.append(item)
-	return (CfAddItem)(c)
+	return CfAddItem(c)
 }
 
 // Adds an item to a Cuckoo Filter if the item did not exist previously..
@@ -3577,7 +3577,7 @@ func (c CfAddnx) Key(key string) CfAddnxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfAddnxKey)(c)
+	return CfAddnxKey(c)
 }
 
 type CfAddnxItem Base
@@ -3591,7 +3591,7 @@ type CfAddnxKey Base
 
 func (c CfAddnxKey) Item(item string) CfAddnxItem {
 	c.command.append(item)
-	return (CfAddnxItem)(c)
+	return CfAddnxItem(c)
 }
 
 // Return the number of times an item might be in a Cuckoo Filter.
@@ -3617,7 +3617,7 @@ func (c CfCount) Key(key string) CfCountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfCountKey)(c)
+	return CfCountKey(c)
 }
 
 type CfCountItem Base
@@ -3636,7 +3636,7 @@ type CfCountKey Base
 
 func (c CfCountKey) Item(item string) CfCountItem {
 	c.command.append(item)
-	return (CfCountItem)(c)
+	return CfCountItem(c)
 }
 
 // Deletes an item from a Cuckoo Filter.
@@ -3662,7 +3662,7 @@ func (c CfDel) Key(key string) CfDelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfDelKey)(c)
+	return CfDelKey(c)
 }
 
 type CfDelItem Base
@@ -3676,7 +3676,7 @@ type CfDelKey Base
 
 func (c CfDelKey) Item(item string) CfDelItem {
 	c.command.append(item)
-	return (CfDelItem)(c)
+	return CfDelItem(c)
 }
 
 // Checks whether one or more items exist in a Cuckoo Filter.
@@ -3702,7 +3702,7 @@ func (c CfExists) Key(key string) CfExistsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfExistsKey)(c)
+	return CfExistsKey(c)
 }
 
 type CfExistsItem Base
@@ -3721,7 +3721,7 @@ type CfExistsKey Base
 
 func (c CfExistsKey) Item(item string) CfExistsItem {
 	c.command.append(item)
-	return (CfExistsItem)(c)
+	return CfExistsItem(c)
 }
 
 // Returns information about a Cuckoo Filter.
@@ -3747,7 +3747,7 @@ func (c CfInfo) Key(key string) CfInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfInfoKey)(c)
+	return CfInfoKey(c)
 }
 
 type CfInfoKey Base
@@ -3785,19 +3785,19 @@ func (c CfInsert) Key(key string) CfInsertKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfInsertKey)(c)
+	return CfInsertKey(c)
 }
 
 type CfInsertCapacity Base
 
 func (c CfInsertCapacity) Nocreate() CfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (CfInsertNocreate)(c)
+	return CfInsertNocreate(c)
 }
 
 func (c CfInsertCapacity) Items() CfInsertItems {
 	c.command.append("ITEMS")
-	return (CfInsertItems)(c)
+	return CfInsertItems(c)
 }
 
 type CfInsertItem Base
@@ -3816,31 +3816,31 @@ type CfInsertItems Base
 
 func (c CfInsertItems) Item(item ...string) CfInsertItem {
 	c.command.append(item...)
-	return (CfInsertItem)(c)
+	return CfInsertItem(c)
 }
 
 type CfInsertKey Base
 
 func (c CfInsertKey) Capacity(capacity int64) CfInsertCapacity {
 	c.command.append("CAPACITY", strconv.FormatInt(capacity, 10))
-	return (CfInsertCapacity)(c)
+	return CfInsertCapacity(c)
 }
 
 func (c CfInsertKey) Nocreate() CfInsertNocreate {
 	c.command.append("NOCREATE")
-	return (CfInsertNocreate)(c)
+	return CfInsertNocreate(c)
 }
 
 func (c CfInsertKey) Items() CfInsertItems {
 	c.command.append("ITEMS")
-	return (CfInsertItems)(c)
+	return CfInsertItems(c)
 }
 
 type CfInsertNocreate Base
 
 func (c CfInsertNocreate) Items() CfInsertItems {
 	c.command.append("ITEMS")
-	return (CfInsertItems)(c)
+	return CfInsertItems(c)
 }
 
 // Adds one or more items to a Cuckoo Filter if the items did not exist previously. A filter will be created if it does not exist.
@@ -3866,19 +3866,19 @@ func (c CfInsertnx) Key(key string) CfInsertnxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfInsertnxKey)(c)
+	return CfInsertnxKey(c)
 }
 
 type CfInsertnxCapacity Base
 
 func (c CfInsertnxCapacity) Nocreate() CfInsertnxNocreate {
 	c.command.append("NOCREATE")
-	return (CfInsertnxNocreate)(c)
+	return CfInsertnxNocreate(c)
 }
 
 func (c CfInsertnxCapacity) Items() CfInsertnxItems {
 	c.command.append("ITEMS")
-	return (CfInsertnxItems)(c)
+	return CfInsertnxItems(c)
 }
 
 type CfInsertnxItem Base
@@ -3897,31 +3897,31 @@ type CfInsertnxItems Base
 
 func (c CfInsertnxItems) Item(item ...string) CfInsertnxItem {
 	c.command.append(item...)
-	return (CfInsertnxItem)(c)
+	return CfInsertnxItem(c)
 }
 
 type CfInsertnxKey Base
 
 func (c CfInsertnxKey) Capacity(capacity int64) CfInsertnxCapacity {
 	c.command.append("CAPACITY", strconv.FormatInt(capacity, 10))
-	return (CfInsertnxCapacity)(c)
+	return CfInsertnxCapacity(c)
 }
 
 func (c CfInsertnxKey) Nocreate() CfInsertnxNocreate {
 	c.command.append("NOCREATE")
-	return (CfInsertnxNocreate)(c)
+	return CfInsertnxNocreate(c)
 }
 
 func (c CfInsertnxKey) Items() CfInsertnxItems {
 	c.command.append("ITEMS")
-	return (CfInsertnxItems)(c)
+	return CfInsertnxItems(c)
 }
 
 type CfInsertnxNocreate Base
 
 func (c CfInsertnxNocreate) Items() CfInsertnxItems {
 	c.command.append("ITEMS")
-	return (CfInsertnxItems)(c)
+	return CfInsertnxItems(c)
 }
 
 // Restores a filter previously saved using SCANDUMP.
@@ -3947,7 +3947,7 @@ func (c CfLoadchunk) Key(key string) CfLoadchunkKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfLoadchunkKey)(c)
+	return CfLoadchunkKey(c)
 }
 
 type CfLoadchunkData Base
@@ -3961,14 +3961,14 @@ type CfLoadchunkIterator Base
 
 func (c CfLoadchunkIterator) Data(data string) CfLoadchunkData {
 	c.command.append(data)
-	return (CfLoadchunkData)(c)
+	return CfLoadchunkData(c)
 }
 
 type CfLoadchunkKey Base
 
 func (c CfLoadchunkKey) Iterator(iterator int64) CfLoadchunkIterator {
 	c.command.append(strconv.FormatInt(iterator, 10))
-	return (CfLoadchunkIterator)(c)
+	return CfLoadchunkIterator(c)
 }
 
 // Checks whether one or more items exist in a Cuckoo Filter.
@@ -3994,7 +3994,7 @@ func (c CfMexists) Key(key string) CfMexistsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfMexistsKey)(c)
+	return CfMexistsKey(c)
 }
 
 type CfMexistsItem Base
@@ -4013,7 +4013,7 @@ type CfMexistsKey Base
 
 func (c CfMexistsKey) Item(item ...string) CfMexistsItem {
 	c.command.append(item...)
-	return (CfMexistsItem)(c)
+	return CfMexistsItem(c)
 }
 
 // Creates a new Cuckoo Filter.
@@ -4039,19 +4039,19 @@ func (c CfReserve) Key(key string) CfReserveKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfReserveKey)(c)
+	return CfReserveKey(c)
 }
 
 type CfReserveBucketsize Base
 
 func (c CfReserveBucketsize) Maxiterations(maxiterations int64) CfReserveMaxiterations {
 	c.command.append("MAXITERATIONS", strconv.FormatInt(maxiterations, 10))
-	return (CfReserveMaxiterations)(c)
+	return CfReserveMaxiterations(c)
 }
 
 func (c CfReserveBucketsize) Expansion(expansion int64) CfReserveExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (CfReserveExpansion)(c)
+	return CfReserveExpansion(c)
 }
 
 // Return Completed Redis command.
@@ -4063,17 +4063,17 @@ type CfReserveCapacity Base
 
 func (c CfReserveCapacity) Bucketsize(bucketsize int64) CfReserveBucketsize {
 	c.command.append("BUCKETSIZE", strconv.FormatInt(bucketsize, 10))
-	return (CfReserveBucketsize)(c)
+	return CfReserveBucketsize(c)
 }
 
 func (c CfReserveCapacity) Maxiterations(maxiterations int64) CfReserveMaxiterations {
 	c.command.append("MAXITERATIONS", strconv.FormatInt(maxiterations, 10))
-	return (CfReserveMaxiterations)(c)
+	return CfReserveMaxiterations(c)
 }
 
 func (c CfReserveCapacity) Expansion(expansion int64) CfReserveExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (CfReserveExpansion)(c)
+	return CfReserveExpansion(c)
 }
 
 // Return Completed Redis command.
@@ -4092,14 +4092,14 @@ type CfReserveKey Base
 
 func (c CfReserveKey) Capacity(capacity int64) CfReserveCapacity {
 	c.command.append(strconv.FormatInt(capacity, 10))
-	return (CfReserveCapacity)(c)
+	return CfReserveCapacity(c)
 }
 
 type CfReserveMaxiterations Base
 
 func (c CfReserveMaxiterations) Expansion(expansion int64) CfReserveExpansion {
 	c.command.append("EXPANSION", strconv.FormatInt(expansion, 10))
-	return (CfReserveExpansion)(c)
+	return CfReserveExpansion(c)
 }
 
 // Return Completed Redis command.
@@ -4130,7 +4130,7 @@ func (c CfScandump) Key(key string) CfScandumpKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CfScandumpKey)(c)
+	return CfScandumpKey(c)
 }
 
 type CfScandumpIterator Base
@@ -4144,7 +4144,7 @@ type CfScandumpKey Base
 
 func (c CfScandumpKey) Iterator(iterator int64) CfScandumpIterator {
 	c.command.append(strconv.FormatInt(iterator, 10))
-	return (CfScandumpIterator)(c)
+	return CfScandumpIterator(c)
 }
 
 // Instruct the server about tracking or not keys in the next request.
@@ -4165,12 +4165,12 @@ func (b Builder) ClientCaching() ClientCaching {
 
 func (c ClientCaching) Yes() ClientCachingModeYes {
 	c.command.append("YES")
-	return (ClientCachingModeYes)(c)
+	return ClientCachingModeYes(c)
 }
 
 func (c ClientCaching) No() ClientCachingModeNo {
 	c.command.append("NO")
-	return (ClientCachingModeNo)(c)
+	return ClientCachingModeNo(c)
 }
 
 type ClientCachingModeNo Base
@@ -4289,52 +4289,52 @@ func (b Builder) ClientKill() ClientKill {
 
 func (c ClientKill) IpPort(ipPort string) ClientKillIpPort {
 	c.command.append(ipPort)
-	return (ClientKillIpPort)(c)
+	return ClientKillIpPort(c)
 }
 
 func (c ClientKill) Id(clientId int64) ClientKillId {
 	c.command.append("ID", strconv.FormatInt(clientId, 10))
-	return (ClientKillId)(c)
+	return ClientKillId(c)
 }
 
 func (c ClientKill) TypeNormal() ClientKillTypeNormal {
 	c.command.append("TYPE", "NORMAL")
-	return (ClientKillTypeNormal)(c)
+	return ClientKillTypeNormal(c)
 }
 
 func (c ClientKill) TypeMaster() ClientKillTypeMaster {
 	c.command.append("TYPE", "MASTER")
-	return (ClientKillTypeMaster)(c)
+	return ClientKillTypeMaster(c)
 }
 
 func (c ClientKill) TypeReplica() ClientKillTypeReplica {
 	c.command.append("TYPE", "REPLICA")
-	return (ClientKillTypeReplica)(c)
+	return ClientKillTypeReplica(c)
 }
 
 func (c ClientKill) TypePubsub() ClientKillTypePubsub {
 	c.command.append("TYPE", "PUBSUB")
-	return (ClientKillTypePubsub)(c)
+	return ClientKillTypePubsub(c)
 }
 
 func (c ClientKill) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKill) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKill) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKill) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4346,12 +4346,12 @@ type ClientKillAddr Base
 
 func (c ClientKillAddr) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillAddr) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4363,42 +4363,42 @@ type ClientKillId Base
 
 func (c ClientKillId) TypeNormal() ClientKillTypeNormal {
 	c.command.append("TYPE", "NORMAL")
-	return (ClientKillTypeNormal)(c)
+	return ClientKillTypeNormal(c)
 }
 
 func (c ClientKillId) TypeMaster() ClientKillTypeMaster {
 	c.command.append("TYPE", "MASTER")
-	return (ClientKillTypeMaster)(c)
+	return ClientKillTypeMaster(c)
 }
 
 func (c ClientKillId) TypeReplica() ClientKillTypeReplica {
 	c.command.append("TYPE", "REPLICA")
-	return (ClientKillTypeReplica)(c)
+	return ClientKillTypeReplica(c)
 }
 
 func (c ClientKillId) TypePubsub() ClientKillTypePubsub {
 	c.command.append("TYPE", "PUBSUB")
-	return (ClientKillTypePubsub)(c)
+	return ClientKillTypePubsub(c)
 }
 
 func (c ClientKillId) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillId) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillId) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillId) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4410,47 +4410,47 @@ type ClientKillIpPort Base
 
 func (c ClientKillIpPort) Id(clientId int64) ClientKillId {
 	c.command.append("ID", strconv.FormatInt(clientId, 10))
-	return (ClientKillId)(c)
+	return ClientKillId(c)
 }
 
 func (c ClientKillIpPort) TypeNormal() ClientKillTypeNormal {
 	c.command.append("TYPE", "NORMAL")
-	return (ClientKillTypeNormal)(c)
+	return ClientKillTypeNormal(c)
 }
 
 func (c ClientKillIpPort) TypeMaster() ClientKillTypeMaster {
 	c.command.append("TYPE", "MASTER")
-	return (ClientKillTypeMaster)(c)
+	return ClientKillTypeMaster(c)
 }
 
 func (c ClientKillIpPort) TypeReplica() ClientKillTypeReplica {
 	c.command.append("TYPE", "REPLICA")
-	return (ClientKillTypeReplica)(c)
+	return ClientKillTypeReplica(c)
 }
 
 func (c ClientKillIpPort) TypePubsub() ClientKillTypePubsub {
 	c.command.append("TYPE", "PUBSUB")
-	return (ClientKillTypePubsub)(c)
+	return ClientKillTypePubsub(c)
 }
 
 func (c ClientKillIpPort) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillIpPort) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillIpPort) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillIpPort) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4462,7 +4462,7 @@ type ClientKillLaddr Base
 
 func (c ClientKillLaddr) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4481,22 +4481,22 @@ type ClientKillTypeMaster Base
 
 func (c ClientKillTypeMaster) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillTypeMaster) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillTypeMaster) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillTypeMaster) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4508,22 +4508,22 @@ type ClientKillTypeNormal Base
 
 func (c ClientKillTypeNormal) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillTypeNormal) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillTypeNormal) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillTypeNormal) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4535,22 +4535,22 @@ type ClientKillTypePubsub Base
 
 func (c ClientKillTypePubsub) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillTypePubsub) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillTypePubsub) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillTypePubsub) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4562,22 +4562,22 @@ type ClientKillTypeReplica Base
 
 func (c ClientKillTypeReplica) User(username string) ClientKillUser {
 	c.command.append("USER", username)
-	return (ClientKillUser)(c)
+	return ClientKillUser(c)
 }
 
 func (c ClientKillTypeReplica) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillTypeReplica) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillTypeReplica) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4589,17 +4589,17 @@ type ClientKillUser Base
 
 func (c ClientKillUser) Addr(ipPort string) ClientKillAddr {
 	c.command.append("ADDR", ipPort)
-	return (ClientKillAddr)(c)
+	return ClientKillAddr(c)
 }
 
 func (c ClientKillUser) Laddr(ipPort string) ClientKillLaddr {
 	c.command.append("LADDR", ipPort)
-	return (ClientKillLaddr)(c)
+	return ClientKillLaddr(c)
 }
 
 func (c ClientKillUser) Skipme(yesNo string) ClientKillSkipme {
 	c.command.append("SKIPME", yesNo)
-	return (ClientKillSkipme)(c)
+	return ClientKillSkipme(c)
 }
 
 // Return Completed Redis command.
@@ -4625,27 +4625,27 @@ func (b Builder) ClientList() ClientList {
 
 func (c ClientList) TypeNormal() ClientListTypeNormal {
 	c.command.append("TYPE", "NORMAL")
-	return (ClientListTypeNormal)(c)
+	return ClientListTypeNormal(c)
 }
 
 func (c ClientList) TypeMaster() ClientListTypeMaster {
 	c.command.append("TYPE", "MASTER")
-	return (ClientListTypeMaster)(c)
+	return ClientListTypeMaster(c)
 }
 
 func (c ClientList) TypeReplica() ClientListTypeReplica {
 	c.command.append("TYPE", "REPLICA")
-	return (ClientListTypeReplica)(c)
+	return ClientListTypeReplica(c)
 }
 
 func (c ClientList) TypePubsub() ClientListTypePubsub {
 	c.command.append("TYPE", "PUBSUB")
-	return (ClientListTypePubsub)(c)
+	return ClientListTypePubsub(c)
 }
 
 func (c ClientList) Id() ClientListIdId {
 	c.command.append("ID")
-	return (ClientListIdId)(c)
+	return ClientListIdId(c)
 }
 
 // Return Completed Redis command.
@@ -4673,14 +4673,14 @@ func (c ClientListIdId) ClientId(clientId ...int64) ClientListIdClientId {
 	for _, n := range clientId {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ClientListIdClientId)(c)
+	return ClientListIdClientId(c)
 }
 
 type ClientListTypeMaster Base
 
 func (c ClientListTypeMaster) Id() ClientListIdId {
 	c.command.append("ID")
-	return (ClientListIdId)(c)
+	return ClientListIdId(c)
 }
 
 // Return Completed Redis command.
@@ -4692,7 +4692,7 @@ type ClientListTypeNormal Base
 
 func (c ClientListTypeNormal) Id() ClientListIdId {
 	c.command.append("ID")
-	return (ClientListIdId)(c)
+	return ClientListIdId(c)
 }
 
 // Return Completed Redis command.
@@ -4704,7 +4704,7 @@ type ClientListTypePubsub Base
 
 func (c ClientListTypePubsub) Id() ClientListIdId {
 	c.command.append("ID")
-	return (ClientListIdId)(c)
+	return ClientListIdId(c)
 }
 
 // Return Completed Redis command.
@@ -4716,7 +4716,7 @@ type ClientListTypeReplica Base
 
 func (c ClientListTypeReplica) Id() ClientListIdId {
 	c.command.append("ID")
-	return (ClientListIdId)(c)
+	return ClientListIdId(c)
 }
 
 // Return Completed Redis command.
@@ -4742,12 +4742,12 @@ func (b Builder) ClientNoEvict() ClientNoEvict {
 
 func (c ClientNoEvict) On() ClientNoEvictEnabledOn {
 	c.command.append("ON")
-	return (ClientNoEvictEnabledOn)(c)
+	return ClientNoEvictEnabledOn(c)
 }
 
 func (c ClientNoEvict) Off() ClientNoEvictEnabledOff {
 	c.command.append("OFF")
-	return (ClientNoEvictEnabledOff)(c)
+	return ClientNoEvictEnabledOff(c)
 }
 
 type ClientNoEvictEnabledOff Base
@@ -4782,7 +4782,7 @@ func (b Builder) ClientPause() ClientPause {
 
 func (c ClientPause) Timeout(timeout int64) ClientPauseTimeout {
 	c.command.append(strconv.FormatInt(timeout, 10))
-	return (ClientPauseTimeout)(c)
+	return ClientPauseTimeout(c)
 }
 
 type ClientPauseModeAll Base
@@ -4803,12 +4803,12 @@ type ClientPauseTimeout Base
 
 func (c ClientPauseTimeout) Write() ClientPauseModeWrite {
 	c.command.append("WRITE")
-	return (ClientPauseModeWrite)(c)
+	return ClientPauseModeWrite(c)
 }
 
 func (c ClientPauseTimeout) All() ClientPauseModeAll {
 	c.command.append("ALL")
-	return (ClientPauseModeAll)(c)
+	return ClientPauseModeAll(c)
 }
 
 // Return Completed Redis command.
@@ -4834,17 +4834,17 @@ func (b Builder) ClientReply() ClientReply {
 
 func (c ClientReply) On() ClientReplyReplyModeOn {
 	c.command.append("ON")
-	return (ClientReplyReplyModeOn)(c)
+	return ClientReplyReplyModeOn(c)
 }
 
 func (c ClientReply) Off() ClientReplyReplyModeOff {
 	c.command.append("OFF")
-	return (ClientReplyReplyModeOff)(c)
+	return ClientReplyReplyModeOff(c)
 }
 
 func (c ClientReply) Skip() ClientReplyReplyModeSkip {
 	c.command.append("SKIP")
-	return (ClientReplyReplyModeSkip)(c)
+	return ClientReplyReplyModeSkip(c)
 }
 
 type ClientReplyReplyModeOff Base
@@ -4886,7 +4886,7 @@ func (b Builder) ClientSetname() ClientSetname {
 
 func (c ClientSetname) ConnectionName(connectionName string) ClientSetnameConnectionName {
 	c.command.append(connectionName)
-	return (ClientSetnameConnectionName)(c)
+	return ClientSetnameConnectionName(c)
 }
 
 type ClientSetnameConnectionName Base
@@ -4914,29 +4914,29 @@ func (b Builder) ClientTracking() ClientTracking {
 
 func (c ClientTracking) On() ClientTrackingStatusOn {
 	c.command.append("ON")
-	return (ClientTrackingStatusOn)(c)
+	return ClientTrackingStatusOn(c)
 }
 
 func (c ClientTracking) Off() ClientTrackingStatusOff {
 	c.command.append("OFF")
-	return (ClientTrackingStatusOff)(c)
+	return ClientTrackingStatusOff(c)
 }
 
 type ClientTrackingBcast Base
 
 func (c ClientTrackingBcast) Optin() ClientTrackingOptin {
 	c.command.append("OPTIN")
-	return (ClientTrackingOptin)(c)
+	return ClientTrackingOptin(c)
 }
 
 func (c ClientTrackingBcast) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingBcast) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -4955,12 +4955,12 @@ type ClientTrackingOptin Base
 
 func (c ClientTrackingOptin) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingOptin) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -4972,7 +4972,7 @@ type ClientTrackingOptout Base
 
 func (c ClientTrackingOptout) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -4989,22 +4989,22 @@ func (c ClientTrackingPrefix) Prefix(prefix string) ClientTrackingPrefix {
 
 func (c ClientTrackingPrefix) Bcast() ClientTrackingBcast {
 	c.command.append("BCAST")
-	return (ClientTrackingBcast)(c)
+	return ClientTrackingBcast(c)
 }
 
 func (c ClientTrackingPrefix) Optin() ClientTrackingOptin {
 	c.command.append("OPTIN")
-	return (ClientTrackingOptin)(c)
+	return ClientTrackingOptin(c)
 }
 
 func (c ClientTrackingPrefix) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingPrefix) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -5015,27 +5015,27 @@ func (c ClientTrackingPrefix) Build() Completed {
 type ClientTrackingRedirect Base
 
 func (c ClientTrackingRedirect) Prefix() ClientTrackingPrefix {
-	return (ClientTrackingPrefix)(c)
+	return ClientTrackingPrefix(c)
 }
 
 func (c ClientTrackingRedirect) Bcast() ClientTrackingBcast {
 	c.command.append("BCAST")
-	return (ClientTrackingBcast)(c)
+	return ClientTrackingBcast(c)
 }
 
 func (c ClientTrackingRedirect) Optin() ClientTrackingOptin {
 	c.command.append("OPTIN")
-	return (ClientTrackingOptin)(c)
+	return ClientTrackingOptin(c)
 }
 
 func (c ClientTrackingRedirect) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingRedirect) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -5047,31 +5047,31 @@ type ClientTrackingStatusOff Base
 
 func (c ClientTrackingStatusOff) Redirect(clientId int64) ClientTrackingRedirect {
 	c.command.append("REDIRECT", strconv.FormatInt(clientId, 10))
-	return (ClientTrackingRedirect)(c)
+	return ClientTrackingRedirect(c)
 }
 
 func (c ClientTrackingStatusOff) Prefix() ClientTrackingPrefix {
-	return (ClientTrackingPrefix)(c)
+	return ClientTrackingPrefix(c)
 }
 
 func (c ClientTrackingStatusOff) Bcast() ClientTrackingBcast {
 	c.command.append("BCAST")
-	return (ClientTrackingBcast)(c)
+	return ClientTrackingBcast(c)
 }
 
 func (c ClientTrackingStatusOff) Optin() ClientTrackingOptin {
 	c.command.append("OPTIN")
-	return (ClientTrackingOptin)(c)
+	return ClientTrackingOptin(c)
 }
 
 func (c ClientTrackingStatusOff) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingStatusOff) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -5083,31 +5083,31 @@ type ClientTrackingStatusOn Base
 
 func (c ClientTrackingStatusOn) Redirect(clientId int64) ClientTrackingRedirect {
 	c.command.append("REDIRECT", strconv.FormatInt(clientId, 10))
-	return (ClientTrackingRedirect)(c)
+	return ClientTrackingRedirect(c)
 }
 
 func (c ClientTrackingStatusOn) Prefix() ClientTrackingPrefix {
-	return (ClientTrackingPrefix)(c)
+	return ClientTrackingPrefix(c)
 }
 
 func (c ClientTrackingStatusOn) Bcast() ClientTrackingBcast {
 	c.command.append("BCAST")
-	return (ClientTrackingBcast)(c)
+	return ClientTrackingBcast(c)
 }
 
 func (c ClientTrackingStatusOn) Optin() ClientTrackingOptin {
 	c.command.append("OPTIN")
-	return (ClientTrackingOptin)(c)
+	return ClientTrackingOptin(c)
 }
 
 func (c ClientTrackingStatusOn) Optout() ClientTrackingOptout {
 	c.command.append("OPTOUT")
-	return (ClientTrackingOptout)(c)
+	return ClientTrackingOptout(c)
 }
 
 func (c ClientTrackingStatusOn) Noloop() ClientTrackingNoloop {
 	c.command.append("NOLOOP")
-	return (ClientTrackingNoloop)(c)
+	return ClientTrackingNoloop(c)
 }
 
 // Return Completed Redis command.
@@ -5154,19 +5154,19 @@ func (b Builder) ClientUnblock() ClientUnblock {
 
 func (c ClientUnblock) ClientId(clientId int64) ClientUnblockClientId {
 	c.command.append(strconv.FormatInt(clientId, 10))
-	return (ClientUnblockClientId)(c)
+	return ClientUnblockClientId(c)
 }
 
 type ClientUnblockClientId Base
 
 func (c ClientUnblockClientId) Timeout() ClientUnblockUnblockTypeTimeout {
 	c.command.append("TIMEOUT")
-	return (ClientUnblockUnblockTypeTimeout)(c)
+	return ClientUnblockUnblockTypeTimeout(c)
 }
 
 func (c ClientUnblockClientId) Error() ClientUnblockUnblockTypeError {
 	c.command.append("ERROR")
-	return (ClientUnblockUnblockTypeError)(c)
+	return ClientUnblockUnblockTypeError(c)
 }
 
 // Return Completed Redis command.
@@ -5229,7 +5229,7 @@ func (c ClusterAddslots) Slot(slot ...int64) ClusterAddslotsSlot {
 	for _, n := range slot {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ClusterAddslotsSlot)(c)
+	return ClusterAddslotsSlot(c)
 }
 
 type ClusterAddslotsSlot Base
@@ -5263,7 +5263,7 @@ func (b Builder) ClusterAddslotsrange() ClusterAddslotsrange {
 }
 
 func (c ClusterAddslotsrange) StartSlotEndSlot() ClusterAddslotsrangeStartSlotEndSlot {
-	return (ClusterAddslotsrangeStartSlotEndSlot)(c)
+	return ClusterAddslotsrangeStartSlotEndSlot(c)
 }
 
 type ClusterAddslotsrangeStartSlotEndSlot Base
@@ -5317,7 +5317,7 @@ func (b Builder) ClusterCountFailureReports() ClusterCountFailureReports {
 
 func (c ClusterCountFailureReports) NodeId(nodeId string) ClusterCountFailureReportsNodeId {
 	c.command.append(nodeId)
-	return (ClusterCountFailureReportsNodeId)(c)
+	return ClusterCountFailureReportsNodeId(c)
 }
 
 type ClusterCountFailureReportsNodeId Base
@@ -5345,7 +5345,7 @@ func (b Builder) ClusterCountkeysinslot() ClusterCountkeysinslot {
 
 func (c ClusterCountkeysinslot) Slot(slot int64) ClusterCountkeysinslotSlot {
 	c.command.append(strconv.FormatInt(slot, 10))
-	return (ClusterCountkeysinslotSlot)(c)
+	return ClusterCountkeysinslotSlot(c)
 }
 
 type ClusterCountkeysinslotSlot Base
@@ -5375,7 +5375,7 @@ func (c ClusterDelslots) Slot(slot ...int64) ClusterDelslotsSlot {
 	for _, n := range slot {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ClusterDelslotsSlot)(c)
+	return ClusterDelslotsSlot(c)
 }
 
 type ClusterDelslotsSlot Base
@@ -5409,7 +5409,7 @@ func (b Builder) ClusterDelslotsrange() ClusterDelslotsrange {
 }
 
 func (c ClusterDelslotsrange) StartSlotEndSlot() ClusterDelslotsrangeStartSlotEndSlot {
-	return (ClusterDelslotsrangeStartSlotEndSlot)(c)
+	return ClusterDelslotsrangeStartSlotEndSlot(c)
 }
 
 type ClusterDelslotsrangeStartSlotEndSlot Base
@@ -5442,12 +5442,12 @@ func (b Builder) ClusterFailover() ClusterFailover {
 
 func (c ClusterFailover) Force() ClusterFailoverOptionsForce {
 	c.command.append("FORCE")
-	return (ClusterFailoverOptionsForce)(c)
+	return ClusterFailoverOptionsForce(c)
 }
 
 func (c ClusterFailover) Takeover() ClusterFailoverOptionsTakeover {
 	c.command.append("TAKEOVER")
-	return (ClusterFailoverOptionsTakeover)(c)
+	return ClusterFailoverOptionsTakeover(c)
 }
 
 // Return Completed Redis command.
@@ -5508,7 +5508,7 @@ func (b Builder) ClusterForget() ClusterForget {
 
 func (c ClusterForget) NodeId(nodeId string) ClusterForgetNodeId {
 	c.command.append(nodeId)
-	return (ClusterForgetNodeId)(c)
+	return ClusterForgetNodeId(c)
 }
 
 type ClusterForgetNodeId Base
@@ -5536,7 +5536,7 @@ func (b Builder) ClusterGetkeysinslot() ClusterGetkeysinslot {
 
 func (c ClusterGetkeysinslot) Slot(slot int64) ClusterGetkeysinslotSlot {
 	c.command.append(strconv.FormatInt(slot, 10))
-	return (ClusterGetkeysinslotSlot)(c)
+	return ClusterGetkeysinslotSlot(c)
 }
 
 type ClusterGetkeysinslotCount Base
@@ -5550,7 +5550,7 @@ type ClusterGetkeysinslotSlot Base
 
 func (c ClusterGetkeysinslotSlot) Count(count int64) ClusterGetkeysinslotCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (ClusterGetkeysinslotCount)(c)
+	return ClusterGetkeysinslotCount(c)
 }
 
 // Provides info about Redis Cluster node state.
@@ -5592,7 +5592,7 @@ func (b Builder) ClusterKeyslot() ClusterKeyslot {
 
 func (c ClusterKeyslot) Key(key string) ClusterKeyslotKey {
 	c.command.append(key)
-	return (ClusterKeyslotKey)(c)
+	return ClusterKeyslotKey(c)
 }
 
 type ClusterKeyslotKey Base
@@ -5641,7 +5641,7 @@ func (b Builder) ClusterMeet() ClusterMeet {
 
 func (c ClusterMeet) Ip(ip string) ClusterMeetIp {
 	c.command.append(ip)
-	return (ClusterMeetIp)(c)
+	return ClusterMeetIp(c)
 }
 
 type ClusterMeetClusterBusPort Base
@@ -5655,14 +5655,14 @@ type ClusterMeetIp Base
 
 func (c ClusterMeetIp) Port(port int64) ClusterMeetPort {
 	c.command.append(strconv.FormatInt(port, 10))
-	return (ClusterMeetPort)(c)
+	return ClusterMeetPort(c)
 }
 
 type ClusterMeetPort Base
 
 func (c ClusterMeetPort) ClusterBusPort(clusterBusPort int64) ClusterMeetClusterBusPort {
 	c.command.append(strconv.FormatInt(clusterBusPort, 10))
-	return (ClusterMeetClusterBusPort)(c)
+	return ClusterMeetClusterBusPort(c)
 }
 
 // Return Completed Redis command.
@@ -5730,7 +5730,7 @@ func (b Builder) ClusterReplicas() ClusterReplicas {
 
 func (c ClusterReplicas) NodeId(nodeId string) ClusterReplicasNodeId {
 	c.command.append(nodeId)
-	return (ClusterReplicasNodeId)(c)
+	return ClusterReplicasNodeId(c)
 }
 
 type ClusterReplicasNodeId Base
@@ -5758,7 +5758,7 @@ func (b Builder) ClusterReplicate() ClusterReplicate {
 
 func (c ClusterReplicate) NodeId(nodeId string) ClusterReplicateNodeId {
 	c.command.append(nodeId)
-	return (ClusterReplicateNodeId)(c)
+	return ClusterReplicateNodeId(c)
 }
 
 type ClusterReplicateNodeId Base
@@ -5786,12 +5786,12 @@ func (b Builder) ClusterReset() ClusterReset {
 
 func (c ClusterReset) Hard() ClusterResetResetTypeHard {
 	c.command.append("HARD")
-	return (ClusterResetResetTypeHard)(c)
+	return ClusterResetResetTypeHard(c)
 }
 
 func (c ClusterReset) Soft() ClusterResetResetTypeSoft {
 	c.command.append("SOFT")
-	return (ClusterResetResetTypeSoft)(c)
+	return ClusterResetResetTypeSoft(c)
 }
 
 // Return Completed Redis command.
@@ -5852,7 +5852,7 @@ func (b Builder) ClusterSetConfigEpoch() ClusterSetConfigEpoch {
 
 func (c ClusterSetConfigEpoch) ConfigEpoch(configEpoch int64) ClusterSetConfigEpochConfigEpoch {
 	c.command.append(strconv.FormatInt(configEpoch, 10))
-	return (ClusterSetConfigEpochConfigEpoch)(c)
+	return ClusterSetConfigEpochConfigEpoch(c)
 }
 
 type ClusterSetConfigEpochConfigEpoch Base
@@ -5880,7 +5880,7 @@ func (b Builder) ClusterSetslot() ClusterSetslot {
 
 func (c ClusterSetslot) Slot(slot int64) ClusterSetslotSlot {
 	c.command.append(strconv.FormatInt(slot, 10))
-	return (ClusterSetslotSlot)(c)
+	return ClusterSetslotSlot(c)
 }
 
 type ClusterSetslotNodeId Base
@@ -5894,29 +5894,29 @@ type ClusterSetslotSlot Base
 
 func (c ClusterSetslotSlot) Importing() ClusterSetslotSubcommandImporting {
 	c.command.append("IMPORTING")
-	return (ClusterSetslotSubcommandImporting)(c)
+	return ClusterSetslotSubcommandImporting(c)
 }
 
 func (c ClusterSetslotSlot) Migrating() ClusterSetslotSubcommandMigrating {
 	c.command.append("MIGRATING")
-	return (ClusterSetslotSubcommandMigrating)(c)
+	return ClusterSetslotSubcommandMigrating(c)
 }
 
 func (c ClusterSetslotSlot) Stable() ClusterSetslotSubcommandStable {
 	c.command.append("STABLE")
-	return (ClusterSetslotSubcommandStable)(c)
+	return ClusterSetslotSubcommandStable(c)
 }
 
 func (c ClusterSetslotSlot) Node() ClusterSetslotSubcommandNode {
 	c.command.append("NODE")
-	return (ClusterSetslotSubcommandNode)(c)
+	return ClusterSetslotSubcommandNode(c)
 }
 
 type ClusterSetslotSubcommandImporting Base
 
 func (c ClusterSetslotSubcommandImporting) NodeId(nodeId string) ClusterSetslotNodeId {
 	c.command.append(nodeId)
-	return (ClusterSetslotNodeId)(c)
+	return ClusterSetslotNodeId(c)
 }
 
 // Return Completed Redis command.
@@ -5928,7 +5928,7 @@ type ClusterSetslotSubcommandMigrating Base
 
 func (c ClusterSetslotSubcommandMigrating) NodeId(nodeId string) ClusterSetslotNodeId {
 	c.command.append(nodeId)
-	return (ClusterSetslotNodeId)(c)
+	return ClusterSetslotNodeId(c)
 }
 
 // Return Completed Redis command.
@@ -5940,7 +5940,7 @@ type ClusterSetslotSubcommandNode Base
 
 func (c ClusterSetslotSubcommandNode) NodeId(nodeId string) ClusterSetslotNodeId {
 	c.command.append(nodeId)
-	return (ClusterSetslotNodeId)(c)
+	return ClusterSetslotNodeId(c)
 }
 
 // Return Completed Redis command.
@@ -5952,7 +5952,7 @@ type ClusterSetslotSubcommandStable Base
 
 func (c ClusterSetslotSubcommandStable) NodeId(nodeId string) ClusterSetslotNodeId {
 	c.command.append(nodeId)
-	return (ClusterSetslotNodeId)(c)
+	return ClusterSetslotNodeId(c)
 }
 
 // Return Completed Redis command.
@@ -5992,7 +5992,7 @@ func (b Builder) ClusterSlaves() ClusterSlaves {
 
 func (c ClusterSlaves) NodeId(nodeId string) ClusterSlavesNodeId {
 	c.command.append(nodeId)
-	return (ClusterSlavesNodeId)(c)
+	return ClusterSlavesNodeId(c)
 }
 
 type ClusterSlavesNodeId Base
@@ -6046,14 +6046,14 @@ func (c CmsIncrby) Key(key string) CmsIncrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CmsIncrbyKey)(c)
+	return CmsIncrbyKey(c)
 }
 
 type CmsIncrbyItemsIncrement Base
 
 func (c CmsIncrbyItemsIncrement) Item(item string) CmsIncrbyItemsItem {
 	c.command.append(item)
-	return (CmsIncrbyItemsItem)(c)
+	return CmsIncrbyItemsItem(c)
 }
 
 // Return Completed Redis command.
@@ -6065,14 +6065,14 @@ type CmsIncrbyItemsItem Base
 
 func (c CmsIncrbyItemsItem) Increment(increment int64) CmsIncrbyItemsIncrement {
 	c.command.append(strconv.FormatInt(increment, 10))
-	return (CmsIncrbyItemsIncrement)(c)
+	return CmsIncrbyItemsIncrement(c)
 }
 
 type CmsIncrbyKey Base
 
 func (c CmsIncrbyKey) Item(item string) CmsIncrbyItemsItem {
 	c.command.append(item)
-	return (CmsIncrbyItemsItem)(c)
+	return CmsIncrbyItemsItem(c)
 }
 
 // Returns information about a sketch.
@@ -6098,7 +6098,7 @@ func (c CmsInfo) Key(key string) CmsInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CmsInfoKey)(c)
+	return CmsInfoKey(c)
 }
 
 type CmsInfoKey Base
@@ -6136,7 +6136,7 @@ func (c CmsInitbydim) Key(key string) CmsInitbydimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CmsInitbydimKey)(c)
+	return CmsInitbydimKey(c)
 }
 
 type CmsInitbydimDepth Base
@@ -6150,14 +6150,14 @@ type CmsInitbydimKey Base
 
 func (c CmsInitbydimKey) Width(width int64) CmsInitbydimWidth {
 	c.command.append(strconv.FormatInt(width, 10))
-	return (CmsInitbydimWidth)(c)
+	return CmsInitbydimWidth(c)
 }
 
 type CmsInitbydimWidth Base
 
 func (c CmsInitbydimWidth) Depth(depth int64) CmsInitbydimDepth {
 	c.command.append(strconv.FormatInt(depth, 10))
-	return (CmsInitbydimDepth)(c)
+	return CmsInitbydimDepth(c)
 }
 
 // Initializes a Count-Min Sketch to accommodate requested tolerances..
@@ -6183,21 +6183,21 @@ func (c CmsInitbyprob) Key(key string) CmsInitbyprobKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CmsInitbyprobKey)(c)
+	return CmsInitbyprobKey(c)
 }
 
 type CmsInitbyprobError Base
 
 func (c CmsInitbyprobError) Probability(probability float64) CmsInitbyprobProbability {
 	c.command.append(strconv.FormatFloat(probability, 'f', -1, 64))
-	return (CmsInitbyprobProbability)(c)
+	return CmsInitbyprobProbability(c)
 }
 
 type CmsInitbyprobKey Base
 
 func (c CmsInitbyprobKey) Error(error float64) CmsInitbyprobError {
 	c.command.append(strconv.FormatFloat(error, 'f', -1, 64))
-	return (CmsInitbyprobError)(c)
+	return CmsInitbyprobError(c)
 }
 
 type CmsInitbyprobProbability Base
@@ -6230,14 +6230,14 @@ func (c CmsMerge) Destination(destination string) CmsMergeDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (CmsMergeDestination)(c)
+	return CmsMergeDestination(c)
 }
 
 type CmsMergeDestination Base
 
 func (c CmsMergeDestination) Numkeys(numkeys int64) CmsMergeNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (CmsMergeNumkeys)(c)
+	return CmsMergeNumkeys(c)
 }
 
 type CmsMergeNumkeys Base
@@ -6254,7 +6254,7 @@ func (c CmsMergeNumkeys) Source(source ...string) CmsMergeSource {
 		}
 	}
 	c.command.append(source...)
-	return (CmsMergeSource)(c)
+	return CmsMergeSource(c)
 }
 
 type CmsMergeSource Base
@@ -6276,7 +6276,7 @@ func (c CmsMergeSource) Source(source ...string) CmsMergeSource {
 
 func (c CmsMergeSource) Weights() CmsMergeWeightWeights {
 	c.command.append("WEIGHTS")
-	return (CmsMergeWeightWeights)(c)
+	return CmsMergeWeightWeights(c)
 }
 
 // Return Completed Redis command.
@@ -6304,7 +6304,7 @@ func (c CmsMergeWeightWeights) Weight(weight ...float64) CmsMergeWeightWeight {
 	for _, n := range weight {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (CmsMergeWeightWeight)(c)
+	return CmsMergeWeightWeight(c)
 }
 
 // Returns the count for one or more items in a sketch.
@@ -6330,7 +6330,7 @@ func (c CmsQuery) Key(key string) CmsQueryKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (CmsQueryKey)(c)
+	return CmsQueryKey(c)
 }
 
 type CmsQueryItem Base
@@ -6354,7 +6354,7 @@ type CmsQueryKey Base
 
 func (c CmsQueryKey) Item(item ...string) CmsQueryItem {
 	c.command.append(item...)
-	return (CmsQueryItem)(c)
+	return CmsQueryItem(c)
 }
 
 // Get array of Redis command details.
@@ -6410,7 +6410,7 @@ func (b Builder) CommandDocs() CommandDocs {
 
 func (c CommandDocs) CommandName(commandName ...string) CommandDocsCommandName {
 	c.command.append(commandName...)
-	return (CommandDocsCommandName)(c)
+	return CommandDocsCommandName(c)
 }
 
 // Return Completed Redis command.
@@ -6490,7 +6490,7 @@ func (b Builder) CommandInfo() CommandInfo {
 
 func (c CommandInfo) CommandName(commandName ...string) CommandInfoCommandName {
 	c.command.append(commandName...)
-	return (CommandInfoCommandName)(c)
+	return CommandInfoCommandName(c)
 }
 
 // Return Completed Redis command.
@@ -6521,17 +6521,17 @@ func (b Builder) CommandList() CommandList {
 
 func (c CommandList) FilterbyModuleName(name string) CommandListFilterbyModuleName {
 	c.command.append("FILTERBY", "MODULE", name)
-	return (CommandListFilterbyModuleName)(c)
+	return CommandListFilterbyModuleName(c)
 }
 
 func (c CommandList) FilterbyAclcatCategory(category string) CommandListFilterbyAclcatCategory {
 	c.command.append("FILTERBY", "ACLCAT", category)
-	return (CommandListFilterbyAclcatCategory)(c)
+	return CommandListFilterbyAclcatCategory(c)
 }
 
 func (c CommandList) FilterbyPatternPattern(pattern string) CommandListFilterbyPatternPattern {
 	c.command.append("FILTERBY", "PATTERN", pattern)
-	return (CommandListFilterbyPatternPattern)(c)
+	return CommandListFilterbyPatternPattern(c)
 }
 
 // Return Completed Redis command.
@@ -6574,7 +6574,7 @@ func (b Builder) ConfigGet() ConfigGet {
 
 func (c ConfigGet) Parameter(parameter ...string) ConfigGetParameter {
 	c.command.append(parameter...)
-	return (ConfigGetParameter)(c)
+	return ConfigGetParameter(c)
 }
 
 type ConfigGetParameter Base
@@ -6640,7 +6640,7 @@ func (b Builder) ConfigSet() ConfigSet {
 }
 
 func (c ConfigSet) ParameterValue() ConfigSetParameterValue {
-	return (ConfigSetParameterValue)(c)
+	return ConfigSetParameterValue(c)
 }
 
 type ConfigSetParameterValue Base
@@ -6678,14 +6678,14 @@ func (c Copy) Source(source string) CopySource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (CopySource)(c)
+	return CopySource(c)
 }
 
 type CopyDb Base
 
 func (c CopyDb) Replace() CopyReplace {
 	c.command.append("REPLACE")
-	return (CopyReplace)(c)
+	return CopyReplace(c)
 }
 
 // Return Completed Redis command.
@@ -6697,12 +6697,12 @@ type CopyDestination Base
 
 func (c CopyDestination) Db(destinationDb int64) CopyDb {
 	c.command.append("DB", strconv.FormatInt(destinationDb, 10))
-	return (CopyDb)(c)
+	return CopyDb(c)
 }
 
 func (c CopyDestination) Replace() CopyReplace {
 	c.command.append("REPLACE")
-	return (CopyReplace)(c)
+	return CopyReplace(c)
 }
 
 // Return Completed Redis command.
@@ -6726,7 +6726,7 @@ func (c CopySource) Destination(destination string) CopyDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (CopyDestination)(c)
+	return CopyDestination(c)
 }
 
 // Return the number of keys in the selected database.
@@ -6765,7 +6765,7 @@ func (c DebugObject) Key(key string) DebugObjectKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (DebugObjectKey)(c)
+	return DebugObjectKey(c)
 }
 
 type DebugObjectKey Base
@@ -6815,7 +6815,7 @@ func (c Decr) Key(key string) DecrKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (DecrKey)(c)
+	return DecrKey(c)
 }
 
 type DecrKey Base
@@ -6848,7 +6848,7 @@ func (c Decrby) Key(key string) DecrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (DecrbyKey)(c)
+	return DecrbyKey(c)
 }
 
 type DecrbyDecrement Base
@@ -6862,7 +6862,7 @@ type DecrbyKey Base
 
 func (c DecrbyKey) Decrement(decrement int64) DecrbyDecrement {
 	c.command.append(strconv.FormatInt(decrement, 10))
-	return (DecrbyDecrement)(c)
+	return DecrbyDecrement(c)
 }
 
 // Delete a key.
@@ -6893,7 +6893,7 @@ func (c Del) Key(key ...string) DelKey {
 		}
 	}
 	c.command.append(key...)
-	return (DelKey)(c)
+	return DelKey(c)
 }
 
 type DelKey Base
@@ -6958,7 +6958,7 @@ func (c Dump) Key(key string) DumpKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (DumpKey)(c)
+	return DumpKey(c)
 }
 
 type DumpKey Base
@@ -6982,7 +6982,7 @@ func (b Builder) Echo() Echo {
 
 func (c Echo) Message(message string) EchoMessage {
 	c.command.append(message)
-	return (EchoMessage)(c)
+	return EchoMessage(c)
 }
 
 type EchoMessage Base
@@ -7010,7 +7010,7 @@ func (b Builder) Eval() Eval {
 
 func (c Eval) Script(script string) EvalScript {
 	c.command.append(script)
-	return (EvalScript)(c)
+	return EvalScript(c)
 }
 
 type EvalArg Base
@@ -7044,7 +7044,7 @@ func (c EvalKey) Key(key ...string) EvalKey {
 
 func (c EvalKey) Arg(arg ...string) EvalArg {
 	c.command.append(arg...)
-	return (EvalArg)(c)
+	return EvalArg(c)
 }
 
 // Return Completed Redis command.
@@ -7066,12 +7066,12 @@ func (c EvalNumkeys) Key(key ...string) EvalKey {
 		}
 	}
 	c.command.append(key...)
-	return (EvalKey)(c)
+	return EvalKey(c)
 }
 
 func (c EvalNumkeys) Arg(arg ...string) EvalArg {
 	c.command.append(arg...)
-	return (EvalArg)(c)
+	return EvalArg(c)
 }
 
 // Return Completed Redis command.
@@ -7097,7 +7097,7 @@ func (b Builder) EvalRo() EvalRo {
 
 func (c EvalRo) Script(script string) EvalRoScript {
 	c.command.append(script)
-	return (EvalRoScript)(c)
+	return EvalRoScript(c)
 }
 
 type EvalRoArg Base
@@ -7131,7 +7131,7 @@ func (c EvalRoKey) Key(key ...string) EvalRoKey {
 
 func (c EvalRoKey) Arg(arg ...string) EvalRoArg {
 	c.command.append(arg...)
-	return (EvalRoArg)(c)
+	return EvalRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7153,12 +7153,12 @@ func (c EvalRoNumkeys) Key(key ...string) EvalRoKey {
 		}
 	}
 	c.command.append(key...)
-	return (EvalRoKey)(c)
+	return EvalRoKey(c)
 }
 
 func (c EvalRoNumkeys) Arg(arg ...string) EvalRoArg {
 	c.command.append(arg...)
-	return (EvalRoArg)(c)
+	return EvalRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7170,14 +7170,14 @@ type EvalRoScript Base
 
 func (c EvalRoScript) Numkeys(numkeys int64) EvalRoNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (EvalRoNumkeys)(c)
+	return EvalRoNumkeys(c)
 }
 
 type EvalScript Base
 
 func (c EvalScript) Numkeys(numkeys int64) EvalNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (EvalNumkeys)(c)
+	return EvalNumkeys(c)
 }
 
 // Execute a Lua script server side.
@@ -7198,7 +7198,7 @@ func (b Builder) Evalsha() Evalsha {
 
 func (c Evalsha) Sha1(sha1 string) EvalshaSha1 {
 	c.command.append(sha1)
-	return (EvalshaSha1)(c)
+	return EvalshaSha1(c)
 }
 
 type EvalshaArg Base
@@ -7232,7 +7232,7 @@ func (c EvalshaKey) Key(key ...string) EvalshaKey {
 
 func (c EvalshaKey) Arg(arg ...string) EvalshaArg {
 	c.command.append(arg...)
-	return (EvalshaArg)(c)
+	return EvalshaArg(c)
 }
 
 // Return Completed Redis command.
@@ -7254,12 +7254,12 @@ func (c EvalshaNumkeys) Key(key ...string) EvalshaKey {
 		}
 	}
 	c.command.append(key...)
-	return (EvalshaKey)(c)
+	return EvalshaKey(c)
 }
 
 func (c EvalshaNumkeys) Arg(arg ...string) EvalshaArg {
 	c.command.append(arg...)
-	return (EvalshaArg)(c)
+	return EvalshaArg(c)
 }
 
 // Return Completed Redis command.
@@ -7285,7 +7285,7 @@ func (b Builder) EvalshaRo() EvalshaRo {
 
 func (c EvalshaRo) Sha1(sha1 string) EvalshaRoSha1 {
 	c.command.append(sha1)
-	return (EvalshaRoSha1)(c)
+	return EvalshaRoSha1(c)
 }
 
 type EvalshaRoArg Base
@@ -7319,7 +7319,7 @@ func (c EvalshaRoKey) Key(key ...string) EvalshaRoKey {
 
 func (c EvalshaRoKey) Arg(arg ...string) EvalshaRoArg {
 	c.command.append(arg...)
-	return (EvalshaRoArg)(c)
+	return EvalshaRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7341,12 +7341,12 @@ func (c EvalshaRoNumkeys) Key(key ...string) EvalshaRoKey {
 		}
 	}
 	c.command.append(key...)
-	return (EvalshaRoKey)(c)
+	return EvalshaRoKey(c)
 }
 
 func (c EvalshaRoNumkeys) Arg(arg ...string) EvalshaRoArg {
 	c.command.append(arg...)
-	return (EvalshaRoArg)(c)
+	return EvalshaRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7358,14 +7358,14 @@ type EvalshaRoSha1 Base
 
 func (c EvalshaRoSha1) Numkeys(numkeys int64) EvalshaRoNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (EvalshaRoNumkeys)(c)
+	return EvalshaRoNumkeys(c)
 }
 
 type EvalshaSha1 Base
 
 func (c EvalshaSha1) Numkeys(numkeys int64) EvalshaNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (EvalshaNumkeys)(c)
+	return EvalshaNumkeys(c)
 }
 
 // Execute all commands issued after MULTI.
@@ -7413,7 +7413,7 @@ func (c Exists) Key(key ...string) ExistsKey {
 		}
 	}
 	c.command.append(key...)
-	return (ExistsKey)(c)
+	return ExistsKey(c)
 }
 
 type ExistsKey Base
@@ -7461,7 +7461,7 @@ func (c Expire) Key(key string) ExpireKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ExpireKey)(c)
+	return ExpireKey(c)
 }
 
 type ExpireConditionGt Base
@@ -7496,29 +7496,29 @@ type ExpireKey Base
 
 func (c ExpireKey) Seconds(seconds int64) ExpireSeconds {
 	c.command.append(strconv.FormatInt(seconds, 10))
-	return (ExpireSeconds)(c)
+	return ExpireSeconds(c)
 }
 
 type ExpireSeconds Base
 
 func (c ExpireSeconds) Nx() ExpireConditionNx {
 	c.command.append("NX")
-	return (ExpireConditionNx)(c)
+	return ExpireConditionNx(c)
 }
 
 func (c ExpireSeconds) Xx() ExpireConditionXx {
 	c.command.append("XX")
-	return (ExpireConditionXx)(c)
+	return ExpireConditionXx(c)
 }
 
 func (c ExpireSeconds) Gt() ExpireConditionGt {
 	c.command.append("GT")
-	return (ExpireConditionGt)(c)
+	return ExpireConditionGt(c)
 }
 
 func (c ExpireSeconds) Lt() ExpireConditionLt {
 	c.command.append("LT")
-	return (ExpireConditionLt)(c)
+	return ExpireConditionLt(c)
 }
 
 // Return Completed Redis command.
@@ -7549,7 +7549,7 @@ func (c Expireat) Key(key string) ExpireatKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ExpireatKey)(c)
+	return ExpireatKey(c)
 }
 
 type ExpireatConditionGt Base
@@ -7584,29 +7584,29 @@ type ExpireatKey Base
 
 func (c ExpireatKey) Timestamp(timestamp int64) ExpireatTimestamp {
 	c.command.append(strconv.FormatInt(timestamp, 10))
-	return (ExpireatTimestamp)(c)
+	return ExpireatTimestamp(c)
 }
 
 type ExpireatTimestamp Base
 
 func (c ExpireatTimestamp) Nx() ExpireatConditionNx {
 	c.command.append("NX")
-	return (ExpireatConditionNx)(c)
+	return ExpireatConditionNx(c)
 }
 
 func (c ExpireatTimestamp) Xx() ExpireatConditionXx {
 	c.command.append("XX")
-	return (ExpireatConditionXx)(c)
+	return ExpireatConditionXx(c)
 }
 
 func (c ExpireatTimestamp) Gt() ExpireatConditionGt {
 	c.command.append("GT")
-	return (ExpireatConditionGt)(c)
+	return ExpireatConditionGt(c)
 }
 
 func (c ExpireatTimestamp) Lt() ExpireatConditionLt {
 	c.command.append("LT")
-	return (ExpireatConditionLt)(c)
+	return ExpireatConditionLt(c)
 }
 
 // Return Completed Redis command.
@@ -7637,7 +7637,7 @@ func (c Expiretime) Key(key string) ExpiretimeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ExpiretimeKey)(c)
+	return ExpiretimeKey(c)
 }
 
 type ExpiretimeKey Base
@@ -7666,17 +7666,17 @@ func (b Builder) Failover() Failover {
 
 func (c Failover) To() FailoverTargetTo {
 	c.command.append("TO")
-	return (FailoverTargetTo)(c)
+	return FailoverTargetTo(c)
 }
 
 func (c Failover) Abort() FailoverAbort {
 	c.command.append("ABORT")
-	return (FailoverAbort)(c)
+	return FailoverAbort(c)
 }
 
 func (c Failover) Timeout(milliseconds int64) FailoverTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(milliseconds, 10))
-	return (FailoverTimeout)(c)
+	return FailoverTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -7688,7 +7688,7 @@ type FailoverAbort Base
 
 func (c FailoverAbort) Timeout(milliseconds int64) FailoverTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(milliseconds, 10))
-	return (FailoverTimeout)(c)
+	return FailoverTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -7700,12 +7700,12 @@ type FailoverTargetForce Base
 
 func (c FailoverTargetForce) Abort() FailoverAbort {
 	c.command.append("ABORT")
-	return (FailoverAbort)(c)
+	return FailoverAbort(c)
 }
 
 func (c FailoverTargetForce) Timeout(milliseconds int64) FailoverTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(milliseconds, 10))
-	return (FailoverTimeout)(c)
+	return FailoverTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -7717,24 +7717,24 @@ type FailoverTargetHost Base
 
 func (c FailoverTargetHost) Port(port int64) FailoverTargetPort {
 	c.command.append(strconv.FormatInt(port, 10))
-	return (FailoverTargetPort)(c)
+	return FailoverTargetPort(c)
 }
 
 type FailoverTargetPort Base
 
 func (c FailoverTargetPort) Force() FailoverTargetForce {
 	c.command.append("FORCE")
-	return (FailoverTargetForce)(c)
+	return FailoverTargetForce(c)
 }
 
 func (c FailoverTargetPort) Abort() FailoverAbort {
 	c.command.append("ABORT")
-	return (FailoverAbort)(c)
+	return FailoverAbort(c)
 }
 
 func (c FailoverTargetPort) Timeout(milliseconds int64) FailoverTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(milliseconds, 10))
-	return (FailoverTimeout)(c)
+	return FailoverTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -7746,7 +7746,7 @@ type FailoverTargetTo Base
 
 func (c FailoverTargetTo) Host(host string) FailoverTargetHost {
 	c.command.append(host)
-	return (FailoverTargetHost)(c)
+	return FailoverTargetHost(c)
 }
 
 type FailoverTimeout Base
@@ -7767,7 +7767,7 @@ func (b Builder) Fcall() Fcall {
 
 func (c Fcall) Function(function string) FcallFunction {
 	c.command.append(function)
-	return (FcallFunction)(c)
+	return FcallFunction(c)
 }
 
 type FcallArg Base
@@ -7786,7 +7786,7 @@ type FcallFunction Base
 
 func (c FcallFunction) Numkeys(numkeys int64) FcallNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (FcallNumkeys)(c)
+	return FcallNumkeys(c)
 }
 
 type FcallKey Base
@@ -7808,7 +7808,7 @@ func (c FcallKey) Key(key ...string) FcallKey {
 
 func (c FcallKey) Arg(arg ...string) FcallArg {
 	c.command.append(arg...)
-	return (FcallArg)(c)
+	return FcallArg(c)
 }
 
 // Return Completed Redis command.
@@ -7830,12 +7830,12 @@ func (c FcallNumkeys) Key(key ...string) FcallKey {
 		}
 	}
 	c.command.append(key...)
-	return (FcallKey)(c)
+	return FcallKey(c)
 }
 
 func (c FcallNumkeys) Arg(arg ...string) FcallArg {
 	c.command.append(arg...)
-	return (FcallArg)(c)
+	return FcallArg(c)
 }
 
 // Return Completed Redis command.
@@ -7854,7 +7854,7 @@ func (b Builder) FcallRo() FcallRo {
 
 func (c FcallRo) Function(function string) FcallRoFunction {
 	c.command.append(function)
-	return (FcallRoFunction)(c)
+	return FcallRoFunction(c)
 }
 
 type FcallRoArg Base
@@ -7878,7 +7878,7 @@ type FcallRoFunction Base
 
 func (c FcallRoFunction) Numkeys(numkeys int64) FcallRoNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (FcallRoNumkeys)(c)
+	return FcallRoNumkeys(c)
 }
 
 type FcallRoKey Base
@@ -7900,7 +7900,7 @@ func (c FcallRoKey) Key(key ...string) FcallRoKey {
 
 func (c FcallRoKey) Arg(arg ...string) FcallRoArg {
 	c.command.append(arg...)
-	return (FcallRoArg)(c)
+	return FcallRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7927,12 +7927,12 @@ func (c FcallRoNumkeys) Key(key ...string) FcallRoKey {
 		}
 	}
 	c.command.append(key...)
-	return (FcallRoKey)(c)
+	return FcallRoKey(c)
 }
 
 func (c FcallRoNumkeys) Arg(arg ...string) FcallRoArg {
 	c.command.append(arg...)
-	return (FcallRoArg)(c)
+	return FcallRoArg(c)
 }
 
 // Return Completed Redis command.
@@ -7963,12 +7963,12 @@ func (b Builder) Flushall() Flushall {
 
 func (c Flushall) Async() FlushallAsync {
 	c.command.append("ASYNC")
-	return (FlushallAsync)(c)
+	return FlushallAsync(c)
 }
 
 func (c Flushall) Sync() FlushallAsyncSync {
 	c.command.append("SYNC")
-	return (FlushallAsyncSync)(c)
+	return FlushallAsyncSync(c)
 }
 
 // Return Completed Redis command.
@@ -8008,12 +8008,12 @@ func (b Builder) Flushdb() Flushdb {
 
 func (c Flushdb) Async() FlushdbAsync {
 	c.command.append("ASYNC")
-	return (FlushdbAsync)(c)
+	return FlushdbAsync(c)
 }
 
 func (c Flushdb) Sync() FlushdbAsyncSync {
 	c.command.append("SYNC")
-	return (FlushdbAsyncSync)(c)
+	return FlushdbAsyncSync(c)
 }
 
 // Return Completed Redis command.
@@ -8053,24 +8053,24 @@ func (b Builder) FtAggregate() FtAggregate {
 
 func (c FtAggregate) Index(index string) FtAggregateIndex {
 	c.command.append(index)
-	return (FtAggregateIndex)(c)
+	return FtAggregateIndex(c)
 }
 
 type FtAggregateCursorCount Base
 
 func (c FtAggregateCursorCount) Maxidle(idleTime int64) FtAggregateCursorMaxidle {
 	c.command.append("MAXIDLE", strconv.FormatInt(idleTime, 10))
-	return (FtAggregateCursorMaxidle)(c)
+	return FtAggregateCursorMaxidle(c)
 }
 
 func (c FtAggregateCursorCount) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateCursorCount) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8082,12 +8082,12 @@ type FtAggregateCursorMaxidle Base
 
 func (c FtAggregateCursorMaxidle) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateCursorMaxidle) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8099,22 +8099,22 @@ type FtAggregateCursorWithcursor Base
 
 func (c FtAggregateCursorWithcursor) Count(readSize int64) FtAggregateCursorCount {
 	c.command.append("COUNT", strconv.FormatInt(readSize, 10))
-	return (FtAggregateCursorCount)(c)
+	return FtAggregateCursorCount(c)
 }
 
 func (c FtAggregateCursorWithcursor) Maxidle(idleTime int64) FtAggregateCursorMaxidle {
 	c.command.append("MAXIDLE", strconv.FormatInt(idleTime, 10))
-	return (FtAggregateCursorMaxidle)(c)
+	return FtAggregateCursorMaxidle(c)
 }
 
 func (c FtAggregateCursorWithcursor) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateCursorWithcursor) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8133,7 +8133,7 @@ type FtAggregateIndex Base
 
 func (c FtAggregateIndex) Query(query string) FtAggregateQuery {
 	c.command.append(query)
-	return (FtAggregateQuery)(c)
+	return FtAggregateQuery(c)
 }
 
 type FtAggregateLoadField Base
@@ -8145,52 +8145,52 @@ func (c FtAggregateLoadField) Field(field ...string) FtAggregateLoadField {
 
 func (c FtAggregateLoadField) Timeout(timeout int64) FtAggregateTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtAggregateTimeout)(c)
+	return FtAggregateTimeout(c)
 }
 
 func (c FtAggregateLoadField) LoadAll() FtAggregateLoadallLoadAll {
 	c.command.append("LOAD", "*")
-	return (FtAggregateLoadallLoadAll)(c)
+	return FtAggregateLoadallLoadAll(c)
 }
 
 func (c FtAggregateLoadField) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateLoadField) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateLoadField) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateLoadField) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateLoadField) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateLoadField) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateLoadField) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateLoadField) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8202,49 +8202,49 @@ type FtAggregateLoadLoad Base
 
 func (c FtAggregateLoadLoad) Field(field ...string) FtAggregateLoadField {
 	c.command.append(field...)
-	return (FtAggregateLoadField)(c)
+	return FtAggregateLoadField(c)
 }
 
 type FtAggregateLoadallLoadAll Base
 
 func (c FtAggregateLoadallLoadAll) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateLoadallLoadAll) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8256,49 +8256,49 @@ type FtAggregateOpApplyApply Base
 
 func (c FtAggregateOpApplyApply) As(name string) FtAggregateOpApplyAs {
 	c.command.append("AS", name)
-	return (FtAggregateOpApplyAs)(c)
+	return FtAggregateOpApplyAs(c)
 }
 
 type FtAggregateOpApplyAs Base
 
 func (c FtAggregateOpApplyAs) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpApplyAs) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpApplyAs) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpApplyAs) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpApplyAs) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpApplyAs) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpApplyAs) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpApplyAs) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8310,22 +8310,22 @@ type FtAggregateOpFilter Base
 
 func (c FtAggregateOpFilter) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpFilter) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpFilter) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpFilter) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpFilter) Filter(filter string) FtAggregateOpFilter {
@@ -8335,17 +8335,17 @@ func (c FtAggregateOpFilter) Filter(filter string) FtAggregateOpFilter {
 
 func (c FtAggregateOpFilter) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpFilter) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpFilter) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8357,12 +8357,12 @@ type FtAggregateOpGroupbyGroupby Base
 
 func (c FtAggregateOpGroupbyGroupby) Property(property ...string) FtAggregateOpGroupbyProperty {
 	c.command.append(property...)
-	return (FtAggregateOpGroupbyProperty)(c)
+	return FtAggregateOpGroupbyProperty(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
@@ -8372,37 +8372,37 @@ func (c FtAggregateOpGroupbyGroupby) Groupby(nargs int64) FtAggregateOpGroupbyGr
 
 func (c FtAggregateOpGroupbyGroupby) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyGroupby) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8419,47 +8419,47 @@ func (c FtAggregateOpGroupbyProperty) Property(property ...string) FtAggregateOp
 
 func (c FtAggregateOpGroupbyProperty) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyProperty) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8476,67 +8476,67 @@ func (c FtAggregateOpGroupbyReduceArg) Arg(arg ...string) FtAggregateOpGroupbyRe
 
 func (c FtAggregateOpGroupbyReduceArg) As(name string) FtAggregateOpGroupbyReduceAs {
 	c.command.append("AS", name)
-	return (FtAggregateOpGroupbyReduceAs)(c)
+	return FtAggregateOpGroupbyReduceAs(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) By(by string) FtAggregateOpGroupbyReduceBy {
 	c.command.append("BY", by)
-	return (FtAggregateOpGroupbyReduceBy)(c)
+	return FtAggregateOpGroupbyReduceBy(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Asc() FtAggregateOpGroupbyReduceOrderAsc {
 	c.command.append("ASC")
-	return (FtAggregateOpGroupbyReduceOrderAsc)(c)
+	return FtAggregateOpGroupbyReduceOrderAsc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Desc() FtAggregateOpGroupbyReduceOrderDesc {
 	c.command.append("DESC")
-	return (FtAggregateOpGroupbyReduceOrderDesc)(c)
+	return FtAggregateOpGroupbyReduceOrderDesc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceArg) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8548,62 +8548,62 @@ type FtAggregateOpGroupbyReduceAs Base
 
 func (c FtAggregateOpGroupbyReduceAs) By(by string) FtAggregateOpGroupbyReduceBy {
 	c.command.append("BY", by)
-	return (FtAggregateOpGroupbyReduceBy)(c)
+	return FtAggregateOpGroupbyReduceBy(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Asc() FtAggregateOpGroupbyReduceOrderAsc {
 	c.command.append("ASC")
-	return (FtAggregateOpGroupbyReduceOrderAsc)(c)
+	return FtAggregateOpGroupbyReduceOrderAsc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Desc() FtAggregateOpGroupbyReduceOrderDesc {
 	c.command.append("DESC")
-	return (FtAggregateOpGroupbyReduceOrderDesc)(c)
+	return FtAggregateOpGroupbyReduceOrderDesc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceAs) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8615,57 +8615,57 @@ type FtAggregateOpGroupbyReduceBy Base
 
 func (c FtAggregateOpGroupbyReduceBy) Asc() FtAggregateOpGroupbyReduceOrderAsc {
 	c.command.append("ASC")
-	return (FtAggregateOpGroupbyReduceOrderAsc)(c)
+	return FtAggregateOpGroupbyReduceOrderAsc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Desc() FtAggregateOpGroupbyReduceOrderDesc {
 	c.command.append("DESC")
-	return (FtAggregateOpGroupbyReduceOrderDesc)(c)
+	return FtAggregateOpGroupbyReduceOrderDesc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceBy) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8677,72 +8677,72 @@ type FtAggregateOpGroupbyReduceNargs Base
 
 func (c FtAggregateOpGroupbyReduceNargs) Arg(arg ...string) FtAggregateOpGroupbyReduceArg {
 	c.command.append(arg...)
-	return (FtAggregateOpGroupbyReduceArg)(c)
+	return FtAggregateOpGroupbyReduceArg(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) As(name string) FtAggregateOpGroupbyReduceAs {
 	c.command.append("AS", name)
-	return (FtAggregateOpGroupbyReduceAs)(c)
+	return FtAggregateOpGroupbyReduceAs(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) By(by string) FtAggregateOpGroupbyReduceBy {
 	c.command.append("BY", by)
-	return (FtAggregateOpGroupbyReduceBy)(c)
+	return FtAggregateOpGroupbyReduceBy(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Asc() FtAggregateOpGroupbyReduceOrderAsc {
 	c.command.append("ASC")
-	return (FtAggregateOpGroupbyReduceOrderAsc)(c)
+	return FtAggregateOpGroupbyReduceOrderAsc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Desc() FtAggregateOpGroupbyReduceOrderDesc {
 	c.command.append("DESC")
-	return (FtAggregateOpGroupbyReduceOrderDesc)(c)
+	return FtAggregateOpGroupbyReduceOrderDesc(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceNargs) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8754,47 +8754,47 @@ type FtAggregateOpGroupbyReduceOrderAsc Base
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderAsc) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8806,47 +8806,47 @@ type FtAggregateOpGroupbyReduceOrderDesc Base
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Reduce(function string) FtAggregateOpGroupbyReduceReduce {
 	c.command.append("REDUCE", function)
-	return (FtAggregateOpGroupbyReduceReduce)(c)
+	return FtAggregateOpGroupbyReduceReduce(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpGroupbyReduceOrderDesc) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8858,56 +8858,56 @@ type FtAggregateOpGroupbyReduceReduce Base
 
 func (c FtAggregateOpGroupbyReduceReduce) Nargs(nargs int64) FtAggregateOpGroupbyReduceNargs {
 	c.command.append(strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyReduceNargs)(c)
+	return FtAggregateOpGroupbyReduceNargs(c)
 }
 
 type FtAggregateOpLimitLimit Base
 
 func (c FtAggregateOpLimitLimit) OffsetNum(offset int64, num int64) FtAggregateOpLimitOffsetNum {
 	c.command.append(strconv.FormatInt(offset, 10), strconv.FormatInt(num, 10))
-	return (FtAggregateOpLimitOffsetNum)(c)
+	return FtAggregateOpLimitOffsetNum(c)
 }
 
 type FtAggregateOpLimitOffsetNum Base
 
 func (c FtAggregateOpLimitOffsetNum) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpLimitOffsetNum) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8919,52 +8919,52 @@ type FtAggregateOpSortbyFieldsOrderAsc Base
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Property(property string) FtAggregateOpSortbyFieldsProperty {
 	c.command.append(property)
-	return (FtAggregateOpSortbyFieldsProperty)(c)
+	return FtAggregateOpSortbyFieldsProperty(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Max(num int64) FtAggregateOpSortbyMax {
 	c.command.append("MAX", strconv.FormatInt(num, 10))
-	return (FtAggregateOpSortbyMax)(c)
+	return FtAggregateOpSortbyMax(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderAsc) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -8976,52 +8976,52 @@ type FtAggregateOpSortbyFieldsOrderDesc Base
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Property(property string) FtAggregateOpSortbyFieldsProperty {
 	c.command.append(property)
-	return (FtAggregateOpSortbyFieldsProperty)(c)
+	return FtAggregateOpSortbyFieldsProperty(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Max(num int64) FtAggregateOpSortbyMax {
 	c.command.append("MAX", strconv.FormatInt(num, 10))
-	return (FtAggregateOpSortbyMax)(c)
+	return FtAggregateOpSortbyMax(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpSortbyFieldsOrderDesc) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9033,12 +9033,12 @@ type FtAggregateOpSortbyFieldsProperty Base
 
 func (c FtAggregateOpSortbyFieldsProperty) Asc() FtAggregateOpSortbyFieldsOrderAsc {
 	c.command.append("ASC")
-	return (FtAggregateOpSortbyFieldsOrderAsc)(c)
+	return FtAggregateOpSortbyFieldsOrderAsc(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Desc() FtAggregateOpSortbyFieldsOrderDesc {
 	c.command.append("DESC")
-	return (FtAggregateOpSortbyFieldsOrderDesc)(c)
+	return FtAggregateOpSortbyFieldsOrderDesc(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Property(property string) FtAggregateOpSortbyFieldsProperty {
@@ -9048,47 +9048,47 @@ func (c FtAggregateOpSortbyFieldsProperty) Property(property string) FtAggregate
 
 func (c FtAggregateOpSortbyFieldsProperty) Max(num int64) FtAggregateOpSortbyMax {
 	c.command.append("MAX", strconv.FormatInt(num, 10))
-	return (FtAggregateOpSortbyMax)(c)
+	return FtAggregateOpSortbyMax(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpSortbyFieldsProperty) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9100,42 +9100,42 @@ type FtAggregateOpSortbyMax Base
 
 func (c FtAggregateOpSortbyMax) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpSortbyMax) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpSortbyMax) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpSortbyMax) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpSortbyMax) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateOpSortbyMax) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpSortbyMax) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpSortbyMax) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9147,32 +9147,32 @@ type FtAggregateOpSortbySortby Base
 
 func (c FtAggregateOpSortbySortby) Property(property string) FtAggregateOpSortbyFieldsProperty {
 	c.command.append(property)
-	return (FtAggregateOpSortbyFieldsProperty)(c)
+	return FtAggregateOpSortbyFieldsProperty(c)
 }
 
 func (c FtAggregateOpSortbySortby) Max(num int64) FtAggregateOpSortbyMax {
 	c.command.append("MAX", strconv.FormatInt(num, 10))
-	return (FtAggregateOpSortbyMax)(c)
+	return FtAggregateOpSortbyMax(c)
 }
 
 func (c FtAggregateOpSortbySortby) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateOpSortbySortby) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateOpSortbySortby) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateOpSortbySortby) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateOpSortbySortby) Sortby(nargs int64) FtAggregateOpSortbySortby {
@@ -9182,17 +9182,17 @@ func (c FtAggregateOpSortbySortby) Sortby(nargs int64) FtAggregateOpSortbySortby
 
 func (c FtAggregateOpSortbySortby) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateOpSortbySortby) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateOpSortbySortby) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9209,7 +9209,7 @@ func (c FtAggregateParamsNameValue) NameValue(name string, value string) FtAggre
 
 func (c FtAggregateParamsNameValue) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9220,76 +9220,76 @@ func (c FtAggregateParamsNameValue) Build() Completed {
 type FtAggregateParamsNargs Base
 
 func (c FtAggregateParamsNargs) NameValue() FtAggregateParamsNameValue {
-	return (FtAggregateParamsNameValue)(c)
+	return FtAggregateParamsNameValue(c)
 }
 
 type FtAggregateParamsParams Base
 
 func (c FtAggregateParamsParams) Nargs(nargs int64) FtAggregateParamsNargs {
 	c.command.append(strconv.FormatInt(nargs, 10))
-	return (FtAggregateParamsNargs)(c)
+	return FtAggregateParamsNargs(c)
 }
 
 type FtAggregateQuery Base
 
 func (c FtAggregateQuery) Verbatim() FtAggregateVerbatim {
 	c.command.append("VERBATIM")
-	return (FtAggregateVerbatim)(c)
+	return FtAggregateVerbatim(c)
 }
 
 func (c FtAggregateQuery) Load(count string) FtAggregateLoadLoad {
 	c.command.append("LOAD", count)
-	return (FtAggregateLoadLoad)(c)
+	return FtAggregateLoadLoad(c)
 }
 
 func (c FtAggregateQuery) Timeout(timeout int64) FtAggregateTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtAggregateTimeout)(c)
+	return FtAggregateTimeout(c)
 }
 
 func (c FtAggregateQuery) LoadAll() FtAggregateLoadallLoadAll {
 	c.command.append("LOAD", "*")
-	return (FtAggregateLoadallLoadAll)(c)
+	return FtAggregateLoadallLoadAll(c)
 }
 
 func (c FtAggregateQuery) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateQuery) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateQuery) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateQuery) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateQuery) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateQuery) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateQuery) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateQuery) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9301,47 +9301,47 @@ type FtAggregateTimeout Base
 
 func (c FtAggregateTimeout) LoadAll() FtAggregateLoadallLoadAll {
 	c.command.append("LOAD", "*")
-	return (FtAggregateLoadallLoadAll)(c)
+	return FtAggregateLoadallLoadAll(c)
 }
 
 func (c FtAggregateTimeout) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateTimeout) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateTimeout) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateTimeout) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateTimeout) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateTimeout) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateTimeout) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateTimeout) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9353,57 +9353,57 @@ type FtAggregateVerbatim Base
 
 func (c FtAggregateVerbatim) Load(count string) FtAggregateLoadLoad {
 	c.command.append("LOAD", count)
-	return (FtAggregateLoadLoad)(c)
+	return FtAggregateLoadLoad(c)
 }
 
 func (c FtAggregateVerbatim) Timeout(timeout int64) FtAggregateTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtAggregateTimeout)(c)
+	return FtAggregateTimeout(c)
 }
 
 func (c FtAggregateVerbatim) LoadAll() FtAggregateLoadallLoadAll {
 	c.command.append("LOAD", "*")
-	return (FtAggregateLoadallLoadAll)(c)
+	return FtAggregateLoadallLoadAll(c)
 }
 
 func (c FtAggregateVerbatim) Groupby(nargs int64) FtAggregateOpGroupbyGroupby {
 	c.command.append("GROUPBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpGroupbyGroupby)(c)
+	return FtAggregateOpGroupbyGroupby(c)
 }
 
 func (c FtAggregateVerbatim) Sortby(nargs int64) FtAggregateOpSortbySortby {
 	c.command.append("SORTBY", strconv.FormatInt(nargs, 10))
-	return (FtAggregateOpSortbySortby)(c)
+	return FtAggregateOpSortbySortby(c)
 }
 
 func (c FtAggregateVerbatim) Apply(expression string) FtAggregateOpApplyApply {
 	c.command.append("APPLY", expression)
-	return (FtAggregateOpApplyApply)(c)
+	return FtAggregateOpApplyApply(c)
 }
 
 func (c FtAggregateVerbatim) Limit() FtAggregateOpLimitLimit {
 	c.command.append("LIMIT")
-	return (FtAggregateOpLimitLimit)(c)
+	return FtAggregateOpLimitLimit(c)
 }
 
 func (c FtAggregateVerbatim) Filter(filter string) FtAggregateOpFilter {
 	c.command.append("FILTER", filter)
-	return (FtAggregateOpFilter)(c)
+	return FtAggregateOpFilter(c)
 }
 
 func (c FtAggregateVerbatim) Withcursor() FtAggregateCursorWithcursor {
 	c.command.append("WITHCURSOR")
-	return (FtAggregateCursorWithcursor)(c)
+	return FtAggregateCursorWithcursor(c)
 }
 
 func (c FtAggregateVerbatim) Params() FtAggregateParamsParams {
 	c.command.append("PARAMS")
-	return (FtAggregateParamsParams)(c)
+	return FtAggregateParamsParams(c)
 }
 
 func (c FtAggregateVerbatim) Dialect(dialect int64) FtAggregateDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtAggregateDialect)(c)
+	return FtAggregateDialect(c)
 }
 
 // Return Completed Redis command.
@@ -9429,14 +9429,14 @@ func (b Builder) FtAliasadd() FtAliasadd {
 
 func (c FtAliasadd) Alias(alias string) FtAliasaddAlias {
 	c.command.append(alias)
-	return (FtAliasaddAlias)(c)
+	return FtAliasaddAlias(c)
 }
 
 type FtAliasaddAlias Base
 
 func (c FtAliasaddAlias) Index(index string) FtAliasaddIndex {
 	c.command.append(index)
-	return (FtAliasaddIndex)(c)
+	return FtAliasaddIndex(c)
 }
 
 type FtAliasaddIndex Base
@@ -9464,7 +9464,7 @@ func (b Builder) FtAliasdel() FtAliasdel {
 
 func (c FtAliasdel) Alias(alias string) FtAliasdelAlias {
 	c.command.append(alias)
-	return (FtAliasdelAlias)(c)
+	return FtAliasdelAlias(c)
 }
 
 type FtAliasdelAlias Base
@@ -9492,14 +9492,14 @@ func (b Builder) FtAliasupdate() FtAliasupdate {
 
 func (c FtAliasupdate) Alias(alias string) FtAliasupdateAlias {
 	c.command.append(alias)
-	return (FtAliasupdateAlias)(c)
+	return FtAliasupdateAlias(c)
 }
 
 type FtAliasupdateAlias Base
 
 func (c FtAliasupdateAlias) Index(index string) FtAliasupdateIndex {
 	c.command.append(index)
-	return (FtAliasupdateIndex)(c)
+	return FtAliasupdateIndex(c)
 }
 
 type FtAliasupdateIndex Base
@@ -9527,33 +9527,33 @@ func (b Builder) FtAlter() FtAlter {
 
 func (c FtAlter) Index(index string) FtAlterIndex {
 	c.command.append(index)
-	return (FtAlterIndex)(c)
+	return FtAlterIndex(c)
 }
 
 type FtAlterAdd Base
 
 func (c FtAlterAdd) Field(field string) FtAlterField {
 	c.command.append(field)
-	return (FtAlterField)(c)
+	return FtAlterField(c)
 }
 
 type FtAlterField Base
 
 func (c FtAlterField) Options(options string) FtAlterOptions {
 	c.command.append(options)
-	return (FtAlterOptions)(c)
+	return FtAlterOptions(c)
 }
 
 type FtAlterIndex Base
 
 func (c FtAlterIndex) Skipinitialscan() FtAlterSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtAlterSkipinitialscan)(c)
+	return FtAlterSkipinitialscan(c)
 }
 
 func (c FtAlterIndex) Schema() FtAlterSchema {
 	c.command.append("SCHEMA")
-	return (FtAlterSchema)(c)
+	return FtAlterSchema(c)
 }
 
 type FtAlterOptions Base
@@ -9567,14 +9567,14 @@ type FtAlterSchema Base
 
 func (c FtAlterSchema) Add() FtAlterAdd {
 	c.command.append("ADD")
-	return (FtAlterAdd)(c)
+	return FtAlterAdd(c)
 }
 
 type FtAlterSkipinitialscan Base
 
 func (c FtAlterSkipinitialscan) Schema() FtAlterSchema {
 	c.command.append("SCHEMA")
-	return (FtAlterSchema)(c)
+	return FtAlterSchema(c)
 }
 
 // Retrieves runtime configuration options.
@@ -9595,7 +9595,7 @@ func (b Builder) FtConfigGet() FtConfigGet {
 
 func (c FtConfigGet) Option(option string) FtConfigGetOption {
 	c.command.append(option)
-	return (FtConfigGetOption)(c)
+	return FtConfigGetOption(c)
 }
 
 type FtConfigGetOption Base
@@ -9623,7 +9623,7 @@ func (b Builder) FtConfigHelp() FtConfigHelp {
 
 func (c FtConfigHelp) Option(option string) FtConfigHelpOption {
 	c.command.append(option)
-	return (FtConfigHelpOption)(c)
+	return FtConfigHelpOption(c)
 }
 
 type FtConfigHelpOption Base
@@ -9651,14 +9651,14 @@ func (b Builder) FtConfigSet() FtConfigSet {
 
 func (c FtConfigSet) Option(option string) FtConfigSetOption {
 	c.command.append(option)
-	return (FtConfigSetOption)(c)
+	return FtConfigSetOption(c)
 }
 
 type FtConfigSetOption Base
 
 func (c FtConfigSetOption) Value(value string) FtConfigSetValue {
 	c.command.append(value)
-	return (FtConfigSetValue)(c)
+	return FtConfigSetValue(c)
 }
 
 type FtConfigSetValue Base
@@ -9690,115 +9690,115 @@ func (b Builder) FtCreate() FtCreate {
 
 func (c FtCreate) Index(index string) FtCreateIndex {
 	c.command.append(index)
-	return (FtCreateIndex)(c)
+	return FtCreateIndex(c)
 }
 
 type FtCreateFieldAs Base
 
 func (c FtCreateFieldAs) Text() FtCreateFieldFieldTypeText {
 	c.command.append("TEXT")
-	return (FtCreateFieldFieldTypeText)(c)
+	return FtCreateFieldFieldTypeText(c)
 }
 
 func (c FtCreateFieldAs) Tag() FtCreateFieldFieldTypeTag {
 	c.command.append("TAG")
-	return (FtCreateFieldFieldTypeTag)(c)
+	return FtCreateFieldFieldTypeTag(c)
 }
 
 func (c FtCreateFieldAs) Numeric() FtCreateFieldFieldTypeNumeric {
 	c.command.append("NUMERIC")
-	return (FtCreateFieldFieldTypeNumeric)(c)
+	return FtCreateFieldFieldTypeNumeric(c)
 }
 
 func (c FtCreateFieldAs) Geo() FtCreateFieldFieldTypeGeo {
 	c.command.append("GEO")
-	return (FtCreateFieldFieldTypeGeo)(c)
+	return FtCreateFieldFieldTypeGeo(c)
 }
 
 func (c FtCreateFieldAs) Vector(algo string, nargs int64, args ...string) FtCreateFieldFieldTypeVector {
 	c.command.append("VECTOR", algo, strconv.FormatInt(nargs, 10))
 	c.command.append(args...)
-	return (FtCreateFieldFieldTypeVector)(c)
+	return FtCreateFieldFieldTypeVector(c)
 }
 
 type FtCreateFieldFieldName Base
 
 func (c FtCreateFieldFieldName) As(alias string) FtCreateFieldAs {
 	c.command.append("AS", alias)
-	return (FtCreateFieldAs)(c)
+	return FtCreateFieldAs(c)
 }
 
 func (c FtCreateFieldFieldName) Text() FtCreateFieldFieldTypeText {
 	c.command.append("TEXT")
-	return (FtCreateFieldFieldTypeText)(c)
+	return FtCreateFieldFieldTypeText(c)
 }
 
 func (c FtCreateFieldFieldName) Tag() FtCreateFieldFieldTypeTag {
 	c.command.append("TAG")
-	return (FtCreateFieldFieldTypeTag)(c)
+	return FtCreateFieldFieldTypeTag(c)
 }
 
 func (c FtCreateFieldFieldName) Numeric() FtCreateFieldFieldTypeNumeric {
 	c.command.append("NUMERIC")
-	return (FtCreateFieldFieldTypeNumeric)(c)
+	return FtCreateFieldFieldTypeNumeric(c)
 }
 
 func (c FtCreateFieldFieldName) Geo() FtCreateFieldFieldTypeGeo {
 	c.command.append("GEO")
-	return (FtCreateFieldFieldTypeGeo)(c)
+	return FtCreateFieldFieldTypeGeo(c)
 }
 
 func (c FtCreateFieldFieldName) Vector(algo string, nargs int64, args ...string) FtCreateFieldFieldTypeVector {
 	c.command.append("VECTOR", algo, strconv.FormatInt(nargs, 10))
 	c.command.append(args...)
-	return (FtCreateFieldFieldTypeVector)(c)
+	return FtCreateFieldFieldTypeVector(c)
 }
 
 type FtCreateFieldFieldTypeGeo Base
 
 func (c FtCreateFieldFieldTypeGeo) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldFieldTypeGeo) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -9810,47 +9810,47 @@ type FtCreateFieldFieldTypeNumeric Base
 
 func (c FtCreateFieldFieldTypeNumeric) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldFieldTypeNumeric) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -9862,47 +9862,47 @@ type FtCreateFieldFieldTypeTag Base
 
 func (c FtCreateFieldFieldTypeTag) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldFieldTypeTag) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -9914,47 +9914,47 @@ type FtCreateFieldFieldTypeText Base
 
 func (c FtCreateFieldFieldTypeText) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldFieldTypeText) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldFieldTypeText) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -9966,47 +9966,47 @@ type FtCreateFieldFieldTypeVector Base
 
 func (c FtCreateFieldFieldTypeVector) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldFieldTypeVector) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10018,37 +10018,37 @@ type FtCreateFieldOptionCasesensitive Base
 
 func (c FtCreateFieldOptionCasesensitive) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionCasesensitive) Casesensitive() FtCreateFieldOptionCasesensitive {
@@ -10058,7 +10058,7 @@ func (c FtCreateFieldOptionCasesensitive) Casesensitive() FtCreateFieldOptionCas
 
 func (c FtCreateFieldOptionCasesensitive) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10070,37 +10070,37 @@ type FtCreateFieldOptionNoindex Base
 
 func (c FtCreateFieldOptionNoindex) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionNoindex) Noindex() FtCreateFieldOptionNoindex {
@@ -10110,7 +10110,7 @@ func (c FtCreateFieldOptionNoindex) Noindex() FtCreateFieldOptionNoindex {
 
 func (c FtCreateFieldOptionNoindex) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10122,37 +10122,37 @@ type FtCreateFieldOptionNostem Base
 
 func (c FtCreateFieldOptionNostem) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionNostem) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionNostem) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionNostem) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionNostem) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionNostem) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionNostem) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionNostem) Nostem() FtCreateFieldOptionNostem {
@@ -10162,7 +10162,7 @@ func (c FtCreateFieldOptionNostem) Nostem() FtCreateFieldOptionNostem {
 
 func (c FtCreateFieldOptionNostem) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10174,37 +10174,37 @@ type FtCreateFieldOptionPhonetic Base
 
 func (c FtCreateFieldOptionPhonetic) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionPhonetic) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
@@ -10214,7 +10214,7 @@ func (c FtCreateFieldOptionPhonetic) Phonetic(phonetic string) FtCreateFieldOpti
 
 func (c FtCreateFieldOptionPhonetic) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10226,37 +10226,37 @@ type FtCreateFieldOptionSeparator Base
 
 func (c FtCreateFieldOptionSeparator) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionSeparator) Separator(separator string) FtCreateFieldOptionSeparator {
@@ -10266,7 +10266,7 @@ func (c FtCreateFieldOptionSeparator) Separator(separator string) FtCreateFieldO
 
 func (c FtCreateFieldOptionSeparator) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10278,42 +10278,42 @@ type FtCreateFieldOptionSortableSortable Base
 
 func (c FtCreateFieldOptionSortableSortable) Unf() FtCreateFieldOptionSortableUnf {
 	c.command.append("UNF")
-	return (FtCreateFieldOptionSortableUnf)(c)
+	return FtCreateFieldOptionSortableUnf(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionSortableSortable) Sortable() FtCreateFieldOptionSortableSortable {
@@ -10323,7 +10323,7 @@ func (c FtCreateFieldOptionSortableSortable) Sortable() FtCreateFieldOptionSorta
 
 func (c FtCreateFieldOptionSortableSortable) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10335,47 +10335,47 @@ type FtCreateFieldOptionSortableUnf Base
 
 func (c FtCreateFieldOptionSortableUnf) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionSortableUnf) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10387,37 +10387,37 @@ type FtCreateFieldOptionWeight Base
 
 func (c FtCreateFieldOptionWeight) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionWeight) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionWeight) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
 	c.command.append("WITHSUFFIXTRIE")
-	return (FtCreateFieldOptionWithsuffixtrie)(c)
+	return FtCreateFieldOptionWithsuffixtrie(c)
 }
 
 func (c FtCreateFieldOptionWeight) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionWeight) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionWeight) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionWeight) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionWeight) Weight(weight float64) FtCreateFieldOptionWeight {
@@ -10427,7 +10427,7 @@ func (c FtCreateFieldOptionWeight) Weight(weight float64) FtCreateFieldOptionWei
 
 func (c FtCreateFieldOptionWeight) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10439,37 +10439,37 @@ type FtCreateFieldOptionWithsuffixtrie Base
 
 func (c FtCreateFieldOptionWithsuffixtrie) Sortable() FtCreateFieldOptionSortableSortable {
 	c.command.append("SORTABLE")
-	return (FtCreateFieldOptionSortableSortable)(c)
+	return FtCreateFieldOptionSortableSortable(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Noindex() FtCreateFieldOptionNoindex {
 	c.command.append("NOINDEX")
-	return (FtCreateFieldOptionNoindex)(c)
+	return FtCreateFieldOptionNoindex(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Nostem() FtCreateFieldOptionNostem {
 	c.command.append("NOSTEM")
-	return (FtCreateFieldOptionNostem)(c)
+	return FtCreateFieldOptionNostem(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Phonetic(phonetic string) FtCreateFieldOptionPhonetic {
 	c.command.append("PHONETIC", phonetic)
-	return (FtCreateFieldOptionPhonetic)(c)
+	return FtCreateFieldOptionPhonetic(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Weight(weight float64) FtCreateFieldOptionWeight {
 	c.command.append("WEIGHT", strconv.FormatFloat(weight, 'f', -1, 64))
-	return (FtCreateFieldOptionWeight)(c)
+	return FtCreateFieldOptionWeight(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Separator(separator string) FtCreateFieldOptionSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtCreateFieldOptionSeparator)(c)
+	return FtCreateFieldOptionSeparator(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Casesensitive() FtCreateFieldOptionCasesensitive {
 	c.command.append("CASESENSITIVE")
-	return (FtCreateFieldOptionCasesensitive)(c)
+	return FtCreateFieldOptionCasesensitive(c)
 }
 
 func (c FtCreateFieldOptionWithsuffixtrie) Withsuffixtrie() FtCreateFieldOptionWithsuffixtrie {
@@ -10479,7 +10479,7 @@ func (c FtCreateFieldOptionWithsuffixtrie) Withsuffixtrie() FtCreateFieldOptionW
 
 func (c FtCreateFieldOptionWithsuffixtrie) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 // Return Completed Redis command.
@@ -10491,651 +10491,651 @@ type FtCreateFilter Base
 
 func (c FtCreateFilter) Language(defaultLang string) FtCreateLanguage {
 	c.command.append("LANGUAGE", defaultLang)
-	return (FtCreateLanguage)(c)
+	return FtCreateLanguage(c)
 }
 
 func (c FtCreateFilter) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreateFilter) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateFilter) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateFilter) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateFilter) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateFilter) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateFilter) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateFilter) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateFilter) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateFilter) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateFilter) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateFilter) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateFilter) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateIndex Base
 
 func (c FtCreateIndex) OnHash() FtCreateOnHash {
 	c.command.append("ON", "HASH")
-	return (FtCreateOnHash)(c)
+	return FtCreateOnHash(c)
 }
 
 func (c FtCreateIndex) OnJson() FtCreateOnJson {
 	c.command.append("ON", "JSON")
-	return (FtCreateOnJson)(c)
+	return FtCreateOnJson(c)
 }
 
 func (c FtCreateIndex) Prefix(count int64) FtCreatePrefixCount {
 	c.command.append("PREFIX", strconv.FormatInt(count, 10))
-	return (FtCreatePrefixCount)(c)
+	return FtCreatePrefixCount(c)
 }
 
 func (c FtCreateIndex) Filter(filter string) FtCreateFilter {
 	c.command.append("FILTER", filter)
-	return (FtCreateFilter)(c)
+	return FtCreateFilter(c)
 }
 
 func (c FtCreateIndex) Language(defaultLang string) FtCreateLanguage {
 	c.command.append("LANGUAGE", defaultLang)
-	return (FtCreateLanguage)(c)
+	return FtCreateLanguage(c)
 }
 
 func (c FtCreateIndex) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreateIndex) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateIndex) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateIndex) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateIndex) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateIndex) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateIndex) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateIndex) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateIndex) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateIndex) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateIndex) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateIndex) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateIndex) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateLanguage Base
 
 func (c FtCreateLanguage) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreateLanguage) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateLanguage) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateLanguage) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateLanguage) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateLanguage) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateLanguage) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateLanguage) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateLanguage) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateLanguage) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateLanguage) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateLanguage) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateLanguage) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateLanguageField Base
 
 func (c FtCreateLanguageField) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateLanguageField) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateLanguageField) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateLanguageField) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateLanguageField) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateLanguageField) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateLanguageField) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateLanguageField) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateLanguageField) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateLanguageField) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateLanguageField) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateLanguageField) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateMaxtextfields Base
 
 func (c FtCreateMaxtextfields) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateMaxtextfields) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateMaxtextfields) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateMaxtextfields) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateMaxtextfields) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateMaxtextfields) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateMaxtextfields) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateMaxtextfields) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateNofields Base
 
 func (c FtCreateNofields) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateNofields) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateNofields) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateNofields) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateNofreqs Base
 
 func (c FtCreateNofreqs) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateNofreqs) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateNofreqs) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateNohl Base
 
 func (c FtCreateNohl) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateNohl) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateNohl) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateNohl) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateNohl) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateNooffsets Base
 
 func (c FtCreateNooffsets) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateNooffsets) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateNooffsets) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateNooffsets) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateNooffsets) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateNooffsets) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateOnHash Base
 
 func (c FtCreateOnHash) Prefix(count int64) FtCreatePrefixCount {
 	c.command.append("PREFIX", strconv.FormatInt(count, 10))
-	return (FtCreatePrefixCount)(c)
+	return FtCreatePrefixCount(c)
 }
 
 func (c FtCreateOnHash) Filter(filter string) FtCreateFilter {
 	c.command.append("FILTER", filter)
-	return (FtCreateFilter)(c)
+	return FtCreateFilter(c)
 }
 
 func (c FtCreateOnHash) Language(defaultLang string) FtCreateLanguage {
 	c.command.append("LANGUAGE", defaultLang)
-	return (FtCreateLanguage)(c)
+	return FtCreateLanguage(c)
 }
 
 func (c FtCreateOnHash) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreateOnHash) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateOnHash) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateOnHash) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateOnHash) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateOnHash) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateOnHash) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateOnHash) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateOnHash) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateOnHash) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateOnHash) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateOnHash) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateOnHash) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateOnJson Base
 
 func (c FtCreateOnJson) Prefix(count int64) FtCreatePrefixCount {
 	c.command.append("PREFIX", strconv.FormatInt(count, 10))
-	return (FtCreatePrefixCount)(c)
+	return FtCreatePrefixCount(c)
 }
 
 func (c FtCreateOnJson) Filter(filter string) FtCreateFilter {
 	c.command.append("FILTER", filter)
-	return (FtCreateFilter)(c)
+	return FtCreateFilter(c)
 }
 
 func (c FtCreateOnJson) Language(defaultLang string) FtCreateLanguage {
 	c.command.append("LANGUAGE", defaultLang)
-	return (FtCreateLanguage)(c)
+	return FtCreateLanguage(c)
 }
 
 func (c FtCreateOnJson) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreateOnJson) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreateOnJson) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateOnJson) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateOnJson) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateOnJson) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateOnJson) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateOnJson) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateOnJson) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateOnJson) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateOnJson) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateOnJson) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateOnJson) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreatePayloadField Base
 
 func (c FtCreatePayloadField) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreatePayloadField) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreatePayloadField) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreatePayloadField) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreatePayloadField) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreatePayloadField) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreatePayloadField) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreatePayloadField) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreatePayloadField) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreatePrefixCount Base
 
 func (c FtCreatePrefixCount) Prefix(prefix ...string) FtCreatePrefixPrefix {
 	c.command.append(prefix...)
-	return (FtCreatePrefixPrefix)(c)
+	return FtCreatePrefixPrefix(c)
 }
 
 type FtCreatePrefixPrefix Base
@@ -11147,200 +11147,200 @@ func (c FtCreatePrefixPrefix) Prefix(prefix ...string) FtCreatePrefixPrefix {
 
 func (c FtCreatePrefixPrefix) Filter(filter string) FtCreateFilter {
 	c.command.append("FILTER", filter)
-	return (FtCreateFilter)(c)
+	return FtCreateFilter(c)
 }
 
 func (c FtCreatePrefixPrefix) Language(defaultLang string) FtCreateLanguage {
 	c.command.append("LANGUAGE", defaultLang)
-	return (FtCreateLanguage)(c)
+	return FtCreateLanguage(c)
 }
 
 func (c FtCreatePrefixPrefix) LanguageField(langAttribute string) FtCreateLanguageField {
 	c.command.append("LANGUAGE_FIELD", langAttribute)
-	return (FtCreateLanguageField)(c)
+	return FtCreateLanguageField(c)
 }
 
 func (c FtCreatePrefixPrefix) Score(defaultScore float64) FtCreateScore {
 	c.command.append("SCORE", strconv.FormatFloat(defaultScore, 'f', -1, 64))
-	return (FtCreateScore)(c)
+	return FtCreateScore(c)
 }
 
 func (c FtCreatePrefixPrefix) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreatePrefixPrefix) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreatePrefixPrefix) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreatePrefixPrefix) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreatePrefixPrefix) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreatePrefixPrefix) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreatePrefixPrefix) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreatePrefixPrefix) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreatePrefixPrefix) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreatePrefixPrefix) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreatePrefixPrefix) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateSchema Base
 
 func (c FtCreateSchema) FieldName(fieldName string) FtCreateFieldFieldName {
 	c.command.append(fieldName)
-	return (FtCreateFieldFieldName)(c)
+	return FtCreateFieldFieldName(c)
 }
 
 type FtCreateScore Base
 
 func (c FtCreateScore) ScoreField(scoreAttribute string) FtCreateScoreField {
 	c.command.append("SCORE_FIELD", scoreAttribute)
-	return (FtCreateScoreField)(c)
+	return FtCreateScoreField(c)
 }
 
 func (c FtCreateScore) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateScore) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateScore) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateScore) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateScore) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateScore) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateScore) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateScore) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateScore) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateScore) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateScoreField Base
 
 func (c FtCreateScoreField) PayloadField(payloadAttribute string) FtCreatePayloadField {
 	c.command.append("PAYLOAD_FIELD", payloadAttribute)
-	return (FtCreatePayloadField)(c)
+	return FtCreatePayloadField(c)
 }
 
 func (c FtCreateScoreField) Maxtextfields() FtCreateMaxtextfields {
 	c.command.append("MAXTEXTFIELDS")
-	return (FtCreateMaxtextfields)(c)
+	return FtCreateMaxtextfields(c)
 }
 
 func (c FtCreateScoreField) Temporary(seconds float64) FtCreateTemporary {
 	c.command.append("TEMPORARY", strconv.FormatFloat(seconds, 'f', -1, 64))
-	return (FtCreateTemporary)(c)
+	return FtCreateTemporary(c)
 }
 
 func (c FtCreateScoreField) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateScoreField) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateScoreField) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateScoreField) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateScoreField) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateScoreField) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateScoreField) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateSkipinitialscan Base
 
 func (c FtCreateSkipinitialscan) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateStopwordsStopword Base
@@ -11352,66 +11352,66 @@ func (c FtCreateStopwordsStopword) Stopword(stopword ...string) FtCreateStopword
 
 func (c FtCreateStopwordsStopword) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateStopwordsStopword) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateStopwordsStopwords Base
 
 func (c FtCreateStopwordsStopwords) Stopword(stopword ...string) FtCreateStopwordsStopword {
 	c.command.append(stopword...)
-	return (FtCreateStopwordsStopword)(c)
+	return FtCreateStopwordsStopword(c)
 }
 
 func (c FtCreateStopwordsStopwords) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateStopwordsStopwords) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 type FtCreateTemporary Base
 
 func (c FtCreateTemporary) Nooffsets() FtCreateNooffsets {
 	c.command.append("NOOFFSETS")
-	return (FtCreateNooffsets)(c)
+	return FtCreateNooffsets(c)
 }
 
 func (c FtCreateTemporary) Nohl() FtCreateNohl {
 	c.command.append("NOHL")
-	return (FtCreateNohl)(c)
+	return FtCreateNohl(c)
 }
 
 func (c FtCreateTemporary) Nofields() FtCreateNofields {
 	c.command.append("NOFIELDS")
-	return (FtCreateNofields)(c)
+	return FtCreateNofields(c)
 }
 
 func (c FtCreateTemporary) Nofreqs() FtCreateNofreqs {
 	c.command.append("NOFREQS")
-	return (FtCreateNofreqs)(c)
+	return FtCreateNofreqs(c)
 }
 
 func (c FtCreateTemporary) Stopwords(count int64) FtCreateStopwordsStopwords {
 	c.command.append("STOPWORDS", strconv.FormatInt(count, 10))
-	return (FtCreateStopwordsStopwords)(c)
+	return FtCreateStopwordsStopwords(c)
 }
 
 func (c FtCreateTemporary) Skipinitialscan() FtCreateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtCreateSkipinitialscan)(c)
+	return FtCreateSkipinitialscan(c)
 }
 
 func (c FtCreateTemporary) Schema() FtCreateSchema {
 	c.command.append("SCHEMA")
-	return (FtCreateSchema)(c)
+	return FtCreateSchema(c)
 }
 
 // Deletes a cursor.
@@ -11432,7 +11432,7 @@ func (b Builder) FtCursorDel() FtCursorDel {
 
 func (c FtCursorDel) Index(index string) FtCursorDelIndex {
 	c.command.append(index)
-	return (FtCursorDelIndex)(c)
+	return FtCursorDelIndex(c)
 }
 
 type FtCursorDelCursorId Base
@@ -11446,7 +11446,7 @@ type FtCursorDelIndex Base
 
 func (c FtCursorDelIndex) CursorId(cursorId int64) FtCursorDelCursorId {
 	c.command.append(strconv.FormatInt(cursorId, 10))
-	return (FtCursorDelCursorId)(c)
+	return FtCursorDelCursorId(c)
 }
 
 // Reads from a cursor.
@@ -11467,7 +11467,7 @@ func (b Builder) FtCursorRead() FtCursorRead {
 
 func (c FtCursorRead) Index(index string) FtCursorReadIndex {
 	c.command.append(index)
-	return (FtCursorReadIndex)(c)
+	return FtCursorReadIndex(c)
 }
 
 type FtCursorReadCount Base
@@ -11481,7 +11481,7 @@ type FtCursorReadCursorId Base
 
 func (c FtCursorReadCursorId) Count(readSize int64) FtCursorReadCount {
 	c.command.append("COUNT", strconv.FormatInt(readSize, 10))
-	return (FtCursorReadCount)(c)
+	return FtCursorReadCount(c)
 }
 
 // Return Completed Redis command.
@@ -11493,7 +11493,7 @@ type FtCursorReadIndex Base
 
 func (c FtCursorReadIndex) CursorId(cursorId int64) FtCursorReadCursorId {
 	c.command.append(strconv.FormatInt(cursorId, 10))
-	return (FtCursorReadCursorId)(c)
+	return FtCursorReadCursorId(c)
 }
 
 // Adds terms to a dictionary.
@@ -11514,14 +11514,14 @@ func (b Builder) FtDictadd() FtDictadd {
 
 func (c FtDictadd) Dict(dict string) FtDictaddDict {
 	c.command.append(dict)
-	return (FtDictaddDict)(c)
+	return FtDictaddDict(c)
 }
 
 type FtDictaddDict Base
 
 func (c FtDictaddDict) Term(term ...string) FtDictaddTerm {
 	c.command.append(term...)
-	return (FtDictaddTerm)(c)
+	return FtDictaddTerm(c)
 }
 
 type FtDictaddTerm Base
@@ -11554,14 +11554,14 @@ func (b Builder) FtDictdel() FtDictdel {
 
 func (c FtDictdel) Dict(dict string) FtDictdelDict {
 	c.command.append(dict)
-	return (FtDictdelDict)(c)
+	return FtDictdelDict(c)
 }
 
 type FtDictdelDict Base
 
 func (c FtDictdelDict) Term(term ...string) FtDictdelTerm {
 	c.command.append(term...)
-	return (FtDictdelTerm)(c)
+	return FtDictdelTerm(c)
 }
 
 type FtDictdelTerm Base
@@ -11594,7 +11594,7 @@ func (b Builder) FtDictdump() FtDictdump {
 
 func (c FtDictdump) Dict(dict string) FtDictdumpDict {
 	c.command.append(dict)
-	return (FtDictdumpDict)(c)
+	return FtDictdumpDict(c)
 }
 
 type FtDictdumpDict Base
@@ -11622,7 +11622,7 @@ func (b Builder) FtDropindex() FtDropindex {
 
 func (c FtDropindex) Index(index string) FtDropindexIndex {
 	c.command.append(index)
-	return (FtDropindexIndex)(c)
+	return FtDropindexIndex(c)
 }
 
 type FtDropindexDeleteDocsDd Base
@@ -11636,7 +11636,7 @@ type FtDropindexIndex Base
 
 func (c FtDropindexIndex) Dd() FtDropindexDeleteDocsDd {
 	c.command.append("DD")
-	return (FtDropindexDeleteDocsDd)(c)
+	return FtDropindexDeleteDocsDd(c)
 }
 
 // Return Completed Redis command.
@@ -11662,7 +11662,7 @@ func (b Builder) FtExplain() FtExplain {
 
 func (c FtExplain) Index(index string) FtExplainIndex {
 	c.command.append(index)
-	return (FtExplainIndex)(c)
+	return FtExplainIndex(c)
 }
 
 type FtExplainDialect Base
@@ -11676,14 +11676,14 @@ type FtExplainIndex Base
 
 func (c FtExplainIndex) Query(query string) FtExplainQuery {
 	c.command.append(query)
-	return (FtExplainQuery)(c)
+	return FtExplainQuery(c)
 }
 
 type FtExplainQuery Base
 
 func (c FtExplainQuery) Dialect(dialect int64) FtExplainDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtExplainDialect)(c)
+	return FtExplainDialect(c)
 }
 
 // Return Completed Redis command.
@@ -11709,7 +11709,7 @@ func (b Builder) FtExplaincli() FtExplaincli {
 
 func (c FtExplaincli) Index(index string) FtExplaincliIndex {
 	c.command.append(index)
-	return (FtExplaincliIndex)(c)
+	return FtExplaincliIndex(c)
 }
 
 type FtExplaincliDialect Base
@@ -11723,14 +11723,14 @@ type FtExplaincliIndex Base
 
 func (c FtExplaincliIndex) Query(query string) FtExplaincliQuery {
 	c.command.append(query)
-	return (FtExplaincliQuery)(c)
+	return FtExplaincliQuery(c)
 }
 
 type FtExplaincliQuery Base
 
 func (c FtExplaincliQuery) Dialect(dialect int64) FtExplaincliDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtExplaincliDialect)(c)
+	return FtExplaincliDialect(c)
 }
 
 // Return Completed Redis command.
@@ -11756,7 +11756,7 @@ func (b Builder) FtInfo() FtInfo {
 
 func (c FtInfo) Index(index string) FtInfoIndex {
 	c.command.append(index)
-	return (FtInfoIndex)(c)
+	return FtInfoIndex(c)
 }
 
 type FtInfoIndex Base
@@ -11798,26 +11798,26 @@ func (b Builder) FtProfile() FtProfile {
 
 func (c FtProfile) Index(index string) FtProfileIndex {
 	c.command.append(index)
-	return (FtProfileIndex)(c)
+	return FtProfileIndex(c)
 }
 
 type FtProfileIndex Base
 
 func (c FtProfileIndex) Search() FtProfileQuerytypeSearch {
 	c.command.append("SEARCH")
-	return (FtProfileQuerytypeSearch)(c)
+	return FtProfileQuerytypeSearch(c)
 }
 
 func (c FtProfileIndex) Aggregate() FtProfileQuerytypeAggregate {
 	c.command.append("AGGREGATE")
-	return (FtProfileQuerytypeAggregate)(c)
+	return FtProfileQuerytypeAggregate(c)
 }
 
 type FtProfileLimited Base
 
 func (c FtProfileLimited) Query(query string) FtProfileQuery {
 	c.command.append("QUERY", query)
-	return (FtProfileQuery)(c)
+	return FtProfileQuery(c)
 }
 
 type FtProfileQuery Base
@@ -11831,24 +11831,24 @@ type FtProfileQuerytypeAggregate Base
 
 func (c FtProfileQuerytypeAggregate) Limited() FtProfileLimited {
 	c.command.append("LIMITED")
-	return (FtProfileLimited)(c)
+	return FtProfileLimited(c)
 }
 
 func (c FtProfileQuerytypeAggregate) Query(query string) FtProfileQuery {
 	c.command.append("QUERY", query)
-	return (FtProfileQuery)(c)
+	return FtProfileQuery(c)
 }
 
 type FtProfileQuerytypeSearch Base
 
 func (c FtProfileQuerytypeSearch) Limited() FtProfileLimited {
 	c.command.append("LIMITED")
-	return (FtProfileLimited)(c)
+	return FtProfileLimited(c)
 }
 
 func (c FtProfileQuerytypeSearch) Query(query string) FtProfileQuery {
 	c.command.append("QUERY", query)
-	return (FtProfileQuery)(c)
+	return FtProfileQuery(c)
 }
 
 // Searches the index with a textual query, returning either documents or just ids.
@@ -11869,7 +11869,7 @@ func (b Builder) FtSearch() FtSearch {
 
 func (c FtSearch) Index(index string) FtSearchIndex {
 	c.command.append(index)
-	return (FtSearchIndex)(c)
+	return FtSearchIndex(c)
 }
 
 type FtSearchDialect Base
@@ -11883,37 +11883,37 @@ type FtSearchExpander Base
 
 func (c FtSearchExpander) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchExpander) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchExpander) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchExpander) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchExpander) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchExpander) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchExpander) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -11925,27 +11925,27 @@ type FtSearchExplainscore Base
 
 func (c FtSearchExplainscore) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchExplainscore) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchExplainscore) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchExplainscore) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchExplainscore) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -11957,104 +11957,104 @@ type FtSearchFilterFilter Base
 
 func (c FtSearchFilterFilter) Min(min float64) FtSearchFilterMin {
 	c.command.append(strconv.FormatFloat(min, 'f', -1, 64))
-	return (FtSearchFilterMin)(c)
+	return FtSearchFilterMin(c)
 }
 
 type FtSearchFilterMax Base
 
 func (c FtSearchFilterMax) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchFilterMax) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchFilterMax) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchFilterMax) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchFilterMax) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchFilterMax) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchFilterMax) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchFilterMax) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchFilterMax) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchFilterMax) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchFilterMax) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchFilterMax) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchFilterMax) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchFilterMax) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchFilterMax) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchFilterMax) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchFilterMax) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchFilterMax) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchFilterMax) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12066,142 +12066,142 @@ type FtSearchFilterMin Base
 
 func (c FtSearchFilterMin) Max(max float64) FtSearchFilterMax {
 	c.command.append(strconv.FormatFloat(max, 'f', -1, 64))
-	return (FtSearchFilterMax)(c)
+	return FtSearchFilterMax(c)
 }
 
 type FtSearchGeoFilterGeofilter Base
 
 func (c FtSearchGeoFilterGeofilter) Lon(lon float64) FtSearchGeoFilterLon {
 	c.command.append(strconv.FormatFloat(lon, 'f', -1, 64))
-	return (FtSearchGeoFilterLon)(c)
+	return FtSearchGeoFilterLon(c)
 }
 
 type FtSearchGeoFilterLat Base
 
 func (c FtSearchGeoFilterLat) Radius(radius float64) FtSearchGeoFilterRadius {
 	c.command.append(strconv.FormatFloat(radius, 'f', -1, 64))
-	return (FtSearchGeoFilterRadius)(c)
+	return FtSearchGeoFilterRadius(c)
 }
 
 type FtSearchGeoFilterLon Base
 
 func (c FtSearchGeoFilterLon) Lat(lat float64) FtSearchGeoFilterLat {
 	c.command.append(strconv.FormatFloat(lat, 'f', -1, 64))
-	return (FtSearchGeoFilterLat)(c)
+	return FtSearchGeoFilterLat(c)
 }
 
 type FtSearchGeoFilterRadius Base
 
 func (c FtSearchGeoFilterRadius) M() FtSearchGeoFilterRadiusTypeM {
 	c.command.append("m")
-	return (FtSearchGeoFilterRadiusTypeM)(c)
+	return FtSearchGeoFilterRadiusTypeM(c)
 }
 
 func (c FtSearchGeoFilterRadius) Km() FtSearchGeoFilterRadiusTypeKm {
 	c.command.append("km")
-	return (FtSearchGeoFilterRadiusTypeKm)(c)
+	return FtSearchGeoFilterRadiusTypeKm(c)
 }
 
 func (c FtSearchGeoFilterRadius) Mi() FtSearchGeoFilterRadiusTypeMi {
 	c.command.append("mi")
-	return (FtSearchGeoFilterRadiusTypeMi)(c)
+	return FtSearchGeoFilterRadiusTypeMi(c)
 }
 
 func (c FtSearchGeoFilterRadius) Ft() FtSearchGeoFilterRadiusTypeFt {
 	c.command.append("ft")
-	return (FtSearchGeoFilterRadiusTypeFt)(c)
+	return FtSearchGeoFilterRadiusTypeFt(c)
 }
 
 type FtSearchGeoFilterRadiusTypeFt Base
 
 func (c FtSearchGeoFilterRadiusTypeFt) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeFt) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12213,92 +12213,92 @@ type FtSearchGeoFilterRadiusTypeKm Base
 
 func (c FtSearchGeoFilterRadiusTypeKm) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeKm) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12310,92 +12310,92 @@ type FtSearchGeoFilterRadiusTypeM Base
 
 func (c FtSearchGeoFilterRadiusTypeM) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeM) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12407,92 +12407,92 @@ type FtSearchGeoFilterRadiusTypeMi Base
 
 func (c FtSearchGeoFilterRadiusTypeMi) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchGeoFilterRadiusTypeMi) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12509,67 +12509,67 @@ func (c FtSearchHighlightFieldsField) Field(field ...string) FtSearchHighlightFi
 
 func (c FtSearchHighlightFieldsField) Tags() FtSearchHighlightTagsTags {
 	c.command.append("TAGS")
-	return (FtSearchHighlightTagsTags)(c)
+	return FtSearchHighlightTagsTags(c)
 }
 
 func (c FtSearchHighlightFieldsField) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchHighlightFieldsField) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchHighlightFieldsField) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchHighlightFieldsField) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchHighlightFieldsField) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchHighlightFieldsField) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchHighlightFieldsField) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchHighlightFieldsField) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchHighlightFieldsField) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchHighlightFieldsField) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchHighlightFieldsField) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchHighlightFieldsField) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12581,79 +12581,79 @@ type FtSearchHighlightFieldsFields Base
 
 func (c FtSearchHighlightFieldsFields) Field(field ...string) FtSearchHighlightFieldsField {
 	c.command.append(field...)
-	return (FtSearchHighlightFieldsField)(c)
+	return FtSearchHighlightFieldsField(c)
 }
 
 type FtSearchHighlightHighlight Base
 
 func (c FtSearchHighlightHighlight) Fields(count string) FtSearchHighlightFieldsFields {
 	c.command.append("FIELDS", count)
-	return (FtSearchHighlightFieldsFields)(c)
+	return FtSearchHighlightFieldsFields(c)
 }
 
 func (c FtSearchHighlightHighlight) Tags() FtSearchHighlightTagsTags {
 	c.command.append("TAGS")
-	return (FtSearchHighlightTagsTags)(c)
+	return FtSearchHighlightTagsTags(c)
 }
 
 func (c FtSearchHighlightHighlight) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchHighlightHighlight) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchHighlightHighlight) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchHighlightHighlight) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchHighlightHighlight) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchHighlightHighlight) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchHighlightHighlight) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchHighlightHighlight) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchHighlightHighlight) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchHighlightHighlight) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchHighlightHighlight) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchHighlightHighlight) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12665,62 +12665,62 @@ type FtSearchHighlightTagsOpenClose Base
 
 func (c FtSearchHighlightTagsOpenClose) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchHighlightTagsOpenClose) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12732,7 +12732,7 @@ type FtSearchHighlightTagsTags Base
 
 func (c FtSearchHighlightTagsTags) OpenClose(open string, close string) FtSearchHighlightTagsOpenClose {
 	c.command.append(open, close)
-	return (FtSearchHighlightTagsOpenClose)(c)
+	return FtSearchHighlightTagsOpenClose(c)
 }
 
 type FtSearchInFieldsField Base
@@ -12744,77 +12744,77 @@ func (c FtSearchInFieldsField) Field(field ...string) FtSearchInFieldsField {
 
 func (c FtSearchInFieldsField) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchInFieldsField) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchInFieldsField) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchInFieldsField) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchInFieldsField) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchInFieldsField) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchInFieldsField) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchInFieldsField) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchInFieldsField) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchInFieldsField) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchInFieldsField) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchInFieldsField) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchInFieldsField) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchInFieldsField) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchInFieldsField) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12826,14 +12826,14 @@ type FtSearchInFieldsInfields Base
 
 func (c FtSearchInFieldsInfields) Field(field ...string) FtSearchInFieldsField {
 	c.command.append(field...)
-	return (FtSearchInFieldsField)(c)
+	return FtSearchInFieldsField(c)
 }
 
 type FtSearchInKeysInkeys Base
 
 func (c FtSearchInKeysInkeys) Key(key ...string) FtSearchInKeysKey {
 	c.command.append(key...)
-	return (FtSearchInKeysKey)(c)
+	return FtSearchInKeysKey(c)
 }
 
 type FtSearchInKeysKey Base
@@ -12845,82 +12845,82 @@ func (c FtSearchInKeysKey) Key(key ...string) FtSearchInKeysKey {
 
 func (c FtSearchInKeysKey) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchInKeysKey) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchInKeysKey) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchInKeysKey) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchInKeysKey) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchInKeysKey) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchInKeysKey) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchInKeysKey) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchInKeysKey) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchInKeysKey) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchInKeysKey) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchInKeysKey) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchInKeysKey) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchInKeysKey) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchInKeysKey) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchInKeysKey) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12932,49 +12932,49 @@ type FtSearchIndex Base
 
 func (c FtSearchIndex) Query(query string) FtSearchQuery {
 	c.command.append(query)
-	return (FtSearchQuery)(c)
+	return FtSearchQuery(c)
 }
 
 type FtSearchLanguage Base
 
 func (c FtSearchLanguage) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchLanguage) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchLanguage) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchLanguage) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchLanguage) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchLanguage) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchLanguage) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchLanguage) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -12986,19 +12986,19 @@ type FtSearchLimitLimit Base
 
 func (c FtSearchLimitLimit) OffsetNum(offset int64, num int64) FtSearchLimitOffsetNum {
 	c.command.append(strconv.FormatInt(offset, 10), strconv.FormatInt(num, 10))
-	return (FtSearchLimitOffsetNum)(c)
+	return FtSearchLimitOffsetNum(c)
 }
 
 type FtSearchLimitOffsetNum Base
 
 func (c FtSearchLimitOffsetNum) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchLimitOffsetNum) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13010,122 +13010,122 @@ type FtSearchNocontent Base
 
 func (c FtSearchNocontent) Verbatim() FtSearchVerbatim {
 	c.command.append("VERBATIM")
-	return (FtSearchVerbatim)(c)
+	return FtSearchVerbatim(c)
 }
 
 func (c FtSearchNocontent) Nostopwords() FtSearchNostopwords {
 	c.command.append("NOSTOPWORDS")
-	return (FtSearchNostopwords)(c)
+	return FtSearchNostopwords(c)
 }
 
 func (c FtSearchNocontent) Withscores() FtSearchWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSearchWithscores)(c)
+	return FtSearchWithscores(c)
 }
 
 func (c FtSearchNocontent) Withpayloads() FtSearchWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSearchWithpayloads)(c)
+	return FtSearchWithpayloads(c)
 }
 
 func (c FtSearchNocontent) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchNocontent) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchNocontent) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchNocontent) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchNocontent) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchNocontent) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchNocontent) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchNocontent) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchNocontent) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchNocontent) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchNocontent) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchNocontent) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchNocontent) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchNocontent) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchNocontent) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchNocontent) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchNocontent) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchNocontent) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchNocontent) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchNocontent) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13137,112 +13137,112 @@ type FtSearchNostopwords Base
 
 func (c FtSearchNostopwords) Withscores() FtSearchWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSearchWithscores)(c)
+	return FtSearchWithscores(c)
 }
 
 func (c FtSearchNostopwords) Withpayloads() FtSearchWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSearchWithpayloads)(c)
+	return FtSearchWithpayloads(c)
 }
 
 func (c FtSearchNostopwords) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchNostopwords) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchNostopwords) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchNostopwords) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchNostopwords) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchNostopwords) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchNostopwords) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchNostopwords) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchNostopwords) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchNostopwords) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchNostopwords) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchNostopwords) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchNostopwords) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchNostopwords) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchNostopwords) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchNostopwords) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchNostopwords) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchNostopwords) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchNostopwords) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchNostopwords) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13259,7 +13259,7 @@ func (c FtSearchParamsNameValue) NameValue(name string, value string) FtSearchPa
 
 func (c FtSearchParamsNameValue) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13270,36 +13270,36 @@ func (c FtSearchParamsNameValue) Build() Completed {
 type FtSearchParamsNargs Base
 
 func (c FtSearchParamsNargs) NameValue() FtSearchParamsNameValue {
-	return (FtSearchParamsNameValue)(c)
+	return FtSearchParamsNameValue(c)
 }
 
 type FtSearchParamsParams Base
 
 func (c FtSearchParamsParams) Nargs(nargs int64) FtSearchParamsNargs {
 	c.command.append(strconv.FormatInt(nargs, 10))
-	return (FtSearchParamsNargs)(c)
+	return FtSearchParamsNargs(c)
 }
 
 type FtSearchPayload Base
 
 func (c FtSearchPayload) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchPayload) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchPayload) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchPayload) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13311,127 +13311,127 @@ type FtSearchQuery Base
 
 func (c FtSearchQuery) Nocontent() FtSearchNocontent {
 	c.command.append("NOCONTENT")
-	return (FtSearchNocontent)(c)
+	return FtSearchNocontent(c)
 }
 
 func (c FtSearchQuery) Verbatim() FtSearchVerbatim {
 	c.command.append("VERBATIM")
-	return (FtSearchVerbatim)(c)
+	return FtSearchVerbatim(c)
 }
 
 func (c FtSearchQuery) Nostopwords() FtSearchNostopwords {
 	c.command.append("NOSTOPWORDS")
-	return (FtSearchNostopwords)(c)
+	return FtSearchNostopwords(c)
 }
 
 func (c FtSearchQuery) Withscores() FtSearchWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSearchWithscores)(c)
+	return FtSearchWithscores(c)
 }
 
 func (c FtSearchQuery) Withpayloads() FtSearchWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSearchWithpayloads)(c)
+	return FtSearchWithpayloads(c)
 }
 
 func (c FtSearchQuery) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchQuery) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchQuery) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchQuery) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchQuery) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchQuery) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchQuery) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchQuery) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchQuery) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchQuery) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchQuery) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchQuery) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchQuery) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchQuery) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchQuery) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchQuery) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchQuery) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchQuery) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchQuery) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchQuery) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13443,77 +13443,77 @@ type FtSearchReturnIdentifiersAs Base
 
 func (c FtSearchReturnIdentifiersAs) Identifier(identifier string) FtSearchReturnIdentifiersIdentifier {
 	c.command.append(identifier)
-	return (FtSearchReturnIdentifiersIdentifier)(c)
+	return FtSearchReturnIdentifiersIdentifier(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchReturnIdentifiersAs) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13525,7 +13525,7 @@ type FtSearchReturnIdentifiersIdentifier Base
 
 func (c FtSearchReturnIdentifiersIdentifier) As(property string) FtSearchReturnIdentifiersAs {
 	c.command.append("AS", property)
-	return (FtSearchReturnIdentifiersAs)(c)
+	return FtSearchReturnIdentifiersAs(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Identifier(identifier string) FtSearchReturnIdentifiersIdentifier {
@@ -13535,72 +13535,72 @@ func (c FtSearchReturnIdentifiersIdentifier) Identifier(identifier string) FtSea
 
 func (c FtSearchReturnIdentifiersIdentifier) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchReturnIdentifiersIdentifier) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13612,39 +13612,39 @@ type FtSearchReturnReturn Base
 
 func (c FtSearchReturnReturn) Identifier(identifier string) FtSearchReturnIdentifiersIdentifier {
 	c.command.append(identifier)
-	return (FtSearchReturnIdentifiersIdentifier)(c)
+	return FtSearchReturnIdentifiersIdentifier(c)
 }
 
 type FtSearchScorer Base
 
 func (c FtSearchScorer) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchScorer) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchScorer) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchScorer) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchScorer) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchScorer) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13656,57 +13656,57 @@ type FtSearchSlop Base
 
 func (c FtSearchSlop) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSlop) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSlop) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSlop) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSlop) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSlop) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSlop) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSlop) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSlop) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSlop) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSlop) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13718,17 +13718,17 @@ type FtSearchSortbyOrderAsc Base
 
 func (c FtSearchSortbyOrderAsc) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSortbyOrderAsc) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSortbyOrderAsc) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13740,17 +13740,17 @@ type FtSearchSortbyOrderDesc Base
 
 func (c FtSearchSortbyOrderDesc) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSortbyOrderDesc) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSortbyOrderDesc) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13762,27 +13762,27 @@ type FtSearchSortbySortby Base
 
 func (c FtSearchSortbySortby) Asc() FtSearchSortbyOrderAsc {
 	c.command.append("ASC")
-	return (FtSearchSortbyOrderAsc)(c)
+	return FtSearchSortbyOrderAsc(c)
 }
 
 func (c FtSearchSortbySortby) Desc() FtSearchSortbyOrderDesc {
 	c.command.append("DESC")
-	return (FtSearchSortbyOrderDesc)(c)
+	return FtSearchSortbyOrderDesc(c)
 }
 
 func (c FtSearchSortbySortby) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSortbySortby) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSortbySortby) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13799,82 +13799,82 @@ func (c FtSearchSummarizeFieldsField) Field(field ...string) FtSearchSummarizeFi
 
 func (c FtSearchSummarizeFieldsField) Frags(num int64) FtSearchSummarizeFrags {
 	c.command.append("FRAGS", strconv.FormatInt(num, 10))
-	return (FtSearchSummarizeFrags)(c)
+	return FtSearchSummarizeFrags(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Len(fragsize int64) FtSearchSummarizeLen {
 	c.command.append("LEN", strconv.FormatInt(fragsize, 10))
-	return (FtSearchSummarizeLen)(c)
+	return FtSearchSummarizeLen(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Separator(separator string) FtSearchSummarizeSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtSearchSummarizeSeparator)(c)
+	return FtSearchSummarizeSeparator(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSummarizeFieldsField) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13886,84 +13886,84 @@ type FtSearchSummarizeFieldsFields Base
 
 func (c FtSearchSummarizeFieldsFields) Field(field ...string) FtSearchSummarizeFieldsField {
 	c.command.append(field...)
-	return (FtSearchSummarizeFieldsField)(c)
+	return FtSearchSummarizeFieldsField(c)
 }
 
 type FtSearchSummarizeFrags Base
 
 func (c FtSearchSummarizeFrags) Len(fragsize int64) FtSearchSummarizeLen {
 	c.command.append("LEN", strconv.FormatInt(fragsize, 10))
-	return (FtSearchSummarizeLen)(c)
+	return FtSearchSummarizeLen(c)
 }
 
 func (c FtSearchSummarizeFrags) Separator(separator string) FtSearchSummarizeSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtSearchSummarizeSeparator)(c)
+	return FtSearchSummarizeSeparator(c)
 }
 
 func (c FtSearchSummarizeFrags) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchSummarizeFrags) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchSummarizeFrags) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSummarizeFrags) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSummarizeFrags) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSummarizeFrags) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSummarizeFrags) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSummarizeFrags) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSummarizeFrags) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSummarizeFrags) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSummarizeFrags) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSummarizeFrags) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSummarizeFrags) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -13975,72 +13975,72 @@ type FtSearchSummarizeLen Base
 
 func (c FtSearchSummarizeLen) Separator(separator string) FtSearchSummarizeSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtSearchSummarizeSeparator)(c)
+	return FtSearchSummarizeSeparator(c)
 }
 
 func (c FtSearchSummarizeLen) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchSummarizeLen) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchSummarizeLen) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSummarizeLen) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSummarizeLen) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSummarizeLen) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSummarizeLen) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSummarizeLen) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSummarizeLen) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSummarizeLen) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSummarizeLen) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSummarizeLen) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSummarizeLen) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14052,67 +14052,67 @@ type FtSearchSummarizeSeparator Base
 
 func (c FtSearchSummarizeSeparator) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchSummarizeSeparator) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchSummarizeSeparator) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSummarizeSeparator) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSummarizeSeparator) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSummarizeSeparator) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSummarizeSeparator) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSummarizeSeparator) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSummarizeSeparator) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSummarizeSeparator) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSummarizeSeparator) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSummarizeSeparator) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSummarizeSeparator) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14124,87 +14124,87 @@ type FtSearchSummarizeSummarize Base
 
 func (c FtSearchSummarizeSummarize) Fields(count string) FtSearchSummarizeFieldsFields {
 	c.command.append("FIELDS", count)
-	return (FtSearchSummarizeFieldsFields)(c)
+	return FtSearchSummarizeFieldsFields(c)
 }
 
 func (c FtSearchSummarizeSummarize) Frags(num int64) FtSearchSummarizeFrags {
 	c.command.append("FRAGS", strconv.FormatInt(num, 10))
-	return (FtSearchSummarizeFrags)(c)
+	return FtSearchSummarizeFrags(c)
 }
 
 func (c FtSearchSummarizeSummarize) Len(fragsize int64) FtSearchSummarizeLen {
 	c.command.append("LEN", strconv.FormatInt(fragsize, 10))
-	return (FtSearchSummarizeLen)(c)
+	return FtSearchSummarizeLen(c)
 }
 
 func (c FtSearchSummarizeSummarize) Separator(separator string) FtSearchSummarizeSeparator {
 	c.command.append("SEPARATOR", separator)
-	return (FtSearchSummarizeSeparator)(c)
+	return FtSearchSummarizeSeparator(c)
 }
 
 func (c FtSearchSummarizeSummarize) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchSummarizeSummarize) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchSummarizeSummarize) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchSummarizeSummarize) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchSummarizeSummarize) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchSummarizeSummarize) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchSummarizeSummarize) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchSummarizeSummarize) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchSummarizeSummarize) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchSummarizeSummarize) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchSummarizeSummarize) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchSummarizeSummarize) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchSummarizeSummarize) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14216,47 +14216,47 @@ type FtSearchTagsInorder Base
 
 func (c FtSearchTagsInorder) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchTagsInorder) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchTagsInorder) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchTagsInorder) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchTagsInorder) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchTagsInorder) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchTagsInorder) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchTagsInorder) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchTagsInorder) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14268,52 +14268,52 @@ type FtSearchTimeout Base
 
 func (c FtSearchTimeout) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchTimeout) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchTimeout) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchTimeout) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchTimeout) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchTimeout) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchTimeout) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchTimeout) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchTimeout) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchTimeout) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14325,117 +14325,117 @@ type FtSearchVerbatim Base
 
 func (c FtSearchVerbatim) Nostopwords() FtSearchNostopwords {
 	c.command.append("NOSTOPWORDS")
-	return (FtSearchNostopwords)(c)
+	return FtSearchNostopwords(c)
 }
 
 func (c FtSearchVerbatim) Withscores() FtSearchWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSearchWithscores)(c)
+	return FtSearchWithscores(c)
 }
 
 func (c FtSearchVerbatim) Withpayloads() FtSearchWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSearchWithpayloads)(c)
+	return FtSearchWithpayloads(c)
 }
 
 func (c FtSearchVerbatim) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchVerbatim) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchVerbatim) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchVerbatim) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchVerbatim) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchVerbatim) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchVerbatim) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchVerbatim) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchVerbatim) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchVerbatim) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchVerbatim) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchVerbatim) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchVerbatim) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchVerbatim) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchVerbatim) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchVerbatim) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchVerbatim) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchVerbatim) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchVerbatim) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchVerbatim) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14447,102 +14447,102 @@ type FtSearchWithpayloads Base
 
 func (c FtSearchWithpayloads) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchWithpayloads) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchWithpayloads) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchWithpayloads) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchWithpayloads) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchWithpayloads) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchWithpayloads) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchWithpayloads) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchWithpayloads) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchWithpayloads) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchWithpayloads) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchWithpayloads) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchWithpayloads) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchWithpayloads) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchWithpayloads) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchWithpayloads) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchWithpayloads) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchWithpayloads) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchWithpayloads) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchWithpayloads) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14554,107 +14554,107 @@ type FtSearchWithscores Base
 
 func (c FtSearchWithscores) Withpayloads() FtSearchWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSearchWithpayloads)(c)
+	return FtSearchWithpayloads(c)
 }
 
 func (c FtSearchWithscores) Withsortkeys() FtSearchWithsortkeys {
 	c.command.append("WITHSORTKEYS")
-	return (FtSearchWithsortkeys)(c)
+	return FtSearchWithsortkeys(c)
 }
 
 func (c FtSearchWithscores) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchWithscores) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchWithscores) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchWithscores) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchWithscores) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchWithscores) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchWithscores) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchWithscores) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchWithscores) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchWithscores) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchWithscores) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchWithscores) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchWithscores) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchWithscores) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchWithscores) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchWithscores) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchWithscores) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchWithscores) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchWithscores) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14666,97 +14666,97 @@ type FtSearchWithsortkeys Base
 
 func (c FtSearchWithsortkeys) Filter(numericField string) FtSearchFilterFilter {
 	c.command.append("FILTER", numericField)
-	return (FtSearchFilterFilter)(c)
+	return FtSearchFilterFilter(c)
 }
 
 func (c FtSearchWithsortkeys) Geofilter(geoField string) FtSearchGeoFilterGeofilter {
 	c.command.append("GEOFILTER", geoField)
-	return (FtSearchGeoFilterGeofilter)(c)
+	return FtSearchGeoFilterGeofilter(c)
 }
 
 func (c FtSearchWithsortkeys) Inkeys(count string) FtSearchInKeysInkeys {
 	c.command.append("INKEYS", count)
-	return (FtSearchInKeysInkeys)(c)
+	return FtSearchInKeysInkeys(c)
 }
 
 func (c FtSearchWithsortkeys) Infields(count string) FtSearchInFieldsInfields {
 	c.command.append("INFIELDS", count)
-	return (FtSearchInFieldsInfields)(c)
+	return FtSearchInFieldsInfields(c)
 }
 
 func (c FtSearchWithsortkeys) Return(count string) FtSearchReturnReturn {
 	c.command.append("RETURN", count)
-	return (FtSearchReturnReturn)(c)
+	return FtSearchReturnReturn(c)
 }
 
 func (c FtSearchWithsortkeys) Summarize() FtSearchSummarizeSummarize {
 	c.command.append("SUMMARIZE")
-	return (FtSearchSummarizeSummarize)(c)
+	return FtSearchSummarizeSummarize(c)
 }
 
 func (c FtSearchWithsortkeys) Highlight() FtSearchHighlightHighlight {
 	c.command.append("HIGHLIGHT")
-	return (FtSearchHighlightHighlight)(c)
+	return FtSearchHighlightHighlight(c)
 }
 
 func (c FtSearchWithsortkeys) Slop(slop int64) FtSearchSlop {
 	c.command.append("SLOP", strconv.FormatInt(slop, 10))
-	return (FtSearchSlop)(c)
+	return FtSearchSlop(c)
 }
 
 func (c FtSearchWithsortkeys) Timeout(timeout int64) FtSearchTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (FtSearchTimeout)(c)
+	return FtSearchTimeout(c)
 }
 
 func (c FtSearchWithsortkeys) Inorder() FtSearchTagsInorder {
 	c.command.append("INORDER")
-	return (FtSearchTagsInorder)(c)
+	return FtSearchTagsInorder(c)
 }
 
 func (c FtSearchWithsortkeys) Language(language string) FtSearchLanguage {
 	c.command.append("LANGUAGE", language)
-	return (FtSearchLanguage)(c)
+	return FtSearchLanguage(c)
 }
 
 func (c FtSearchWithsortkeys) Expander(expander string) FtSearchExpander {
 	c.command.append("EXPANDER", expander)
-	return (FtSearchExpander)(c)
+	return FtSearchExpander(c)
 }
 
 func (c FtSearchWithsortkeys) Scorer(scorer string) FtSearchScorer {
 	c.command.append("SCORER", scorer)
-	return (FtSearchScorer)(c)
+	return FtSearchScorer(c)
 }
 
 func (c FtSearchWithsortkeys) Explainscore() FtSearchExplainscore {
 	c.command.append("EXPLAINSCORE")
-	return (FtSearchExplainscore)(c)
+	return FtSearchExplainscore(c)
 }
 
 func (c FtSearchWithsortkeys) Payload(payload string) FtSearchPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSearchPayload)(c)
+	return FtSearchPayload(c)
 }
 
 func (c FtSearchWithsortkeys) Sortby(sortby string) FtSearchSortbySortby {
 	c.command.append("SORTBY", sortby)
-	return (FtSearchSortbySortby)(c)
+	return FtSearchSortbySortby(c)
 }
 
 func (c FtSearchWithsortkeys) Limit() FtSearchLimitLimit {
 	c.command.append("LIMIT")
-	return (FtSearchLimitLimit)(c)
+	return FtSearchLimitLimit(c)
 }
 
 func (c FtSearchWithsortkeys) Params() FtSearchParamsParams {
 	c.command.append("PARAMS")
-	return (FtSearchParamsParams)(c)
+	return FtSearchParamsParams(c)
 }
 
 func (c FtSearchWithsortkeys) Dialect(dialect int64) FtSearchDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSearchDialect)(c)
+	return FtSearchDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14782,7 +14782,7 @@ func (b Builder) FtSpellcheck() FtSpellcheck {
 
 func (c FtSpellcheck) Index(index string) FtSpellcheckIndex {
 	c.command.append(index)
-	return (FtSpellcheckIndex)(c)
+	return FtSpellcheckIndex(c)
 }
 
 type FtSpellcheckDialect Base
@@ -14796,17 +14796,17 @@ type FtSpellcheckDistance Base
 
 func (c FtSpellcheckDistance) TermsInclude() FtSpellcheckTermsTermsInclude {
 	c.command.append("TERMS", "INCLUDE")
-	return (FtSpellcheckTermsTermsInclude)(c)
+	return FtSpellcheckTermsTermsInclude(c)
 }
 
 func (c FtSpellcheckDistance) TermsExclude() FtSpellcheckTermsTermsExclude {
 	c.command.append("TERMS", "EXCLUDE")
-	return (FtSpellcheckTermsTermsExclude)(c)
+	return FtSpellcheckTermsTermsExclude(c)
 }
 
 func (c FtSpellcheckDistance) Dialect(dialect int64) FtSpellcheckDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSpellcheckDialect)(c)
+	return FtSpellcheckDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14818,29 +14818,29 @@ type FtSpellcheckIndex Base
 
 func (c FtSpellcheckIndex) Query(query string) FtSpellcheckQuery {
 	c.command.append(query)
-	return (FtSpellcheckQuery)(c)
+	return FtSpellcheckQuery(c)
 }
 
 type FtSpellcheckQuery Base
 
 func (c FtSpellcheckQuery) Distance(distance int64) FtSpellcheckDistance {
 	c.command.append("DISTANCE", strconv.FormatInt(distance, 10))
-	return (FtSpellcheckDistance)(c)
+	return FtSpellcheckDistance(c)
 }
 
 func (c FtSpellcheckQuery) TermsInclude() FtSpellcheckTermsTermsInclude {
 	c.command.append("TERMS", "INCLUDE")
-	return (FtSpellcheckTermsTermsInclude)(c)
+	return FtSpellcheckTermsTermsInclude(c)
 }
 
 func (c FtSpellcheckQuery) TermsExclude() FtSpellcheckTermsTermsExclude {
 	c.command.append("TERMS", "EXCLUDE")
-	return (FtSpellcheckTermsTermsExclude)(c)
+	return FtSpellcheckTermsTermsExclude(c)
 }
 
 func (c FtSpellcheckQuery) Dialect(dialect int64) FtSpellcheckDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSpellcheckDialect)(c)
+	return FtSpellcheckDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14852,12 +14852,12 @@ type FtSpellcheckTermsDictionary Base
 
 func (c FtSpellcheckTermsDictionary) Terms(terms ...string) FtSpellcheckTermsTerms {
 	c.command.append(terms...)
-	return (FtSpellcheckTermsTerms)(c)
+	return FtSpellcheckTermsTerms(c)
 }
 
 func (c FtSpellcheckTermsDictionary) Dialect(dialect int64) FtSpellcheckDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSpellcheckDialect)(c)
+	return FtSpellcheckDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14874,7 +14874,7 @@ func (c FtSpellcheckTermsTerms) Terms(terms ...string) FtSpellcheckTermsTerms {
 
 func (c FtSpellcheckTermsTerms) Dialect(dialect int64) FtSpellcheckDialect {
 	c.command.append("DIALECT", strconv.FormatInt(dialect, 10))
-	return (FtSpellcheckDialect)(c)
+	return FtSpellcheckDialect(c)
 }
 
 // Return Completed Redis command.
@@ -14886,14 +14886,14 @@ type FtSpellcheckTermsTermsExclude Base
 
 func (c FtSpellcheckTermsTermsExclude) Dictionary(dictionary string) FtSpellcheckTermsDictionary {
 	c.command.append(dictionary)
-	return (FtSpellcheckTermsDictionary)(c)
+	return FtSpellcheckTermsDictionary(c)
 }
 
 type FtSpellcheckTermsTermsInclude Base
 
 func (c FtSpellcheckTermsTermsInclude) Dictionary(dictionary string) FtSpellcheckTermsDictionary {
 	c.command.append(dictionary)
-	return (FtSpellcheckTermsDictionary)(c)
+	return FtSpellcheckTermsDictionary(c)
 }
 
 // Adds a suggestion string to an auto-complete suggestion dictionary.
@@ -14914,14 +14914,14 @@ func (b Builder) FtSugadd() FtSugadd {
 
 func (c FtSugadd) Key(key string) FtSugaddKey {
 	c.command.append(key)
-	return (FtSugaddKey)(c)
+	return FtSugaddKey(c)
 }
 
 type FtSugaddIncrementScoreIncr Base
 
 func (c FtSugaddIncrementScoreIncr) Payload(payload string) FtSugaddPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSugaddPayload)(c)
+	return FtSugaddPayload(c)
 }
 
 // Return Completed Redis command.
@@ -14933,7 +14933,7 @@ type FtSugaddKey Base
 
 func (c FtSugaddKey) String(string string) FtSugaddString {
 	c.command.append(string)
-	return (FtSugaddString)(c)
+	return FtSugaddString(c)
 }
 
 type FtSugaddPayload Base
@@ -14947,12 +14947,12 @@ type FtSugaddScore Base
 
 func (c FtSugaddScore) Incr() FtSugaddIncrementScoreIncr {
 	c.command.append("INCR")
-	return (FtSugaddIncrementScoreIncr)(c)
+	return FtSugaddIncrementScoreIncr(c)
 }
 
 func (c FtSugaddScore) Payload(payload string) FtSugaddPayload {
 	c.command.append("PAYLOAD", payload)
-	return (FtSugaddPayload)(c)
+	return FtSugaddPayload(c)
 }
 
 // Return Completed Redis command.
@@ -14964,7 +14964,7 @@ type FtSugaddString Base
 
 func (c FtSugaddString) Score(score float64) FtSugaddScore {
 	c.command.append(strconv.FormatFloat(score, 'f', -1, 64))
-	return (FtSugaddScore)(c)
+	return FtSugaddScore(c)
 }
 
 // Deletes a string from a suggestion index.
@@ -14985,14 +14985,14 @@ func (b Builder) FtSugdel() FtSugdel {
 
 func (c FtSugdel) Key(key string) FtSugdelKey {
 	c.command.append(key)
-	return (FtSugdelKey)(c)
+	return FtSugdelKey(c)
 }
 
 type FtSugdelKey Base
 
 func (c FtSugdelKey) String(string string) FtSugdelString {
 	c.command.append(string)
-	return (FtSugdelString)(c)
+	return FtSugdelString(c)
 }
 
 type FtSugdelString Base
@@ -15020,24 +15020,24 @@ func (b Builder) FtSugget() FtSugget {
 
 func (c FtSugget) Key(key string) FtSuggetKey {
 	c.command.append(key)
-	return (FtSuggetKey)(c)
+	return FtSuggetKey(c)
 }
 
 type FtSuggetFuzzy Base
 
 func (c FtSuggetFuzzy) Withscores() FtSuggetWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSuggetWithscores)(c)
+	return FtSuggetWithscores(c)
 }
 
 func (c FtSuggetFuzzy) Withpayloads() FtSuggetWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSuggetWithpayloads)(c)
+	return FtSuggetWithpayloads(c)
 }
 
 func (c FtSuggetFuzzy) Max(max int64) FtSuggetMax {
 	c.command.append("MAX", strconv.FormatInt(max, 10))
-	return (FtSuggetMax)(c)
+	return FtSuggetMax(c)
 }
 
 // Return Completed Redis command.
@@ -15049,7 +15049,7 @@ type FtSuggetKey Base
 
 func (c FtSuggetKey) Prefix(prefix string) FtSuggetPrefix {
 	c.command.append(prefix)
-	return (FtSuggetPrefix)(c)
+	return FtSuggetPrefix(c)
 }
 
 type FtSuggetMax Base
@@ -15063,22 +15063,22 @@ type FtSuggetPrefix Base
 
 func (c FtSuggetPrefix) Fuzzy() FtSuggetFuzzy {
 	c.command.append("FUZZY")
-	return (FtSuggetFuzzy)(c)
+	return FtSuggetFuzzy(c)
 }
 
 func (c FtSuggetPrefix) Withscores() FtSuggetWithscores {
 	c.command.append("WITHSCORES")
-	return (FtSuggetWithscores)(c)
+	return FtSuggetWithscores(c)
 }
 
 func (c FtSuggetPrefix) Withpayloads() FtSuggetWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSuggetWithpayloads)(c)
+	return FtSuggetWithpayloads(c)
 }
 
 func (c FtSuggetPrefix) Max(max int64) FtSuggetMax {
 	c.command.append("MAX", strconv.FormatInt(max, 10))
-	return (FtSuggetMax)(c)
+	return FtSuggetMax(c)
 }
 
 // Return Completed Redis command.
@@ -15090,7 +15090,7 @@ type FtSuggetWithpayloads Base
 
 func (c FtSuggetWithpayloads) Max(max int64) FtSuggetMax {
 	c.command.append("MAX", strconv.FormatInt(max, 10))
-	return (FtSuggetMax)(c)
+	return FtSuggetMax(c)
 }
 
 // Return Completed Redis command.
@@ -15102,12 +15102,12 @@ type FtSuggetWithscores Base
 
 func (c FtSuggetWithscores) Withpayloads() FtSuggetWithpayloads {
 	c.command.append("WITHPAYLOADS")
-	return (FtSuggetWithpayloads)(c)
+	return FtSuggetWithpayloads(c)
 }
 
 func (c FtSuggetWithscores) Max(max int64) FtSuggetMax {
 	c.command.append("MAX", strconv.FormatInt(max, 10))
-	return (FtSuggetMax)(c)
+	return FtSuggetMax(c)
 }
 
 // Return Completed Redis command.
@@ -15133,7 +15133,7 @@ func (b Builder) FtSuglen() FtSuglen {
 
 func (c FtSuglen) Key(key string) FtSuglenKey {
 	c.command.append(key)
-	return (FtSuglenKey)(c)
+	return FtSuglenKey(c)
 }
 
 type FtSuglenKey Base
@@ -15161,7 +15161,7 @@ func (b Builder) FtSyndump() FtSyndump {
 
 func (c FtSyndump) Index(index string) FtSyndumpIndex {
 	c.command.append(index)
-	return (FtSyndumpIndex)(c)
+	return FtSyndumpIndex(c)
 }
 
 type FtSyndumpIndex Base
@@ -15189,33 +15189,33 @@ func (b Builder) FtSynupdate() FtSynupdate {
 
 func (c FtSynupdate) Index(index string) FtSynupdateIndex {
 	c.command.append(index)
-	return (FtSynupdateIndex)(c)
+	return FtSynupdateIndex(c)
 }
 
 type FtSynupdateIndex Base
 
 func (c FtSynupdateIndex) SynonymGroupId(synonymGroupId string) FtSynupdateSynonymGroupId {
 	c.command.append(synonymGroupId)
-	return (FtSynupdateSynonymGroupId)(c)
+	return FtSynupdateSynonymGroupId(c)
 }
 
 type FtSynupdateSkipinitialscan Base
 
 func (c FtSynupdateSkipinitialscan) Term(term ...string) FtSynupdateTerm {
 	c.command.append(term...)
-	return (FtSynupdateTerm)(c)
+	return FtSynupdateTerm(c)
 }
 
 type FtSynupdateSynonymGroupId Base
 
 func (c FtSynupdateSynonymGroupId) Skipinitialscan() FtSynupdateSkipinitialscan {
 	c.command.append("SKIPINITIALSCAN")
-	return (FtSynupdateSkipinitialscan)(c)
+	return FtSynupdateSkipinitialscan(c)
 }
 
 func (c FtSynupdateSynonymGroupId) Term(term ...string) FtSynupdateTerm {
 	c.command.append(term...)
-	return (FtSynupdateTerm)(c)
+	return FtSynupdateTerm(c)
 }
 
 type FtSynupdateTerm Base
@@ -15248,7 +15248,7 @@ func (b Builder) FtTagvals() FtTagvals {
 
 func (c FtTagvals) Index(index string) FtTagvalsIndex {
 	c.command.append(index)
-	return (FtTagvalsIndex)(c)
+	return FtTagvalsIndex(c)
 }
 
 type FtTagvalsFieldName Base
@@ -15262,7 +15262,7 @@ type FtTagvalsIndex Base
 
 func (c FtTagvalsIndex) FieldName(fieldName string) FtTagvalsFieldName {
 	c.command.append(fieldName)
-	return (FtTagvalsFieldName)(c)
+	return FtTagvalsFieldName(c)
 }
 
 type FunctionDelete Base
@@ -15276,7 +15276,7 @@ func (b Builder) FunctionDelete() FunctionDelete {
 
 func (c FunctionDelete) LibraryName(libraryName string) FunctionDeleteLibraryName {
 	c.command.append(libraryName)
-	return (FunctionDeleteLibraryName)(c)
+	return FunctionDeleteLibraryName(c)
 }
 
 type FunctionDeleteLibraryName Base
@@ -15311,12 +15311,12 @@ func (b Builder) FunctionFlush() FunctionFlush {
 
 func (c FunctionFlush) Async() FunctionFlushAsync {
 	c.command.append("ASYNC")
-	return (FunctionFlushAsync)(c)
+	return FunctionFlushAsync(c)
 }
 
 func (c FunctionFlush) Sync() FunctionFlushAsyncSync {
 	c.command.append("SYNC")
-	return (FunctionFlushAsyncSync)(c)
+	return FunctionFlushAsyncSync(c)
 }
 
 // Return Completed Redis command.
@@ -15377,12 +15377,12 @@ func (b Builder) FunctionList() FunctionList {
 
 func (c FunctionList) Libraryname(libraryNamePattern string) FunctionListLibraryname {
 	c.command.append("LIBRARYNAME", libraryNamePattern)
-	return (FunctionListLibraryname)(c)
+	return FunctionListLibraryname(c)
 }
 
 func (c FunctionList) Withcode() FunctionListWithcode {
 	c.command.append("WITHCODE")
-	return (FunctionListWithcode)(c)
+	return FunctionListWithcode(c)
 }
 
 // Return Completed Redis command.
@@ -15394,7 +15394,7 @@ type FunctionListLibraryname Base
 
 func (c FunctionListLibraryname) Withcode() FunctionListWithcode {
 	c.command.append("WITHCODE")
-	return (FunctionListWithcode)(c)
+	return FunctionListWithcode(c)
 }
 
 // Return Completed Redis command.
@@ -15420,12 +15420,12 @@ func (b Builder) FunctionLoad() FunctionLoad {
 
 func (c FunctionLoad) Replace() FunctionLoadReplace {
 	c.command.append("REPLACE")
-	return (FunctionLoadReplace)(c)
+	return FunctionLoadReplace(c)
 }
 
 func (c FunctionLoad) FunctionCode(functionCode string) FunctionLoadFunctionCode {
 	c.command.append(functionCode)
-	return (FunctionLoadFunctionCode)(c)
+	return FunctionLoadFunctionCode(c)
 }
 
 type FunctionLoadFunctionCode Base
@@ -15439,7 +15439,7 @@ type FunctionLoadReplace Base
 
 func (c FunctionLoadReplace) FunctionCode(functionCode string) FunctionLoadFunctionCode {
 	c.command.append(functionCode)
-	return (FunctionLoadFunctionCode)(c)
+	return FunctionLoadFunctionCode(c)
 }
 
 type FunctionRestore Base
@@ -15453,7 +15453,7 @@ func (b Builder) FunctionRestore() FunctionRestore {
 
 func (c FunctionRestore) SerializedValue(serializedValue string) FunctionRestoreSerializedValue {
 	c.command.append(serializedValue)
-	return (FunctionRestoreSerializedValue)(c)
+	return FunctionRestoreSerializedValue(c)
 }
 
 type FunctionRestorePolicyAppend Base
@@ -15481,17 +15481,17 @@ type FunctionRestoreSerializedValue Base
 
 func (c FunctionRestoreSerializedValue) Flush() FunctionRestorePolicyFlush {
 	c.command.append("FLUSH")
-	return (FunctionRestorePolicyFlush)(c)
+	return FunctionRestorePolicyFlush(c)
 }
 
 func (c FunctionRestoreSerializedValue) Append() FunctionRestorePolicyAppend {
 	c.command.append("APPEND")
-	return (FunctionRestorePolicyAppend)(c)
+	return FunctionRestorePolicyAppend(c)
 }
 
 func (c FunctionRestoreSerializedValue) Replace() FunctionRestorePolicyReplace {
 	c.command.append("REPLACE")
-	return (FunctionRestorePolicyReplace)(c)
+	return FunctionRestorePolicyReplace(c)
 }
 
 // Return Completed Redis command.
@@ -15536,56 +15536,56 @@ func (c Geoadd) Key(key string) GeoaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoaddKey)(c)
+	return GeoaddKey(c)
 }
 
 type GeoaddChangeCh Base
 
 func (c GeoaddChangeCh) LongitudeLatitudeMember() GeoaddLongitudeLatitudeMember {
-	return (GeoaddLongitudeLatitudeMember)(c)
+	return GeoaddLongitudeLatitudeMember(c)
 }
 
 type GeoaddConditionNx Base
 
 func (c GeoaddConditionNx) Ch() GeoaddChangeCh {
 	c.command.append("CH")
-	return (GeoaddChangeCh)(c)
+	return GeoaddChangeCh(c)
 }
 
 func (c GeoaddConditionNx) LongitudeLatitudeMember() GeoaddLongitudeLatitudeMember {
-	return (GeoaddLongitudeLatitudeMember)(c)
+	return GeoaddLongitudeLatitudeMember(c)
 }
 
 type GeoaddConditionXx Base
 
 func (c GeoaddConditionXx) Ch() GeoaddChangeCh {
 	c.command.append("CH")
-	return (GeoaddChangeCh)(c)
+	return GeoaddChangeCh(c)
 }
 
 func (c GeoaddConditionXx) LongitudeLatitudeMember() GeoaddLongitudeLatitudeMember {
-	return (GeoaddLongitudeLatitudeMember)(c)
+	return GeoaddLongitudeLatitudeMember(c)
 }
 
 type GeoaddKey Base
 
 func (c GeoaddKey) Nx() GeoaddConditionNx {
 	c.command.append("NX")
-	return (GeoaddConditionNx)(c)
+	return GeoaddConditionNx(c)
 }
 
 func (c GeoaddKey) Xx() GeoaddConditionXx {
 	c.command.append("XX")
-	return (GeoaddConditionXx)(c)
+	return GeoaddConditionXx(c)
 }
 
 func (c GeoaddKey) Ch() GeoaddChangeCh {
 	c.command.append("CH")
-	return (GeoaddChangeCh)(c)
+	return GeoaddChangeCh(c)
 }
 
 func (c GeoaddKey) LongitudeLatitudeMember() GeoaddLongitudeLatitudeMember {
-	return (GeoaddLongitudeLatitudeMember)(c)
+	return GeoaddLongitudeLatitudeMember(c)
 }
 
 type GeoaddLongitudeLatitudeMember Base
@@ -15623,43 +15623,43 @@ func (c Geodist) Key(key string) GeodistKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeodistKey)(c)
+	return GeodistKey(c)
 }
 
 type GeodistKey Base
 
 func (c GeodistKey) Member1(member1 string) GeodistMember1 {
 	c.command.append(member1)
-	return (GeodistMember1)(c)
+	return GeodistMember1(c)
 }
 
 type GeodistMember1 Base
 
 func (c GeodistMember1) Member2(member2 string) GeodistMember2 {
 	c.command.append(member2)
-	return (GeodistMember2)(c)
+	return GeodistMember2(c)
 }
 
 type GeodistMember2 Base
 
 func (c GeodistMember2) M() GeodistUnitM {
 	c.command.append("m")
-	return (GeodistUnitM)(c)
+	return GeodistUnitM(c)
 }
 
 func (c GeodistMember2) Km() GeodistUnitKm {
 	c.command.append("km")
-	return (GeodistUnitKm)(c)
+	return GeodistUnitKm(c)
 }
 
 func (c GeodistMember2) Ft() GeodistUnitFt {
 	c.command.append("ft")
-	return (GeodistUnitFt)(c)
+	return GeodistUnitFt(c)
 }
 
 func (c GeodistMember2) Mi() GeodistUnitMi {
 	c.command.append("mi")
-	return (GeodistUnitMi)(c)
+	return GeodistUnitMi(c)
 }
 
 // Return Completed Redis command.
@@ -15743,14 +15743,14 @@ func (c Geohash) Key(key string) GeohashKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeohashKey)(c)
+	return GeohashKey(c)
 }
 
 type GeohashKey Base
 
 func (c GeohashKey) Member(member ...string) GeohashMember {
 	c.command.append(member...)
-	return (GeohashMember)(c)
+	return GeohashMember(c)
 }
 
 type GeohashMember Base
@@ -15793,14 +15793,14 @@ func (c Geopos) Key(key string) GeoposKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoposKey)(c)
+	return GeoposKey(c)
 }
 
 type GeoposKey Base
 
 func (c GeoposKey) Member(member ...string) GeoposMember {
 	c.command.append(member...)
-	return (GeoposMember)(c)
+	return GeoposMember(c)
 }
 
 type GeoposMember Base
@@ -15843,19 +15843,19 @@ func (c Georadius) Key(key string) GeoradiusKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoradiusKey)(c)
+	return GeoradiusKey(c)
 }
 
 type GeoradiusCountAny Base
 
 func (c GeoradiusCountAny) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusCountAny) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusCountAny) Store(key string) GeoradiusStore {
@@ -15865,7 +15865,7 @@ func (c GeoradiusCountAny) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusCountAny) Storedist(key string) GeoradiusStoredist {
@@ -15875,7 +15875,7 @@ func (c GeoradiusCountAny) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -15887,17 +15887,17 @@ type GeoradiusCountCount Base
 
 func (c GeoradiusCountCount) Any() GeoradiusCountAny {
 	c.command.append("ANY")
-	return (GeoradiusCountAny)(c)
+	return GeoradiusCountAny(c)
 }
 
 func (c GeoradiusCountCount) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusCountCount) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusCountCount) Store(key string) GeoradiusStore {
@@ -15907,7 +15907,7 @@ func (c GeoradiusCountCount) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusCountCount) Storedist(key string) GeoradiusStoredist {
@@ -15917,7 +15917,7 @@ func (c GeoradiusCountCount) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -15929,21 +15929,21 @@ type GeoradiusKey Base
 
 func (c GeoradiusKey) Longitude(longitude float64) GeoradiusLongitude {
 	c.command.append(strconv.FormatFloat(longitude, 'f', -1, 64))
-	return (GeoradiusLongitude)(c)
+	return GeoradiusLongitude(c)
 }
 
 type GeoradiusLatitude Base
 
 func (c GeoradiusLatitude) Radius(radius float64) GeoradiusRadius {
 	c.command.append(strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeoradiusRadius)(c)
+	return GeoradiusRadius(c)
 }
 
 type GeoradiusLongitude Base
 
 func (c GeoradiusLongitude) Latitude(latitude float64) GeoradiusLatitude {
 	c.command.append(strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeoradiusLatitude)(c)
+	return GeoradiusLatitude(c)
 }
 
 type GeoradiusOrderAsc Base
@@ -15955,7 +15955,7 @@ func (c GeoradiusOrderAsc) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusOrderAsc) Storedist(key string) GeoradiusStoredist {
@@ -15965,7 +15965,7 @@ func (c GeoradiusOrderAsc) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -15982,7 +15982,7 @@ func (c GeoradiusOrderDesc) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusOrderDesc) Storedist(key string) GeoradiusStoredist {
@@ -15992,7 +15992,7 @@ func (c GeoradiusOrderDesc) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16004,22 +16004,22 @@ type GeoradiusRadius Base
 
 func (c GeoradiusRadius) M() GeoradiusUnitM {
 	c.command.append("m")
-	return (GeoradiusUnitM)(c)
+	return GeoradiusUnitM(c)
 }
 
 func (c GeoradiusRadius) Km() GeoradiusUnitKm {
 	c.command.append("km")
-	return (GeoradiusUnitKm)(c)
+	return GeoradiusUnitKm(c)
 }
 
 func (c GeoradiusRadius) Ft() GeoradiusUnitFt {
 	c.command.append("ft")
-	return (GeoradiusUnitFt)(c)
+	return GeoradiusUnitFt(c)
 }
 
 func (c GeoradiusRadius) Mi() GeoradiusUnitMi {
 	c.command.append("mi")
-	return (GeoradiusUnitMi)(c)
+	return GeoradiusUnitMi(c)
 }
 
 type GeoradiusRo Base
@@ -16038,19 +16038,19 @@ func (c GeoradiusRo) Key(key string) GeoradiusRoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoradiusRoKey)(c)
+	return GeoradiusRoKey(c)
 }
 
 type GeoradiusRoCountAny Base
 
 func (c GeoradiusRoCountAny) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoCountAny) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16067,17 +16067,17 @@ type GeoradiusRoCountCount Base
 
 func (c GeoradiusRoCountCount) Any() GeoradiusRoCountAny {
 	c.command.append("ANY")
-	return (GeoradiusRoCountAny)(c)
+	return GeoradiusRoCountAny(c)
 }
 
 func (c GeoradiusRoCountCount) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoCountCount) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16094,21 +16094,21 @@ type GeoradiusRoKey Base
 
 func (c GeoradiusRoKey) Longitude(longitude float64) GeoradiusRoLongitude {
 	c.command.append(strconv.FormatFloat(longitude, 'f', -1, 64))
-	return (GeoradiusRoLongitude)(c)
+	return GeoradiusRoLongitude(c)
 }
 
 type GeoradiusRoLatitude Base
 
 func (c GeoradiusRoLatitude) Radius(radius float64) GeoradiusRoRadius {
 	c.command.append(strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeoradiusRoRadius)(c)
+	return GeoradiusRoRadius(c)
 }
 
 type GeoradiusRoLongitude Base
 
 func (c GeoradiusRoLongitude) Latitude(latitude float64) GeoradiusRoLatitude {
 	c.command.append(strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeoradiusRoLatitude)(c)
+	return GeoradiusRoLatitude(c)
 }
 
 type GeoradiusRoOrderAsc Base
@@ -16139,54 +16139,54 @@ type GeoradiusRoRadius Base
 
 func (c GeoradiusRoRadius) M() GeoradiusRoUnitM {
 	c.command.append("m")
-	return (GeoradiusRoUnitM)(c)
+	return GeoradiusRoUnitM(c)
 }
 
 func (c GeoradiusRoRadius) Km() GeoradiusRoUnitKm {
 	c.command.append("km")
-	return (GeoradiusRoUnitKm)(c)
+	return GeoradiusRoUnitKm(c)
 }
 
 func (c GeoradiusRoRadius) Ft() GeoradiusRoUnitFt {
 	c.command.append("ft")
-	return (GeoradiusRoUnitFt)(c)
+	return GeoradiusRoUnitFt(c)
 }
 
 func (c GeoradiusRoRadius) Mi() GeoradiusRoUnitMi {
 	c.command.append("mi")
-	return (GeoradiusRoUnitMi)(c)
+	return GeoradiusRoUnitMi(c)
 }
 
 type GeoradiusRoUnitFt Base
 
 func (c GeoradiusRoUnitFt) Withcoord() GeoradiusRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusRoWithcoord)(c)
+	return GeoradiusRoWithcoord(c)
 }
 
 func (c GeoradiusRoUnitFt) Withdist() GeoradiusRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusRoWithdist)(c)
+	return GeoradiusRoWithdist(c)
 }
 
 func (c GeoradiusRoUnitFt) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoUnitFt) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoUnitFt) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoUnitFt) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16203,32 +16203,32 @@ type GeoradiusRoUnitKm Base
 
 func (c GeoradiusRoUnitKm) Withcoord() GeoradiusRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusRoWithcoord)(c)
+	return GeoradiusRoWithcoord(c)
 }
 
 func (c GeoradiusRoUnitKm) Withdist() GeoradiusRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusRoWithdist)(c)
+	return GeoradiusRoWithdist(c)
 }
 
 func (c GeoradiusRoUnitKm) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoUnitKm) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoUnitKm) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoUnitKm) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16245,32 +16245,32 @@ type GeoradiusRoUnitM Base
 
 func (c GeoradiusRoUnitM) Withcoord() GeoradiusRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusRoWithcoord)(c)
+	return GeoradiusRoWithcoord(c)
 }
 
 func (c GeoradiusRoUnitM) Withdist() GeoradiusRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusRoWithdist)(c)
+	return GeoradiusRoWithdist(c)
 }
 
 func (c GeoradiusRoUnitM) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoUnitM) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoUnitM) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoUnitM) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16287,32 +16287,32 @@ type GeoradiusRoUnitMi Base
 
 func (c GeoradiusRoUnitMi) Withcoord() GeoradiusRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusRoWithcoord)(c)
+	return GeoradiusRoWithcoord(c)
 }
 
 func (c GeoradiusRoUnitMi) Withdist() GeoradiusRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusRoWithdist)(c)
+	return GeoradiusRoWithdist(c)
 }
 
 func (c GeoradiusRoUnitMi) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoUnitMi) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoUnitMi) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoUnitMi) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16329,27 +16329,27 @@ type GeoradiusRoWithcoord Base
 
 func (c GeoradiusRoWithcoord) Withdist() GeoradiusRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusRoWithdist)(c)
+	return GeoradiusRoWithdist(c)
 }
 
 func (c GeoradiusRoWithcoord) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoWithcoord) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoWithcoord) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoWithcoord) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16366,22 +16366,22 @@ type GeoradiusRoWithdist Base
 
 func (c GeoradiusRoWithdist) Withhash() GeoradiusRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusRoWithhash)(c)
+	return GeoradiusRoWithhash(c)
 }
 
 func (c GeoradiusRoWithdist) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoWithdist) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoWithdist) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16398,17 +16398,17 @@ type GeoradiusRoWithhash Base
 
 func (c GeoradiusRoWithhash) Count(count int64) GeoradiusRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusRoCountCount)(c)
+	return GeoradiusRoCountCount(c)
 }
 
 func (c GeoradiusRoWithhash) Asc() GeoradiusRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusRoOrderAsc)(c)
+	return GeoradiusRoOrderAsc(c)
 }
 
 func (c GeoradiusRoWithhash) Desc() GeoradiusRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusRoOrderDesc)(c)
+	return GeoradiusRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -16430,7 +16430,7 @@ func (c GeoradiusStore) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16449,32 +16449,32 @@ type GeoradiusUnitFt Base
 
 func (c GeoradiusUnitFt) Withcoord() GeoradiusWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusWithcoord)(c)
+	return GeoradiusWithcoord(c)
 }
 
 func (c GeoradiusUnitFt) Withdist() GeoradiusWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusWithdist)(c)
+	return GeoradiusWithdist(c)
 }
 
 func (c GeoradiusUnitFt) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusUnitFt) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusUnitFt) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusUnitFt) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusUnitFt) Store(key string) GeoradiusStore {
@@ -16484,7 +16484,7 @@ func (c GeoradiusUnitFt) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusUnitFt) Storedist(key string) GeoradiusStoredist {
@@ -16494,7 +16494,7 @@ func (c GeoradiusUnitFt) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16506,32 +16506,32 @@ type GeoradiusUnitKm Base
 
 func (c GeoradiusUnitKm) Withcoord() GeoradiusWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusWithcoord)(c)
+	return GeoradiusWithcoord(c)
 }
 
 func (c GeoradiusUnitKm) Withdist() GeoradiusWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusWithdist)(c)
+	return GeoradiusWithdist(c)
 }
 
 func (c GeoradiusUnitKm) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusUnitKm) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusUnitKm) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusUnitKm) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusUnitKm) Store(key string) GeoradiusStore {
@@ -16541,7 +16541,7 @@ func (c GeoradiusUnitKm) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusUnitKm) Storedist(key string) GeoradiusStoredist {
@@ -16551,7 +16551,7 @@ func (c GeoradiusUnitKm) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16563,32 +16563,32 @@ type GeoradiusUnitM Base
 
 func (c GeoradiusUnitM) Withcoord() GeoradiusWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusWithcoord)(c)
+	return GeoradiusWithcoord(c)
 }
 
 func (c GeoradiusUnitM) Withdist() GeoradiusWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusWithdist)(c)
+	return GeoradiusWithdist(c)
 }
 
 func (c GeoradiusUnitM) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusUnitM) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusUnitM) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusUnitM) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusUnitM) Store(key string) GeoradiusStore {
@@ -16598,7 +16598,7 @@ func (c GeoradiusUnitM) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusUnitM) Storedist(key string) GeoradiusStoredist {
@@ -16608,7 +16608,7 @@ func (c GeoradiusUnitM) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16620,32 +16620,32 @@ type GeoradiusUnitMi Base
 
 func (c GeoradiusUnitMi) Withcoord() GeoradiusWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusWithcoord)(c)
+	return GeoradiusWithcoord(c)
 }
 
 func (c GeoradiusUnitMi) Withdist() GeoradiusWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusWithdist)(c)
+	return GeoradiusWithdist(c)
 }
 
 func (c GeoradiusUnitMi) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusUnitMi) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusUnitMi) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusUnitMi) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusUnitMi) Store(key string) GeoradiusStore {
@@ -16655,7 +16655,7 @@ func (c GeoradiusUnitMi) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusUnitMi) Storedist(key string) GeoradiusStoredist {
@@ -16665,7 +16665,7 @@ func (c GeoradiusUnitMi) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16677,27 +16677,27 @@ type GeoradiusWithcoord Base
 
 func (c GeoradiusWithcoord) Withdist() GeoradiusWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusWithdist)(c)
+	return GeoradiusWithdist(c)
 }
 
 func (c GeoradiusWithcoord) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusWithcoord) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusWithcoord) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusWithcoord) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusWithcoord) Store(key string) GeoradiusStore {
@@ -16707,7 +16707,7 @@ func (c GeoradiusWithcoord) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusWithcoord) Storedist(key string) GeoradiusStoredist {
@@ -16717,7 +16717,7 @@ func (c GeoradiusWithcoord) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16729,22 +16729,22 @@ type GeoradiusWithdist Base
 
 func (c GeoradiusWithdist) Withhash() GeoradiusWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusWithhash)(c)
+	return GeoradiusWithhash(c)
 }
 
 func (c GeoradiusWithdist) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusWithdist) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusWithdist) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusWithdist) Store(key string) GeoradiusStore {
@@ -16754,7 +16754,7 @@ func (c GeoradiusWithdist) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusWithdist) Storedist(key string) GeoradiusStoredist {
@@ -16764,7 +16764,7 @@ func (c GeoradiusWithdist) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16776,17 +16776,17 @@ type GeoradiusWithhash Base
 
 func (c GeoradiusWithhash) Count(count int64) GeoradiusCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusCountCount)(c)
+	return GeoradiusCountCount(c)
 }
 
 func (c GeoradiusWithhash) Asc() GeoradiusOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusOrderAsc)(c)
+	return GeoradiusOrderAsc(c)
 }
 
 func (c GeoradiusWithhash) Desc() GeoradiusOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusOrderDesc)(c)
+	return GeoradiusOrderDesc(c)
 }
 
 func (c GeoradiusWithhash) Store(key string) GeoradiusStore {
@@ -16796,7 +16796,7 @@ func (c GeoradiusWithhash) Store(key string) GeoradiusStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusStore)(c)
+	return GeoradiusStore(c)
 }
 
 func (c GeoradiusWithhash) Storedist(key string) GeoradiusStoredist {
@@ -16806,7 +16806,7 @@ func (c GeoradiusWithhash) Storedist(key string) GeoradiusStoredist {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusStoredist)(c)
+	return GeoradiusStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16837,19 +16837,19 @@ func (c Georadiusbymember) Key(key string) GeoradiusbymemberKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoradiusbymemberKey)(c)
+	return GeoradiusbymemberKey(c)
 }
 
 type GeoradiusbymemberCountAny Base
 
 func (c GeoradiusbymemberCountAny) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberCountAny) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberCountAny) Store(key string) GeoradiusbymemberStore {
@@ -16859,7 +16859,7 @@ func (c GeoradiusbymemberCountAny) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberCountAny) Storedist(key string) GeoradiusbymemberStoredist {
@@ -16869,7 +16869,7 @@ func (c GeoradiusbymemberCountAny) Storedist(key string) GeoradiusbymemberStored
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16881,17 +16881,17 @@ type GeoradiusbymemberCountCount Base
 
 func (c GeoradiusbymemberCountCount) Any() GeoradiusbymemberCountAny {
 	c.command.append("ANY")
-	return (GeoradiusbymemberCountAny)(c)
+	return GeoradiusbymemberCountAny(c)
 }
 
 func (c GeoradiusbymemberCountCount) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberCountCount) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberCountCount) Store(key string) GeoradiusbymemberStore {
@@ -16901,7 +16901,7 @@ func (c GeoradiusbymemberCountCount) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberCountCount) Storedist(key string) GeoradiusbymemberStoredist {
@@ -16911,7 +16911,7 @@ func (c GeoradiusbymemberCountCount) Storedist(key string) GeoradiusbymemberStor
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16923,14 +16923,14 @@ type GeoradiusbymemberKey Base
 
 func (c GeoradiusbymemberKey) Member(member string) GeoradiusbymemberMember {
 	c.command.append(member)
-	return (GeoradiusbymemberMember)(c)
+	return GeoradiusbymemberMember(c)
 }
 
 type GeoradiusbymemberMember Base
 
 func (c GeoradiusbymemberMember) Radius(radius float64) GeoradiusbymemberRadius {
 	c.command.append(strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeoradiusbymemberRadius)(c)
+	return GeoradiusbymemberRadius(c)
 }
 
 type GeoradiusbymemberOrderAsc Base
@@ -16942,7 +16942,7 @@ func (c GeoradiusbymemberOrderAsc) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberOrderAsc) Storedist(key string) GeoradiusbymemberStoredist {
@@ -16952,7 +16952,7 @@ func (c GeoradiusbymemberOrderAsc) Storedist(key string) GeoradiusbymemberStored
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16969,7 +16969,7 @@ func (c GeoradiusbymemberOrderDesc) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberOrderDesc) Storedist(key string) GeoradiusbymemberStoredist {
@@ -16979,7 +16979,7 @@ func (c GeoradiusbymemberOrderDesc) Storedist(key string) GeoradiusbymemberStore
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -16991,22 +16991,22 @@ type GeoradiusbymemberRadius Base
 
 func (c GeoradiusbymemberRadius) M() GeoradiusbymemberUnitM {
 	c.command.append("m")
-	return (GeoradiusbymemberUnitM)(c)
+	return GeoradiusbymemberUnitM(c)
 }
 
 func (c GeoradiusbymemberRadius) Km() GeoradiusbymemberUnitKm {
 	c.command.append("km")
-	return (GeoradiusbymemberUnitKm)(c)
+	return GeoradiusbymemberUnitKm(c)
 }
 
 func (c GeoradiusbymemberRadius) Ft() GeoradiusbymemberUnitFt {
 	c.command.append("ft")
-	return (GeoradiusbymemberUnitFt)(c)
+	return GeoradiusbymemberUnitFt(c)
 }
 
 func (c GeoradiusbymemberRadius) Mi() GeoradiusbymemberUnitMi {
 	c.command.append("mi")
-	return (GeoradiusbymemberUnitMi)(c)
+	return GeoradiusbymemberUnitMi(c)
 }
 
 type GeoradiusbymemberRo Base
@@ -17025,19 +17025,19 @@ func (c GeoradiusbymemberRo) Key(key string) GeoradiusbymemberRoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeoradiusbymemberRoKey)(c)
+	return GeoradiusbymemberRoKey(c)
 }
 
 type GeoradiusbymemberRoCountAny Base
 
 func (c GeoradiusbymemberRoCountAny) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoCountAny) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17054,17 +17054,17 @@ type GeoradiusbymemberRoCountCount Base
 
 func (c GeoradiusbymemberRoCountCount) Any() GeoradiusbymemberRoCountAny {
 	c.command.append("ANY")
-	return (GeoradiusbymemberRoCountAny)(c)
+	return GeoradiusbymemberRoCountAny(c)
 }
 
 func (c GeoradiusbymemberRoCountCount) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoCountCount) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17081,14 +17081,14 @@ type GeoradiusbymemberRoKey Base
 
 func (c GeoradiusbymemberRoKey) Member(member string) GeoradiusbymemberRoMember {
 	c.command.append(member)
-	return (GeoradiusbymemberRoMember)(c)
+	return GeoradiusbymemberRoMember(c)
 }
 
 type GeoradiusbymemberRoMember Base
 
 func (c GeoradiusbymemberRoMember) Radius(radius float64) GeoradiusbymemberRoRadius {
 	c.command.append(strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeoradiusbymemberRoRadius)(c)
+	return GeoradiusbymemberRoRadius(c)
 }
 
 type GeoradiusbymemberRoOrderAsc Base
@@ -17119,54 +17119,54 @@ type GeoradiusbymemberRoRadius Base
 
 func (c GeoradiusbymemberRoRadius) M() GeoradiusbymemberRoUnitM {
 	c.command.append("m")
-	return (GeoradiusbymemberRoUnitM)(c)
+	return GeoradiusbymemberRoUnitM(c)
 }
 
 func (c GeoradiusbymemberRoRadius) Km() GeoradiusbymemberRoUnitKm {
 	c.command.append("km")
-	return (GeoradiusbymemberRoUnitKm)(c)
+	return GeoradiusbymemberRoUnitKm(c)
 }
 
 func (c GeoradiusbymemberRoRadius) Ft() GeoradiusbymemberRoUnitFt {
 	c.command.append("ft")
-	return (GeoradiusbymemberRoUnitFt)(c)
+	return GeoradiusbymemberRoUnitFt(c)
 }
 
 func (c GeoradiusbymemberRoRadius) Mi() GeoradiusbymemberRoUnitMi {
 	c.command.append("mi")
-	return (GeoradiusbymemberRoUnitMi)(c)
+	return GeoradiusbymemberRoUnitMi(c)
 }
 
 type GeoradiusbymemberRoUnitFt Base
 
 func (c GeoradiusbymemberRoUnitFt) Withcoord() GeoradiusbymemberRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberRoWithcoord)(c)
+	return GeoradiusbymemberRoWithcoord(c)
 }
 
 func (c GeoradiusbymemberRoUnitFt) Withdist() GeoradiusbymemberRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberRoWithdist)(c)
+	return GeoradiusbymemberRoWithdist(c)
 }
 
 func (c GeoradiusbymemberRoUnitFt) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoUnitFt) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoUnitFt) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoUnitFt) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17183,32 +17183,32 @@ type GeoradiusbymemberRoUnitKm Base
 
 func (c GeoradiusbymemberRoUnitKm) Withcoord() GeoradiusbymemberRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberRoWithcoord)(c)
+	return GeoradiusbymemberRoWithcoord(c)
 }
 
 func (c GeoradiusbymemberRoUnitKm) Withdist() GeoradiusbymemberRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberRoWithdist)(c)
+	return GeoradiusbymemberRoWithdist(c)
 }
 
 func (c GeoradiusbymemberRoUnitKm) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoUnitKm) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoUnitKm) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoUnitKm) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17225,32 +17225,32 @@ type GeoradiusbymemberRoUnitM Base
 
 func (c GeoradiusbymemberRoUnitM) Withcoord() GeoradiusbymemberRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberRoWithcoord)(c)
+	return GeoradiusbymemberRoWithcoord(c)
 }
 
 func (c GeoradiusbymemberRoUnitM) Withdist() GeoradiusbymemberRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberRoWithdist)(c)
+	return GeoradiusbymemberRoWithdist(c)
 }
 
 func (c GeoradiusbymemberRoUnitM) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoUnitM) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoUnitM) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoUnitM) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17267,32 +17267,32 @@ type GeoradiusbymemberRoUnitMi Base
 
 func (c GeoradiusbymemberRoUnitMi) Withcoord() GeoradiusbymemberRoWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberRoWithcoord)(c)
+	return GeoradiusbymemberRoWithcoord(c)
 }
 
 func (c GeoradiusbymemberRoUnitMi) Withdist() GeoradiusbymemberRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberRoWithdist)(c)
+	return GeoradiusbymemberRoWithdist(c)
 }
 
 func (c GeoradiusbymemberRoUnitMi) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoUnitMi) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoUnitMi) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoUnitMi) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17309,27 +17309,27 @@ type GeoradiusbymemberRoWithcoord Base
 
 func (c GeoradiusbymemberRoWithcoord) Withdist() GeoradiusbymemberRoWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberRoWithdist)(c)
+	return GeoradiusbymemberRoWithdist(c)
 }
 
 func (c GeoradiusbymemberRoWithcoord) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoWithcoord) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoWithcoord) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoWithcoord) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17346,22 +17346,22 @@ type GeoradiusbymemberRoWithdist Base
 
 func (c GeoradiusbymemberRoWithdist) Withhash() GeoradiusbymemberRoWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberRoWithhash)(c)
+	return GeoradiusbymemberRoWithhash(c)
 }
 
 func (c GeoradiusbymemberRoWithdist) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoWithdist) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoWithdist) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17378,17 +17378,17 @@ type GeoradiusbymemberRoWithhash Base
 
 func (c GeoradiusbymemberRoWithhash) Count(count int64) GeoradiusbymemberRoCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberRoCountCount)(c)
+	return GeoradiusbymemberRoCountCount(c)
 }
 
 func (c GeoradiusbymemberRoWithhash) Asc() GeoradiusbymemberRoOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberRoOrderAsc)(c)
+	return GeoradiusbymemberRoOrderAsc(c)
 }
 
 func (c GeoradiusbymemberRoWithhash) Desc() GeoradiusbymemberRoOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberRoOrderDesc)(c)
+	return GeoradiusbymemberRoOrderDesc(c)
 }
 
 // Return Completed Redis command.
@@ -17410,7 +17410,7 @@ func (c GeoradiusbymemberStore) Storedist(key string) GeoradiusbymemberStoredist
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17429,32 +17429,32 @@ type GeoradiusbymemberUnitFt Base
 
 func (c GeoradiusbymemberUnitFt) Withcoord() GeoradiusbymemberWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberWithcoord)(c)
+	return GeoradiusbymemberWithcoord(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Withdist() GeoradiusbymemberWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberWithdist)(c)
+	return GeoradiusbymemberWithdist(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Store(key string) GeoradiusbymemberStore {
@@ -17464,7 +17464,7 @@ func (c GeoradiusbymemberUnitFt) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberUnitFt) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17474,7 +17474,7 @@ func (c GeoradiusbymemberUnitFt) Storedist(key string) GeoradiusbymemberStoredis
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17486,32 +17486,32 @@ type GeoradiusbymemberUnitKm Base
 
 func (c GeoradiusbymemberUnitKm) Withcoord() GeoradiusbymemberWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberWithcoord)(c)
+	return GeoradiusbymemberWithcoord(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Withdist() GeoradiusbymemberWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberWithdist)(c)
+	return GeoradiusbymemberWithdist(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Store(key string) GeoradiusbymemberStore {
@@ -17521,7 +17521,7 @@ func (c GeoradiusbymemberUnitKm) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberUnitKm) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17531,7 +17531,7 @@ func (c GeoradiusbymemberUnitKm) Storedist(key string) GeoradiusbymemberStoredis
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17543,32 +17543,32 @@ type GeoradiusbymemberUnitM Base
 
 func (c GeoradiusbymemberUnitM) Withcoord() GeoradiusbymemberWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberWithcoord)(c)
+	return GeoradiusbymemberWithcoord(c)
 }
 
 func (c GeoradiusbymemberUnitM) Withdist() GeoradiusbymemberWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberWithdist)(c)
+	return GeoradiusbymemberWithdist(c)
 }
 
 func (c GeoradiusbymemberUnitM) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberUnitM) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberUnitM) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberUnitM) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberUnitM) Store(key string) GeoradiusbymemberStore {
@@ -17578,7 +17578,7 @@ func (c GeoradiusbymemberUnitM) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberUnitM) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17588,7 +17588,7 @@ func (c GeoradiusbymemberUnitM) Storedist(key string) GeoradiusbymemberStoredist
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17600,32 +17600,32 @@ type GeoradiusbymemberUnitMi Base
 
 func (c GeoradiusbymemberUnitMi) Withcoord() GeoradiusbymemberWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeoradiusbymemberWithcoord)(c)
+	return GeoradiusbymemberWithcoord(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Withdist() GeoradiusbymemberWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberWithdist)(c)
+	return GeoradiusbymemberWithdist(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Store(key string) GeoradiusbymemberStore {
@@ -17635,7 +17635,7 @@ func (c GeoradiusbymemberUnitMi) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberUnitMi) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17645,7 +17645,7 @@ func (c GeoradiusbymemberUnitMi) Storedist(key string) GeoradiusbymemberStoredis
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17657,27 +17657,27 @@ type GeoradiusbymemberWithcoord Base
 
 func (c GeoradiusbymemberWithcoord) Withdist() GeoradiusbymemberWithdist {
 	c.command.append("WITHDIST")
-	return (GeoradiusbymemberWithdist)(c)
+	return GeoradiusbymemberWithdist(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Store(key string) GeoradiusbymemberStore {
@@ -17687,7 +17687,7 @@ func (c GeoradiusbymemberWithcoord) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberWithcoord) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17697,7 +17697,7 @@ func (c GeoradiusbymemberWithcoord) Storedist(key string) GeoradiusbymemberStore
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17709,22 +17709,22 @@ type GeoradiusbymemberWithdist Base
 
 func (c GeoradiusbymemberWithdist) Withhash() GeoradiusbymemberWithhash {
 	c.command.append("WITHHASH")
-	return (GeoradiusbymemberWithhash)(c)
+	return GeoradiusbymemberWithhash(c)
 }
 
 func (c GeoradiusbymemberWithdist) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberWithdist) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberWithdist) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberWithdist) Store(key string) GeoradiusbymemberStore {
@@ -17734,7 +17734,7 @@ func (c GeoradiusbymemberWithdist) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberWithdist) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17744,7 +17744,7 @@ func (c GeoradiusbymemberWithdist) Storedist(key string) GeoradiusbymemberStored
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17756,17 +17756,17 @@ type GeoradiusbymemberWithhash Base
 
 func (c GeoradiusbymemberWithhash) Count(count int64) GeoradiusbymemberCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeoradiusbymemberCountCount)(c)
+	return GeoradiusbymemberCountCount(c)
 }
 
 func (c GeoradiusbymemberWithhash) Asc() GeoradiusbymemberOrderAsc {
 	c.command.append("ASC")
-	return (GeoradiusbymemberOrderAsc)(c)
+	return GeoradiusbymemberOrderAsc(c)
 }
 
 func (c GeoradiusbymemberWithhash) Desc() GeoradiusbymemberOrderDesc {
 	c.command.append("DESC")
-	return (GeoradiusbymemberOrderDesc)(c)
+	return GeoradiusbymemberOrderDesc(c)
 }
 
 func (c GeoradiusbymemberWithhash) Store(key string) GeoradiusbymemberStore {
@@ -17776,7 +17776,7 @@ func (c GeoradiusbymemberWithhash) Store(key string) GeoradiusbymemberStore {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STORE", key)
-	return (GeoradiusbymemberStore)(c)
+	return GeoradiusbymemberStore(c)
 }
 
 func (c GeoradiusbymemberWithhash) Storedist(key string) GeoradiusbymemberStoredist {
@@ -17786,7 +17786,7 @@ func (c GeoradiusbymemberWithhash) Storedist(key string) GeoradiusbymemberStored
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append("STOREDIST", key)
-	return (GeoradiusbymemberStoredist)(c)
+	return GeoradiusbymemberStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -17817,68 +17817,68 @@ func (c Geosearch) Key(key string) GeosearchKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GeosearchKey)(c)
+	return GeosearchKey(c)
 }
 
 type GeosearchCircleBoxBybox Base
 
 func (c GeosearchCircleBoxBybox) Height(height float64) GeosearchCircleBoxHeight {
 	c.command.append(strconv.FormatFloat(height, 'f', -1, 64))
-	return (GeosearchCircleBoxHeight)(c)
+	return GeosearchCircleBoxHeight(c)
 }
 
 type GeosearchCircleBoxHeight Base
 
 func (c GeosearchCircleBoxHeight) M() GeosearchCircleBoxUnitM {
 	c.command.append("m")
-	return (GeosearchCircleBoxUnitM)(c)
+	return GeosearchCircleBoxUnitM(c)
 }
 
 func (c GeosearchCircleBoxHeight) Km() GeosearchCircleBoxUnitKm {
 	c.command.append("km")
-	return (GeosearchCircleBoxUnitKm)(c)
+	return GeosearchCircleBoxUnitKm(c)
 }
 
 func (c GeosearchCircleBoxHeight) Ft() GeosearchCircleBoxUnitFt {
 	c.command.append("ft")
-	return (GeosearchCircleBoxUnitFt)(c)
+	return GeosearchCircleBoxUnitFt(c)
 }
 
 func (c GeosearchCircleBoxHeight) Mi() GeosearchCircleBoxUnitMi {
 	c.command.append("mi")
-	return (GeosearchCircleBoxUnitMi)(c)
+	return GeosearchCircleBoxUnitMi(c)
 }
 
 type GeosearchCircleBoxUnitFt Base
 
 func (c GeosearchCircleBoxUnitFt) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleBoxUnitFt) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleBoxUnitFt) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleBoxUnitFt) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleBoxUnitFt) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleBoxUnitFt) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -17895,32 +17895,32 @@ type GeosearchCircleBoxUnitKm Base
 
 func (c GeosearchCircleBoxUnitKm) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleBoxUnitKm) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleBoxUnitKm) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleBoxUnitKm) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleBoxUnitKm) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleBoxUnitKm) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -17937,32 +17937,32 @@ type GeosearchCircleBoxUnitM Base
 
 func (c GeosearchCircleBoxUnitM) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleBoxUnitM) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleBoxUnitM) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleBoxUnitM) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleBoxUnitM) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleBoxUnitM) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -17979,32 +17979,32 @@ type GeosearchCircleBoxUnitMi Base
 
 func (c GeosearchCircleBoxUnitMi) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleBoxUnitMi) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleBoxUnitMi) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleBoxUnitMi) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleBoxUnitMi) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleBoxUnitMi) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18021,59 +18021,59 @@ type GeosearchCircleCircleByradius Base
 
 func (c GeosearchCircleCircleByradius) M() GeosearchCircleCircleUnitM {
 	c.command.append("m")
-	return (GeosearchCircleCircleUnitM)(c)
+	return GeosearchCircleCircleUnitM(c)
 }
 
 func (c GeosearchCircleCircleByradius) Km() GeosearchCircleCircleUnitKm {
 	c.command.append("km")
-	return (GeosearchCircleCircleUnitKm)(c)
+	return GeosearchCircleCircleUnitKm(c)
 }
 
 func (c GeosearchCircleCircleByradius) Ft() GeosearchCircleCircleUnitFt {
 	c.command.append("ft")
-	return (GeosearchCircleCircleUnitFt)(c)
+	return GeosearchCircleCircleUnitFt(c)
 }
 
 func (c GeosearchCircleCircleByradius) Mi() GeosearchCircleCircleUnitMi {
 	c.command.append("mi")
-	return (GeosearchCircleCircleUnitMi)(c)
+	return GeosearchCircleCircleUnitMi(c)
 }
 
 type GeosearchCircleCircleUnitFt Base
 
 func (c GeosearchCircleCircleUnitFt) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleCircleUnitFt) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18090,37 +18090,37 @@ type GeosearchCircleCircleUnitKm Base
 
 func (c GeosearchCircleCircleUnitKm) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleCircleUnitKm) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18137,37 +18137,37 @@ type GeosearchCircleCircleUnitM Base
 
 func (c GeosearchCircleCircleUnitM) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleCircleUnitM) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18184,37 +18184,37 @@ type GeosearchCircleCircleUnitMi Base
 
 func (c GeosearchCircleCircleUnitMi) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Asc() GeosearchOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchOrderAsc)(c)
+	return GeosearchOrderAsc(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Desc() GeosearchOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchOrderDesc)(c)
+	return GeosearchOrderDesc(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCircleCircleUnitMi) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18231,17 +18231,17 @@ type GeosearchCountAny Base
 
 func (c GeosearchCountAny) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCountAny) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCountAny) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18258,22 +18258,22 @@ type GeosearchCountCount Base
 
 func (c GeosearchCountCount) Any() GeosearchCountAny {
 	c.command.append("ANY")
-	return (GeosearchCountAny)(c)
+	return GeosearchCountAny(c)
 }
 
 func (c GeosearchCountCount) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchCountCount) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchCountCount) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18290,63 +18290,63 @@ type GeosearchFrommemberFromlonlat Base
 
 func (c GeosearchFrommemberFromlonlat) Byradius(radius float64) GeosearchCircleCircleByradius {
 	c.command.append("BYRADIUS", strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeosearchCircleCircleByradius)(c)
+	return GeosearchCircleCircleByradius(c)
 }
 
 func (c GeosearchFrommemberFromlonlat) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 type GeosearchFrommemberFrommember Base
 
 func (c GeosearchFrommemberFrommember) Fromlonlat(longitude float64, latitude float64) GeosearchFrommemberFromlonlat {
 	c.command.append("FROMLONLAT", strconv.FormatFloat(longitude, 'f', -1, 64), strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeosearchFrommemberFromlonlat)(c)
+	return GeosearchFrommemberFromlonlat(c)
 }
 
 func (c GeosearchFrommemberFrommember) Byradius(radius float64) GeosearchCircleCircleByradius {
 	c.command.append("BYRADIUS", strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeosearchCircleCircleByradius)(c)
+	return GeosearchCircleCircleByradius(c)
 }
 
 func (c GeosearchFrommemberFrommember) Bybox(width float64) GeosearchCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchCircleBoxBybox)(c)
+	return GeosearchCircleBoxBybox(c)
 }
 
 type GeosearchKey Base
 
 func (c GeosearchKey) Frommember(member string) GeosearchFrommemberFrommember {
 	c.command.append("FROMMEMBER", member)
-	return (GeosearchFrommemberFrommember)(c)
+	return GeosearchFrommemberFrommember(c)
 }
 
 func (c GeosearchKey) Fromlonlat(longitude float64, latitude float64) GeosearchFrommemberFromlonlat {
 	c.command.append("FROMLONLAT", strconv.FormatFloat(longitude, 'f', -1, 64), strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeosearchFrommemberFromlonlat)(c)
+	return GeosearchFrommemberFromlonlat(c)
 }
 
 type GeosearchOrderAsc Base
 
 func (c GeosearchOrderAsc) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchOrderAsc) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchOrderAsc) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchOrderAsc) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18363,22 +18363,22 @@ type GeosearchOrderDesc Base
 
 func (c GeosearchOrderDesc) Count(count int64) GeosearchCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchCountCount)(c)
+	return GeosearchCountCount(c)
 }
 
 func (c GeosearchOrderDesc) Withcoord() GeosearchWithcoord {
 	c.command.append("WITHCOORD")
-	return (GeosearchWithcoord)(c)
+	return GeosearchWithcoord(c)
 }
 
 func (c GeosearchOrderDesc) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchOrderDesc) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18395,12 +18395,12 @@ type GeosearchWithcoord Base
 
 func (c GeosearchWithcoord) Withdist() GeosearchWithdist {
 	c.command.append("WITHDIST")
-	return (GeosearchWithdist)(c)
+	return GeosearchWithdist(c)
 }
 
 func (c GeosearchWithcoord) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18417,7 +18417,7 @@ type GeosearchWithdist Base
 
 func (c GeosearchWithdist) Withhash() GeosearchWithhash {
 	c.command.append("WITHHASH")
-	return (GeosearchWithhash)(c)
+	return GeosearchWithhash(c)
 }
 
 // Return Completed Redis command.
@@ -18465,58 +18465,58 @@ func (c Geosearchstore) Destination(destination string) GeosearchstoreDestinatio
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (GeosearchstoreDestination)(c)
+	return GeosearchstoreDestination(c)
 }
 
 type GeosearchstoreCircleBoxBybox Base
 
 func (c GeosearchstoreCircleBoxBybox) Height(height float64) GeosearchstoreCircleBoxHeight {
 	c.command.append(strconv.FormatFloat(height, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxHeight)(c)
+	return GeosearchstoreCircleBoxHeight(c)
 }
 
 type GeosearchstoreCircleBoxHeight Base
 
 func (c GeosearchstoreCircleBoxHeight) M() GeosearchstoreCircleBoxUnitM {
 	c.command.append("m")
-	return (GeosearchstoreCircleBoxUnitM)(c)
+	return GeosearchstoreCircleBoxUnitM(c)
 }
 
 func (c GeosearchstoreCircleBoxHeight) Km() GeosearchstoreCircleBoxUnitKm {
 	c.command.append("km")
-	return (GeosearchstoreCircleBoxUnitKm)(c)
+	return GeosearchstoreCircleBoxUnitKm(c)
 }
 
 func (c GeosearchstoreCircleBoxHeight) Ft() GeosearchstoreCircleBoxUnitFt {
 	c.command.append("ft")
-	return (GeosearchstoreCircleBoxUnitFt)(c)
+	return GeosearchstoreCircleBoxUnitFt(c)
 }
 
 func (c GeosearchstoreCircleBoxHeight) Mi() GeosearchstoreCircleBoxUnitMi {
 	c.command.append("mi")
-	return (GeosearchstoreCircleBoxUnitMi)(c)
+	return GeosearchstoreCircleBoxUnitMi(c)
 }
 
 type GeosearchstoreCircleBoxUnitFt Base
 
 func (c GeosearchstoreCircleBoxUnitFt) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitFt) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitFt) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitFt) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18528,22 +18528,22 @@ type GeosearchstoreCircleBoxUnitKm Base
 
 func (c GeosearchstoreCircleBoxUnitKm) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitKm) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitKm) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitKm) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18555,22 +18555,22 @@ type GeosearchstoreCircleBoxUnitM Base
 
 func (c GeosearchstoreCircleBoxUnitM) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitM) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitM) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitM) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18582,22 +18582,22 @@ type GeosearchstoreCircleBoxUnitMi Base
 
 func (c GeosearchstoreCircleBoxUnitMi) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitMi) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitMi) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleBoxUnitMi) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18609,49 +18609,49 @@ type GeosearchstoreCircleCircleByradius Base
 
 func (c GeosearchstoreCircleCircleByradius) M() GeosearchstoreCircleCircleUnitM {
 	c.command.append("m")
-	return (GeosearchstoreCircleCircleUnitM)(c)
+	return GeosearchstoreCircleCircleUnitM(c)
 }
 
 func (c GeosearchstoreCircleCircleByradius) Km() GeosearchstoreCircleCircleUnitKm {
 	c.command.append("km")
-	return (GeosearchstoreCircleCircleUnitKm)(c)
+	return GeosearchstoreCircleCircleUnitKm(c)
 }
 
 func (c GeosearchstoreCircleCircleByradius) Ft() GeosearchstoreCircleCircleUnitFt {
 	c.command.append("ft")
-	return (GeosearchstoreCircleCircleUnitFt)(c)
+	return GeosearchstoreCircleCircleUnitFt(c)
 }
 
 func (c GeosearchstoreCircleCircleByradius) Mi() GeosearchstoreCircleCircleUnitMi {
 	c.command.append("mi")
-	return (GeosearchstoreCircleCircleUnitMi)(c)
+	return GeosearchstoreCircleCircleUnitMi(c)
 }
 
 type GeosearchstoreCircleCircleUnitFt Base
 
 func (c GeosearchstoreCircleCircleUnitFt) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitFt) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitFt) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitFt) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitFt) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18663,27 +18663,27 @@ type GeosearchstoreCircleCircleUnitKm Base
 
 func (c GeosearchstoreCircleCircleUnitKm) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitKm) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitKm) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitKm) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitKm) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18695,27 +18695,27 @@ type GeosearchstoreCircleCircleUnitM Base
 
 func (c GeosearchstoreCircleCircleUnitM) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitM) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitM) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitM) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitM) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18727,27 +18727,27 @@ type GeosearchstoreCircleCircleUnitMi Base
 
 func (c GeosearchstoreCircleCircleUnitMi) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitMi) Asc() GeosearchstoreOrderAsc {
 	c.command.append("ASC")
-	return (GeosearchstoreOrderAsc)(c)
+	return GeosearchstoreOrderAsc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitMi) Desc() GeosearchstoreOrderDesc {
 	c.command.append("DESC")
-	return (GeosearchstoreOrderDesc)(c)
+	return GeosearchstoreOrderDesc(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitMi) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreCircleCircleUnitMi) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18759,7 +18759,7 @@ type GeosearchstoreCountAny Base
 
 func (c GeosearchstoreCountAny) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18771,12 +18771,12 @@ type GeosearchstoreCountCount Base
 
 func (c GeosearchstoreCountCount) Any() GeosearchstoreCountAny {
 	c.command.append("ANY")
-	return (GeosearchstoreCountAny)(c)
+	return GeosearchstoreCountAny(c)
 }
 
 func (c GeosearchstoreCountCount) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18793,48 +18793,48 @@ func (c GeosearchstoreDestination) Source(source string) GeosearchstoreSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (GeosearchstoreSource)(c)
+	return GeosearchstoreSource(c)
 }
 
 type GeosearchstoreFrommemberFromlonlat Base
 
 func (c GeosearchstoreFrommemberFromlonlat) Byradius(radius float64) GeosearchstoreCircleCircleByradius {
 	c.command.append("BYRADIUS", strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeosearchstoreCircleCircleByradius)(c)
+	return GeosearchstoreCircleCircleByradius(c)
 }
 
 func (c GeosearchstoreFrommemberFromlonlat) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 type GeosearchstoreFrommemberFrommember Base
 
 func (c GeosearchstoreFrommemberFrommember) Fromlonlat(longitude float64, latitude float64) GeosearchstoreFrommemberFromlonlat {
 	c.command.append("FROMLONLAT", strconv.FormatFloat(longitude, 'f', -1, 64), strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeosearchstoreFrommemberFromlonlat)(c)
+	return GeosearchstoreFrommemberFromlonlat(c)
 }
 
 func (c GeosearchstoreFrommemberFrommember) Byradius(radius float64) GeosearchstoreCircleCircleByradius {
 	c.command.append("BYRADIUS", strconv.FormatFloat(radius, 'f', -1, 64))
-	return (GeosearchstoreCircleCircleByradius)(c)
+	return GeosearchstoreCircleCircleByradius(c)
 }
 
 func (c GeosearchstoreFrommemberFrommember) Bybox(width float64) GeosearchstoreCircleBoxBybox {
 	c.command.append("BYBOX", strconv.FormatFloat(width, 'f', -1, 64))
-	return (GeosearchstoreCircleBoxBybox)(c)
+	return GeosearchstoreCircleBoxBybox(c)
 }
 
 type GeosearchstoreOrderAsc Base
 
 func (c GeosearchstoreOrderAsc) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreOrderAsc) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18846,12 +18846,12 @@ type GeosearchstoreOrderDesc Base
 
 func (c GeosearchstoreOrderDesc) Count(count int64) GeosearchstoreCountCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (GeosearchstoreCountCount)(c)
+	return GeosearchstoreCountCount(c)
 }
 
 func (c GeosearchstoreOrderDesc) Storedist() GeosearchstoreStoredist {
 	c.command.append("STOREDIST")
-	return (GeosearchstoreStoredist)(c)
+	return GeosearchstoreStoredist(c)
 }
 
 // Return Completed Redis command.
@@ -18863,12 +18863,12 @@ type GeosearchstoreSource Base
 
 func (c GeosearchstoreSource) Frommember(member string) GeosearchstoreFrommemberFrommember {
 	c.command.append("FROMMEMBER", member)
-	return (GeosearchstoreFrommemberFrommember)(c)
+	return GeosearchstoreFrommemberFrommember(c)
 }
 
 func (c GeosearchstoreSource) Fromlonlat(longitude float64, latitude float64) GeosearchstoreFrommemberFromlonlat {
 	c.command.append("FROMLONLAT", strconv.FormatFloat(longitude, 'f', -1, 64), strconv.FormatFloat(latitude, 'f', -1, 64))
-	return (GeosearchstoreFrommemberFromlonlat)(c)
+	return GeosearchstoreFrommemberFromlonlat(c)
 }
 
 type GeosearchstoreStoredist Base
@@ -18901,7 +18901,7 @@ func (c Get) Key(key string) GetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetKey)(c)
+	return GetKey(c)
 }
 
 type GetKey Base
@@ -18939,14 +18939,14 @@ func (c Getbit) Key(key string) GetbitKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetbitKey)(c)
+	return GetbitKey(c)
 }
 
 type GetbitKey Base
 
 func (c GetbitKey) Offset(offset int64) GetbitOffset {
 	c.command.append(strconv.FormatInt(offset, 10))
-	return (GetbitOffset)(c)
+	return GetbitOffset(c)
 }
 
 type GetbitOffset Base
@@ -18984,7 +18984,7 @@ func (c Getdel) Key(key string) GetdelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetdelKey)(c)
+	return GetdelKey(c)
 }
 
 type GetdelKey Base
@@ -19017,7 +19017,7 @@ func (c Getex) Key(key string) GetexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetexKey)(c)
+	return GetexKey(c)
 }
 
 type GetexExpirationExSeconds Base
@@ -19059,27 +19059,27 @@ type GetexKey Base
 
 func (c GetexKey) ExSeconds(seconds int64) GetexExpirationExSeconds {
 	c.command.append("EX", strconv.FormatInt(seconds, 10))
-	return (GetexExpirationExSeconds)(c)
+	return GetexExpirationExSeconds(c)
 }
 
 func (c GetexKey) PxMilliseconds(milliseconds int64) GetexExpirationPxMilliseconds {
 	c.command.append("PX", strconv.FormatInt(milliseconds, 10))
-	return (GetexExpirationPxMilliseconds)(c)
+	return GetexExpirationPxMilliseconds(c)
 }
 
 func (c GetexKey) ExatTimestamp(timestamp int64) GetexExpirationExatTimestamp {
 	c.command.append("EXAT", strconv.FormatInt(timestamp, 10))
-	return (GetexExpirationExatTimestamp)(c)
+	return GetexExpirationExatTimestamp(c)
 }
 
 func (c GetexKey) PxatMillisecondsTimestamp(millisecondsTimestamp int64) GetexExpirationPxatMillisecondsTimestamp {
 	c.command.append("PXAT", strconv.FormatInt(millisecondsTimestamp, 10))
-	return (GetexExpirationPxatMillisecondsTimestamp)(c)
+	return GetexExpirationPxatMillisecondsTimestamp(c)
 }
 
 func (c GetexKey) Persist() GetexExpirationPersist {
 	c.command.append("PERSIST")
-	return (GetexExpirationPersist)(c)
+	return GetexExpirationPersist(c)
 }
 
 // Return Completed Redis command.
@@ -19110,7 +19110,7 @@ func (c Getrange) Key(key string) GetrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetrangeKey)(c)
+	return GetrangeKey(c)
 }
 
 type GetrangeEnd Base
@@ -19129,14 +19129,14 @@ type GetrangeKey Base
 
 func (c GetrangeKey) Start(start int64) GetrangeStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (GetrangeStart)(c)
+	return GetrangeStart(c)
 }
 
 type GetrangeStart Base
 
 func (c GetrangeStart) End(end int64) GetrangeEnd {
 	c.command.append(strconv.FormatInt(end, 10))
-	return (GetrangeEnd)(c)
+	return GetrangeEnd(c)
 }
 
 // Set the string value of a key and return its old value.
@@ -19162,14 +19162,14 @@ func (c Getset) Key(key string) GetsetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (GetsetKey)(c)
+	return GetsetKey(c)
 }
 
 type GetsetKey Base
 
 func (c GetsetKey) Value(value string) GetsetValue {
 	c.command.append(value)
-	return (GetsetValue)(c)
+	return GetsetValue(c)
 }
 
 type GetsetValue Base
@@ -19193,7 +19193,7 @@ func (b Builder) GraphConfigGet() GraphConfigGet {
 
 func (c GraphConfigGet) Name(name string) GraphConfigGetName {
 	c.command.append(name)
-	return (GraphConfigGetName)(c)
+	return GraphConfigGetName(c)
 }
 
 type GraphConfigGetName Base
@@ -19217,14 +19217,14 @@ func (b Builder) GraphConfigSet() GraphConfigSet {
 
 func (c GraphConfigSet) Name(name string) GraphConfigSetName {
 	c.command.append(name)
-	return (GraphConfigSetName)(c)
+	return GraphConfigSetName(c)
 }
 
 type GraphConfigSetName Base
 
 func (c GraphConfigSetName) Value(value string) GraphConfigSetValue {
 	c.command.append(value)
-	return (GraphConfigSetValue)(c)
+	return GraphConfigSetValue(c)
 }
 
 type GraphConfigSetValue Base
@@ -19253,7 +19253,7 @@ func (c GraphDelete) Graph(graph string) GraphDeleteGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphDeleteGraph)(c)
+	return GraphDeleteGraph(c)
 }
 
 type GraphDeleteGraph Base
@@ -19282,14 +19282,14 @@ func (c GraphExplain) Graph(graph string) GraphExplainGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphExplainGraph)(c)
+	return GraphExplainGraph(c)
 }
 
 type GraphExplainGraph Base
 
 func (c GraphExplainGraph) Query(query string) GraphExplainQuery {
 	c.command.append(query)
-	return (GraphExplainQuery)(c)
+	return GraphExplainQuery(c)
 }
 
 type GraphExplainQuery Base
@@ -19335,21 +19335,21 @@ func (c GraphProfile) Graph(graph string) GraphProfileGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphProfileGraph)(c)
+	return GraphProfileGraph(c)
 }
 
 type GraphProfileGraph Base
 
 func (c GraphProfileGraph) Query(query string) GraphProfileQuery {
 	c.command.append(query)
-	return (GraphProfileQuery)(c)
+	return GraphProfileQuery(c)
 }
 
 type GraphProfileQuery Base
 
 func (c GraphProfileQuery) Timeout(timeout int64) GraphProfileTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (GraphProfileTimeout)(c)
+	return GraphProfileTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -19383,21 +19383,21 @@ func (c GraphQuery) Graph(graph string) GraphQueryGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphQueryGraph)(c)
+	return GraphQueryGraph(c)
 }
 
 type GraphQueryGraph Base
 
 func (c GraphQueryGraph) Query(query string) GraphQueryQuery {
 	c.command.append(query)
-	return (GraphQueryQuery)(c)
+	return GraphQueryQuery(c)
 }
 
 type GraphQueryQuery Base
 
 func (c GraphQueryQuery) Timeout(timeout int64) GraphQueryTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (GraphQueryTimeout)(c)
+	return GraphQueryTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -19431,21 +19431,21 @@ func (c GraphRoQuery) Graph(graph string) GraphRoQueryGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphRoQueryGraph)(c)
+	return GraphRoQueryGraph(c)
 }
 
 type GraphRoQueryGraph Base
 
 func (c GraphRoQueryGraph) Query(query string) GraphRoQueryQuery {
 	c.command.append(query)
-	return (GraphRoQueryQuery)(c)
+	return GraphRoQueryQuery(c)
 }
 
 type GraphRoQueryQuery Base
 
 func (c GraphRoQueryQuery) Timeout(timeout int64) GraphRoQueryTimeout {
 	c.command.append("TIMEOUT", strconv.FormatInt(timeout, 10))
-	return (GraphRoQueryTimeout)(c)
+	return GraphRoQueryTimeout(c)
 }
 
 // Return Completed Redis command.
@@ -19489,7 +19489,7 @@ func (c GraphSlowlog) Graph(graph string) GraphSlowlogGraph {
 		c.cslot.set(getSlot(graph))
 	}
 	c.command.append(graph)
-	return (GraphSlowlogGraph)(c)
+	return GraphSlowlogGraph(c)
 }
 
 type GraphSlowlogGraph Base
@@ -19522,7 +19522,7 @@ func (c Hdel) Key(key string) HdelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HdelKey)(c)
+	return HdelKey(c)
 }
 
 type HdelField Base
@@ -19541,7 +19541,7 @@ type HdelKey Base
 
 func (c HdelKey) Field(field ...string) HdelField {
 	c.command.append(field...)
-	return (HdelField)(c)
+	return HdelField(c)
 }
 
 // Handshake with Redis.
@@ -19562,7 +19562,7 @@ func (b Builder) Hello() Hello {
 
 func (c Hello) Protover(protover int64) HelloArgumentsProtover {
 	c.command.append(strconv.FormatInt(protover, 10))
-	return (HelloArgumentsProtover)(c)
+	return HelloArgumentsProtover(c)
 }
 
 // Return Completed Redis command.
@@ -19574,7 +19574,7 @@ type HelloArgumentsAuth Base
 
 func (c HelloArgumentsAuth) Setname(clientname string) HelloArgumentsSetname {
 	c.command.append("SETNAME", clientname)
-	return (HelloArgumentsSetname)(c)
+	return HelloArgumentsSetname(c)
 }
 
 // Return Completed Redis command.
@@ -19586,12 +19586,12 @@ type HelloArgumentsProtover Base
 
 func (c HelloArgumentsProtover) Auth(username string, password string) HelloArgumentsAuth {
 	c.command.append("AUTH", username, password)
-	return (HelloArgumentsAuth)(c)
+	return HelloArgumentsAuth(c)
 }
 
 func (c HelloArgumentsProtover) Setname(clientname string) HelloArgumentsSetname {
 	c.command.append("SETNAME", clientname)
-	return (HelloArgumentsSetname)(c)
+	return HelloArgumentsSetname(c)
 }
 
 // Return Completed Redis command.
@@ -19629,7 +19629,7 @@ func (c Hexists) Key(key string) HexistsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HexistsKey)(c)
+	return HexistsKey(c)
 }
 
 type HexistsField Base
@@ -19648,7 +19648,7 @@ type HexistsKey Base
 
 func (c HexistsKey) Field(field string) HexistsField {
 	c.command.append(field)
-	return (HexistsField)(c)
+	return HexistsField(c)
 }
 
 // Get the value of a hash field.
@@ -19674,7 +19674,7 @@ func (c Hget) Key(key string) HgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HgetKey)(c)
+	return HgetKey(c)
 }
 
 type HgetField Base
@@ -19693,7 +19693,7 @@ type HgetKey Base
 
 func (c HgetKey) Field(field string) HgetField {
 	c.command.append(field)
-	return (HgetField)(c)
+	return HgetField(c)
 }
 
 // Get all the fields and values in a hash.
@@ -19719,7 +19719,7 @@ func (c Hgetall) Key(key string) HgetallKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HgetallKey)(c)
+	return HgetallKey(c)
 }
 
 type HgetallKey Base
@@ -19757,14 +19757,14 @@ func (c Hincrby) Key(key string) HincrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HincrbyKey)(c)
+	return HincrbyKey(c)
 }
 
 type HincrbyField Base
 
 func (c HincrbyField) Increment(increment int64) HincrbyIncrement {
 	c.command.append(strconv.FormatInt(increment, 10))
-	return (HincrbyIncrement)(c)
+	return HincrbyIncrement(c)
 }
 
 type HincrbyIncrement Base
@@ -19778,7 +19778,7 @@ type HincrbyKey Base
 
 func (c HincrbyKey) Field(field string) HincrbyField {
 	c.command.append(field)
-	return (HincrbyField)(c)
+	return HincrbyField(c)
 }
 
 // Increment the float value of a hash field by the given amount.
@@ -19804,14 +19804,14 @@ func (c Hincrbyfloat) Key(key string) HincrbyfloatKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HincrbyfloatKey)(c)
+	return HincrbyfloatKey(c)
 }
 
 type HincrbyfloatField Base
 
 func (c HincrbyfloatField) Increment(increment float64) HincrbyfloatIncrement {
 	c.command.append(strconv.FormatFloat(increment, 'f', -1, 64))
-	return (HincrbyfloatIncrement)(c)
+	return HincrbyfloatIncrement(c)
 }
 
 type HincrbyfloatIncrement Base
@@ -19825,7 +19825,7 @@ type HincrbyfloatKey Base
 
 func (c HincrbyfloatKey) Field(field string) HincrbyfloatField {
 	c.command.append(field)
-	return (HincrbyfloatField)(c)
+	return HincrbyfloatField(c)
 }
 
 // Get all the fields in a hash.
@@ -19851,7 +19851,7 @@ func (c Hkeys) Key(key string) HkeysKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HkeysKey)(c)
+	return HkeysKey(c)
 }
 
 type HkeysKey Base
@@ -19889,7 +19889,7 @@ func (c Hlen) Key(key string) HlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HlenKey)(c)
+	return HlenKey(c)
 }
 
 type HlenKey Base
@@ -19927,7 +19927,7 @@ func (c Hmget) Key(key string) HmgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HmgetKey)(c)
+	return HmgetKey(c)
 }
 
 type HmgetField Base
@@ -19951,7 +19951,7 @@ type HmgetKey Base
 
 func (c HmgetKey) Field(field ...string) HmgetField {
 	c.command.append(field...)
-	return (HmgetField)(c)
+	return HmgetField(c)
 }
 
 // Set multiple hash fields to multiple values.
@@ -19977,7 +19977,7 @@ func (c Hmset) Key(key string) HmsetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HmsetKey)(c)
+	return HmsetKey(c)
 }
 
 type HmsetFieldValue Base
@@ -19995,7 +19995,7 @@ func (c HmsetFieldValue) Build() Completed {
 type HmsetKey Base
 
 func (c HmsetKey) FieldValue() HmsetFieldValue {
-	return (HmsetFieldValue)(c)
+	return HmsetFieldValue(c)
 }
 
 // Get one or multiple random fields from a hash.
@@ -20021,14 +20021,14 @@ func (c Hrandfield) Key(key string) HrandfieldKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HrandfieldKey)(c)
+	return HrandfieldKey(c)
 }
 
 type HrandfieldKey Base
 
 func (c HrandfieldKey) Count(count int64) HrandfieldOptionsCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (HrandfieldOptionsCount)(c)
+	return HrandfieldOptionsCount(c)
 }
 
 // Return Completed Redis command.
@@ -20040,7 +20040,7 @@ type HrandfieldOptionsCount Base
 
 func (c HrandfieldOptionsCount) Withvalues() HrandfieldOptionsWithvalues {
 	c.command.append("WITHVALUES")
-	return (HrandfieldOptionsWithvalues)(c)
+	return HrandfieldOptionsWithvalues(c)
 }
 
 // Return Completed Redis command.
@@ -20078,7 +20078,7 @@ func (c Hscan) Key(key string) HscanKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HscanKey)(c)
+	return HscanKey(c)
 }
 
 type HscanCount Base
@@ -20092,12 +20092,12 @@ type HscanCursor Base
 
 func (c HscanCursor) Match(pattern string) HscanMatch {
 	c.command.append("MATCH", pattern)
-	return (HscanMatch)(c)
+	return HscanMatch(c)
 }
 
 func (c HscanCursor) Count(count int64) HscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (HscanCount)(c)
+	return HscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -20109,14 +20109,14 @@ type HscanKey Base
 
 func (c HscanKey) Cursor(cursor int64) HscanCursor {
 	c.command.append(strconv.FormatInt(cursor, 10))
-	return (HscanCursor)(c)
+	return HscanCursor(c)
 }
 
 type HscanMatch Base
 
 func (c HscanMatch) Count(count int64) HscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (HscanCount)(c)
+	return HscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -20147,7 +20147,7 @@ func (c Hset) Key(key string) HsetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HsetKey)(c)
+	return HsetKey(c)
 }
 
 type HsetFieldValue Base
@@ -20165,7 +20165,7 @@ func (c HsetFieldValue) Build() Completed {
 type HsetKey Base
 
 func (c HsetKey) FieldValue() HsetFieldValue {
-	return (HsetFieldValue)(c)
+	return HsetFieldValue(c)
 }
 
 // Set the value of a hash field, only if the field does not exist.
@@ -20191,21 +20191,21 @@ func (c Hsetnx) Key(key string) HsetnxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HsetnxKey)(c)
+	return HsetnxKey(c)
 }
 
 type HsetnxField Base
 
 func (c HsetnxField) Value(value string) HsetnxValue {
 	c.command.append(value)
-	return (HsetnxValue)(c)
+	return HsetnxValue(c)
 }
 
 type HsetnxKey Base
 
 func (c HsetnxKey) Field(field string) HsetnxField {
 	c.command.append(field)
-	return (HsetnxField)(c)
+	return HsetnxField(c)
 }
 
 type HsetnxValue Base
@@ -20238,7 +20238,7 @@ func (c Hstrlen) Key(key string) HstrlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HstrlenKey)(c)
+	return HstrlenKey(c)
 }
 
 type HstrlenField Base
@@ -20257,7 +20257,7 @@ type HstrlenKey Base
 
 func (c HstrlenKey) Field(field string) HstrlenField {
 	c.command.append(field)
-	return (HstrlenField)(c)
+	return HstrlenField(c)
 }
 
 // Get all the values in a hash.
@@ -20283,7 +20283,7 @@ func (c Hvals) Key(key string) HvalsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (HvalsKey)(c)
+	return HvalsKey(c)
 }
 
 type HvalsKey Base
@@ -20321,7 +20321,7 @@ func (c Incr) Key(key string) IncrKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (IncrKey)(c)
+	return IncrKey(c)
 }
 
 type IncrKey Base
@@ -20354,7 +20354,7 @@ func (c Incrby) Key(key string) IncrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (IncrbyKey)(c)
+	return IncrbyKey(c)
 }
 
 type IncrbyIncrement Base
@@ -20368,7 +20368,7 @@ type IncrbyKey Base
 
 func (c IncrbyKey) Increment(increment int64) IncrbyIncrement {
 	c.command.append(strconv.FormatInt(increment, 10))
-	return (IncrbyIncrement)(c)
+	return IncrbyIncrement(c)
 }
 
 // Increment the float value of a key by the given amount.
@@ -20394,7 +20394,7 @@ func (c Incrbyfloat) Key(key string) IncrbyfloatKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (IncrbyfloatKey)(c)
+	return IncrbyfloatKey(c)
 }
 
 type IncrbyfloatIncrement Base
@@ -20408,7 +20408,7 @@ type IncrbyfloatKey Base
 
 func (c IncrbyfloatKey) Increment(increment float64) IncrbyfloatIncrement {
 	c.command.append(strconv.FormatFloat(increment, 'f', -1, 64))
-	return (IncrbyfloatIncrement)(c)
+	return IncrbyfloatIncrement(c)
 }
 
 // Get information and statistics about the server.
@@ -20425,7 +20425,7 @@ func (b Builder) Info() Info {
 
 func (c Info) Section(section ...string) InfoSection {
 	c.command.append(section...)
-	return (InfoSection)(c)
+	return InfoSection(c)
 }
 
 // Return Completed Redis command.
@@ -20468,26 +20468,26 @@ func (c JsonArrappend) Key(key string) JsonArrappendKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrappendKey)(c)
+	return JsonArrappendKey(c)
 }
 
 type JsonArrappendKey Base
 
 func (c JsonArrappendKey) Path(path string) JsonArrappendPath {
 	c.command.append(path)
-	return (JsonArrappendPath)(c)
+	return JsonArrappendPath(c)
 }
 
 func (c JsonArrappendKey) Value(value ...string) JsonArrappendValue {
 	c.command.append(value...)
-	return (JsonArrappendValue)(c)
+	return JsonArrappendValue(c)
 }
 
 type JsonArrappendPath Base
 
 func (c JsonArrappendPath) Value(value ...string) JsonArrappendValue {
 	c.command.append(value...)
-	return (JsonArrappendValue)(c)
+	return JsonArrappendValue(c)
 }
 
 type JsonArrappendValue Base
@@ -20525,28 +20525,28 @@ func (c JsonArrindex) Key(key string) JsonArrindexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrindexKey)(c)
+	return JsonArrindexKey(c)
 }
 
 type JsonArrindexKey Base
 
 func (c JsonArrindexKey) Path(path string) JsonArrindexPath {
 	c.command.append(path)
-	return (JsonArrindexPath)(c)
+	return JsonArrindexPath(c)
 }
 
 type JsonArrindexPath Base
 
 func (c JsonArrindexPath) Value(value string) JsonArrindexValue {
 	c.command.append(value)
-	return (JsonArrindexValue)(c)
+	return JsonArrindexValue(c)
 }
 
 type JsonArrindexStartStart Base
 
 func (c JsonArrindexStartStart) Stop(stop int64) JsonArrindexStartStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (JsonArrindexStartStop)(c)
+	return JsonArrindexStartStop(c)
 }
 
 // Return Completed Redis command.
@@ -20575,7 +20575,7 @@ type JsonArrindexValue Base
 
 func (c JsonArrindexValue) Start(start int64) JsonArrindexStartStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (JsonArrindexStartStart)(c)
+	return JsonArrindexStartStart(c)
 }
 
 // Return Completed Redis command.
@@ -20611,28 +20611,28 @@ func (c JsonArrinsert) Key(key string) JsonArrinsertKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrinsertKey)(c)
+	return JsonArrinsertKey(c)
 }
 
 type JsonArrinsertIndex Base
 
 func (c JsonArrinsertIndex) Value(value ...string) JsonArrinsertValue {
 	c.command.append(value...)
-	return (JsonArrinsertValue)(c)
+	return JsonArrinsertValue(c)
 }
 
 type JsonArrinsertKey Base
 
 func (c JsonArrinsertKey) Path(path string) JsonArrinsertPath {
 	c.command.append(path)
-	return (JsonArrinsertPath)(c)
+	return JsonArrinsertPath(c)
 }
 
 type JsonArrinsertPath Base
 
 func (c JsonArrinsertPath) Index(index int64) JsonArrinsertIndex {
 	c.command.append(strconv.FormatInt(index, 10))
-	return (JsonArrinsertIndex)(c)
+	return JsonArrinsertIndex(c)
 }
 
 type JsonArrinsertValue Base
@@ -20670,14 +20670,14 @@ func (c JsonArrlen) Key(key string) JsonArrlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrlenKey)(c)
+	return JsonArrlenKey(c)
 }
 
 type JsonArrlenKey Base
 
 func (c JsonArrlenKey) Path(path string) JsonArrlenPath {
 	c.command.append(path)
-	return (JsonArrlenPath)(c)
+	return JsonArrlenPath(c)
 }
 
 // Return Completed Redis command.
@@ -20725,14 +20725,14 @@ func (c JsonArrpop) Key(key string) JsonArrpopKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrpopKey)(c)
+	return JsonArrpopKey(c)
 }
 
 type JsonArrpopKey Base
 
 func (c JsonArrpopKey) Path(path string) JsonArrpopPathPath {
 	c.command.append(path)
-	return (JsonArrpopPathPath)(c)
+	return JsonArrpopPathPath(c)
 }
 
 // Return Completed Redis command.
@@ -20751,7 +20751,7 @@ type JsonArrpopPathPath Base
 
 func (c JsonArrpopPathPath) Index(index int64) JsonArrpopPathIndex {
 	c.command.append(strconv.FormatInt(index, 10))
-	return (JsonArrpopPathIndex)(c)
+	return JsonArrpopPathIndex(c)
 }
 
 // Return Completed Redis command.
@@ -20782,28 +20782,28 @@ func (c JsonArrtrim) Key(key string) JsonArrtrimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonArrtrimKey)(c)
+	return JsonArrtrimKey(c)
 }
 
 type JsonArrtrimKey Base
 
 func (c JsonArrtrimKey) Path(path string) JsonArrtrimPath {
 	c.command.append(path)
-	return (JsonArrtrimPath)(c)
+	return JsonArrtrimPath(c)
 }
 
 type JsonArrtrimPath Base
 
 func (c JsonArrtrimPath) Start(start int64) JsonArrtrimStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (JsonArrtrimStart)(c)
+	return JsonArrtrimStart(c)
 }
 
 type JsonArrtrimStart Base
 
 func (c JsonArrtrimStart) Stop(stop int64) JsonArrtrimStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (JsonArrtrimStop)(c)
+	return JsonArrtrimStop(c)
 }
 
 type JsonArrtrimStop Base
@@ -20836,14 +20836,14 @@ func (c JsonClear) Key(key string) JsonClearKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonClearKey)(c)
+	return JsonClearKey(c)
 }
 
 type JsonClearKey Base
 
 func (c JsonClearKey) Path(path string) JsonClearPath {
 	c.command.append(path)
-	return (JsonClearPath)(c)
+	return JsonClearPath(c)
 }
 
 // Return Completed Redis command.
@@ -20888,14 +20888,14 @@ func (c JsonDebugMemory) Key(key string) JsonDebugMemoryKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonDebugMemoryKey)(c)
+	return JsonDebugMemoryKey(c)
 }
 
 type JsonDebugMemoryKey Base
 
 func (c JsonDebugMemoryKey) Path(path string) JsonDebugMemoryPath {
 	c.command.append(path)
-	return (JsonDebugMemoryPath)(c)
+	return JsonDebugMemoryPath(c)
 }
 
 // Return Completed Redis command.
@@ -20933,14 +20933,14 @@ func (c JsonDel) Key(key string) JsonDelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonDelKey)(c)
+	return JsonDelKey(c)
 }
 
 type JsonDelKey Base
 
 func (c JsonDelKey) Path(path string) JsonDelPath {
 	c.command.append(path)
-	return (JsonDelPath)(c)
+	return JsonDelPath(c)
 }
 
 // Return Completed Redis command.
@@ -20971,14 +20971,14 @@ func (c JsonForget) Key(key string) JsonForgetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonForgetKey)(c)
+	return JsonForgetKey(c)
 }
 
 type JsonForgetKey Base
 
 func (c JsonForgetKey) Path(path string) JsonForgetPath {
 	c.command.append(path)
-	return (JsonForgetPath)(c)
+	return JsonForgetPath(c)
 }
 
 // Return Completed Redis command.
@@ -21016,24 +21016,24 @@ func (c JsonGet) Key(key string) JsonGetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonGetKey)(c)
+	return JsonGetKey(c)
 }
 
 type JsonGetIndent Base
 
 func (c JsonGetIndent) Newline(newline string) JsonGetNewline {
 	c.command.append("NEWLINE", newline)
-	return (JsonGetNewline)(c)
+	return JsonGetNewline(c)
 }
 
 func (c JsonGetIndent) Space(space string) JsonGetSpace {
 	c.command.append("SPACE", space)
-	return (JsonGetSpace)(c)
+	return JsonGetSpace(c)
 }
 
 func (c JsonGetIndent) Paths(paths ...string) JsonGetPaths {
 	c.command.append(paths...)
-	return (JsonGetPaths)(c)
+	return JsonGetPaths(c)
 }
 
 // Return Completed Redis command.
@@ -21050,22 +21050,22 @@ type JsonGetKey Base
 
 func (c JsonGetKey) Indent(indent string) JsonGetIndent {
 	c.command.append("INDENT", indent)
-	return (JsonGetIndent)(c)
+	return JsonGetIndent(c)
 }
 
 func (c JsonGetKey) Newline(newline string) JsonGetNewline {
 	c.command.append("NEWLINE", newline)
-	return (JsonGetNewline)(c)
+	return JsonGetNewline(c)
 }
 
 func (c JsonGetKey) Space(space string) JsonGetSpace {
 	c.command.append("SPACE", space)
-	return (JsonGetSpace)(c)
+	return JsonGetSpace(c)
 }
 
 func (c JsonGetKey) Paths(paths ...string) JsonGetPaths {
 	c.command.append(paths...)
-	return (JsonGetPaths)(c)
+	return JsonGetPaths(c)
 }
 
 // Return Completed Redis command.
@@ -21082,12 +21082,12 @@ type JsonGetNewline Base
 
 func (c JsonGetNewline) Space(space string) JsonGetSpace {
 	c.command.append("SPACE", space)
-	return (JsonGetSpace)(c)
+	return JsonGetSpace(c)
 }
 
 func (c JsonGetNewline) Paths(paths ...string) JsonGetPaths {
 	c.command.append(paths...)
-	return (JsonGetPaths)(c)
+	return JsonGetPaths(c)
 }
 
 // Return Completed Redis command.
@@ -21121,7 +21121,7 @@ type JsonGetSpace Base
 
 func (c JsonGetSpace) Paths(paths ...string) JsonGetPaths {
 	c.command.append(paths...)
-	return (JsonGetPaths)(c)
+	return JsonGetPaths(c)
 }
 
 // Return Completed Redis command.
@@ -21162,7 +21162,7 @@ func (c JsonMget) Key(key ...string) JsonMgetKey {
 		}
 	}
 	c.command.append(key...)
-	return (JsonMgetKey)(c)
+	return JsonMgetKey(c)
 }
 
 type JsonMgetKey Base
@@ -21184,7 +21184,7 @@ func (c JsonMgetKey) Key(key ...string) JsonMgetKey {
 
 func (c JsonMgetKey) Path(path string) JsonMgetPath {
 	c.command.append(path)
-	return (JsonMgetPath)(c)
+	return JsonMgetPath(c)
 }
 
 type JsonMgetPath Base
@@ -21222,21 +21222,21 @@ func (c JsonNumincrby) Key(key string) JsonNumincrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonNumincrbyKey)(c)
+	return JsonNumincrbyKey(c)
 }
 
 type JsonNumincrbyKey Base
 
 func (c JsonNumincrbyKey) Path(path string) JsonNumincrbyPath {
 	c.command.append(path)
-	return (JsonNumincrbyPath)(c)
+	return JsonNumincrbyPath(c)
 }
 
 type JsonNumincrbyPath Base
 
 func (c JsonNumincrbyPath) Value(value float64) JsonNumincrbyValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (JsonNumincrbyValue)(c)
+	return JsonNumincrbyValue(c)
 }
 
 type JsonNumincrbyValue Base
@@ -21262,21 +21262,21 @@ func (c JsonNummultby) Key(key string) JsonNummultbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonNummultbyKey)(c)
+	return JsonNummultbyKey(c)
 }
 
 type JsonNummultbyKey Base
 
 func (c JsonNummultbyKey) Path(path string) JsonNummultbyPath {
 	c.command.append(path)
-	return (JsonNummultbyPath)(c)
+	return JsonNummultbyPath(c)
 }
 
 type JsonNummultbyPath Base
 
 func (c JsonNummultbyPath) Value(value float64) JsonNummultbyValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (JsonNummultbyValue)(c)
+	return JsonNummultbyValue(c)
 }
 
 type JsonNummultbyValue Base
@@ -21309,14 +21309,14 @@ func (c JsonObjkeys) Key(key string) JsonObjkeysKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonObjkeysKey)(c)
+	return JsonObjkeysKey(c)
 }
 
 type JsonObjkeysKey Base
 
 func (c JsonObjkeysKey) Path(path string) JsonObjkeysPath {
 	c.command.append(path)
-	return (JsonObjkeysPath)(c)
+	return JsonObjkeysPath(c)
 }
 
 // Return Completed Redis command.
@@ -21364,14 +21364,14 @@ func (c JsonObjlen) Key(key string) JsonObjlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonObjlenKey)(c)
+	return JsonObjlenKey(c)
 }
 
 type JsonObjlenKey Base
 
 func (c JsonObjlenKey) Path(path string) JsonObjlenPath {
 	c.command.append(path)
-	return (JsonObjlenPath)(c)
+	return JsonObjlenPath(c)
 }
 
 // Return Completed Redis command.
@@ -21419,14 +21419,14 @@ func (c JsonResp) Key(key string) JsonRespKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonRespKey)(c)
+	return JsonRespKey(c)
 }
 
 type JsonRespKey Base
 
 func (c JsonRespKey) Path(path string) JsonRespPath {
 	c.command.append(path)
-	return (JsonRespPath)(c)
+	return JsonRespPath(c)
 }
 
 // Return Completed Redis command.
@@ -21474,7 +21474,7 @@ func (c JsonSet) Key(key string) JsonSetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonSetKey)(c)
+	return JsonSetKey(c)
 }
 
 type JsonSetConditionNx Base
@@ -21495,26 +21495,26 @@ type JsonSetKey Base
 
 func (c JsonSetKey) Path(path string) JsonSetPath {
 	c.command.append(path)
-	return (JsonSetPath)(c)
+	return JsonSetPath(c)
 }
 
 type JsonSetPath Base
 
 func (c JsonSetPath) Value(value string) JsonSetValue {
 	c.command.append(value)
-	return (JsonSetValue)(c)
+	return JsonSetValue(c)
 }
 
 type JsonSetValue Base
 
 func (c JsonSetValue) Nx() JsonSetConditionNx {
 	c.command.append("NX")
-	return (JsonSetConditionNx)(c)
+	return JsonSetConditionNx(c)
 }
 
 func (c JsonSetValue) Xx() JsonSetConditionXx {
 	c.command.append("XX")
-	return (JsonSetConditionXx)(c)
+	return JsonSetConditionXx(c)
 }
 
 // Return Completed Redis command.
@@ -21545,26 +21545,26 @@ func (c JsonStrappend) Key(key string) JsonStrappendKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonStrappendKey)(c)
+	return JsonStrappendKey(c)
 }
 
 type JsonStrappendKey Base
 
 func (c JsonStrappendKey) Path(path string) JsonStrappendPath {
 	c.command.append(path)
-	return (JsonStrappendPath)(c)
+	return JsonStrappendPath(c)
 }
 
 func (c JsonStrappendKey) Value(value string) JsonStrappendValue {
 	c.command.append(value)
-	return (JsonStrappendValue)(c)
+	return JsonStrappendValue(c)
 }
 
 type JsonStrappendPath Base
 
 func (c JsonStrappendPath) Value(value string) JsonStrappendValue {
 	c.command.append(value)
-	return (JsonStrappendValue)(c)
+	return JsonStrappendValue(c)
 }
 
 type JsonStrappendValue Base
@@ -21597,14 +21597,14 @@ func (c JsonStrlen) Key(key string) JsonStrlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonStrlenKey)(c)
+	return JsonStrlenKey(c)
 }
 
 type JsonStrlenKey Base
 
 func (c JsonStrlenKey) Path(path string) JsonStrlenPath {
 	c.command.append(path)
-	return (JsonStrlenPath)(c)
+	return JsonStrlenPath(c)
 }
 
 // Return Completed Redis command.
@@ -21652,14 +21652,14 @@ func (c JsonToggle) Key(key string) JsonToggleKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonToggleKey)(c)
+	return JsonToggleKey(c)
 }
 
 type JsonToggleKey Base
 
 func (c JsonToggleKey) Path(path string) JsonTogglePath {
 	c.command.append(path)
-	return (JsonTogglePath)(c)
+	return JsonTogglePath(c)
 }
 
 type JsonTogglePath Base
@@ -21692,14 +21692,14 @@ func (c JsonType) Key(key string) JsonTypeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (JsonTypeKey)(c)
+	return JsonTypeKey(c)
 }
 
 type JsonTypeKey Base
 
 func (c JsonTypeKey) Path(path string) JsonTypePath {
 	c.command.append(path)
-	return (JsonTypePath)(c)
+	return JsonTypePath(c)
 }
 
 // Return Completed Redis command.
@@ -21742,7 +21742,7 @@ func (b Builder) Keys() Keys {
 
 func (c Keys) Pattern(pattern string) KeysPattern {
 	c.command.append(pattern)
-	return (KeysPattern)(c)
+	return KeysPattern(c)
 }
 
 type KeysPattern Base
@@ -21800,7 +21800,7 @@ func (b Builder) LatencyGraph() LatencyGraph {
 
 func (c LatencyGraph) Event(event string) LatencyGraphEvent {
 	c.command.append(event)
-	return (LatencyGraphEvent)(c)
+	return LatencyGraphEvent(c)
 }
 
 type LatencyGraphEvent Base
@@ -21838,7 +21838,7 @@ func (b Builder) LatencyHistogram() LatencyHistogram {
 
 func (c LatencyHistogram) Command(command ...string) LatencyHistogramCommand {
 	c.command.append(command...)
-	return (LatencyHistogramCommand)(c)
+	return LatencyHistogramCommand(c)
 }
 
 // Return Completed Redis command.
@@ -21872,7 +21872,7 @@ func (b Builder) LatencyHistory() LatencyHistory {
 
 func (c LatencyHistory) Event(event string) LatencyHistoryEvent {
 	c.command.append(event)
-	return (LatencyHistoryEvent)(c)
+	return LatencyHistoryEvent(c)
 }
 
 type LatencyHistoryEvent Base
@@ -21913,7 +21913,7 @@ func (b Builder) LatencyReset() LatencyReset {
 
 func (c LatencyReset) Event(event ...string) LatencyResetEvent {
 	c.command.append(event...)
-	return (LatencyResetEvent)(c)
+	return LatencyResetEvent(c)
 }
 
 // Return Completed Redis command.
@@ -21956,19 +21956,19 @@ func (c Lcs) Key1(key1 string) LcsKey1 {
 		c.cslot.set(getSlot(key1))
 	}
 	c.command.append(key1)
-	return (LcsKey1)(c)
+	return LcsKey1(c)
 }
 
 type LcsIdx Base
 
 func (c LcsIdx) Minmatchlen(len int64) LcsMinmatchlen {
 	c.command.append("MINMATCHLEN", strconv.FormatInt(len, 10))
-	return (LcsMinmatchlen)(c)
+	return LcsMinmatchlen(c)
 }
 
 func (c LcsIdx) Withmatchlen() LcsWithmatchlen {
 	c.command.append("WITHMATCHLEN")
-	return (LcsWithmatchlen)(c)
+	return LcsWithmatchlen(c)
 }
 
 // Return Completed Redis command.
@@ -21985,29 +21985,29 @@ func (c LcsKey1) Key2(key2 string) LcsKey2 {
 		c.cslot.set(getSlot(key2))
 	}
 	c.command.append(key2)
-	return (LcsKey2)(c)
+	return LcsKey2(c)
 }
 
 type LcsKey2 Base
 
 func (c LcsKey2) Len() LcsLen {
 	c.command.append("LEN")
-	return (LcsLen)(c)
+	return LcsLen(c)
 }
 
 func (c LcsKey2) Idx() LcsIdx {
 	c.command.append("IDX")
-	return (LcsIdx)(c)
+	return LcsIdx(c)
 }
 
 func (c LcsKey2) Minmatchlen(len int64) LcsMinmatchlen {
 	c.command.append("MINMATCHLEN", strconv.FormatInt(len, 10))
-	return (LcsMinmatchlen)(c)
+	return LcsMinmatchlen(c)
 }
 
 func (c LcsKey2) Withmatchlen() LcsWithmatchlen {
 	c.command.append("WITHMATCHLEN")
-	return (LcsWithmatchlen)(c)
+	return LcsWithmatchlen(c)
 }
 
 // Return Completed Redis command.
@@ -22019,17 +22019,17 @@ type LcsLen Base
 
 func (c LcsLen) Idx() LcsIdx {
 	c.command.append("IDX")
-	return (LcsIdx)(c)
+	return LcsIdx(c)
 }
 
 func (c LcsLen) Minmatchlen(len int64) LcsMinmatchlen {
 	c.command.append("MINMATCHLEN", strconv.FormatInt(len, 10))
-	return (LcsMinmatchlen)(c)
+	return LcsMinmatchlen(c)
 }
 
 func (c LcsLen) Withmatchlen() LcsWithmatchlen {
 	c.command.append("WITHMATCHLEN")
-	return (LcsWithmatchlen)(c)
+	return LcsWithmatchlen(c)
 }
 
 // Return Completed Redis command.
@@ -22041,7 +22041,7 @@ type LcsMinmatchlen Base
 
 func (c LcsMinmatchlen) Withmatchlen() LcsWithmatchlen {
 	c.command.append("WITHMATCHLEN")
-	return (LcsWithmatchlen)(c)
+	return LcsWithmatchlen(c)
 }
 
 // Return Completed Redis command.
@@ -22079,7 +22079,7 @@ func (c Lindex) Key(key string) LindexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LindexKey)(c)
+	return LindexKey(c)
 }
 
 type LindexIndex Base
@@ -22098,7 +22098,7 @@ type LindexKey Base
 
 func (c LindexKey) Index(index int64) LindexIndex {
 	c.command.append(strconv.FormatInt(index, 10))
-	return (LindexIndex)(c)
+	return LindexIndex(c)
 }
 
 // Insert an element before or after another element in a list.
@@ -22124,7 +22124,7 @@ func (c Linsert) Key(key string) LinsertKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LinsertKey)(c)
+	return LinsertKey(c)
 }
 
 type LinsertElement Base
@@ -22138,33 +22138,33 @@ type LinsertKey Base
 
 func (c LinsertKey) Before() LinsertWhereBefore {
 	c.command.append("BEFORE")
-	return (LinsertWhereBefore)(c)
+	return LinsertWhereBefore(c)
 }
 
 func (c LinsertKey) After() LinsertWhereAfter {
 	c.command.append("AFTER")
-	return (LinsertWhereAfter)(c)
+	return LinsertWhereAfter(c)
 }
 
 type LinsertPivot Base
 
 func (c LinsertPivot) Element(element string) LinsertElement {
 	c.command.append(element)
-	return (LinsertElement)(c)
+	return LinsertElement(c)
 }
 
 type LinsertWhereAfter Base
 
 func (c LinsertWhereAfter) Pivot(pivot string) LinsertPivot {
 	c.command.append(pivot)
-	return (LinsertPivot)(c)
+	return LinsertPivot(c)
 }
 
 type LinsertWhereBefore Base
 
 func (c LinsertWhereBefore) Pivot(pivot string) LinsertPivot {
 	c.command.append(pivot)
-	return (LinsertPivot)(c)
+	return LinsertPivot(c)
 }
 
 // Get the length of a list.
@@ -22190,7 +22190,7 @@ func (c Llen) Key(key string) LlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LlenKey)(c)
+	return LlenKey(c)
 }
 
 type LlenKey Base
@@ -22228,19 +22228,19 @@ func (c Lmove) Source(source string) LmoveSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (LmoveSource)(c)
+	return LmoveSource(c)
 }
 
 type LmoveDestination Base
 
 func (c LmoveDestination) Left() LmoveWherefromLeft {
 	c.command.append("LEFT")
-	return (LmoveWherefromLeft)(c)
+	return LmoveWherefromLeft(c)
 }
 
 func (c LmoveDestination) Right() LmoveWherefromRight {
 	c.command.append("RIGHT")
-	return (LmoveWherefromRight)(c)
+	return LmoveWherefromRight(c)
 }
 
 type LmoveSource Base
@@ -22252,31 +22252,31 @@ func (c LmoveSource) Destination(destination string) LmoveDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (LmoveDestination)(c)
+	return LmoveDestination(c)
 }
 
 type LmoveWherefromLeft Base
 
 func (c LmoveWherefromLeft) Left() LmoveWheretoLeft {
 	c.command.append("LEFT")
-	return (LmoveWheretoLeft)(c)
+	return LmoveWheretoLeft(c)
 }
 
 func (c LmoveWherefromLeft) Right() LmoveWheretoRight {
 	c.command.append("RIGHT")
-	return (LmoveWheretoRight)(c)
+	return LmoveWheretoRight(c)
 }
 
 type LmoveWherefromRight Base
 
 func (c LmoveWherefromRight) Left() LmoveWheretoLeft {
 	c.command.append("LEFT")
-	return (LmoveWheretoLeft)(c)
+	return LmoveWheretoLeft(c)
 }
 
 func (c LmoveWherefromRight) Right() LmoveWheretoRight {
 	c.command.append("RIGHT")
-	return (LmoveWheretoRight)(c)
+	return LmoveWheretoRight(c)
 }
 
 type LmoveWheretoLeft Base
@@ -22311,7 +22311,7 @@ func (b Builder) Lmpop() Lmpop {
 
 func (c Lmpop) Numkeys(numkeys int64) LmpopNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (LmpopNumkeys)(c)
+	return LmpopNumkeys(c)
 }
 
 type LmpopCount Base
@@ -22340,12 +22340,12 @@ func (c LmpopKey) Key(key ...string) LmpopKey {
 
 func (c LmpopKey) Left() LmpopWhereLeft {
 	c.command.append("LEFT")
-	return (LmpopWhereLeft)(c)
+	return LmpopWhereLeft(c)
 }
 
 func (c LmpopKey) Right() LmpopWhereRight {
 	c.command.append("RIGHT")
-	return (LmpopWhereRight)(c)
+	return LmpopWhereRight(c)
 }
 
 type LmpopNumkeys Base
@@ -22362,14 +22362,14 @@ func (c LmpopNumkeys) Key(key ...string) LmpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (LmpopKey)(c)
+	return LmpopKey(c)
 }
 
 type LmpopWhereLeft Base
 
 func (c LmpopWhereLeft) Count(count int64) LmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (LmpopCount)(c)
+	return LmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -22381,7 +22381,7 @@ type LmpopWhereRight Base
 
 func (c LmpopWhereRight) Count(count int64) LmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (LmpopCount)(c)
+	return LmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -22403,7 +22403,7 @@ func (b Builder) Lolwut() Lolwut {
 
 func (c Lolwut) Version(version int64) LolwutVersion {
 	c.command.append("VERSION", strconv.FormatInt(version, 10))
-	return (LolwutVersion)(c)
+	return LolwutVersion(c)
 }
 
 // Return Completed Redis command.
@@ -22441,7 +22441,7 @@ func (c Lpop) Key(key string) LpopKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LpopKey)(c)
+	return LpopKey(c)
 }
 
 type LpopCount Base
@@ -22455,7 +22455,7 @@ type LpopKey Base
 
 func (c LpopKey) Count(count int64) LpopCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (LpopCount)(c)
+	return LpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -22486,14 +22486,14 @@ func (c Lpos) Key(key string) LposKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LposKey)(c)
+	return LposKey(c)
 }
 
 type LposCount Base
 
 func (c LposCount) Maxlen(len int64) LposMaxlen {
 	c.command.append("MAXLEN", strconv.FormatInt(len, 10))
-	return (LposMaxlen)(c)
+	return LposMaxlen(c)
 }
 
 // Return Completed Redis command.
@@ -22510,17 +22510,17 @@ type LposElement Base
 
 func (c LposElement) Rank(rank int64) LposRank {
 	c.command.append("RANK", strconv.FormatInt(rank, 10))
-	return (LposRank)(c)
+	return LposRank(c)
 }
 
 func (c LposElement) Count(numMatches int64) LposCount {
 	c.command.append("COUNT", strconv.FormatInt(numMatches, 10))
-	return (LposCount)(c)
+	return LposCount(c)
 }
 
 func (c LposElement) Maxlen(len int64) LposMaxlen {
 	c.command.append("MAXLEN", strconv.FormatInt(len, 10))
-	return (LposMaxlen)(c)
+	return LposMaxlen(c)
 }
 
 // Return Completed Redis command.
@@ -22537,7 +22537,7 @@ type LposKey Base
 
 func (c LposKey) Element(element string) LposElement {
 	c.command.append(element)
-	return (LposElement)(c)
+	return LposElement(c)
 }
 
 type LposMaxlen Base
@@ -22556,12 +22556,12 @@ type LposRank Base
 
 func (c LposRank) Count(numMatches int64) LposCount {
 	c.command.append("COUNT", strconv.FormatInt(numMatches, 10))
-	return (LposCount)(c)
+	return LposCount(c)
 }
 
 func (c LposRank) Maxlen(len int64) LposMaxlen {
 	c.command.append("MAXLEN", strconv.FormatInt(len, 10))
-	return (LposMaxlen)(c)
+	return LposMaxlen(c)
 }
 
 // Return Completed Redis command.
@@ -22597,7 +22597,7 @@ func (c Lpush) Key(key string) LpushKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LpushKey)(c)
+	return LpushKey(c)
 }
 
 type LpushElement Base
@@ -22616,7 +22616,7 @@ type LpushKey Base
 
 func (c LpushKey) Element(element ...string) LpushElement {
 	c.command.append(element...)
-	return (LpushElement)(c)
+	return LpushElement(c)
 }
 
 // Prepend an element to a list, only if the list exists.
@@ -22642,7 +22642,7 @@ func (c Lpushx) Key(key string) LpushxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LpushxKey)(c)
+	return LpushxKey(c)
 }
 
 type LpushxElement Base
@@ -22661,7 +22661,7 @@ type LpushxKey Base
 
 func (c LpushxKey) Element(element ...string) LpushxElement {
 	c.command.append(element...)
-	return (LpushxElement)(c)
+	return LpushxElement(c)
 }
 
 // Get a range of elements from a list.
@@ -22687,21 +22687,21 @@ func (c Lrange) Key(key string) LrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LrangeKey)(c)
+	return LrangeKey(c)
 }
 
 type LrangeKey Base
 
 func (c LrangeKey) Start(start int64) LrangeStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (LrangeStart)(c)
+	return LrangeStart(c)
 }
 
 type LrangeStart Base
 
 func (c LrangeStart) Stop(stop int64) LrangeStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (LrangeStop)(c)
+	return LrangeStop(c)
 }
 
 type LrangeStop Base
@@ -22739,14 +22739,14 @@ func (c Lrem) Key(key string) LremKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LremKey)(c)
+	return LremKey(c)
 }
 
 type LremCount Base
 
 func (c LremCount) Element(element string) LremElement {
 	c.command.append(element)
-	return (LremElement)(c)
+	return LremElement(c)
 }
 
 type LremElement Base
@@ -22760,7 +22760,7 @@ type LremKey Base
 
 func (c LremKey) Count(count int64) LremCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (LremCount)(c)
+	return LremCount(c)
 }
 
 // Set the value of an element in a list by its index.
@@ -22786,7 +22786,7 @@ func (c Lset) Key(key string) LsetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LsetKey)(c)
+	return LsetKey(c)
 }
 
 type LsetElement Base
@@ -22800,14 +22800,14 @@ type LsetIndex Base
 
 func (c LsetIndex) Element(element string) LsetElement {
 	c.command.append(element)
-	return (LsetElement)(c)
+	return LsetElement(c)
 }
 
 type LsetKey Base
 
 func (c LsetKey) Index(index int64) LsetIndex {
 	c.command.append(strconv.FormatInt(index, 10))
-	return (LsetIndex)(c)
+	return LsetIndex(c)
 }
 
 // Trim a list to the specified range.
@@ -22833,21 +22833,21 @@ func (c Ltrim) Key(key string) LtrimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (LtrimKey)(c)
+	return LtrimKey(c)
 }
 
 type LtrimKey Base
 
 func (c LtrimKey) Start(start int64) LtrimStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (LtrimStart)(c)
+	return LtrimStart(c)
 }
 
 type LtrimStart Base
 
 func (c LtrimStart) Stop(stop int64) LtrimStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (LtrimStop)(c)
+	return LtrimStop(c)
 }
 
 type LtrimStop Base
@@ -22965,14 +22965,14 @@ func (c MemoryUsage) Key(key string) MemoryUsageKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (MemoryUsageKey)(c)
+	return MemoryUsageKey(c)
 }
 
 type MemoryUsageKey Base
 
 func (c MemoryUsageKey) Samples(count int64) MemoryUsageSamples {
 	c.command.append("SAMPLES", strconv.FormatInt(count, 10))
-	return (MemoryUsageSamples)(c)
+	return MemoryUsageSamples(c)
 }
 
 // Return Completed Redis command.
@@ -23015,7 +23015,7 @@ func (c Mget) Key(key ...string) MgetKey {
 		}
 	}
 	c.command.append(key...)
-	return (MgetKey)(c)
+	return MgetKey(c)
 }
 
 type MgetKey Base
@@ -23063,14 +23063,14 @@ func (b Builder) Migrate() Migrate {
 
 func (c Migrate) Host(host string) MigrateHost {
 	c.command.append(host)
-	return (MigrateHost)(c)
+	return MigrateHost(c)
 }
 
 type MigrateAuthAuth Base
 
 func (c MigrateAuthAuth) Auth2(username string, password string) MigrateAuthAuth2 {
 	c.command.append("AUTH2", username, password)
-	return (MigrateAuthAuth2)(c)
+	return MigrateAuthAuth2(c)
 }
 
 func (c MigrateAuthAuth) Keys(key ...string) MigrateKeys {
@@ -23086,7 +23086,7 @@ func (c MigrateAuthAuth) Keys(key ...string) MigrateKeys {
 	}
 	c.command.append("KEYS")
 	c.command.append(key...)
-	return (MigrateKeys)(c)
+	return MigrateKeys(c)
 }
 
 // Return Completed Redis command.
@@ -23109,7 +23109,7 @@ func (c MigrateAuthAuth2) Keys(key ...string) MigrateKeys {
 	}
 	c.command.append("KEYS")
 	c.command.append(key...)
-	return (MigrateKeys)(c)
+	return MigrateKeys(c)
 }
 
 // Return Completed Redis command.
@@ -23121,17 +23121,17 @@ type MigrateCopy Base
 
 func (c MigrateCopy) Replace() MigrateReplace {
 	c.command.append("REPLACE")
-	return (MigrateReplace)(c)
+	return MigrateReplace(c)
 }
 
 func (c MigrateCopy) Auth(password string) MigrateAuthAuth {
 	c.command.append("AUTH", password)
-	return (MigrateAuthAuth)(c)
+	return MigrateAuthAuth(c)
 }
 
 func (c MigrateCopy) Auth2(username string, password string) MigrateAuthAuth2 {
 	c.command.append("AUTH2", username, password)
-	return (MigrateAuthAuth2)(c)
+	return MigrateAuthAuth2(c)
 }
 
 func (c MigrateCopy) Keys(key ...string) MigrateKeys {
@@ -23147,7 +23147,7 @@ func (c MigrateCopy) Keys(key ...string) MigrateKeys {
 	}
 	c.command.append("KEYS")
 	c.command.append(key...)
-	return (MigrateKeys)(c)
+	return MigrateKeys(c)
 }
 
 // Return Completed Redis command.
@@ -23159,21 +23159,21 @@ type MigrateDestinationDb Base
 
 func (c MigrateDestinationDb) Timeout(timeout int64) MigrateTimeout {
 	c.command.append(strconv.FormatInt(timeout, 10))
-	return (MigrateTimeout)(c)
+	return MigrateTimeout(c)
 }
 
 type MigrateHost Base
 
 func (c MigrateHost) Port(port int64) MigratePort {
 	c.command.append(strconv.FormatInt(port, 10))
-	return (MigratePort)(c)
+	return MigratePort(c)
 }
 
 type MigrateKey Base
 
 func (c MigrateKey) DestinationDb(destinationDb int64) MigrateDestinationDb {
 	c.command.append(strconv.FormatInt(destinationDb, 10))
-	return (MigrateDestinationDb)(c)
+	return MigrateDestinationDb(c)
 }
 
 type MigrateKeys Base
@@ -23208,19 +23208,19 @@ func (c MigratePort) Key(key string) MigrateKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (MigrateKey)(c)
+	return MigrateKey(c)
 }
 
 type MigrateReplace Base
 
 func (c MigrateReplace) Auth(password string) MigrateAuthAuth {
 	c.command.append("AUTH", password)
-	return (MigrateAuthAuth)(c)
+	return MigrateAuthAuth(c)
 }
 
 func (c MigrateReplace) Auth2(username string, password string) MigrateAuthAuth2 {
 	c.command.append("AUTH2", username, password)
-	return (MigrateAuthAuth2)(c)
+	return MigrateAuthAuth2(c)
 }
 
 func (c MigrateReplace) Keys(key ...string) MigrateKeys {
@@ -23236,7 +23236,7 @@ func (c MigrateReplace) Keys(key ...string) MigrateKeys {
 	}
 	c.command.append("KEYS")
 	c.command.append(key...)
-	return (MigrateKeys)(c)
+	return MigrateKeys(c)
 }
 
 // Return Completed Redis command.
@@ -23248,22 +23248,22 @@ type MigrateTimeout Base
 
 func (c MigrateTimeout) Copy() MigrateCopy {
 	c.command.append("COPY")
-	return (MigrateCopy)(c)
+	return MigrateCopy(c)
 }
 
 func (c MigrateTimeout) Replace() MigrateReplace {
 	c.command.append("REPLACE")
-	return (MigrateReplace)(c)
+	return MigrateReplace(c)
 }
 
 func (c MigrateTimeout) Auth(password string) MigrateAuthAuth {
 	c.command.append("AUTH", password)
-	return (MigrateAuthAuth)(c)
+	return MigrateAuthAuth(c)
 }
 
 func (c MigrateTimeout) Auth2(username string, password string) MigrateAuthAuth2 {
 	c.command.append("AUTH2", username, password)
-	return (MigrateAuthAuth2)(c)
+	return MigrateAuthAuth2(c)
 }
 
 func (c MigrateTimeout) Keys(key ...string) MigrateKeys {
@@ -23279,7 +23279,7 @@ func (c MigrateTimeout) Keys(key ...string) MigrateKeys {
 	}
 	c.command.append("KEYS")
 	c.command.append(key...)
-	return (MigrateKeys)(c)
+	return MigrateKeys(c)
 }
 
 // Return Completed Redis command.
@@ -23326,7 +23326,7 @@ func (b Builder) ModuleLoad() ModuleLoad {
 
 func (c ModuleLoad) Path(path string) ModuleLoadPath {
 	c.command.append(path)
-	return (ModuleLoadPath)(c)
+	return ModuleLoadPath(c)
 }
 
 type ModuleLoadArg Base
@@ -23345,7 +23345,7 @@ type ModuleLoadPath Base
 
 func (c ModuleLoadPath) Arg(arg ...string) ModuleLoadArg {
 	c.command.append(arg...)
-	return (ModuleLoadArg)(c)
+	return ModuleLoadArg(c)
 }
 
 // Return Completed Redis command.
@@ -23364,7 +23364,7 @@ func (b Builder) ModuleLoadex() ModuleLoadex {
 
 func (c ModuleLoadex) Path(path string) ModuleLoadexPath {
 	c.command.append(path)
-	return (ModuleLoadexPath)(c)
+	return ModuleLoadexPath(c)
 }
 
 type ModuleLoadexArgs Base
@@ -23390,7 +23390,7 @@ func (c ModuleLoadexConfig) Config(name string, value string) ModuleLoadexConfig
 func (c ModuleLoadexConfig) Args(args ...string) ModuleLoadexArgs {
 	c.command.append("ARGS")
 	c.command.append(args...)
-	return (ModuleLoadexArgs)(c)
+	return ModuleLoadexArgs(c)
 }
 
 // Return Completed Redis command.
@@ -23401,13 +23401,13 @@ func (c ModuleLoadexConfig) Build() Completed {
 type ModuleLoadexPath Base
 
 func (c ModuleLoadexPath) Config() ModuleLoadexConfig {
-	return (ModuleLoadexConfig)(c)
+	return ModuleLoadexConfig(c)
 }
 
 func (c ModuleLoadexPath) Args(args ...string) ModuleLoadexArgs {
 	c.command.append("ARGS")
 	c.command.append(args...)
-	return (ModuleLoadexArgs)(c)
+	return ModuleLoadexArgs(c)
 }
 
 // Return Completed Redis command.
@@ -23433,7 +23433,7 @@ func (b Builder) ModuleUnload() ModuleUnload {
 
 func (c ModuleUnload) Name(name string) ModuleUnloadName {
 	c.command.append(name)
-	return (ModuleUnloadName)(c)
+	return ModuleUnloadName(c)
 }
 
 type ModuleUnloadName Base
@@ -23483,7 +23483,7 @@ func (c Move) Key(key string) MoveKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (MoveKey)(c)
+	return MoveKey(c)
 }
 
 type MoveDb Base
@@ -23497,7 +23497,7 @@ type MoveKey Base
 
 func (c MoveKey) Db(db int64) MoveDb {
 	c.command.append(strconv.FormatInt(db, 10))
-	return (MoveDb)(c)
+	return MoveDb(c)
 }
 
 // Set multiple keys to multiple values.
@@ -23517,7 +23517,7 @@ func (b Builder) Mset() Mset {
 }
 
 func (c Mset) KeyValue() MsetKeyValue {
-	return (MsetKeyValue)(c)
+	return MsetKeyValue(c)
 }
 
 type MsetKeyValue Base
@@ -23554,7 +23554,7 @@ func (b Builder) Msetnx() Msetnx {
 }
 
 func (c Msetnx) KeyValue() MsetnxKeyValue {
-	return (MsetnxKeyValue)(c)
+	return MsetnxKeyValue(c)
 }
 
 type MsetnxKeyValue Base
@@ -23614,7 +23614,7 @@ func (c ObjectEncoding) Key(key string) ObjectEncodingKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ObjectEncodingKey)(c)
+	return ObjectEncodingKey(c)
 }
 
 type ObjectEncodingKey Base
@@ -23647,7 +23647,7 @@ func (c ObjectFreq) Key(key string) ObjectFreqKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ObjectFreqKey)(c)
+	return ObjectFreqKey(c)
 }
 
 type ObjectFreqKey Base
@@ -23701,7 +23701,7 @@ func (c ObjectIdletime) Key(key string) ObjectIdletimeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ObjectIdletimeKey)(c)
+	return ObjectIdletimeKey(c)
 }
 
 type ObjectIdletimeKey Base
@@ -23734,7 +23734,7 @@ func (c ObjectRefcount) Key(key string) ObjectRefcountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ObjectRefcountKey)(c)
+	return ObjectRefcountKey(c)
 }
 
 type ObjectRefcountKey Base
@@ -23767,7 +23767,7 @@ func (c Persist) Key(key string) PersistKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PersistKey)(c)
+	return PersistKey(c)
 }
 
 type PersistKey Base
@@ -23800,7 +23800,7 @@ func (c Pexpire) Key(key string) PexpireKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PexpireKey)(c)
+	return PexpireKey(c)
 }
 
 type PexpireConditionGt Base
@@ -23835,29 +23835,29 @@ type PexpireKey Base
 
 func (c PexpireKey) Milliseconds(milliseconds int64) PexpireMilliseconds {
 	c.command.append(strconv.FormatInt(milliseconds, 10))
-	return (PexpireMilliseconds)(c)
+	return PexpireMilliseconds(c)
 }
 
 type PexpireMilliseconds Base
 
 func (c PexpireMilliseconds) Nx() PexpireConditionNx {
 	c.command.append("NX")
-	return (PexpireConditionNx)(c)
+	return PexpireConditionNx(c)
 }
 
 func (c PexpireMilliseconds) Xx() PexpireConditionXx {
 	c.command.append("XX")
-	return (PexpireConditionXx)(c)
+	return PexpireConditionXx(c)
 }
 
 func (c PexpireMilliseconds) Gt() PexpireConditionGt {
 	c.command.append("GT")
-	return (PexpireConditionGt)(c)
+	return PexpireConditionGt(c)
 }
 
 func (c PexpireMilliseconds) Lt() PexpireConditionLt {
 	c.command.append("LT")
-	return (PexpireConditionLt)(c)
+	return PexpireConditionLt(c)
 }
 
 // Return Completed Redis command.
@@ -23888,7 +23888,7 @@ func (c Pexpireat) Key(key string) PexpireatKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PexpireatKey)(c)
+	return PexpireatKey(c)
 }
 
 type PexpireatConditionGt Base
@@ -23923,29 +23923,29 @@ type PexpireatKey Base
 
 func (c PexpireatKey) MillisecondsTimestamp(millisecondsTimestamp int64) PexpireatMillisecondsTimestamp {
 	c.command.append(strconv.FormatInt(millisecondsTimestamp, 10))
-	return (PexpireatMillisecondsTimestamp)(c)
+	return PexpireatMillisecondsTimestamp(c)
 }
 
 type PexpireatMillisecondsTimestamp Base
 
 func (c PexpireatMillisecondsTimestamp) Nx() PexpireatConditionNx {
 	c.command.append("NX")
-	return (PexpireatConditionNx)(c)
+	return PexpireatConditionNx(c)
 }
 
 func (c PexpireatMillisecondsTimestamp) Xx() PexpireatConditionXx {
 	c.command.append("XX")
-	return (PexpireatConditionXx)(c)
+	return PexpireatConditionXx(c)
 }
 
 func (c PexpireatMillisecondsTimestamp) Gt() PexpireatConditionGt {
 	c.command.append("GT")
-	return (PexpireatConditionGt)(c)
+	return PexpireatConditionGt(c)
 }
 
 func (c PexpireatMillisecondsTimestamp) Lt() PexpireatConditionLt {
 	c.command.append("LT")
-	return (PexpireatConditionLt)(c)
+	return PexpireatConditionLt(c)
 }
 
 // Return Completed Redis command.
@@ -23976,7 +23976,7 @@ func (c Pexpiretime) Key(key string) PexpiretimeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PexpiretimeKey)(c)
+	return PexpiretimeKey(c)
 }
 
 type PexpiretimeKey Base
@@ -24014,7 +24014,7 @@ func (c Pfadd) Key(key string) PfaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PfaddKey)(c)
+	return PfaddKey(c)
 }
 
 type PfaddElement Base
@@ -24033,7 +24033,7 @@ type PfaddKey Base
 
 func (c PfaddKey) Element(element ...string) PfaddElement {
 	c.command.append(element...)
-	return (PfaddElement)(c)
+	return PfaddElement(c)
 }
 
 // Return Completed Redis command.
@@ -24069,7 +24069,7 @@ func (c Pfcount) Key(key ...string) PfcountKey {
 		}
 	}
 	c.command.append(key...)
-	return (PfcountKey)(c)
+	return PfcountKey(c)
 }
 
 type PfcountKey Base
@@ -24117,7 +24117,7 @@ func (c Pfmerge) Destkey(destkey string) PfmergeDestkey {
 		c.cslot.set(getSlot(destkey))
 	}
 	c.command.append(destkey)
-	return (PfmergeDestkey)(c)
+	return PfmergeDestkey(c)
 }
 
 type PfmergeDestkey Base
@@ -24134,7 +24134,7 @@ func (c PfmergeDestkey) Sourcekey(sourcekey ...string) PfmergeSourcekey {
 		}
 	}
 	c.command.append(sourcekey...)
-	return (PfmergeSourcekey)(c)
+	return PfmergeSourcekey(c)
 }
 
 type PfmergeSourcekey Base
@@ -24173,7 +24173,7 @@ func (b Builder) Ping() Ping {
 
 func (c Ping) Message(message string) PingMessage {
 	c.command.append(message)
-	return (PingMessage)(c)
+	return PingMessage(c)
 }
 
 // Return Completed Redis command.
@@ -24211,21 +24211,21 @@ func (c Psetex) Key(key string) PsetexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PsetexKey)(c)
+	return PsetexKey(c)
 }
 
 type PsetexKey Base
 
 func (c PsetexKey) Milliseconds(milliseconds int64) PsetexMilliseconds {
 	c.command.append(strconv.FormatInt(milliseconds, 10))
-	return (PsetexMilliseconds)(c)
+	return PsetexMilliseconds(c)
 }
 
 type PsetexMilliseconds Base
 
 func (c PsetexMilliseconds) Value(value string) PsetexValue {
 	c.command.append(value)
-	return (PsetexValue)(c)
+	return PsetexValue(c)
 }
 
 type PsetexValue Base
@@ -24253,7 +24253,7 @@ func (b Builder) Psubscribe() Psubscribe {
 
 func (c Psubscribe) Pattern(pattern ...string) PsubscribePattern {
 	c.command.append(pattern...)
-	return (PsubscribePattern)(c)
+	return PsubscribePattern(c)
 }
 
 type PsubscribePattern Base
@@ -24282,7 +24282,7 @@ func (b Builder) Psync() Psync {
 
 func (c Psync) Replicationid(replicationid string) PsyncReplicationid {
 	c.command.append(replicationid)
-	return (PsyncReplicationid)(c)
+	return PsyncReplicationid(c)
 }
 
 type PsyncOffset Base
@@ -24296,7 +24296,7 @@ type PsyncReplicationid Base
 
 func (c PsyncReplicationid) Offset(offset int64) PsyncOffset {
 	c.command.append(strconv.FormatInt(offset, 10))
-	return (PsyncOffset)(c)
+	return PsyncOffset(c)
 }
 
 // Get the time to live for a key in milliseconds.
@@ -24322,7 +24322,7 @@ func (c Pttl) Key(key string) PttlKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (PttlKey)(c)
+	return PttlKey(c)
 }
 
 type PttlKey Base
@@ -24355,14 +24355,14 @@ func (b Builder) Publish() Publish {
 
 func (c Publish) Channel(channel string) PublishChannel {
 	c.command.append(channel)
-	return (PublishChannel)(c)
+	return PublishChannel(c)
 }
 
 type PublishChannel Base
 
 func (c PublishChannel) Message(message string) PublishMessage {
 	c.command.append(message)
-	return (PublishMessage)(c)
+	return PublishMessage(c)
 }
 
 type PublishMessage Base
@@ -24390,7 +24390,7 @@ func (b Builder) PubsubChannels() PubsubChannels {
 
 func (c PubsubChannels) Pattern(pattern string) PubsubChannelsPattern {
 	c.command.append(pattern)
-	return (PubsubChannelsPattern)(c)
+	return PubsubChannelsPattern(c)
 }
 
 // Return Completed Redis command.
@@ -24465,7 +24465,7 @@ func (b Builder) PubsubNumsub() PubsubNumsub {
 
 func (c PubsubNumsub) Channel(channel ...string) PubsubNumsubChannel {
 	c.command.append(channel...)
-	return (PubsubNumsubChannel)(c)
+	return PubsubNumsubChannel(c)
 }
 
 // Return Completed Redis command.
@@ -24496,7 +24496,7 @@ func (b Builder) PubsubShardchannels() PubsubShardchannels {
 
 func (c PubsubShardchannels) Pattern(pattern string) PubsubShardchannelsPattern {
 	c.command.append(pattern)
-	return (PubsubShardchannelsPattern)(c)
+	return PubsubShardchannelsPattern(c)
 }
 
 // Return Completed Redis command.
@@ -24522,7 +24522,7 @@ func (b Builder) PubsubShardnumsub() PubsubShardnumsub {
 
 func (c PubsubShardnumsub) Channel(channel ...string) PubsubShardnumsubChannel {
 	c.command.append(channel...)
-	return (PubsubShardnumsubChannel)(c)
+	return PubsubShardnumsubChannel(c)
 }
 
 // Return Completed Redis command.
@@ -24560,7 +24560,7 @@ func (b Builder) Punsubscribe() Punsubscribe {
 
 func (c Punsubscribe) Pattern(pattern ...string) PunsubscribePattern {
 	c.command.append(pattern...)
-	return (PunsubscribePattern)(c)
+	return PunsubscribePattern(c)
 }
 
 // Return Completed Redis command.
@@ -24683,7 +24683,7 @@ func (c Rename) Key(key string) RenameKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RenameKey)(c)
+	return RenameKey(c)
 }
 
 type RenameKey Base
@@ -24695,7 +24695,7 @@ func (c RenameKey) Newkey(newkey string) RenameNewkey {
 		c.cslot.set(getSlot(newkey))
 	}
 	c.command.append(newkey)
-	return (RenameNewkey)(c)
+	return RenameNewkey(c)
 }
 
 type RenameNewkey Base
@@ -24728,7 +24728,7 @@ func (c Renamenx) Key(key string) RenamenxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RenamenxKey)(c)
+	return RenamenxKey(c)
 }
 
 type RenamenxKey Base
@@ -24740,7 +24740,7 @@ func (c RenamenxKey) Newkey(newkey string) RenamenxNewkey {
 		c.cslot.set(getSlot(newkey))
 	}
 	c.command.append(newkey)
-	return (RenamenxNewkey)(c)
+	return RenamenxNewkey(c)
 }
 
 type RenamenxNewkey Base
@@ -24764,14 +24764,14 @@ func (b Builder) Replicaof() Replicaof {
 
 func (c Replicaof) Host(host string) ReplicaofHost {
 	c.command.append(host)
-	return (ReplicaofHost)(c)
+	return ReplicaofHost(c)
 }
 
 type ReplicaofHost Base
 
 func (c ReplicaofHost) Port(port int64) ReplicaofPort {
 	c.command.append(strconv.FormatInt(port, 10))
-	return (ReplicaofPort)(c)
+	return ReplicaofPort(c)
 }
 
 type ReplicaofPort Base
@@ -24821,19 +24821,19 @@ func (c Restore) Key(key string) RestoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RestoreKey)(c)
+	return RestoreKey(c)
 }
 
 type RestoreAbsttl Base
 
 func (c RestoreAbsttl) Idletime(seconds int64) RestoreIdletime {
 	c.command.append("IDLETIME", strconv.FormatInt(seconds, 10))
-	return (RestoreIdletime)(c)
+	return RestoreIdletime(c)
 }
 
 func (c RestoreAbsttl) Freq(frequency int64) RestoreFreq {
 	c.command.append("FREQ", strconv.FormatInt(frequency, 10))
-	return (RestoreFreq)(c)
+	return RestoreFreq(c)
 }
 
 // Return Completed Redis command.
@@ -24852,7 +24852,7 @@ type RestoreIdletime Base
 
 func (c RestoreIdletime) Freq(frequency int64) RestoreFreq {
 	c.command.append("FREQ", strconv.FormatInt(frequency, 10))
-	return (RestoreFreq)(c)
+	return RestoreFreq(c)
 }
 
 // Return Completed Redis command.
@@ -24864,24 +24864,24 @@ type RestoreKey Base
 
 func (c RestoreKey) Ttl(ttl int64) RestoreTtl {
 	c.command.append(strconv.FormatInt(ttl, 10))
-	return (RestoreTtl)(c)
+	return RestoreTtl(c)
 }
 
 type RestoreReplace Base
 
 func (c RestoreReplace) Absttl() RestoreAbsttl {
 	c.command.append("ABSTTL")
-	return (RestoreAbsttl)(c)
+	return RestoreAbsttl(c)
 }
 
 func (c RestoreReplace) Idletime(seconds int64) RestoreIdletime {
 	c.command.append("IDLETIME", strconv.FormatInt(seconds, 10))
-	return (RestoreIdletime)(c)
+	return RestoreIdletime(c)
 }
 
 func (c RestoreReplace) Freq(frequency int64) RestoreFreq {
 	c.command.append("FREQ", strconv.FormatInt(frequency, 10))
-	return (RestoreFreq)(c)
+	return RestoreFreq(c)
 }
 
 // Return Completed Redis command.
@@ -24893,22 +24893,22 @@ type RestoreSerializedValue Base
 
 func (c RestoreSerializedValue) Replace() RestoreReplace {
 	c.command.append("REPLACE")
-	return (RestoreReplace)(c)
+	return RestoreReplace(c)
 }
 
 func (c RestoreSerializedValue) Absttl() RestoreAbsttl {
 	c.command.append("ABSTTL")
-	return (RestoreAbsttl)(c)
+	return RestoreAbsttl(c)
 }
 
 func (c RestoreSerializedValue) Idletime(seconds int64) RestoreIdletime {
 	c.command.append("IDLETIME", strconv.FormatInt(seconds, 10))
-	return (RestoreIdletime)(c)
+	return RestoreIdletime(c)
 }
 
 func (c RestoreSerializedValue) Freq(frequency int64) RestoreFreq {
 	c.command.append("FREQ", strconv.FormatInt(frequency, 10))
-	return (RestoreFreq)(c)
+	return RestoreFreq(c)
 }
 
 // Return Completed Redis command.
@@ -24920,7 +24920,7 @@ type RestoreTtl Base
 
 func (c RestoreTtl) SerializedValue(serializedValue string) RestoreSerializedValue {
 	c.command.append(serializedValue)
-	return (RestoreSerializedValue)(c)
+	return RestoreSerializedValue(c)
 }
 
 // The RG.ABORTEXECUTION command aborts the execution of a function in mid-flight..
@@ -24941,7 +24941,7 @@ func (b Builder) RgAbortexecution() RgAbortexecution {
 
 func (c RgAbortexecution) Id(id string) RgAbortexecutionId {
 	c.command.append(id)
-	return (RgAbortexecutionId)(c)
+	return RgAbortexecutionId(c)
 }
 
 type RgAbortexecutionId Base
@@ -24969,7 +24969,7 @@ func (b Builder) RgConfigget() RgConfigget {
 
 func (c RgConfigget) Key(key ...string) RgConfiggetKey {
 	c.command.append(key...)
-	return (RgConfiggetKey)(c)
+	return RgConfiggetKey(c)
 }
 
 type RgConfiggetKey Base
@@ -25001,7 +25001,7 @@ func (b Builder) RgConfigset() RgConfigset {
 }
 
 func (c RgConfigset) KeyValue() RgConfigsetKeyValue {
-	return (RgConfigsetKeyValue)(c)
+	return RgConfigsetKeyValue(c)
 }
 
 type RgConfigsetKeyValue Base
@@ -25034,7 +25034,7 @@ func (b Builder) RgDropexecution() RgDropexecution {
 
 func (c RgDropexecution) Id(id string) RgDropexecutionId {
 	c.command.append(id)
-	return (RgDropexecutionId)(c)
+	return RgDropexecutionId(c)
 }
 
 type RgDropexecutionId Base
@@ -25104,19 +25104,19 @@ func (b Builder) RgGetexecution() RgGetexecution {
 
 func (c RgGetexecution) Id(id string) RgGetexecutionId {
 	c.command.append(id)
-	return (RgGetexecutionId)(c)
+	return RgGetexecutionId(c)
 }
 
 type RgGetexecutionId Base
 
 func (c RgGetexecutionId) Shard() RgGetexecutionModeShard {
 	c.command.append("SHARD")
-	return (RgGetexecutionModeShard)(c)
+	return RgGetexecutionModeShard(c)
 }
 
 func (c RgGetexecutionId) Cluster() RgGetexecutionModeCluster {
 	c.command.append("CLUSTER")
-	return (RgGetexecutionModeCluster)(c)
+	return RgGetexecutionModeCluster(c)
 }
 
 // Return Completed Redis command.
@@ -25156,7 +25156,7 @@ func (b Builder) RgGetresults() RgGetresults {
 
 func (c RgGetresults) Id(id string) RgGetresultsId {
 	c.command.append(id)
-	return (RgGetresultsId)(c)
+	return RgGetresultsId(c)
 }
 
 type RgGetresultsId Base
@@ -25184,7 +25184,7 @@ func (b Builder) RgGetresultsblocking() RgGetresultsblocking {
 
 func (c RgGetresultsblocking) Id(id string) RgGetresultsblockingId {
 	c.command.append(id)
-	return (RgGetresultsblockingId)(c)
+	return RgGetresultsblockingId(c)
 }
 
 type RgGetresultsblockingId Base
@@ -25254,25 +25254,25 @@ func (b Builder) RgPyexecute() RgPyexecute {
 
 func (c RgPyexecute) Function(function string) RgPyexecuteFunction {
 	c.command.append(function)
-	return (RgPyexecuteFunction)(c)
+	return RgPyexecuteFunction(c)
 }
 
 type RgPyexecuteDescription Base
 
 func (c RgPyexecuteDescription) Upgrade() RgPyexecuteUpgrade {
 	c.command.append("UPGRADE")
-	return (RgPyexecuteUpgrade)(c)
+	return RgPyexecuteUpgrade(c)
 }
 
 func (c RgPyexecuteDescription) ReplaceWith(replaceWith string) RgPyexecuteReplaceWith {
 	c.command.append("REPLACE_WITH", replaceWith)
-	return (RgPyexecuteReplaceWith)(c)
+	return RgPyexecuteReplaceWith(c)
 }
 
 func (c RgPyexecuteDescription) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25284,33 +25284,33 @@ type RgPyexecuteFunction Base
 
 func (c RgPyexecuteFunction) Unblocking() RgPyexecuteUnblocking {
 	c.command.append("UNBLOCKING")
-	return (RgPyexecuteUnblocking)(c)
+	return RgPyexecuteUnblocking(c)
 }
 
 func (c RgPyexecuteFunction) Id(id string) RgPyexecuteId {
 	c.command.append("ID", id)
-	return (RgPyexecuteId)(c)
+	return RgPyexecuteId(c)
 }
 
 func (c RgPyexecuteFunction) Description(description string) RgPyexecuteDescription {
 	c.command.append("DESCRIPTION", description)
-	return (RgPyexecuteDescription)(c)
+	return RgPyexecuteDescription(c)
 }
 
 func (c RgPyexecuteFunction) Upgrade() RgPyexecuteUpgrade {
 	c.command.append("UPGRADE")
-	return (RgPyexecuteUpgrade)(c)
+	return RgPyexecuteUpgrade(c)
 }
 
 func (c RgPyexecuteFunction) ReplaceWith(replaceWith string) RgPyexecuteReplaceWith {
 	c.command.append("REPLACE_WITH", replaceWith)
-	return (RgPyexecuteReplaceWith)(c)
+	return RgPyexecuteReplaceWith(c)
 }
 
 func (c RgPyexecuteFunction) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25322,23 +25322,23 @@ type RgPyexecuteId Base
 
 func (c RgPyexecuteId) Description(description string) RgPyexecuteDescription {
 	c.command.append("DESCRIPTION", description)
-	return (RgPyexecuteDescription)(c)
+	return RgPyexecuteDescription(c)
 }
 
 func (c RgPyexecuteId) Upgrade() RgPyexecuteUpgrade {
 	c.command.append("UPGRADE")
-	return (RgPyexecuteUpgrade)(c)
+	return RgPyexecuteUpgrade(c)
 }
 
 func (c RgPyexecuteId) ReplaceWith(replaceWith string) RgPyexecuteReplaceWith {
 	c.command.append("REPLACE_WITH", replaceWith)
-	return (RgPyexecuteReplaceWith)(c)
+	return RgPyexecuteReplaceWith(c)
 }
 
 func (c RgPyexecuteId) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25351,7 +25351,7 @@ type RgPyexecuteReplaceWith Base
 func (c RgPyexecuteReplaceWith) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25376,28 +25376,28 @@ type RgPyexecuteUnblocking Base
 
 func (c RgPyexecuteUnblocking) Id(id string) RgPyexecuteId {
 	c.command.append("ID", id)
-	return (RgPyexecuteId)(c)
+	return RgPyexecuteId(c)
 }
 
 func (c RgPyexecuteUnblocking) Description(description string) RgPyexecuteDescription {
 	c.command.append("DESCRIPTION", description)
-	return (RgPyexecuteDescription)(c)
+	return RgPyexecuteDescription(c)
 }
 
 func (c RgPyexecuteUnblocking) Upgrade() RgPyexecuteUpgrade {
 	c.command.append("UPGRADE")
-	return (RgPyexecuteUpgrade)(c)
+	return RgPyexecuteUpgrade(c)
 }
 
 func (c RgPyexecuteUnblocking) ReplaceWith(replaceWith string) RgPyexecuteReplaceWith {
 	c.command.append("REPLACE_WITH", replaceWith)
-	return (RgPyexecuteReplaceWith)(c)
+	return RgPyexecuteReplaceWith(c)
 }
 
 func (c RgPyexecuteUnblocking) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25409,13 +25409,13 @@ type RgPyexecuteUpgrade Base
 
 func (c RgPyexecuteUpgrade) ReplaceWith(replaceWith string) RgPyexecuteReplaceWith {
 	c.command.append("REPLACE_WITH", replaceWith)
-	return (RgPyexecuteReplaceWith)(c)
+	return RgPyexecuteReplaceWith(c)
 }
 
 func (c RgPyexecuteUpgrade) Requirements(requirement ...string) RgPyexecuteRequirementsRequirements {
 	c.command.append("REQUIREMENTS")
 	c.command.append(requirement...)
-	return (RgPyexecuteRequirementsRequirements)(c)
+	return RgPyexecuteRequirementsRequirements(c)
 }
 
 // Return Completed Redis command.
@@ -25483,7 +25483,7 @@ func (b Builder) RgTrigger() RgTrigger {
 
 func (c RgTrigger) Trigger(trigger string) RgTriggerTrigger {
 	c.command.append(trigger)
-	return (RgTriggerTrigger)(c)
+	return RgTriggerTrigger(c)
 }
 
 type RgTriggerArgument Base
@@ -25502,7 +25502,7 @@ type RgTriggerTrigger Base
 
 func (c RgTriggerTrigger) Argument(argument ...string) RgTriggerArgument {
 	c.command.append(argument...)
-	return (RgTriggerArgument)(c)
+	return RgTriggerArgument(c)
 }
 
 // The RG.UNREGISTER command removes the registration of a function..
@@ -25523,7 +25523,7 @@ func (b Builder) RgUnregister() RgUnregister {
 
 func (c RgUnregister) Id(id string) RgUnregisterId {
 	c.command.append(id)
-	return (RgUnregisterId)(c)
+	return RgUnregisterId(c)
 }
 
 type RgUnregisterId Base
@@ -25573,7 +25573,7 @@ func (c Rpop) Key(key string) RpopKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RpopKey)(c)
+	return RpopKey(c)
 }
 
 type RpopCount Base
@@ -25587,7 +25587,7 @@ type RpopKey Base
 
 func (c RpopKey) Count(count int64) RpopCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (RpopCount)(c)
+	return RpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -25618,7 +25618,7 @@ func (c Rpoplpush) Source(source string) RpoplpushSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (RpoplpushSource)(c)
+	return RpoplpushSource(c)
 }
 
 type RpoplpushDestination Base
@@ -25637,7 +25637,7 @@ func (c RpoplpushSource) Destination(destination string) RpoplpushDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (RpoplpushDestination)(c)
+	return RpoplpushDestination(c)
 }
 
 // Append one or multiple elements to a list.
@@ -25663,7 +25663,7 @@ func (c Rpush) Key(key string) RpushKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RpushKey)(c)
+	return RpushKey(c)
 }
 
 type RpushElement Base
@@ -25682,7 +25682,7 @@ type RpushKey Base
 
 func (c RpushKey) Element(element ...string) RpushElement {
 	c.command.append(element...)
-	return (RpushElement)(c)
+	return RpushElement(c)
 }
 
 // Append an element to a list, only if the list exists.
@@ -25708,7 +25708,7 @@ func (c Rpushx) Key(key string) RpushxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (RpushxKey)(c)
+	return RpushxKey(c)
 }
 
 type RpushxElement Base
@@ -25727,7 +25727,7 @@ type RpushxKey Base
 
 func (c RpushxKey) Element(element ...string) RpushxElement {
 	c.command.append(element...)
-	return (RpushxElement)(c)
+	return RpushxElement(c)
 }
 
 // Add one or more members to a set.
@@ -25753,14 +25753,14 @@ func (c Sadd) Key(key string) SaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SaddKey)(c)
+	return SaddKey(c)
 }
 
 type SaddKey Base
 
 func (c SaddKey) Member(member ...string) SaddMember {
 	c.command.append(member...)
-	return (SaddMember)(c)
+	return SaddMember(c)
 }
 
 type SaddMember Base
@@ -25810,14 +25810,14 @@ func (b Builder) Scan() Scan {
 
 func (c Scan) Cursor(cursor int64) ScanCursor {
 	c.command.append(strconv.FormatInt(cursor, 10))
-	return (ScanCursor)(c)
+	return ScanCursor(c)
 }
 
 type ScanCount Base
 
 func (c ScanCount) Type(typ string) ScanType {
 	c.command.append("TYPE", typ)
-	return (ScanType)(c)
+	return ScanType(c)
 }
 
 // Return Completed Redis command.
@@ -25829,17 +25829,17 @@ type ScanCursor Base
 
 func (c ScanCursor) Match(pattern string) ScanMatch {
 	c.command.append("MATCH", pattern)
-	return (ScanMatch)(c)
+	return ScanMatch(c)
 }
 
 func (c ScanCursor) Count(count int64) ScanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ScanCount)(c)
+	return ScanCount(c)
 }
 
 func (c ScanCursor) Type(typ string) ScanType {
 	c.command.append("TYPE", typ)
-	return (ScanType)(c)
+	return ScanType(c)
 }
 
 // Return Completed Redis command.
@@ -25851,12 +25851,12 @@ type ScanMatch Base
 
 func (c ScanMatch) Count(count int64) ScanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ScanCount)(c)
+	return ScanCount(c)
 }
 
 func (c ScanMatch) Type(typ string) ScanType {
 	c.command.append("TYPE", typ)
-	return (ScanType)(c)
+	return ScanType(c)
 }
 
 // Return Completed Redis command.
@@ -25894,7 +25894,7 @@ func (c Scard) Key(key string) ScardKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ScardKey)(c)
+	return ScardKey(c)
 }
 
 type ScardKey Base
@@ -25927,17 +25927,17 @@ func (b Builder) ScriptDebug() ScriptDebug {
 
 func (c ScriptDebug) Yes() ScriptDebugModeYes {
 	c.command.append("YES")
-	return (ScriptDebugModeYes)(c)
+	return ScriptDebugModeYes(c)
 }
 
 func (c ScriptDebug) Sync() ScriptDebugModeSync {
 	c.command.append("SYNC")
-	return (ScriptDebugModeSync)(c)
+	return ScriptDebugModeSync(c)
 }
 
 func (c ScriptDebug) No() ScriptDebugModeNo {
 	c.command.append("NO")
-	return (ScriptDebugModeNo)(c)
+	return ScriptDebugModeNo(c)
 }
 
 type ScriptDebugModeNo Base
@@ -25979,7 +25979,7 @@ func (b Builder) ScriptExists() ScriptExists {
 
 func (c ScriptExists) Sha1(sha1 ...string) ScriptExistsSha1 {
 	c.command.append(sha1...)
-	return (ScriptExistsSha1)(c)
+	return ScriptExistsSha1(c)
 }
 
 type ScriptExistsSha1 Base
@@ -26012,12 +26012,12 @@ func (b Builder) ScriptFlush() ScriptFlush {
 
 func (c ScriptFlush) Async() ScriptFlushAsync {
 	c.command.append("ASYNC")
-	return (ScriptFlushAsync)(c)
+	return ScriptFlushAsync(c)
 }
 
 func (c ScriptFlush) Sync() ScriptFlushAsyncSync {
 	c.command.append("SYNC")
-	return (ScriptFlushAsyncSync)(c)
+	return ScriptFlushAsyncSync(c)
 }
 
 // Return Completed Redis command.
@@ -26078,7 +26078,7 @@ func (b Builder) ScriptLoad() ScriptLoad {
 
 func (c ScriptLoad) Script(script string) ScriptLoadScript {
 	c.command.append(script)
-	return (ScriptLoadScript)(c)
+	return ScriptLoadScript(c)
 }
 
 type ScriptLoadScript Base
@@ -26116,7 +26116,7 @@ func (c Sdiff) Key(key ...string) SdiffKey {
 		}
 	}
 	c.command.append(key...)
-	return (SdiffKey)(c)
+	return SdiffKey(c)
 }
 
 type SdiffKey Base
@@ -26164,7 +26164,7 @@ func (c Sdiffstore) Destination(destination string) SdiffstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (SdiffstoreDestination)(c)
+	return SdiffstoreDestination(c)
 }
 
 type SdiffstoreDestination Base
@@ -26181,7 +26181,7 @@ func (c SdiffstoreDestination) Key(key ...string) SdiffstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (SdiffstoreKey)(c)
+	return SdiffstoreKey(c)
 }
 
 type SdiffstoreKey Base
@@ -26220,7 +26220,7 @@ func (b Builder) Select() Select {
 
 func (c Select) Index(index int64) SelectIndex {
 	c.command.append(strconv.FormatInt(index, 10))
-	return (SelectIndex)(c)
+	return SelectIndex(c)
 }
 
 type SelectIndex Base
@@ -26241,7 +26241,7 @@ func (b Builder) SentinelFailover() SentinelFailover {
 
 func (c SentinelFailover) Master(master string) SentinelFailoverMaster {
 	c.command.append(master)
-	return (SentinelFailoverMaster)(c)
+	return SentinelFailoverMaster(c)
 }
 
 type SentinelFailoverMaster Base
@@ -26262,7 +26262,7 @@ func (b Builder) SentinelGetMasterAddrByName() SentinelGetMasterAddrByName {
 
 func (c SentinelGetMasterAddrByName) Master(master string) SentinelGetMasterAddrByNameMaster {
 	c.command.append(master)
-	return (SentinelGetMasterAddrByNameMaster)(c)
+	return SentinelGetMasterAddrByNameMaster(c)
 }
 
 type SentinelGetMasterAddrByNameMaster Base
@@ -26283,7 +26283,7 @@ func (b Builder) SentinelSentinels() SentinelSentinels {
 
 func (c SentinelSentinels) Master(master string) SentinelSentinelsMaster {
 	c.command.append(master)
-	return (SentinelSentinelsMaster)(c)
+	return SentinelSentinelsMaster(c)
 }
 
 type SentinelSentinelsMaster Base
@@ -26316,39 +26316,39 @@ func (c Set) Key(key string) SetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SetKey)(c)
+	return SetKey(c)
 }
 
 type SetConditionNx Base
 
 func (c SetConditionNx) Get() SetGet {
 	c.command.append("GET")
-	return (SetGet)(c)
+	return SetGet(c)
 }
 
 func (c SetConditionNx) ExSeconds(seconds int64) SetExpirationExSeconds {
 	c.command.append("EX", strconv.FormatInt(seconds, 10))
-	return (SetExpirationExSeconds)(c)
+	return SetExpirationExSeconds(c)
 }
 
 func (c SetConditionNx) PxMilliseconds(milliseconds int64) SetExpirationPxMilliseconds {
 	c.command.append("PX", strconv.FormatInt(milliseconds, 10))
-	return (SetExpirationPxMilliseconds)(c)
+	return SetExpirationPxMilliseconds(c)
 }
 
 func (c SetConditionNx) ExatTimestamp(timestamp int64) SetExpirationExatTimestamp {
 	c.command.append("EXAT", strconv.FormatInt(timestamp, 10))
-	return (SetExpirationExatTimestamp)(c)
+	return SetExpirationExatTimestamp(c)
 }
 
 func (c SetConditionNx) PxatMillisecondsTimestamp(millisecondsTimestamp int64) SetExpirationPxatMillisecondsTimestamp {
 	c.command.append("PXAT", strconv.FormatInt(millisecondsTimestamp, 10))
-	return (SetExpirationPxatMillisecondsTimestamp)(c)
+	return SetExpirationPxatMillisecondsTimestamp(c)
 }
 
 func (c SetConditionNx) Keepttl() SetExpirationKeepttl {
 	c.command.append("KEEPTTL")
-	return (SetExpirationKeepttl)(c)
+	return SetExpirationKeepttl(c)
 }
 
 // Return Completed Redis command.
@@ -26360,32 +26360,32 @@ type SetConditionXx Base
 
 func (c SetConditionXx) Get() SetGet {
 	c.command.append("GET")
-	return (SetGet)(c)
+	return SetGet(c)
 }
 
 func (c SetConditionXx) ExSeconds(seconds int64) SetExpirationExSeconds {
 	c.command.append("EX", strconv.FormatInt(seconds, 10))
-	return (SetExpirationExSeconds)(c)
+	return SetExpirationExSeconds(c)
 }
 
 func (c SetConditionXx) PxMilliseconds(milliseconds int64) SetExpirationPxMilliseconds {
 	c.command.append("PX", strconv.FormatInt(milliseconds, 10))
-	return (SetExpirationPxMilliseconds)(c)
+	return SetExpirationPxMilliseconds(c)
 }
 
 func (c SetConditionXx) ExatTimestamp(timestamp int64) SetExpirationExatTimestamp {
 	c.command.append("EXAT", strconv.FormatInt(timestamp, 10))
-	return (SetExpirationExatTimestamp)(c)
+	return SetExpirationExatTimestamp(c)
 }
 
 func (c SetConditionXx) PxatMillisecondsTimestamp(millisecondsTimestamp int64) SetExpirationPxatMillisecondsTimestamp {
 	c.command.append("PXAT", strconv.FormatInt(millisecondsTimestamp, 10))
-	return (SetExpirationPxatMillisecondsTimestamp)(c)
+	return SetExpirationPxatMillisecondsTimestamp(c)
 }
 
 func (c SetConditionXx) Keepttl() SetExpirationKeepttl {
 	c.command.append("KEEPTTL")
-	return (SetExpirationKeepttl)(c)
+	return SetExpirationKeepttl(c)
 }
 
 // Return Completed Redis command.
@@ -26432,27 +26432,27 @@ type SetGet Base
 
 func (c SetGet) ExSeconds(seconds int64) SetExpirationExSeconds {
 	c.command.append("EX", strconv.FormatInt(seconds, 10))
-	return (SetExpirationExSeconds)(c)
+	return SetExpirationExSeconds(c)
 }
 
 func (c SetGet) PxMilliseconds(milliseconds int64) SetExpirationPxMilliseconds {
 	c.command.append("PX", strconv.FormatInt(milliseconds, 10))
-	return (SetExpirationPxMilliseconds)(c)
+	return SetExpirationPxMilliseconds(c)
 }
 
 func (c SetGet) ExatTimestamp(timestamp int64) SetExpirationExatTimestamp {
 	c.command.append("EXAT", strconv.FormatInt(timestamp, 10))
-	return (SetExpirationExatTimestamp)(c)
+	return SetExpirationExatTimestamp(c)
 }
 
 func (c SetGet) PxatMillisecondsTimestamp(millisecondsTimestamp int64) SetExpirationPxatMillisecondsTimestamp {
 	c.command.append("PXAT", strconv.FormatInt(millisecondsTimestamp, 10))
-	return (SetExpirationPxatMillisecondsTimestamp)(c)
+	return SetExpirationPxatMillisecondsTimestamp(c)
 }
 
 func (c SetGet) Keepttl() SetExpirationKeepttl {
 	c.command.append("KEEPTTL")
-	return (SetExpirationKeepttl)(c)
+	return SetExpirationKeepttl(c)
 }
 
 // Return Completed Redis command.
@@ -26464,49 +26464,49 @@ type SetKey Base
 
 func (c SetKey) Value(value string) SetValue {
 	c.command.append(value)
-	return (SetValue)(c)
+	return SetValue(c)
 }
 
 type SetValue Base
 
 func (c SetValue) Nx() SetConditionNx {
 	c.command.append("NX")
-	return (SetConditionNx)(c)
+	return SetConditionNx(c)
 }
 
 func (c SetValue) Xx() SetConditionXx {
 	c.command.append("XX")
-	return (SetConditionXx)(c)
+	return SetConditionXx(c)
 }
 
 func (c SetValue) Get() SetGet {
 	c.command.append("GET")
-	return (SetGet)(c)
+	return SetGet(c)
 }
 
 func (c SetValue) ExSeconds(seconds int64) SetExpirationExSeconds {
 	c.command.append("EX", strconv.FormatInt(seconds, 10))
-	return (SetExpirationExSeconds)(c)
+	return SetExpirationExSeconds(c)
 }
 
 func (c SetValue) PxMilliseconds(milliseconds int64) SetExpirationPxMilliseconds {
 	c.command.append("PX", strconv.FormatInt(milliseconds, 10))
-	return (SetExpirationPxMilliseconds)(c)
+	return SetExpirationPxMilliseconds(c)
 }
 
 func (c SetValue) ExatTimestamp(timestamp int64) SetExpirationExatTimestamp {
 	c.command.append("EXAT", strconv.FormatInt(timestamp, 10))
-	return (SetExpirationExatTimestamp)(c)
+	return SetExpirationExatTimestamp(c)
 }
 
 func (c SetValue) PxatMillisecondsTimestamp(millisecondsTimestamp int64) SetExpirationPxatMillisecondsTimestamp {
 	c.command.append("PXAT", strconv.FormatInt(millisecondsTimestamp, 10))
-	return (SetExpirationPxatMillisecondsTimestamp)(c)
+	return SetExpirationPxatMillisecondsTimestamp(c)
 }
 
 func (c SetValue) Keepttl() SetExpirationKeepttl {
 	c.command.append("KEEPTTL")
-	return (SetExpirationKeepttl)(c)
+	return SetExpirationKeepttl(c)
 }
 
 // Return Completed Redis command.
@@ -26537,21 +26537,21 @@ func (c Setbit) Key(key string) SetbitKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SetbitKey)(c)
+	return SetbitKey(c)
 }
 
 type SetbitKey Base
 
 func (c SetbitKey) Offset(offset int64) SetbitOffset {
 	c.command.append(strconv.FormatInt(offset, 10))
-	return (SetbitOffset)(c)
+	return SetbitOffset(c)
 }
 
 type SetbitOffset Base
 
 func (c SetbitOffset) Value(value int64) SetbitValue {
 	c.command.append(strconv.FormatInt(value, 10))
-	return (SetbitValue)(c)
+	return SetbitValue(c)
 }
 
 type SetbitValue Base
@@ -26584,21 +26584,21 @@ func (c Setex) Key(key string) SetexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SetexKey)(c)
+	return SetexKey(c)
 }
 
 type SetexKey Base
 
 func (c SetexKey) Seconds(seconds int64) SetexSeconds {
 	c.command.append(strconv.FormatInt(seconds, 10))
-	return (SetexSeconds)(c)
+	return SetexSeconds(c)
 }
 
 type SetexSeconds Base
 
 func (c SetexSeconds) Value(value string) SetexValue {
 	c.command.append(value)
-	return (SetexValue)(c)
+	return SetexValue(c)
 }
 
 type SetexValue Base
@@ -26631,14 +26631,14 @@ func (c Setnx) Key(key string) SetnxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SetnxKey)(c)
+	return SetnxKey(c)
 }
 
 type SetnxKey Base
 
 func (c SetnxKey) Value(value string) SetnxValue {
 	c.command.append(value)
-	return (SetnxValue)(c)
+	return SetnxValue(c)
 }
 
 type SetnxValue Base
@@ -26671,21 +26671,21 @@ func (c Setrange) Key(key string) SetrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SetrangeKey)(c)
+	return SetrangeKey(c)
 }
 
 type SetrangeKey Base
 
 func (c SetrangeKey) Offset(offset int64) SetrangeOffset {
 	c.command.append(strconv.FormatInt(offset, 10))
-	return (SetrangeOffset)(c)
+	return SetrangeOffset(c)
 }
 
 type SetrangeOffset Base
 
 func (c SetrangeOffset) Value(value string) SetrangeValue {
 	c.command.append(value)
-	return (SetrangeValue)(c)
+	return SetrangeValue(c)
 }
 
 type SetrangeValue Base
@@ -26709,27 +26709,27 @@ func (b Builder) Shutdown() Shutdown {
 
 func (c Shutdown) Nosave() ShutdownSaveModeNosave {
 	c.command.append("NOSAVE")
-	return (ShutdownSaveModeNosave)(c)
+	return ShutdownSaveModeNosave(c)
 }
 
 func (c Shutdown) Save() ShutdownSaveModeSave {
 	c.command.append("SAVE")
-	return (ShutdownSaveModeSave)(c)
+	return ShutdownSaveModeSave(c)
 }
 
 func (c Shutdown) Now() ShutdownNow {
 	c.command.append("NOW")
-	return (ShutdownNow)(c)
+	return ShutdownNow(c)
 }
 
 func (c Shutdown) Force() ShutdownForce {
 	c.command.append("FORCE")
-	return (ShutdownForce)(c)
+	return ShutdownForce(c)
 }
 
 func (c Shutdown) Abort() ShutdownAbort {
 	c.command.append("ABORT")
-	return (ShutdownAbort)(c)
+	return ShutdownAbort(c)
 }
 
 // Return Completed Redis command.
@@ -26748,7 +26748,7 @@ type ShutdownForce Base
 
 func (c ShutdownForce) Abort() ShutdownAbort {
 	c.command.append("ABORT")
-	return (ShutdownAbort)(c)
+	return ShutdownAbort(c)
 }
 
 // Return Completed Redis command.
@@ -26760,12 +26760,12 @@ type ShutdownNow Base
 
 func (c ShutdownNow) Force() ShutdownForce {
 	c.command.append("FORCE")
-	return (ShutdownForce)(c)
+	return ShutdownForce(c)
 }
 
 func (c ShutdownNow) Abort() ShutdownAbort {
 	c.command.append("ABORT")
-	return (ShutdownAbort)(c)
+	return ShutdownAbort(c)
 }
 
 // Return Completed Redis command.
@@ -26777,17 +26777,17 @@ type ShutdownSaveModeNosave Base
 
 func (c ShutdownSaveModeNosave) Now() ShutdownNow {
 	c.command.append("NOW")
-	return (ShutdownNow)(c)
+	return ShutdownNow(c)
 }
 
 func (c ShutdownSaveModeNosave) Force() ShutdownForce {
 	c.command.append("FORCE")
-	return (ShutdownForce)(c)
+	return ShutdownForce(c)
 }
 
 func (c ShutdownSaveModeNosave) Abort() ShutdownAbort {
 	c.command.append("ABORT")
-	return (ShutdownAbort)(c)
+	return ShutdownAbort(c)
 }
 
 // Return Completed Redis command.
@@ -26799,17 +26799,17 @@ type ShutdownSaveModeSave Base
 
 func (c ShutdownSaveModeSave) Now() ShutdownNow {
 	c.command.append("NOW")
-	return (ShutdownNow)(c)
+	return ShutdownNow(c)
 }
 
 func (c ShutdownSaveModeSave) Force() ShutdownForce {
 	c.command.append("FORCE")
-	return (ShutdownForce)(c)
+	return ShutdownForce(c)
 }
 
 func (c ShutdownSaveModeSave) Abort() ShutdownAbort {
 	c.command.append("ABORT")
-	return (ShutdownAbort)(c)
+	return ShutdownAbort(c)
 }
 
 // Return Completed Redis command.
@@ -26845,7 +26845,7 @@ func (c Sinter) Key(key ...string) SinterKey {
 		}
 	}
 	c.command.append(key...)
-	return (SinterKey)(c)
+	return SinterKey(c)
 }
 
 type SinterKey Base
@@ -26888,7 +26888,7 @@ func (b Builder) Sintercard() Sintercard {
 
 func (c Sintercard) Numkeys(numkeys int64) SintercardNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (SintercardNumkeys)(c)
+	return SintercardNumkeys(c)
 }
 
 type SintercardKey Base
@@ -26910,7 +26910,7 @@ func (c SintercardKey) Key(key ...string) SintercardKey {
 
 func (c SintercardKey) Limit(limit int64) SintercardLimit {
 	c.command.append("LIMIT", strconv.FormatInt(limit, 10))
-	return (SintercardLimit)(c)
+	return SintercardLimit(c)
 }
 
 // Return Completed Redis command.
@@ -26939,7 +26939,7 @@ func (c SintercardNumkeys) Key(key ...string) SintercardKey {
 		}
 	}
 	c.command.append(key...)
-	return (SintercardKey)(c)
+	return SintercardKey(c)
 }
 
 // Intersect multiple sets and store the resulting set in a key.
@@ -26965,7 +26965,7 @@ func (c Sinterstore) Destination(destination string) SinterstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (SinterstoreDestination)(c)
+	return SinterstoreDestination(c)
 }
 
 type SinterstoreDestination Base
@@ -26982,7 +26982,7 @@ func (c SinterstoreDestination) Key(key ...string) SinterstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (SinterstoreKey)(c)
+	return SinterstoreKey(c)
 }
 
 type SinterstoreKey Base
@@ -27030,14 +27030,14 @@ func (c Sismember) Key(key string) SismemberKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SismemberKey)(c)
+	return SismemberKey(c)
 }
 
 type SismemberKey Base
 
 func (c SismemberKey) Member(member string) SismemberMember {
 	c.command.append(member)
-	return (SismemberMember)(c)
+	return SismemberMember(c)
 }
 
 type SismemberMember Base
@@ -27066,14 +27066,14 @@ func (b Builder) Slaveof() Slaveof {
 
 func (c Slaveof) Host(host string) SlaveofHost {
 	c.command.append(host)
-	return (SlaveofHost)(c)
+	return SlaveofHost(c)
 }
 
 type SlaveofHost Base
 
 func (c SlaveofHost) Port(port int64) SlaveofPort {
 	c.command.append(strconv.FormatInt(port, 10))
-	return (SlaveofPort)(c)
+	return SlaveofPort(c)
 }
 
 type SlaveofPort Base
@@ -27101,7 +27101,7 @@ func (b Builder) SlowlogGet() SlowlogGet {
 
 func (c SlowlogGet) Count(count int64) SlowlogGetCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (SlowlogGetCount)(c)
+	return SlowlogGetCount(c)
 }
 
 // Return Completed Redis command.
@@ -27202,7 +27202,7 @@ func (c Smembers) Key(key string) SmembersKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SmembersKey)(c)
+	return SmembersKey(c)
 }
 
 type SmembersKey Base
@@ -27240,14 +27240,14 @@ func (c Smismember) Key(key string) SmismemberKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SmismemberKey)(c)
+	return SmismemberKey(c)
 }
 
 type SmismemberKey Base
 
 func (c SmismemberKey) Member(member ...string) SmismemberMember {
 	c.command.append(member...)
-	return (SmismemberMember)(c)
+	return SmismemberMember(c)
 }
 
 type SmismemberMember Base
@@ -27290,14 +27290,14 @@ func (c Smove) Source(source string) SmoveSource {
 		c.cslot.set(getSlot(source))
 	}
 	c.command.append(source)
-	return (SmoveSource)(c)
+	return SmoveSource(c)
 }
 
 type SmoveDestination Base
 
 func (c SmoveDestination) Member(member string) SmoveMember {
 	c.command.append(member)
-	return (SmoveMember)(c)
+	return SmoveMember(c)
 }
 
 type SmoveMember Base
@@ -27316,7 +27316,7 @@ func (c SmoveSource) Destination(destination string) SmoveDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (SmoveDestination)(c)
+	return SmoveDestination(c)
 }
 
 // Sort the elements in a list, set or sorted set.
@@ -27342,33 +27342,33 @@ func (c Sort) Key(key string) SortKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SortKey)(c)
+	return SortKey(c)
 }
 
 type SortBy Base
 
 func (c SortBy) Limit(offset int64, count int64) SortLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (SortLimit)(c)
+	return SortLimit(c)
 }
 
 func (c SortBy) Get() SortGet {
-	return (SortGet)(c)
+	return SortGet(c)
 }
 
 func (c SortBy) Asc() SortOrderAsc {
 	c.command.append("ASC")
-	return (SortOrderAsc)(c)
+	return SortOrderAsc(c)
 }
 
 func (c SortBy) Desc() SortOrderDesc {
 	c.command.append("DESC")
-	return (SortOrderDesc)(c)
+	return SortOrderDesc(c)
 }
 
 func (c SortBy) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortBy) Store(destination string) SortStore {
@@ -27378,7 +27378,7 @@ func (c SortBy) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27395,17 +27395,17 @@ func (c SortGet) Get(pattern string) SortGet {
 
 func (c SortGet) Asc() SortOrderAsc {
 	c.command.append("ASC")
-	return (SortOrderAsc)(c)
+	return SortOrderAsc(c)
 }
 
 func (c SortGet) Desc() SortOrderDesc {
 	c.command.append("DESC")
-	return (SortOrderDesc)(c)
+	return SortOrderDesc(c)
 }
 
 func (c SortGet) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortGet) Store(destination string) SortStore {
@@ -27415,7 +27415,7 @@ func (c SortGet) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27427,31 +27427,31 @@ type SortKey Base
 
 func (c SortKey) By(pattern string) SortBy {
 	c.command.append("BY", pattern)
-	return (SortBy)(c)
+	return SortBy(c)
 }
 
 func (c SortKey) Limit(offset int64, count int64) SortLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (SortLimit)(c)
+	return SortLimit(c)
 }
 
 func (c SortKey) Get() SortGet {
-	return (SortGet)(c)
+	return SortGet(c)
 }
 
 func (c SortKey) Asc() SortOrderAsc {
 	c.command.append("ASC")
-	return (SortOrderAsc)(c)
+	return SortOrderAsc(c)
 }
 
 func (c SortKey) Desc() SortOrderDesc {
 	c.command.append("DESC")
-	return (SortOrderDesc)(c)
+	return SortOrderDesc(c)
 }
 
 func (c SortKey) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortKey) Store(destination string) SortStore {
@@ -27461,7 +27461,7 @@ func (c SortKey) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27472,22 +27472,22 @@ func (c SortKey) Build() Completed {
 type SortLimit Base
 
 func (c SortLimit) Get() SortGet {
-	return (SortGet)(c)
+	return SortGet(c)
 }
 
 func (c SortLimit) Asc() SortOrderAsc {
 	c.command.append("ASC")
-	return (SortOrderAsc)(c)
+	return SortOrderAsc(c)
 }
 
 func (c SortLimit) Desc() SortOrderDesc {
 	c.command.append("DESC")
-	return (SortOrderDesc)(c)
+	return SortOrderDesc(c)
 }
 
 func (c SortLimit) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortLimit) Store(destination string) SortStore {
@@ -27497,7 +27497,7 @@ func (c SortLimit) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27509,7 +27509,7 @@ type SortOrderAsc Base
 
 func (c SortOrderAsc) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortOrderAsc) Store(destination string) SortStore {
@@ -27519,7 +27519,7 @@ func (c SortOrderAsc) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27531,7 +27531,7 @@ type SortOrderDesc Base
 
 func (c SortOrderDesc) Alpha() SortSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortSortingAlpha)(c)
+	return SortSortingAlpha(c)
 }
 
 func (c SortOrderDesc) Store(destination string) SortStore {
@@ -27541,7 +27541,7 @@ func (c SortOrderDesc) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27572,33 +27572,33 @@ func (c SortRo) Key(key string) SortRoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SortRoKey)(c)
+	return SortRoKey(c)
 }
 
 type SortRoBy Base
 
 func (c SortRoBy) Limit(offset int64, count int64) SortRoLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (SortRoLimit)(c)
+	return SortRoLimit(c)
 }
 
 func (c SortRoBy) Get() SortRoGet {
-	return (SortRoGet)(c)
+	return SortRoGet(c)
 }
 
 func (c SortRoBy) Asc() SortRoOrderAsc {
 	c.command.append("ASC")
-	return (SortRoOrderAsc)(c)
+	return SortRoOrderAsc(c)
 }
 
 func (c SortRoBy) Desc() SortRoOrderDesc {
 	c.command.append("DESC")
-	return (SortRoOrderDesc)(c)
+	return SortRoOrderDesc(c)
 }
 
 func (c SortRoBy) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27620,17 +27620,17 @@ func (c SortRoGet) Get(pattern string) SortRoGet {
 
 func (c SortRoGet) Asc() SortRoOrderAsc {
 	c.command.append("ASC")
-	return (SortRoOrderAsc)(c)
+	return SortRoOrderAsc(c)
 }
 
 func (c SortRoGet) Desc() SortRoOrderDesc {
 	c.command.append("DESC")
-	return (SortRoOrderDesc)(c)
+	return SortRoOrderDesc(c)
 }
 
 func (c SortRoGet) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27647,31 +27647,31 @@ type SortRoKey Base
 
 func (c SortRoKey) By(pattern string) SortRoBy {
 	c.command.append("BY", pattern)
-	return (SortRoBy)(c)
+	return SortRoBy(c)
 }
 
 func (c SortRoKey) Limit(offset int64, count int64) SortRoLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (SortRoLimit)(c)
+	return SortRoLimit(c)
 }
 
 func (c SortRoKey) Get() SortRoGet {
-	return (SortRoGet)(c)
+	return SortRoGet(c)
 }
 
 func (c SortRoKey) Asc() SortRoOrderAsc {
 	c.command.append("ASC")
-	return (SortRoOrderAsc)(c)
+	return SortRoOrderAsc(c)
 }
 
 func (c SortRoKey) Desc() SortRoOrderDesc {
 	c.command.append("DESC")
-	return (SortRoOrderDesc)(c)
+	return SortRoOrderDesc(c)
 }
 
 func (c SortRoKey) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27687,22 +27687,22 @@ func (c SortRoKey) Cache() Cacheable {
 type SortRoLimit Base
 
 func (c SortRoLimit) Get() SortRoGet {
-	return (SortRoGet)(c)
+	return SortRoGet(c)
 }
 
 func (c SortRoLimit) Asc() SortRoOrderAsc {
 	c.command.append("ASC")
-	return (SortRoOrderAsc)(c)
+	return SortRoOrderAsc(c)
 }
 
 func (c SortRoLimit) Desc() SortRoOrderDesc {
 	c.command.append("DESC")
-	return (SortRoOrderDesc)(c)
+	return SortRoOrderDesc(c)
 }
 
 func (c SortRoLimit) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27719,7 +27719,7 @@ type SortRoOrderAsc Base
 
 func (c SortRoOrderAsc) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27736,7 +27736,7 @@ type SortRoOrderDesc Base
 
 func (c SortRoOrderDesc) Alpha() SortRoSortingAlpha {
 	c.command.append("ALPHA")
-	return (SortRoSortingAlpha)(c)
+	return SortRoSortingAlpha(c)
 }
 
 // Return Completed Redis command.
@@ -27770,7 +27770,7 @@ func (c SortSortingAlpha) Store(destination string) SortStore {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append("STORE", destination)
-	return (SortStore)(c)
+	return SortStore(c)
 }
 
 // Return Completed Redis command.
@@ -27808,7 +27808,7 @@ func (c Spop) Key(key string) SpopKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SpopKey)(c)
+	return SpopKey(c)
 }
 
 type SpopCount Base
@@ -27822,7 +27822,7 @@ type SpopKey Base
 
 func (c SpopKey) Count(count int64) SpopCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (SpopCount)(c)
+	return SpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -27846,14 +27846,14 @@ func (c Spublish) Channel(channel string) SpublishChannel {
 		c.cslot.set(getSlot(channel))
 	}
 	c.command.append(channel)
-	return (SpublishChannel)(c)
+	return SpublishChannel(c)
 }
 
 type SpublishChannel Base
 
 func (c SpublishChannel) Message(message string) SpublishMessage {
 	c.command.append(message)
-	return (SpublishMessage)(c)
+	return SpublishMessage(c)
 }
 
 type SpublishMessage Base
@@ -27886,7 +27886,7 @@ func (c Srandmember) Key(key string) SrandmemberKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SrandmemberKey)(c)
+	return SrandmemberKey(c)
 }
 
 type SrandmemberCount Base
@@ -27900,7 +27900,7 @@ type SrandmemberKey Base
 
 func (c SrandmemberKey) Count(count int64) SrandmemberCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (SrandmemberCount)(c)
+	return SrandmemberCount(c)
 }
 
 // Return Completed Redis command.
@@ -27931,14 +27931,14 @@ func (c Srem) Key(key string) SremKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SremKey)(c)
+	return SremKey(c)
 }
 
 type SremKey Base
 
 func (c SremKey) Member(member ...string) SremMember {
 	c.command.append(member...)
-	return (SremMember)(c)
+	return SremMember(c)
 }
 
 type SremMember Base
@@ -27976,7 +27976,7 @@ func (c Sscan) Key(key string) SscanKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (SscanKey)(c)
+	return SscanKey(c)
 }
 
 type SscanCount Base
@@ -27990,12 +27990,12 @@ type SscanCursor Base
 
 func (c SscanCursor) Match(pattern string) SscanMatch {
 	c.command.append("MATCH", pattern)
-	return (SscanMatch)(c)
+	return SscanMatch(c)
 }
 
 func (c SscanCursor) Count(count int64) SscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (SscanCount)(c)
+	return SscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -28007,14 +28007,14 @@ type SscanKey Base
 
 func (c SscanKey) Cursor(cursor int64) SscanCursor {
 	c.command.append(strconv.FormatInt(cursor, 10))
-	return (SscanCursor)(c)
+	return SscanCursor(c)
 }
 
 type SscanMatch Base
 
 func (c SscanMatch) Count(count int64) SscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (SscanCount)(c)
+	return SscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -28043,7 +28043,7 @@ func (c Ssubscribe) Channel(channel ...string) SsubscribeChannel {
 		}
 	}
 	c.command.append(channel...)
-	return (SsubscribeChannel)(c)
+	return SsubscribeChannel(c)
 }
 
 type SsubscribeChannel Base
@@ -28091,7 +28091,7 @@ func (c Strlen) Key(key string) StrlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (StrlenKey)(c)
+	return StrlenKey(c)
 }
 
 type StrlenKey Base
@@ -28124,7 +28124,7 @@ func (b Builder) Subscribe() Subscribe {
 
 func (c Subscribe) Channel(channel ...string) SubscribeChannel {
 	c.command.append(channel...)
-	return (SubscribeChannel)(c)
+	return SubscribeChannel(c)
 }
 
 type SubscribeChannel Base
@@ -28167,7 +28167,7 @@ func (c Sunion) Key(key ...string) SunionKey {
 		}
 	}
 	c.command.append(key...)
-	return (SunionKey)(c)
+	return SunionKey(c)
 }
 
 type SunionKey Base
@@ -28215,7 +28215,7 @@ func (c Sunionstore) Destination(destination string) SunionstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (SunionstoreDestination)(c)
+	return SunionstoreDestination(c)
 }
 
 type SunionstoreDestination Base
@@ -28232,7 +28232,7 @@ func (c SunionstoreDestination) Key(key ...string) SunionstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (SunionstoreKey)(c)
+	return SunionstoreKey(c)
 }
 
 type SunionstoreKey Base
@@ -28278,7 +28278,7 @@ func (c Sunsubscribe) Channel(channel ...string) SunsubscribeChannel {
 		}
 	}
 	c.command.append(channel...)
-	return (SunsubscribeChannel)(c)
+	return SunsubscribeChannel(c)
 }
 
 // Return Completed Redis command.
@@ -28326,14 +28326,14 @@ func (b Builder) Swapdb() Swapdb {
 
 func (c Swapdb) Index1(index1 int64) SwapdbIndex1 {
 	c.command.append(strconv.FormatInt(index1, 10))
-	return (SwapdbIndex1)(c)
+	return SwapdbIndex1(c)
 }
 
 type SwapdbIndex1 Base
 
 func (c SwapdbIndex1) Index2(index2 int64) SwapdbIndex2 {
 	c.command.append(strconv.FormatInt(index2, 10))
-	return (SwapdbIndex2)(c)
+	return SwapdbIndex2(c)
 }
 
 type SwapdbIndex2 Base
@@ -28383,14 +28383,14 @@ func (c TdigestAdd) Key(key string) TdigestAddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestAddKey)(c)
+	return TdigestAddKey(c)
 }
 
 type TdigestAddKey Base
 
 func (c TdigestAddKey) Value(value float64) TdigestAddValuesValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (TdigestAddValuesValue)(c)
+	return TdigestAddValuesValue(c)
 }
 
 type TdigestAddValuesValue Base
@@ -28428,7 +28428,7 @@ func (c TdigestByrank) Key(key string) TdigestByrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestByrankKey)(c)
+	return TdigestByrankKey(c)
 }
 
 type TdigestByrankKey Base
@@ -28437,7 +28437,7 @@ func (c TdigestByrankKey) Rank(rank ...float64) TdigestByrankRank {
 	for _, n := range rank {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestByrankRank)(c)
+	return TdigestByrankRank(c)
 }
 
 type TdigestByrankRank Base
@@ -28477,7 +28477,7 @@ func (c TdigestByrevrank) Key(key string) TdigestByrevrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestByrevrankKey)(c)
+	return TdigestByrevrankKey(c)
 }
 
 type TdigestByrevrankKey Base
@@ -28486,7 +28486,7 @@ func (c TdigestByrevrankKey) ReverseRank(reverseRank ...float64) TdigestByrevran
 	for _, n := range reverseRank {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestByrevrankReverseRank)(c)
+	return TdigestByrevrankReverseRank(c)
 }
 
 type TdigestByrevrankReverseRank Base
@@ -28526,7 +28526,7 @@ func (c TdigestCdf) Key(key string) TdigestCdfKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestCdfKey)(c)
+	return TdigestCdfKey(c)
 }
 
 type TdigestCdfKey Base
@@ -28535,7 +28535,7 @@ func (c TdigestCdfKey) Value(value ...float64) TdigestCdfValue {
 	for _, n := range value {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestCdfValue)(c)
+	return TdigestCdfValue(c)
 }
 
 type TdigestCdfValue Base
@@ -28575,7 +28575,7 @@ func (c TdigestCreate) Key(key string) TdigestCreateKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestCreateKey)(c)
+	return TdigestCreateKey(c)
 }
 
 type TdigestCreateCompression Base
@@ -28589,7 +28589,7 @@ type TdigestCreateKey Base
 
 func (c TdigestCreateKey) Compression(compression int64) TdigestCreateCompression {
 	c.command.append("COMPRESSION", strconv.FormatInt(compression, 10))
-	return (TdigestCreateCompression)(c)
+	return TdigestCreateCompression(c)
 }
 
 // Return Completed Redis command.
@@ -28620,7 +28620,7 @@ func (c TdigestInfo) Key(key string) TdigestInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestInfoKey)(c)
+	return TdigestInfoKey(c)
 }
 
 type TdigestInfoKey Base
@@ -28653,7 +28653,7 @@ func (c TdigestMax) Key(key string) TdigestMaxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestMaxKey)(c)
+	return TdigestMaxKey(c)
 }
 
 type TdigestMaxKey Base
@@ -28686,14 +28686,14 @@ func (c TdigestMerge) DestinationKey(destinationKey string) TdigestMergeDestinat
 		c.cslot.set(getSlot(destinationKey))
 	}
 	c.command.append(destinationKey)
-	return (TdigestMergeDestinationKey)(c)
+	return TdigestMergeDestinationKey(c)
 }
 
 type TdigestMergeConfigCompression Base
 
 func (c TdigestMergeConfigCompression) Override() TdigestMergeOverride {
 	c.command.append("OVERRIDE")
-	return (TdigestMergeOverride)(c)
+	return TdigestMergeOverride(c)
 }
 
 // Return Completed Redis command.
@@ -28705,7 +28705,7 @@ type TdigestMergeDestinationKey Base
 
 func (c TdigestMergeDestinationKey) Numkeys(numkeys int64) TdigestMergeNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (TdigestMergeNumkeys)(c)
+	return TdigestMergeNumkeys(c)
 }
 
 type TdigestMergeNumkeys Base
@@ -28722,7 +28722,7 @@ func (c TdigestMergeNumkeys) SourceKey(sourceKey ...string) TdigestMergeSourceKe
 		}
 	}
 	c.command.append(sourceKey...)
-	return (TdigestMergeSourceKey)(c)
+	return TdigestMergeSourceKey(c)
 }
 
 type TdigestMergeOverride Base
@@ -28751,12 +28751,12 @@ func (c TdigestMergeSourceKey) SourceKey(sourceKey ...string) TdigestMergeSource
 
 func (c TdigestMergeSourceKey) Compression(compression int64) TdigestMergeConfigCompression {
 	c.command.append("COMPRESSION", strconv.FormatInt(compression, 10))
-	return (TdigestMergeConfigCompression)(c)
+	return TdigestMergeConfigCompression(c)
 }
 
 func (c TdigestMergeSourceKey) Override() TdigestMergeOverride {
 	c.command.append("OVERRIDE")
-	return (TdigestMergeOverride)(c)
+	return TdigestMergeOverride(c)
 }
 
 // Return Completed Redis command.
@@ -28787,7 +28787,7 @@ func (c TdigestMin) Key(key string) TdigestMinKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestMinKey)(c)
+	return TdigestMinKey(c)
 }
 
 type TdigestMinKey Base
@@ -28820,7 +28820,7 @@ func (c TdigestQuantile) Key(key string) TdigestQuantileKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestQuantileKey)(c)
+	return TdigestQuantileKey(c)
 }
 
 type TdigestQuantileKey Base
@@ -28829,7 +28829,7 @@ func (c TdigestQuantileKey) Quantile(quantile ...float64) TdigestQuantileQuantil
 	for _, n := range quantile {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestQuantileQuantile)(c)
+	return TdigestQuantileQuantile(c)
 }
 
 type TdigestQuantileQuantile Base
@@ -28869,7 +28869,7 @@ func (c TdigestRank) Key(key string) TdigestRankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestRankKey)(c)
+	return TdigestRankKey(c)
 }
 
 type TdigestRankKey Base
@@ -28878,7 +28878,7 @@ func (c TdigestRankKey) Value(value ...float64) TdigestRankValue {
 	for _, n := range value {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestRankValue)(c)
+	return TdigestRankValue(c)
 }
 
 type TdigestRankValue Base
@@ -28918,7 +28918,7 @@ func (c TdigestReset) Key(key string) TdigestResetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestResetKey)(c)
+	return TdigestResetKey(c)
 }
 
 type TdigestResetKey Base
@@ -28951,7 +28951,7 @@ func (c TdigestRevrank) Key(key string) TdigestRevrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestRevrankKey)(c)
+	return TdigestRevrankKey(c)
 }
 
 type TdigestRevrankKey Base
@@ -28960,7 +28960,7 @@ func (c TdigestRevrankKey) Value(value ...float64) TdigestRevrankValue {
 	for _, n := range value {
 		c.command.append(strconv.FormatFloat(n, 'f', -1, 64))
 	}
-	return (TdigestRevrankValue)(c)
+	return TdigestRevrankValue(c)
 }
 
 type TdigestRevrankValue Base
@@ -29000,7 +29000,7 @@ func (c TdigestTrimmedMean) Key(key string) TdigestTrimmedMeanKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TdigestTrimmedMeanKey)(c)
+	return TdigestTrimmedMeanKey(c)
 }
 
 type TdigestTrimmedMeanHighCutQuantile Base
@@ -29014,14 +29014,14 @@ type TdigestTrimmedMeanKey Base
 
 func (c TdigestTrimmedMeanKey) LowCutQuantile(lowCutQuantile float64) TdigestTrimmedMeanLowCutQuantile {
 	c.command.append(strconv.FormatFloat(lowCutQuantile, 'f', -1, 64))
-	return (TdigestTrimmedMeanLowCutQuantile)(c)
+	return TdigestTrimmedMeanLowCutQuantile(c)
 }
 
 type TdigestTrimmedMeanLowCutQuantile Base
 
 func (c TdigestTrimmedMeanLowCutQuantile) HighCutQuantile(highCutQuantile float64) TdigestTrimmedMeanHighCutQuantile {
 	c.command.append(strconv.FormatFloat(highCutQuantile, 'f', -1, 64))
-	return (TdigestTrimmedMeanHighCutQuantile)(c)
+	return TdigestTrimmedMeanHighCutQuantile(c)
 }
 
 // Return the current server time.
@@ -29068,7 +29068,7 @@ func (c TopkAdd) Key(key string) TopkAddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkAddKey)(c)
+	return TopkAddKey(c)
 }
 
 type TopkAddItems Base
@@ -29087,7 +29087,7 @@ type TopkAddKey Base
 
 func (c TopkAddKey) Items(items ...string) TopkAddItems {
 	c.command.append(items...)
-	return (TopkAddItems)(c)
+	return TopkAddItems(c)
 }
 
 // Return the count for one or more items are in a sketch.
@@ -29117,7 +29117,7 @@ func (c TopkCount) Key(key string) TopkCountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkCountKey)(c)
+	return TopkCountKey(c)
 }
 
 type TopkCountItem Base
@@ -29136,7 +29136,7 @@ type TopkCountKey Base
 
 func (c TopkCountKey) Item(item ...string) TopkCountItem {
 	c.command.append(item...)
-	return (TopkCountItem)(c)
+	return TopkCountItem(c)
 }
 
 // Increases the count of one or more items by increment.
@@ -29162,14 +29162,14 @@ func (c TopkIncrby) Key(key string) TopkIncrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkIncrbyKey)(c)
+	return TopkIncrbyKey(c)
 }
 
 type TopkIncrbyItemsIncrement Base
 
 func (c TopkIncrbyItemsIncrement) Item(item string) TopkIncrbyItemsItem {
 	c.command.append(item)
-	return (TopkIncrbyItemsItem)(c)
+	return TopkIncrbyItemsItem(c)
 }
 
 // Return Completed Redis command.
@@ -29181,14 +29181,14 @@ type TopkIncrbyItemsItem Base
 
 func (c TopkIncrbyItemsItem) Increment(increment int64) TopkIncrbyItemsIncrement {
 	c.command.append(strconv.FormatInt(increment, 10))
-	return (TopkIncrbyItemsIncrement)(c)
+	return TopkIncrbyItemsIncrement(c)
 }
 
 type TopkIncrbyKey Base
 
 func (c TopkIncrbyKey) Item(item string) TopkIncrbyItemsItem {
 	c.command.append(item)
-	return (TopkIncrbyItemsItem)(c)
+	return TopkIncrbyItemsItem(c)
 }
 
 // Returns information about a sketch.
@@ -29214,7 +29214,7 @@ func (c TopkInfo) Key(key string) TopkInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkInfoKey)(c)
+	return TopkInfoKey(c)
 }
 
 type TopkInfoKey Base
@@ -29252,14 +29252,14 @@ func (c TopkList) Key(key string) TopkListKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkListKey)(c)
+	return TopkListKey(c)
 }
 
 type TopkListKey Base
 
 func (c TopkListKey) Withcount() TopkListWithcount {
 	c.command.append("WITHCOUNT")
-	return (TopkListWithcount)(c)
+	return TopkListWithcount(c)
 }
 
 // Return Completed Redis command.
@@ -29307,7 +29307,7 @@ func (c TopkQuery) Key(key string) TopkQueryKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkQueryKey)(c)
+	return TopkQueryKey(c)
 }
 
 type TopkQueryItem Base
@@ -29331,7 +29331,7 @@ type TopkQueryKey Base
 
 func (c TopkQueryKey) Item(item ...string) TopkQueryItem {
 	c.command.append(item...)
-	return (TopkQueryItem)(c)
+	return TopkQueryItem(c)
 }
 
 // Initializes a TopK with specified parameters.
@@ -29357,14 +29357,14 @@ func (c TopkReserve) Key(key string) TopkReserveKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TopkReserveKey)(c)
+	return TopkReserveKey(c)
 }
 
 type TopkReserveKey Base
 
 func (c TopkReserveKey) Topk(topk int64) TopkReserveTopk {
 	c.command.append(strconv.FormatInt(topk, 10))
-	return (TopkReserveTopk)(c)
+	return TopkReserveTopk(c)
 }
 
 type TopkReserveParamsDecay Base
@@ -29378,21 +29378,21 @@ type TopkReserveParamsDepth Base
 
 func (c TopkReserveParamsDepth) Decay(decay float64) TopkReserveParamsDecay {
 	c.command.append(strconv.FormatFloat(decay, 'f', -1, 64))
-	return (TopkReserveParamsDecay)(c)
+	return TopkReserveParamsDecay(c)
 }
 
 type TopkReserveParamsWidth Base
 
 func (c TopkReserveParamsWidth) Depth(depth int64) TopkReserveParamsDepth {
 	c.command.append(strconv.FormatInt(depth, 10))
-	return (TopkReserveParamsDepth)(c)
+	return TopkReserveParamsDepth(c)
 }
 
 type TopkReserveTopk Base
 
 func (c TopkReserveTopk) Width(width int64) TopkReserveParamsWidth {
 	c.command.append(strconv.FormatInt(width, 10))
-	return (TopkReserveParamsWidth)(c)
+	return TopkReserveParamsWidth(c)
 }
 
 // Return Completed Redis command.
@@ -29428,7 +29428,7 @@ func (c Touch) Key(key ...string) TouchKey {
 		}
 	}
 	c.command.append(key...)
-	return (TouchKey)(c)
+	return TouchKey(c)
 }
 
 type TouchKey Base
@@ -29476,7 +29476,7 @@ func (c TsAdd) Key(key string) TsAddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsAddKey)(c)
+	return TsAddKey(c)
 }
 
 type TsAddChunkSize Base
@@ -29484,37 +29484,37 @@ type TsAddChunkSize Base
 func (c TsAddChunkSize) OnDuplicateBlock() TsAddOnDuplicateBlock {
 	c.ctags = ctagBlock
 	c.command.append("ON_DUPLICATE", "BLOCK")
-	return (TsAddOnDuplicateBlock)(c)
+	return TsAddOnDuplicateBlock(c)
 }
 
 func (c TsAddChunkSize) OnDuplicateFirst() TsAddOnDuplicateFirst {
 	c.command.append("ON_DUPLICATE", "FIRST")
-	return (TsAddOnDuplicateFirst)(c)
+	return TsAddOnDuplicateFirst(c)
 }
 
 func (c TsAddChunkSize) OnDuplicateLast() TsAddOnDuplicateLast {
 	c.command.append("ON_DUPLICATE", "LAST")
-	return (TsAddOnDuplicateLast)(c)
+	return TsAddOnDuplicateLast(c)
 }
 
 func (c TsAddChunkSize) OnDuplicateMin() TsAddOnDuplicateMin {
 	c.command.append("ON_DUPLICATE", "MIN")
-	return (TsAddOnDuplicateMin)(c)
+	return TsAddOnDuplicateMin(c)
 }
 
 func (c TsAddChunkSize) OnDuplicateMax() TsAddOnDuplicateMax {
 	c.command.append("ON_DUPLICATE", "MAX")
-	return (TsAddOnDuplicateMax)(c)
+	return TsAddOnDuplicateMax(c)
 }
 
 func (c TsAddChunkSize) OnDuplicateSum() TsAddOnDuplicateSum {
 	c.command.append("ON_DUPLICATE", "SUM")
-	return (TsAddOnDuplicateSum)(c)
+	return TsAddOnDuplicateSum(c)
 }
 
 func (c TsAddChunkSize) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29526,43 +29526,43 @@ type TsAddEncodingCompressed Base
 
 func (c TsAddEncodingCompressed) ChunkSize(size int64) TsAddChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAddChunkSize)(c)
+	return TsAddChunkSize(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateBlock() TsAddOnDuplicateBlock {
 	c.ctags = ctagBlock
 	c.command.append("ON_DUPLICATE", "BLOCK")
-	return (TsAddOnDuplicateBlock)(c)
+	return TsAddOnDuplicateBlock(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateFirst() TsAddOnDuplicateFirst {
 	c.command.append("ON_DUPLICATE", "FIRST")
-	return (TsAddOnDuplicateFirst)(c)
+	return TsAddOnDuplicateFirst(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateLast() TsAddOnDuplicateLast {
 	c.command.append("ON_DUPLICATE", "LAST")
-	return (TsAddOnDuplicateLast)(c)
+	return TsAddOnDuplicateLast(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateMin() TsAddOnDuplicateMin {
 	c.command.append("ON_DUPLICATE", "MIN")
-	return (TsAddOnDuplicateMin)(c)
+	return TsAddOnDuplicateMin(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateMax() TsAddOnDuplicateMax {
 	c.command.append("ON_DUPLICATE", "MAX")
-	return (TsAddOnDuplicateMax)(c)
+	return TsAddOnDuplicateMax(c)
 }
 
 func (c TsAddEncodingCompressed) OnDuplicateSum() TsAddOnDuplicateSum {
 	c.command.append("ON_DUPLICATE", "SUM")
-	return (TsAddOnDuplicateSum)(c)
+	return TsAddOnDuplicateSum(c)
 }
 
 func (c TsAddEncodingCompressed) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29574,43 +29574,43 @@ type TsAddEncodingUncompressed Base
 
 func (c TsAddEncodingUncompressed) ChunkSize(size int64) TsAddChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAddChunkSize)(c)
+	return TsAddChunkSize(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateBlock() TsAddOnDuplicateBlock {
 	c.ctags = ctagBlock
 	c.command.append("ON_DUPLICATE", "BLOCK")
-	return (TsAddOnDuplicateBlock)(c)
+	return TsAddOnDuplicateBlock(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateFirst() TsAddOnDuplicateFirst {
 	c.command.append("ON_DUPLICATE", "FIRST")
-	return (TsAddOnDuplicateFirst)(c)
+	return TsAddOnDuplicateFirst(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateLast() TsAddOnDuplicateLast {
 	c.command.append("ON_DUPLICATE", "LAST")
-	return (TsAddOnDuplicateLast)(c)
+	return TsAddOnDuplicateLast(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateMin() TsAddOnDuplicateMin {
 	c.command.append("ON_DUPLICATE", "MIN")
-	return (TsAddOnDuplicateMin)(c)
+	return TsAddOnDuplicateMin(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateMax() TsAddOnDuplicateMax {
 	c.command.append("ON_DUPLICATE", "MAX")
-	return (TsAddOnDuplicateMax)(c)
+	return TsAddOnDuplicateMax(c)
 }
 
 func (c TsAddEncodingUncompressed) OnDuplicateSum() TsAddOnDuplicateSum {
 	c.command.append("ON_DUPLICATE", "SUM")
-	return (TsAddOnDuplicateSum)(c)
+	return TsAddOnDuplicateSum(c)
 }
 
 func (c TsAddEncodingUncompressed) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29622,7 +29622,7 @@ type TsAddKey Base
 
 func (c TsAddKey) Timestamp(timestamp int64) TsAddTimestamp {
 	c.command.append(strconv.FormatInt(timestamp, 10))
-	return (TsAddTimestamp)(c)
+	return TsAddTimestamp(c)
 }
 
 type TsAddLabels Base
@@ -29641,7 +29641,7 @@ type TsAddOnDuplicateBlock Base
 
 func (c TsAddOnDuplicateBlock) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29653,7 +29653,7 @@ type TsAddOnDuplicateFirst Base
 
 func (c TsAddOnDuplicateFirst) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29665,7 +29665,7 @@ type TsAddOnDuplicateLast Base
 
 func (c TsAddOnDuplicateLast) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29677,7 +29677,7 @@ type TsAddOnDuplicateMax Base
 
 func (c TsAddOnDuplicateMax) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29689,7 +29689,7 @@ type TsAddOnDuplicateMin Base
 
 func (c TsAddOnDuplicateMin) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29701,7 +29701,7 @@ type TsAddOnDuplicateSum Base
 
 func (c TsAddOnDuplicateSum) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29713,53 +29713,53 @@ type TsAddRetention Base
 
 func (c TsAddRetention) EncodingUncompressed() TsAddEncodingUncompressed {
 	c.command.append("ENCODING", "UNCOMPRESSED")
-	return (TsAddEncodingUncompressed)(c)
+	return TsAddEncodingUncompressed(c)
 }
 
 func (c TsAddRetention) EncodingCompressed() TsAddEncodingCompressed {
 	c.command.append("ENCODING", "COMPRESSED")
-	return (TsAddEncodingCompressed)(c)
+	return TsAddEncodingCompressed(c)
 }
 
 func (c TsAddRetention) ChunkSize(size int64) TsAddChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAddChunkSize)(c)
+	return TsAddChunkSize(c)
 }
 
 func (c TsAddRetention) OnDuplicateBlock() TsAddOnDuplicateBlock {
 	c.ctags = ctagBlock
 	c.command.append("ON_DUPLICATE", "BLOCK")
-	return (TsAddOnDuplicateBlock)(c)
+	return TsAddOnDuplicateBlock(c)
 }
 
 func (c TsAddRetention) OnDuplicateFirst() TsAddOnDuplicateFirst {
 	c.command.append("ON_DUPLICATE", "FIRST")
-	return (TsAddOnDuplicateFirst)(c)
+	return TsAddOnDuplicateFirst(c)
 }
 
 func (c TsAddRetention) OnDuplicateLast() TsAddOnDuplicateLast {
 	c.command.append("ON_DUPLICATE", "LAST")
-	return (TsAddOnDuplicateLast)(c)
+	return TsAddOnDuplicateLast(c)
 }
 
 func (c TsAddRetention) OnDuplicateMin() TsAddOnDuplicateMin {
 	c.command.append("ON_DUPLICATE", "MIN")
-	return (TsAddOnDuplicateMin)(c)
+	return TsAddOnDuplicateMin(c)
 }
 
 func (c TsAddRetention) OnDuplicateMax() TsAddOnDuplicateMax {
 	c.command.append("ON_DUPLICATE", "MAX")
-	return (TsAddOnDuplicateMax)(c)
+	return TsAddOnDuplicateMax(c)
 }
 
 func (c TsAddRetention) OnDuplicateSum() TsAddOnDuplicateSum {
 	c.command.append("ON_DUPLICATE", "SUM")
-	return (TsAddOnDuplicateSum)(c)
+	return TsAddOnDuplicateSum(c)
 }
 
 func (c TsAddRetention) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29771,65 +29771,65 @@ type TsAddTimestamp Base
 
 func (c TsAddTimestamp) Value(value float64) TsAddValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (TsAddValue)(c)
+	return TsAddValue(c)
 }
 
 type TsAddValue Base
 
 func (c TsAddValue) Retention(retentionperiod int64) TsAddRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsAddRetention)(c)
+	return TsAddRetention(c)
 }
 
 func (c TsAddValue) EncodingUncompressed() TsAddEncodingUncompressed {
 	c.command.append("ENCODING", "UNCOMPRESSED")
-	return (TsAddEncodingUncompressed)(c)
+	return TsAddEncodingUncompressed(c)
 }
 
 func (c TsAddValue) EncodingCompressed() TsAddEncodingCompressed {
 	c.command.append("ENCODING", "COMPRESSED")
-	return (TsAddEncodingCompressed)(c)
+	return TsAddEncodingCompressed(c)
 }
 
 func (c TsAddValue) ChunkSize(size int64) TsAddChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAddChunkSize)(c)
+	return TsAddChunkSize(c)
 }
 
 func (c TsAddValue) OnDuplicateBlock() TsAddOnDuplicateBlock {
 	c.ctags = ctagBlock
 	c.command.append("ON_DUPLICATE", "BLOCK")
-	return (TsAddOnDuplicateBlock)(c)
+	return TsAddOnDuplicateBlock(c)
 }
 
 func (c TsAddValue) OnDuplicateFirst() TsAddOnDuplicateFirst {
 	c.command.append("ON_DUPLICATE", "FIRST")
-	return (TsAddOnDuplicateFirst)(c)
+	return TsAddOnDuplicateFirst(c)
 }
 
 func (c TsAddValue) OnDuplicateLast() TsAddOnDuplicateLast {
 	c.command.append("ON_DUPLICATE", "LAST")
-	return (TsAddOnDuplicateLast)(c)
+	return TsAddOnDuplicateLast(c)
 }
 
 func (c TsAddValue) OnDuplicateMin() TsAddOnDuplicateMin {
 	c.command.append("ON_DUPLICATE", "MIN")
-	return (TsAddOnDuplicateMin)(c)
+	return TsAddOnDuplicateMin(c)
 }
 
 func (c TsAddValue) OnDuplicateMax() TsAddOnDuplicateMax {
 	c.command.append("ON_DUPLICATE", "MAX")
-	return (TsAddOnDuplicateMax)(c)
+	return TsAddOnDuplicateMax(c)
 }
 
 func (c TsAddValue) OnDuplicateSum() TsAddOnDuplicateSum {
 	c.command.append("ON_DUPLICATE", "SUM")
-	return (TsAddOnDuplicateSum)(c)
+	return TsAddOnDuplicateSum(c)
 }
 
 func (c TsAddValue) Labels() TsAddLabels {
 	c.command.append("LABELS")
-	return (TsAddLabels)(c)
+	return TsAddLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29860,7 +29860,7 @@ func (c TsAlter) Key(key string) TsAlterKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsAlterKey)(c)
+	return TsAlterKey(c)
 }
 
 type TsAlterChunkSize Base
@@ -29868,37 +29868,37 @@ type TsAlterChunkSize Base
 func (c TsAlterChunkSize) DuplicatePolicyBlock() TsAlterDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsAlterDuplicatePolicyBlock)(c)
+	return TsAlterDuplicatePolicyBlock(c)
 }
 
 func (c TsAlterChunkSize) DuplicatePolicyFirst() TsAlterDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsAlterDuplicatePolicyFirst)(c)
+	return TsAlterDuplicatePolicyFirst(c)
 }
 
 func (c TsAlterChunkSize) DuplicatePolicyLast() TsAlterDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsAlterDuplicatePolicyLast)(c)
+	return TsAlterDuplicatePolicyLast(c)
 }
 
 func (c TsAlterChunkSize) DuplicatePolicyMin() TsAlterDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsAlterDuplicatePolicyMin)(c)
+	return TsAlterDuplicatePolicyMin(c)
 }
 
 func (c TsAlterChunkSize) DuplicatePolicyMax() TsAlterDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsAlterDuplicatePolicyMax)(c)
+	return TsAlterDuplicatePolicyMax(c)
 }
 
 func (c TsAlterChunkSize) DuplicatePolicySum() TsAlterDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsAlterDuplicatePolicySum)(c)
+	return TsAlterDuplicatePolicySum(c)
 }
 
 func (c TsAlterChunkSize) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29910,7 +29910,7 @@ type TsAlterDuplicatePolicyBlock Base
 
 func (c TsAlterDuplicatePolicyBlock) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29922,7 +29922,7 @@ type TsAlterDuplicatePolicyFirst Base
 
 func (c TsAlterDuplicatePolicyFirst) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29934,7 +29934,7 @@ type TsAlterDuplicatePolicyLast Base
 
 func (c TsAlterDuplicatePolicyLast) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29946,7 +29946,7 @@ type TsAlterDuplicatePolicyMax Base
 
 func (c TsAlterDuplicatePolicyMax) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29958,7 +29958,7 @@ type TsAlterDuplicatePolicyMin Base
 
 func (c TsAlterDuplicatePolicyMin) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29970,7 +29970,7 @@ type TsAlterDuplicatePolicySum Base
 
 func (c TsAlterDuplicatePolicySum) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -29982,48 +29982,48 @@ type TsAlterKey Base
 
 func (c TsAlterKey) Retention(retentionperiod int64) TsAlterRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsAlterRetention)(c)
+	return TsAlterRetention(c)
 }
 
 func (c TsAlterKey) ChunkSize(size int64) TsAlterChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAlterChunkSize)(c)
+	return TsAlterChunkSize(c)
 }
 
 func (c TsAlterKey) DuplicatePolicyBlock() TsAlterDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsAlterDuplicatePolicyBlock)(c)
+	return TsAlterDuplicatePolicyBlock(c)
 }
 
 func (c TsAlterKey) DuplicatePolicyFirst() TsAlterDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsAlterDuplicatePolicyFirst)(c)
+	return TsAlterDuplicatePolicyFirst(c)
 }
 
 func (c TsAlterKey) DuplicatePolicyLast() TsAlterDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsAlterDuplicatePolicyLast)(c)
+	return TsAlterDuplicatePolicyLast(c)
 }
 
 func (c TsAlterKey) DuplicatePolicyMin() TsAlterDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsAlterDuplicatePolicyMin)(c)
+	return TsAlterDuplicatePolicyMin(c)
 }
 
 func (c TsAlterKey) DuplicatePolicyMax() TsAlterDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsAlterDuplicatePolicyMax)(c)
+	return TsAlterDuplicatePolicyMax(c)
 }
 
 func (c TsAlterKey) DuplicatePolicySum() TsAlterDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsAlterDuplicatePolicySum)(c)
+	return TsAlterDuplicatePolicySum(c)
 }
 
 func (c TsAlterKey) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30047,43 +30047,43 @@ type TsAlterRetention Base
 
 func (c TsAlterRetention) ChunkSize(size int64) TsAlterChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsAlterChunkSize)(c)
+	return TsAlterChunkSize(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicyBlock() TsAlterDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsAlterDuplicatePolicyBlock)(c)
+	return TsAlterDuplicatePolicyBlock(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicyFirst() TsAlterDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsAlterDuplicatePolicyFirst)(c)
+	return TsAlterDuplicatePolicyFirst(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicyLast() TsAlterDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsAlterDuplicatePolicyLast)(c)
+	return TsAlterDuplicatePolicyLast(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicyMin() TsAlterDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsAlterDuplicatePolicyMin)(c)
+	return TsAlterDuplicatePolicyMin(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicyMax() TsAlterDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsAlterDuplicatePolicyMax)(c)
+	return TsAlterDuplicatePolicyMax(c)
 }
 
 func (c TsAlterRetention) DuplicatePolicySum() TsAlterDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsAlterDuplicatePolicySum)(c)
+	return TsAlterDuplicatePolicySum(c)
 }
 
 func (c TsAlterRetention) Labels() TsAlterLabels {
 	c.command.append("LABELS")
-	return (TsAlterLabels)(c)
+	return TsAlterLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30114,7 +30114,7 @@ func (c TsCreate) Key(key string) TsCreateKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsCreateKey)(c)
+	return TsCreateKey(c)
 }
 
 type TsCreateChunkSize Base
@@ -30122,37 +30122,37 @@ type TsCreateChunkSize Base
 func (c TsCreateChunkSize) DuplicatePolicyBlock() TsCreateDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsCreateDuplicatePolicyBlock)(c)
+	return TsCreateDuplicatePolicyBlock(c)
 }
 
 func (c TsCreateChunkSize) DuplicatePolicyFirst() TsCreateDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsCreateDuplicatePolicyFirst)(c)
+	return TsCreateDuplicatePolicyFirst(c)
 }
 
 func (c TsCreateChunkSize) DuplicatePolicyLast() TsCreateDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsCreateDuplicatePolicyLast)(c)
+	return TsCreateDuplicatePolicyLast(c)
 }
 
 func (c TsCreateChunkSize) DuplicatePolicyMin() TsCreateDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsCreateDuplicatePolicyMin)(c)
+	return TsCreateDuplicatePolicyMin(c)
 }
 
 func (c TsCreateChunkSize) DuplicatePolicyMax() TsCreateDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsCreateDuplicatePolicyMax)(c)
+	return TsCreateDuplicatePolicyMax(c)
 }
 
 func (c TsCreateChunkSize) DuplicatePolicySum() TsCreateDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsCreateDuplicatePolicySum)(c)
+	return TsCreateDuplicatePolicySum(c)
 }
 
 func (c TsCreateChunkSize) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30164,7 +30164,7 @@ type TsCreateDuplicatePolicyBlock Base
 
 func (c TsCreateDuplicatePolicyBlock) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30176,7 +30176,7 @@ type TsCreateDuplicatePolicyFirst Base
 
 func (c TsCreateDuplicatePolicyFirst) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30188,7 +30188,7 @@ type TsCreateDuplicatePolicyLast Base
 
 func (c TsCreateDuplicatePolicyLast) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30200,7 +30200,7 @@ type TsCreateDuplicatePolicyMax Base
 
 func (c TsCreateDuplicatePolicyMax) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30212,7 +30212,7 @@ type TsCreateDuplicatePolicyMin Base
 
 func (c TsCreateDuplicatePolicyMin) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30224,7 +30224,7 @@ type TsCreateDuplicatePolicySum Base
 
 func (c TsCreateDuplicatePolicySum) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30236,43 +30236,43 @@ type TsCreateEncodingCompressed Base
 
 func (c TsCreateEncodingCompressed) ChunkSize(size int64) TsCreateChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsCreateChunkSize)(c)
+	return TsCreateChunkSize(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicyBlock() TsCreateDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsCreateDuplicatePolicyBlock)(c)
+	return TsCreateDuplicatePolicyBlock(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicyFirst() TsCreateDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsCreateDuplicatePolicyFirst)(c)
+	return TsCreateDuplicatePolicyFirst(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicyLast() TsCreateDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsCreateDuplicatePolicyLast)(c)
+	return TsCreateDuplicatePolicyLast(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicyMin() TsCreateDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsCreateDuplicatePolicyMin)(c)
+	return TsCreateDuplicatePolicyMin(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicyMax() TsCreateDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsCreateDuplicatePolicyMax)(c)
+	return TsCreateDuplicatePolicyMax(c)
 }
 
 func (c TsCreateEncodingCompressed) DuplicatePolicySum() TsCreateDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsCreateDuplicatePolicySum)(c)
+	return TsCreateDuplicatePolicySum(c)
 }
 
 func (c TsCreateEncodingCompressed) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30284,43 +30284,43 @@ type TsCreateEncodingUncompressed Base
 
 func (c TsCreateEncodingUncompressed) ChunkSize(size int64) TsCreateChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsCreateChunkSize)(c)
+	return TsCreateChunkSize(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicyBlock() TsCreateDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsCreateDuplicatePolicyBlock)(c)
+	return TsCreateDuplicatePolicyBlock(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicyFirst() TsCreateDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsCreateDuplicatePolicyFirst)(c)
+	return TsCreateDuplicatePolicyFirst(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicyLast() TsCreateDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsCreateDuplicatePolicyLast)(c)
+	return TsCreateDuplicatePolicyLast(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicyMin() TsCreateDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsCreateDuplicatePolicyMin)(c)
+	return TsCreateDuplicatePolicyMin(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicyMax() TsCreateDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsCreateDuplicatePolicyMax)(c)
+	return TsCreateDuplicatePolicyMax(c)
 }
 
 func (c TsCreateEncodingUncompressed) DuplicatePolicySum() TsCreateDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsCreateDuplicatePolicySum)(c)
+	return TsCreateDuplicatePolicySum(c)
 }
 
 func (c TsCreateEncodingUncompressed) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30332,58 +30332,58 @@ type TsCreateKey Base
 
 func (c TsCreateKey) Retention(retentionperiod int64) TsCreateRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsCreateRetention)(c)
+	return TsCreateRetention(c)
 }
 
 func (c TsCreateKey) EncodingUncompressed() TsCreateEncodingUncompressed {
 	c.command.append("ENCODING", "UNCOMPRESSED")
-	return (TsCreateEncodingUncompressed)(c)
+	return TsCreateEncodingUncompressed(c)
 }
 
 func (c TsCreateKey) EncodingCompressed() TsCreateEncodingCompressed {
 	c.command.append("ENCODING", "COMPRESSED")
-	return (TsCreateEncodingCompressed)(c)
+	return TsCreateEncodingCompressed(c)
 }
 
 func (c TsCreateKey) ChunkSize(size int64) TsCreateChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsCreateChunkSize)(c)
+	return TsCreateChunkSize(c)
 }
 
 func (c TsCreateKey) DuplicatePolicyBlock() TsCreateDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsCreateDuplicatePolicyBlock)(c)
+	return TsCreateDuplicatePolicyBlock(c)
 }
 
 func (c TsCreateKey) DuplicatePolicyFirst() TsCreateDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsCreateDuplicatePolicyFirst)(c)
+	return TsCreateDuplicatePolicyFirst(c)
 }
 
 func (c TsCreateKey) DuplicatePolicyLast() TsCreateDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsCreateDuplicatePolicyLast)(c)
+	return TsCreateDuplicatePolicyLast(c)
 }
 
 func (c TsCreateKey) DuplicatePolicyMin() TsCreateDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsCreateDuplicatePolicyMin)(c)
+	return TsCreateDuplicatePolicyMin(c)
 }
 
 func (c TsCreateKey) DuplicatePolicyMax() TsCreateDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsCreateDuplicatePolicyMax)(c)
+	return TsCreateDuplicatePolicyMax(c)
 }
 
 func (c TsCreateKey) DuplicatePolicySum() TsCreateDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsCreateDuplicatePolicySum)(c)
+	return TsCreateDuplicatePolicySum(c)
 }
 
 func (c TsCreateKey) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30407,53 +30407,53 @@ type TsCreateRetention Base
 
 func (c TsCreateRetention) EncodingUncompressed() TsCreateEncodingUncompressed {
 	c.command.append("ENCODING", "UNCOMPRESSED")
-	return (TsCreateEncodingUncompressed)(c)
+	return TsCreateEncodingUncompressed(c)
 }
 
 func (c TsCreateRetention) EncodingCompressed() TsCreateEncodingCompressed {
 	c.command.append("ENCODING", "COMPRESSED")
-	return (TsCreateEncodingCompressed)(c)
+	return TsCreateEncodingCompressed(c)
 }
 
 func (c TsCreateRetention) ChunkSize(size int64) TsCreateChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsCreateChunkSize)(c)
+	return TsCreateChunkSize(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicyBlock() TsCreateDuplicatePolicyBlock {
 	c.ctags = ctagBlock
 	c.command.append("DUPLICATE_POLICY", "BLOCK")
-	return (TsCreateDuplicatePolicyBlock)(c)
+	return TsCreateDuplicatePolicyBlock(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicyFirst() TsCreateDuplicatePolicyFirst {
 	c.command.append("DUPLICATE_POLICY", "FIRST")
-	return (TsCreateDuplicatePolicyFirst)(c)
+	return TsCreateDuplicatePolicyFirst(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicyLast() TsCreateDuplicatePolicyLast {
 	c.command.append("DUPLICATE_POLICY", "LAST")
-	return (TsCreateDuplicatePolicyLast)(c)
+	return TsCreateDuplicatePolicyLast(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicyMin() TsCreateDuplicatePolicyMin {
 	c.command.append("DUPLICATE_POLICY", "MIN")
-	return (TsCreateDuplicatePolicyMin)(c)
+	return TsCreateDuplicatePolicyMin(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicyMax() TsCreateDuplicatePolicyMax {
 	c.command.append("DUPLICATE_POLICY", "MAX")
-	return (TsCreateDuplicatePolicyMax)(c)
+	return TsCreateDuplicatePolicyMax(c)
 }
 
 func (c TsCreateRetention) DuplicatePolicySum() TsCreateDuplicatePolicySum {
 	c.command.append("DUPLICATE_POLICY", "SUM")
-	return (TsCreateDuplicatePolicySum)(c)
+	return TsCreateDuplicatePolicySum(c)
 }
 
 func (c TsCreateRetention) Labels() TsCreateLabels {
 	c.command.append("LABELS")
-	return (TsCreateLabels)(c)
+	return TsCreateLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30484,98 +30484,98 @@ func (c TsCreaterule) Sourcekey(sourcekey string) TsCreateruleSourcekey {
 		c.cslot.set(getSlot(sourcekey))
 	}
 	c.command.append(sourcekey)
-	return (TsCreateruleSourcekey)(c)
+	return TsCreateruleSourcekey(c)
 }
 
 type TsCreateruleAggregationAvg Base
 
 func (c TsCreateruleAggregationAvg) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationCount Base
 
 func (c TsCreateruleAggregationCount) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationFirst Base
 
 func (c TsCreateruleAggregationFirst) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationLast Base
 
 func (c TsCreateruleAggregationLast) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationMax Base
 
 func (c TsCreateruleAggregationMax) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationMin Base
 
 func (c TsCreateruleAggregationMin) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationRange Base
 
 func (c TsCreateruleAggregationRange) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationStdP Base
 
 func (c TsCreateruleAggregationStdP) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationStdS Base
 
 func (c TsCreateruleAggregationStdS) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationSum Base
 
 func (c TsCreateruleAggregationSum) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationTwa Base
 
 func (c TsCreateruleAggregationTwa) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationVarP Base
 
 func (c TsCreateruleAggregationVarP) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAggregationVarS Base
 
 func (c TsCreateruleAggregationVarS) Bucketduration(bucketduration int64) TsCreateruleBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsCreateruleBucketduration)(c)
+	return TsCreateruleBucketduration(c)
 }
 
 type TsCreateruleAligntimestamp Base
@@ -30589,7 +30589,7 @@ type TsCreateruleBucketduration Base
 
 func (c TsCreateruleBucketduration) Aligntimestamp(aligntimestamp int64) TsCreateruleAligntimestamp {
 	c.command.append(strconv.FormatInt(aligntimestamp, 10))
-	return (TsCreateruleAligntimestamp)(c)
+	return TsCreateruleAligntimestamp(c)
 }
 
 // Return Completed Redis command.
@@ -30601,67 +30601,67 @@ type TsCreateruleDestkey Base
 
 func (c TsCreateruleDestkey) AggregationAvg() TsCreateruleAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsCreateruleAggregationAvg)(c)
+	return TsCreateruleAggregationAvg(c)
 }
 
 func (c TsCreateruleDestkey) AggregationSum() TsCreateruleAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsCreateruleAggregationSum)(c)
+	return TsCreateruleAggregationSum(c)
 }
 
 func (c TsCreateruleDestkey) AggregationMin() TsCreateruleAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsCreateruleAggregationMin)(c)
+	return TsCreateruleAggregationMin(c)
 }
 
 func (c TsCreateruleDestkey) AggregationMax() TsCreateruleAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsCreateruleAggregationMax)(c)
+	return TsCreateruleAggregationMax(c)
 }
 
 func (c TsCreateruleDestkey) AggregationRange() TsCreateruleAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsCreateruleAggregationRange)(c)
+	return TsCreateruleAggregationRange(c)
 }
 
 func (c TsCreateruleDestkey) AggregationCount() TsCreateruleAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsCreateruleAggregationCount)(c)
+	return TsCreateruleAggregationCount(c)
 }
 
 func (c TsCreateruleDestkey) AggregationFirst() TsCreateruleAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsCreateruleAggregationFirst)(c)
+	return TsCreateruleAggregationFirst(c)
 }
 
 func (c TsCreateruleDestkey) AggregationLast() TsCreateruleAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsCreateruleAggregationLast)(c)
+	return TsCreateruleAggregationLast(c)
 }
 
 func (c TsCreateruleDestkey) AggregationStdP() TsCreateruleAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsCreateruleAggregationStdP)(c)
+	return TsCreateruleAggregationStdP(c)
 }
 
 func (c TsCreateruleDestkey) AggregationStdS() TsCreateruleAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsCreateruleAggregationStdS)(c)
+	return TsCreateruleAggregationStdS(c)
 }
 
 func (c TsCreateruleDestkey) AggregationVarP() TsCreateruleAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsCreateruleAggregationVarP)(c)
+	return TsCreateruleAggregationVarP(c)
 }
 
 func (c TsCreateruleDestkey) AggregationVarS() TsCreateruleAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsCreateruleAggregationVarS)(c)
+	return TsCreateruleAggregationVarS(c)
 }
 
 func (c TsCreateruleDestkey) AggregationTwa() TsCreateruleAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsCreateruleAggregationTwa)(c)
+	return TsCreateruleAggregationTwa(c)
 }
 
 type TsCreateruleSourcekey Base
@@ -30673,7 +30673,7 @@ func (c TsCreateruleSourcekey) Destkey(destkey string) TsCreateruleDestkey {
 		c.cslot.set(getSlot(destkey))
 	}
 	c.command.append(destkey)
-	return (TsCreateruleDestkey)(c)
+	return TsCreateruleDestkey(c)
 }
 
 // Creates a new sample that decrements the latest sample's value.
@@ -30699,14 +30699,14 @@ func (c TsDecrby) Key(key string) TsDecrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsDecrbyKey)(c)
+	return TsDecrbyKey(c)
 }
 
 type TsDecrbyChunkSize Base
 
 func (c TsDecrbyChunkSize) Labels() TsDecrbyLabels {
 	c.command.append("LABELS")
-	return (TsDecrbyLabels)(c)
+	return TsDecrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30718,7 +30718,7 @@ type TsDecrbyKey Base
 
 func (c TsDecrbyKey) Value(value float64) TsDecrbyValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (TsDecrbyValue)(c)
+	return TsDecrbyValue(c)
 }
 
 type TsDecrbyLabels Base
@@ -30737,17 +30737,17 @@ type TsDecrbyRetention Base
 
 func (c TsDecrbyRetention) Uncompressed() TsDecrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsDecrbyUncompressed)(c)
+	return TsDecrbyUncompressed(c)
 }
 
 func (c TsDecrbyRetention) ChunkSize(size int64) TsDecrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsDecrbyChunkSize)(c)
+	return TsDecrbyChunkSize(c)
 }
 
 func (c TsDecrbyRetention) Labels() TsDecrbyLabels {
 	c.command.append("LABELS")
-	return (TsDecrbyLabels)(c)
+	return TsDecrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30759,22 +30759,22 @@ type TsDecrbyTimestamp Base
 
 func (c TsDecrbyTimestamp) Retention(retentionperiod int64) TsDecrbyRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsDecrbyRetention)(c)
+	return TsDecrbyRetention(c)
 }
 
 func (c TsDecrbyTimestamp) Uncompressed() TsDecrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsDecrbyUncompressed)(c)
+	return TsDecrbyUncompressed(c)
 }
 
 func (c TsDecrbyTimestamp) ChunkSize(size int64) TsDecrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsDecrbyChunkSize)(c)
+	return TsDecrbyChunkSize(c)
 }
 
 func (c TsDecrbyTimestamp) Labels() TsDecrbyLabels {
 	c.command.append("LABELS")
-	return (TsDecrbyLabels)(c)
+	return TsDecrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30786,12 +30786,12 @@ type TsDecrbyUncompressed Base
 
 func (c TsDecrbyUncompressed) ChunkSize(size int64) TsDecrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsDecrbyChunkSize)(c)
+	return TsDecrbyChunkSize(c)
 }
 
 func (c TsDecrbyUncompressed) Labels() TsDecrbyLabels {
 	c.command.append("LABELS")
-	return (TsDecrbyLabels)(c)
+	return TsDecrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30803,27 +30803,27 @@ type TsDecrbyValue Base
 
 func (c TsDecrbyValue) Timestamp(timestamp int64) TsDecrbyTimestamp {
 	c.command.append("TIMESTAMP", strconv.FormatInt(timestamp, 10))
-	return (TsDecrbyTimestamp)(c)
+	return TsDecrbyTimestamp(c)
 }
 
 func (c TsDecrbyValue) Retention(retentionperiod int64) TsDecrbyRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsDecrbyRetention)(c)
+	return TsDecrbyRetention(c)
 }
 
 func (c TsDecrbyValue) Uncompressed() TsDecrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsDecrbyUncompressed)(c)
+	return TsDecrbyUncompressed(c)
 }
 
 func (c TsDecrbyValue) ChunkSize(size int64) TsDecrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsDecrbyChunkSize)(c)
+	return TsDecrbyChunkSize(c)
 }
 
 func (c TsDecrbyValue) Labels() TsDecrbyLabels {
 	c.command.append("LABELS")
-	return (TsDecrbyLabels)(c)
+	return TsDecrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -30854,21 +30854,21 @@ func (c TsDel) Key(key string) TsDelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsDelKey)(c)
+	return TsDelKey(c)
 }
 
 type TsDelFromTimestamp Base
 
 func (c TsDelFromTimestamp) ToTimestamp(toTimestamp int64) TsDelToTimestamp {
 	c.command.append(strconv.FormatInt(toTimestamp, 10))
-	return (TsDelToTimestamp)(c)
+	return TsDelToTimestamp(c)
 }
 
 type TsDelKey Base
 
 func (c TsDelKey) FromTimestamp(fromTimestamp int64) TsDelFromTimestamp {
 	c.command.append(strconv.FormatInt(fromTimestamp, 10))
-	return (TsDelFromTimestamp)(c)
+	return TsDelFromTimestamp(c)
 }
 
 type TsDelToTimestamp Base
@@ -30901,7 +30901,7 @@ func (c TsDeleterule) Sourcekey(sourcekey string) TsDeleteruleSourcekey {
 		c.cslot.set(getSlot(sourcekey))
 	}
 	c.command.append(sourcekey)
-	return (TsDeleteruleSourcekey)(c)
+	return TsDeleteruleSourcekey(c)
 }
 
 type TsDeleteruleDestkey Base
@@ -30920,7 +30920,7 @@ func (c TsDeleteruleSourcekey) Destkey(destkey string) TsDeleteruleDestkey {
 		c.cslot.set(getSlot(destkey))
 	}
 	c.command.append(destkey)
-	return (TsDeleteruleDestkey)(c)
+	return TsDeleteruleDestkey(c)
 }
 
 // Get the last sample.
@@ -30946,14 +30946,14 @@ func (c TsGet) Key(key string) TsGetKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsGetKey)(c)
+	return TsGetKey(c)
 }
 
 type TsGetKey Base
 
 func (c TsGetKey) Latest() TsGetLatest {
 	c.command.append("LATEST")
-	return (TsGetLatest)(c)
+	return TsGetLatest(c)
 }
 
 // Return Completed Redis command.
@@ -30991,14 +30991,14 @@ func (c TsIncrby) Key(key string) TsIncrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsIncrbyKey)(c)
+	return TsIncrbyKey(c)
 }
 
 type TsIncrbyChunkSize Base
 
 func (c TsIncrbyChunkSize) Labels() TsIncrbyLabels {
 	c.command.append("LABELS")
-	return (TsIncrbyLabels)(c)
+	return TsIncrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -31010,7 +31010,7 @@ type TsIncrbyKey Base
 
 func (c TsIncrbyKey) Value(value float64) TsIncrbyValue {
 	c.command.append(strconv.FormatFloat(value, 'f', -1, 64))
-	return (TsIncrbyValue)(c)
+	return TsIncrbyValue(c)
 }
 
 type TsIncrbyLabels Base
@@ -31029,17 +31029,17 @@ type TsIncrbyRetention Base
 
 func (c TsIncrbyRetention) Uncompressed() TsIncrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsIncrbyUncompressed)(c)
+	return TsIncrbyUncompressed(c)
 }
 
 func (c TsIncrbyRetention) ChunkSize(size int64) TsIncrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsIncrbyChunkSize)(c)
+	return TsIncrbyChunkSize(c)
 }
 
 func (c TsIncrbyRetention) Labels() TsIncrbyLabels {
 	c.command.append("LABELS")
-	return (TsIncrbyLabels)(c)
+	return TsIncrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -31051,22 +31051,22 @@ type TsIncrbyTimestamp Base
 
 func (c TsIncrbyTimestamp) Retention(retentionperiod int64) TsIncrbyRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsIncrbyRetention)(c)
+	return TsIncrbyRetention(c)
 }
 
 func (c TsIncrbyTimestamp) Uncompressed() TsIncrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsIncrbyUncompressed)(c)
+	return TsIncrbyUncompressed(c)
 }
 
 func (c TsIncrbyTimestamp) ChunkSize(size int64) TsIncrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsIncrbyChunkSize)(c)
+	return TsIncrbyChunkSize(c)
 }
 
 func (c TsIncrbyTimestamp) Labels() TsIncrbyLabels {
 	c.command.append("LABELS")
-	return (TsIncrbyLabels)(c)
+	return TsIncrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -31078,12 +31078,12 @@ type TsIncrbyUncompressed Base
 
 func (c TsIncrbyUncompressed) ChunkSize(size int64) TsIncrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsIncrbyChunkSize)(c)
+	return TsIncrbyChunkSize(c)
 }
 
 func (c TsIncrbyUncompressed) Labels() TsIncrbyLabels {
 	c.command.append("LABELS")
-	return (TsIncrbyLabels)(c)
+	return TsIncrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -31095,27 +31095,27 @@ type TsIncrbyValue Base
 
 func (c TsIncrbyValue) Timestamp(timestamp int64) TsIncrbyTimestamp {
 	c.command.append("TIMESTAMP", strconv.FormatInt(timestamp, 10))
-	return (TsIncrbyTimestamp)(c)
+	return TsIncrbyTimestamp(c)
 }
 
 func (c TsIncrbyValue) Retention(retentionperiod int64) TsIncrbyRetention {
 	c.command.append("RETENTION", strconv.FormatInt(retentionperiod, 10))
-	return (TsIncrbyRetention)(c)
+	return TsIncrbyRetention(c)
 }
 
 func (c TsIncrbyValue) Uncompressed() TsIncrbyUncompressed {
 	c.command.append("UNCOMPRESSED")
-	return (TsIncrbyUncompressed)(c)
+	return TsIncrbyUncompressed(c)
 }
 
 func (c TsIncrbyValue) ChunkSize(size int64) TsIncrbyChunkSize {
 	c.command.append("CHUNK_SIZE", strconv.FormatInt(size, 10))
-	return (TsIncrbyChunkSize)(c)
+	return TsIncrbyChunkSize(c)
 }
 
 func (c TsIncrbyValue) Labels() TsIncrbyLabels {
 	c.command.append("LABELS")
-	return (TsIncrbyLabels)(c)
+	return TsIncrbyLabels(c)
 }
 
 // Return Completed Redis command.
@@ -31146,7 +31146,7 @@ func (c TsInfo) Key(key string) TsInfoKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsInfoKey)(c)
+	return TsInfoKey(c)
 }
 
 type TsInfoDebug Base
@@ -31160,7 +31160,7 @@ type TsInfoKey Base
 
 func (c TsInfoKey) Debug(debug string) TsInfoDebug {
 	c.command.append(debug)
-	return (TsInfoDebug)(c)
+	return TsInfoDebug(c)
 }
 
 // Return Completed Redis command.
@@ -31185,7 +31185,7 @@ func (b Builder) TsMadd() TsMadd {
 }
 
 func (c TsMadd) KeyTimestampValue() TsMaddKeyTimestampValue {
-	return (TsMaddKeyTimestampValue)(c)
+	return TsMaddKeyTimestampValue(c)
 }
 
 type TsMaddKeyTimestampValue Base
@@ -31223,24 +31223,24 @@ func (b Builder) TsMget() TsMget {
 
 func (c TsMget) Latest() TsMgetLatest {
 	c.command.append("LATEST")
-	return (TsMgetLatest)(c)
+	return TsMgetLatest(c)
 }
 
 func (c TsMget) Withlabels() TsMgetWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMgetWithlabels)(c)
+	return TsMgetWithlabels(c)
 }
 
 func (c TsMget) SelectedLabels(labels []string) TsMgetSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMgetSelectedLabels)(c)
+	return TsMgetSelectedLabels(c)
 }
 
 func (c TsMget) Filter(filter ...string) TsMgetFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMgetFilter)(c)
+	return TsMgetFilter(c)
 }
 
 type TsMgetFilter Base
@@ -31260,19 +31260,19 @@ type TsMgetLatest Base
 
 func (c TsMgetLatest) Withlabels() TsMgetWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMgetWithlabels)(c)
+	return TsMgetWithlabels(c)
 }
 
 func (c TsMgetLatest) SelectedLabels(labels []string) TsMgetSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMgetSelectedLabels)(c)
+	return TsMgetSelectedLabels(c)
 }
 
 func (c TsMgetLatest) Filter(filter ...string) TsMgetFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMgetFilter)(c)
+	return TsMgetFilter(c)
 }
 
 type TsMgetSelectedLabels Base
@@ -31280,7 +31280,7 @@ type TsMgetSelectedLabels Base
 func (c TsMgetSelectedLabels) Filter(filter ...string) TsMgetFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMgetFilter)(c)
+	return TsMgetFilter(c)
 }
 
 type TsMgetWithlabels Base
@@ -31288,7 +31288,7 @@ type TsMgetWithlabels Base
 func (c TsMgetWithlabels) Filter(filter ...string) TsMgetFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMgetFilter)(c)
+	return TsMgetFilter(c)
 }
 
 // Query a range across multiple time-series by filters in forward direction.
@@ -31309,129 +31309,129 @@ func (b Builder) TsMrange() TsMrange {
 
 func (c TsMrange) Fromtimestamp(fromtimestamp int64) TsMrangeFromtimestamp {
 	c.command.append(strconv.FormatInt(fromtimestamp, 10))
-	return (TsMrangeFromtimestamp)(c)
+	return TsMrangeFromtimestamp(c)
 }
 
 type TsMrangeAggregationAggregationAvg Base
 
 func (c TsMrangeAggregationAggregationAvg) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationCount Base
 
 func (c TsMrangeAggregationAggregationCount) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationFirst Base
 
 func (c TsMrangeAggregationAggregationFirst) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationLast Base
 
 func (c TsMrangeAggregationAggregationLast) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationMax Base
 
 func (c TsMrangeAggregationAggregationMax) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationMin Base
 
 func (c TsMrangeAggregationAggregationMin) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationRange Base
 
 func (c TsMrangeAggregationAggregationRange) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationStdP Base
 
 func (c TsMrangeAggregationAggregationStdP) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationStdS Base
 
 func (c TsMrangeAggregationAggregationStdS) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationSum Base
 
 func (c TsMrangeAggregationAggregationSum) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationTwa Base
 
 func (c TsMrangeAggregationAggregationTwa) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationVarP Base
 
 func (c TsMrangeAggregationAggregationVarP) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationAggregationVarS Base
 
 func (c TsMrangeAggregationAggregationVarS) Bucketduration(bucketduration int64) TsMrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrangeAggregationBucketduration)(c)
+	return TsMrangeAggregationBucketduration(c)
 }
 
 type TsMrangeAggregationBucketduration Base
 
 func (c TsMrangeAggregationBucketduration) Buckettimestamp(buckettimestamp string) TsMrangeAggregationBuckettimestamp {
 	c.command.append("BUCKETTIMESTAMP", buckettimestamp)
-	return (TsMrangeAggregationBuckettimestamp)(c)
+	return TsMrangeAggregationBuckettimestamp(c)
 }
 
 func (c TsMrangeAggregationBucketduration) Empty() TsMrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsMrangeAggregationEmpty)(c)
+	return TsMrangeAggregationEmpty(c)
 }
 
 func (c TsMrangeAggregationBucketduration) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeAggregationBuckettimestamp Base
 
 func (c TsMrangeAggregationBuckettimestamp) Empty() TsMrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsMrangeAggregationEmpty)(c)
+	return TsMrangeAggregationEmpty(c)
 }
 
 func (c TsMrangeAggregationBuckettimestamp) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeAggregationEmpty Base
@@ -31439,158 +31439,158 @@ type TsMrangeAggregationEmpty Base
 func (c TsMrangeAggregationEmpty) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeAlign Base
 
 func (c TsMrangeAlign) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeAlign) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeAlign) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeAlign) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeAlign) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeAlign) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeAlign) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeAlign) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeAlign) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeAlign) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeAlign) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeAlign) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeAlign) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeAlign) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeCount Base
 
 func (c TsMrangeCount) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeCount) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeCount) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeCount) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeCount) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeCount) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeCount) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeCount) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeCount) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeCount) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeCount) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeCount) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeCount) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeCount) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeCount) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeFilter Base
@@ -31603,7 +31603,7 @@ func (c TsMrangeFilter) Filter(filter ...string) TsMrangeFilter {
 
 func (c TsMrangeFilter) Groupby(label string, reduce string, reducer string) TsMrangeGroupby {
 	c.command.append("GROUPBY", label, reduce, reducer)
-	return (TsMrangeGroupby)(c)
+	return TsMrangeGroupby(c)
 }
 
 // Return Completed Redis command.
@@ -31623,200 +31623,200 @@ func (c TsMrangeFilterByTs) FilterByTs(timestamp ...int64) TsMrangeFilterByTs {
 
 func (c TsMrangeFilterByTs) FilterByValue(min float64, max float64) TsMrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrangeFilterByValue)(c)
+	return TsMrangeFilterByValue(c)
 }
 
 func (c TsMrangeFilterByTs) Withlabels() TsMrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrangeWithlabels)(c)
+	return TsMrangeWithlabels(c)
 }
 
 func (c TsMrangeFilterByTs) SelectedLabels(labels []string) TsMrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrangeSelectedLabels)(c)
+	return TsMrangeSelectedLabels(c)
 }
 
 func (c TsMrangeFilterByTs) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeFilterByTs) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeFilterByTs) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeFilterByTs) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeFilterByValue Base
 
 func (c TsMrangeFilterByValue) Withlabels() TsMrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrangeWithlabels)(c)
+	return TsMrangeWithlabels(c)
 }
 
 func (c TsMrangeFilterByValue) SelectedLabels(labels []string) TsMrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrangeSelectedLabels)(c)
+	return TsMrangeSelectedLabels(c)
 }
 
 func (c TsMrangeFilterByValue) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeFilterByValue) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeFilterByValue) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeFilterByValue) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeFromtimestamp Base
 
 func (c TsMrangeFromtimestamp) Totimestamp(totimestamp int64) TsMrangeTotimestamp {
 	c.command.append(strconv.FormatInt(totimestamp, 10))
-	return (TsMrangeTotimestamp)(c)
+	return TsMrangeTotimestamp(c)
 }
 
 type TsMrangeGroupby Base
@@ -31833,194 +31833,194 @@ func (c TsMrangeLatest) FilterByTs(timestamp ...int64) TsMrangeFilterByTs {
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsMrangeFilterByTs)(c)
+	return TsMrangeFilterByTs(c)
 }
 
 func (c TsMrangeLatest) FilterByValue(min float64, max float64) TsMrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrangeFilterByValue)(c)
+	return TsMrangeFilterByValue(c)
 }
 
 func (c TsMrangeLatest) Withlabels() TsMrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrangeWithlabels)(c)
+	return TsMrangeWithlabels(c)
 }
 
 func (c TsMrangeLatest) SelectedLabels(labels []string) TsMrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrangeSelectedLabels)(c)
+	return TsMrangeSelectedLabels(c)
 }
 
 func (c TsMrangeLatest) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeLatest) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeLatest) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeLatest) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeLatest) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeLatest) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeLatest) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeLatest) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeLatest) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeLatest) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeLatest) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeLatest) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeLatest) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeLatest) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeLatest) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeLatest) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeSelectedLabels Base
 
 func (c TsMrangeSelectedLabels) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeSelectedLabels) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeSelectedLabels) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeSelectedLabels) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeTotimestamp Base
 
 func (c TsMrangeTotimestamp) Latest() TsMrangeLatest {
 	c.command.append("LATEST")
-	return (TsMrangeLatest)(c)
+	return TsMrangeLatest(c)
 }
 
 func (c TsMrangeTotimestamp) FilterByTs(timestamp ...int64) TsMrangeFilterByTs {
@@ -32028,187 +32028,187 @@ func (c TsMrangeTotimestamp) FilterByTs(timestamp ...int64) TsMrangeFilterByTs {
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsMrangeFilterByTs)(c)
+	return TsMrangeFilterByTs(c)
 }
 
 func (c TsMrangeTotimestamp) FilterByValue(min float64, max float64) TsMrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrangeFilterByValue)(c)
+	return TsMrangeFilterByValue(c)
 }
 
 func (c TsMrangeTotimestamp) Withlabels() TsMrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrangeWithlabels)(c)
+	return TsMrangeWithlabels(c)
 }
 
 func (c TsMrangeTotimestamp) SelectedLabels(labels []string) TsMrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrangeSelectedLabels)(c)
+	return TsMrangeSelectedLabels(c)
 }
 
 func (c TsMrangeTotimestamp) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeTotimestamp) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeTotimestamp) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeTotimestamp) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 type TsMrangeWithlabels Base
 
 func (c TsMrangeWithlabels) Count(count int64) TsMrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrangeCount)(c)
+	return TsMrangeCount(c)
 }
 
 func (c TsMrangeWithlabels) Align(value string) TsMrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrangeAlign)(c)
+	return TsMrangeAlign(c)
 }
 
 func (c TsMrangeWithlabels) AggregationAvg() TsMrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrangeAggregationAggregationAvg)(c)
+	return TsMrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrangeWithlabels) AggregationSum() TsMrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrangeAggregationAggregationSum)(c)
+	return TsMrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrangeWithlabels) AggregationMin() TsMrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrangeAggregationAggregationMin)(c)
+	return TsMrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrangeWithlabels) AggregationMax() TsMrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrangeAggregationAggregationMax)(c)
+	return TsMrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrangeWithlabels) AggregationRange() TsMrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrangeAggregationAggregationRange)(c)
+	return TsMrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrangeWithlabels) AggregationCount() TsMrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrangeAggregationAggregationCount)(c)
+	return TsMrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrangeWithlabels) AggregationFirst() TsMrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrangeAggregationAggregationFirst)(c)
+	return TsMrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrangeWithlabels) AggregationLast() TsMrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrangeAggregationAggregationLast)(c)
+	return TsMrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrangeWithlabels) AggregationStdP() TsMrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrangeAggregationAggregationStdP)(c)
+	return TsMrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrangeWithlabels) AggregationStdS() TsMrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrangeAggregationAggregationStdS)(c)
+	return TsMrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrangeWithlabels) AggregationVarP() TsMrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrangeAggregationAggregationVarP)(c)
+	return TsMrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrangeWithlabels) AggregationVarS() TsMrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrangeAggregationAggregationVarS)(c)
+	return TsMrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrangeWithlabels) AggregationTwa() TsMrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrangeAggregationAggregationTwa)(c)
+	return TsMrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrangeWithlabels) Filter(filter ...string) TsMrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrangeFilter)(c)
+	return TsMrangeFilter(c)
 }
 
 // Query a range across multiple time-series by filters in reverse direction.
@@ -32229,129 +32229,129 @@ func (b Builder) TsMrevrange() TsMrevrange {
 
 func (c TsMrevrange) Fromtimestamp(fromtimestamp int64) TsMrevrangeFromtimestamp {
 	c.command.append(strconv.FormatInt(fromtimestamp, 10))
-	return (TsMrevrangeFromtimestamp)(c)
+	return TsMrevrangeFromtimestamp(c)
 }
 
 type TsMrevrangeAggregationAggregationAvg Base
 
 func (c TsMrevrangeAggregationAggregationAvg) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationCount Base
 
 func (c TsMrevrangeAggregationAggregationCount) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationFirst Base
 
 func (c TsMrevrangeAggregationAggregationFirst) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationLast Base
 
 func (c TsMrevrangeAggregationAggregationLast) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationMax Base
 
 func (c TsMrevrangeAggregationAggregationMax) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationMin Base
 
 func (c TsMrevrangeAggregationAggregationMin) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationRange Base
 
 func (c TsMrevrangeAggregationAggregationRange) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationStdP Base
 
 func (c TsMrevrangeAggregationAggregationStdP) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationStdS Base
 
 func (c TsMrevrangeAggregationAggregationStdS) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationSum Base
 
 func (c TsMrevrangeAggregationAggregationSum) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationTwa Base
 
 func (c TsMrevrangeAggregationAggregationTwa) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationVarP Base
 
 func (c TsMrevrangeAggregationAggregationVarP) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationAggregationVarS Base
 
 func (c TsMrevrangeAggregationAggregationVarS) Bucketduration(bucketduration int64) TsMrevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsMrevrangeAggregationBucketduration)(c)
+	return TsMrevrangeAggregationBucketduration(c)
 }
 
 type TsMrevrangeAggregationBucketduration Base
 
 func (c TsMrevrangeAggregationBucketduration) Buckettimestamp(buckettimestamp string) TsMrevrangeAggregationBuckettimestamp {
 	c.command.append("BUCKETTIMESTAMP", buckettimestamp)
-	return (TsMrevrangeAggregationBuckettimestamp)(c)
+	return TsMrevrangeAggregationBuckettimestamp(c)
 }
 
 func (c TsMrevrangeAggregationBucketduration) Empty() TsMrevrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsMrevrangeAggregationEmpty)(c)
+	return TsMrevrangeAggregationEmpty(c)
 }
 
 func (c TsMrevrangeAggregationBucketduration) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeAggregationBuckettimestamp Base
 
 func (c TsMrevrangeAggregationBuckettimestamp) Empty() TsMrevrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsMrevrangeAggregationEmpty)(c)
+	return TsMrevrangeAggregationEmpty(c)
 }
 
 func (c TsMrevrangeAggregationBuckettimestamp) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeAggregationEmpty Base
@@ -32359,158 +32359,158 @@ type TsMrevrangeAggregationEmpty Base
 func (c TsMrevrangeAggregationEmpty) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeAlign Base
 
 func (c TsMrevrangeAlign) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeAlign) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeAlign) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeAlign) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeAlign) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeAlign) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeAlign) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeAlign) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeAlign) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeAlign) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeAlign) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeAlign) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeAlign) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeAlign) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeCount Base
 
 func (c TsMrevrangeCount) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeCount) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeCount) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeCount) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeCount) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeCount) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeCount) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeCount) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeCount) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeCount) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeCount) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeCount) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeCount) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeCount) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeCount) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeFilter Base
@@ -32523,7 +32523,7 @@ func (c TsMrevrangeFilter) Filter(filter ...string) TsMrevrangeFilter {
 
 func (c TsMrevrangeFilter) Groupby(label string, reduce string, reducer string) TsMrevrangeGroupby {
 	c.command.append("GROUPBY", label, reduce, reducer)
-	return (TsMrevrangeGroupby)(c)
+	return TsMrevrangeGroupby(c)
 }
 
 // Return Completed Redis command.
@@ -32543,200 +32543,200 @@ func (c TsMrevrangeFilterByTs) FilterByTs(timestamp ...int64) TsMrevrangeFilterB
 
 func (c TsMrevrangeFilterByTs) FilterByValue(min float64, max float64) TsMrevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrevrangeFilterByValue)(c)
+	return TsMrevrangeFilterByValue(c)
 }
 
 func (c TsMrevrangeFilterByTs) Withlabels() TsMrevrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrevrangeWithlabels)(c)
+	return TsMrevrangeWithlabels(c)
 }
 
 func (c TsMrevrangeFilterByTs) SelectedLabels(labels []string) TsMrevrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrevrangeSelectedLabels)(c)
+	return TsMrevrangeSelectedLabels(c)
 }
 
 func (c TsMrevrangeFilterByTs) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeFilterByTs) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeFilterByTs) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeFilterByTs) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeFilterByValue Base
 
 func (c TsMrevrangeFilterByValue) Withlabels() TsMrevrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrevrangeWithlabels)(c)
+	return TsMrevrangeWithlabels(c)
 }
 
 func (c TsMrevrangeFilterByValue) SelectedLabels(labels []string) TsMrevrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrevrangeSelectedLabels)(c)
+	return TsMrevrangeSelectedLabels(c)
 }
 
 func (c TsMrevrangeFilterByValue) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeFilterByValue) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeFilterByValue) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeFilterByValue) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeFromtimestamp Base
 
 func (c TsMrevrangeFromtimestamp) Totimestamp(totimestamp int64) TsMrevrangeTotimestamp {
 	c.command.append(strconv.FormatInt(totimestamp, 10))
-	return (TsMrevrangeTotimestamp)(c)
+	return TsMrevrangeTotimestamp(c)
 }
 
 type TsMrevrangeGroupby Base
@@ -32753,194 +32753,194 @@ func (c TsMrevrangeLatest) FilterByTs(timestamp ...int64) TsMrevrangeFilterByTs 
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsMrevrangeFilterByTs)(c)
+	return TsMrevrangeFilterByTs(c)
 }
 
 func (c TsMrevrangeLatest) FilterByValue(min float64, max float64) TsMrevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrevrangeFilterByValue)(c)
+	return TsMrevrangeFilterByValue(c)
 }
 
 func (c TsMrevrangeLatest) Withlabels() TsMrevrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrevrangeWithlabels)(c)
+	return TsMrevrangeWithlabels(c)
 }
 
 func (c TsMrevrangeLatest) SelectedLabels(labels []string) TsMrevrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrevrangeSelectedLabels)(c)
+	return TsMrevrangeSelectedLabels(c)
 }
 
 func (c TsMrevrangeLatest) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeLatest) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeLatest) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeLatest) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeLatest) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeLatest) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeLatest) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeLatest) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeLatest) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeLatest) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeLatest) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeLatest) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeLatest) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeLatest) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeLatest) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeLatest) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeSelectedLabels Base
 
 func (c TsMrevrangeSelectedLabels) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeSelectedLabels) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeSelectedLabels) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeSelectedLabels) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeTotimestamp Base
 
 func (c TsMrevrangeTotimestamp) Latest() TsMrevrangeLatest {
 	c.command.append("LATEST")
-	return (TsMrevrangeLatest)(c)
+	return TsMrevrangeLatest(c)
 }
 
 func (c TsMrevrangeTotimestamp) FilterByTs(timestamp ...int64) TsMrevrangeFilterByTs {
@@ -32948,187 +32948,187 @@ func (c TsMrevrangeTotimestamp) FilterByTs(timestamp ...int64) TsMrevrangeFilter
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsMrevrangeFilterByTs)(c)
+	return TsMrevrangeFilterByTs(c)
 }
 
 func (c TsMrevrangeTotimestamp) FilterByValue(min float64, max float64) TsMrevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsMrevrangeFilterByValue)(c)
+	return TsMrevrangeFilterByValue(c)
 }
 
 func (c TsMrevrangeTotimestamp) Withlabels() TsMrevrangeWithlabels {
 	c.command.append("WITHLABELS")
-	return (TsMrevrangeWithlabels)(c)
+	return TsMrevrangeWithlabels(c)
 }
 
 func (c TsMrevrangeTotimestamp) SelectedLabels(labels []string) TsMrevrangeSelectedLabels {
 	c.command.append("SELECTED_LABELS")
 	c.command.append(labels...)
-	return (TsMrevrangeSelectedLabels)(c)
+	return TsMrevrangeSelectedLabels(c)
 }
 
 func (c TsMrevrangeTotimestamp) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeTotimestamp) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeTotimestamp) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeTotimestamp) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 type TsMrevrangeWithlabels Base
 
 func (c TsMrevrangeWithlabels) Count(count int64) TsMrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsMrevrangeCount)(c)
+	return TsMrevrangeCount(c)
 }
 
 func (c TsMrevrangeWithlabels) Align(value string) TsMrevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsMrevrangeAlign)(c)
+	return TsMrevrangeAlign(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationAvg() TsMrevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsMrevrangeAggregationAggregationAvg)(c)
+	return TsMrevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationSum() TsMrevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsMrevrangeAggregationAggregationSum)(c)
+	return TsMrevrangeAggregationAggregationSum(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationMin() TsMrevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsMrevrangeAggregationAggregationMin)(c)
+	return TsMrevrangeAggregationAggregationMin(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationMax() TsMrevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsMrevrangeAggregationAggregationMax)(c)
+	return TsMrevrangeAggregationAggregationMax(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationRange() TsMrevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsMrevrangeAggregationAggregationRange)(c)
+	return TsMrevrangeAggregationAggregationRange(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationCount() TsMrevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsMrevrangeAggregationAggregationCount)(c)
+	return TsMrevrangeAggregationAggregationCount(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationFirst() TsMrevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsMrevrangeAggregationAggregationFirst)(c)
+	return TsMrevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationLast() TsMrevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsMrevrangeAggregationAggregationLast)(c)
+	return TsMrevrangeAggregationAggregationLast(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationStdP() TsMrevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsMrevrangeAggregationAggregationStdP)(c)
+	return TsMrevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationStdS() TsMrevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsMrevrangeAggregationAggregationStdS)(c)
+	return TsMrevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationVarP() TsMrevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsMrevrangeAggregationAggregationVarP)(c)
+	return TsMrevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationVarS() TsMrevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsMrevrangeAggregationAggregationVarS)(c)
+	return TsMrevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsMrevrangeWithlabels) AggregationTwa() TsMrevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsMrevrangeAggregationAggregationTwa)(c)
+	return TsMrevrangeAggregationAggregationTwa(c)
 }
 
 func (c TsMrevrangeWithlabels) Filter(filter ...string) TsMrevrangeFilter {
 	c.command.append("FILTER")
 	c.command.append(filter...)
-	return (TsMrevrangeFilter)(c)
+	return TsMrevrangeFilter(c)
 }
 
 // Get all the keys matching the filter list.
@@ -33149,7 +33149,7 @@ func (b Builder) TsQueryindex() TsQueryindex {
 
 func (c TsQueryindex) Filter(filter ...string) TsQueryindexFilter {
 	c.command.append(filter...)
-	return (TsQueryindexFilter)(c)
+	return TsQueryindexFilter(c)
 }
 
 type TsQueryindexFilter Base
@@ -33187,110 +33187,110 @@ func (c TsRange) Key(key string) TsRangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsRangeKey)(c)
+	return TsRangeKey(c)
 }
 
 type TsRangeAggregationAggregationAvg Base
 
 func (c TsRangeAggregationAggregationAvg) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationCount Base
 
 func (c TsRangeAggregationAggregationCount) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationFirst Base
 
 func (c TsRangeAggregationAggregationFirst) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationLast Base
 
 func (c TsRangeAggregationAggregationLast) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationMax Base
 
 func (c TsRangeAggregationAggregationMax) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationMin Base
 
 func (c TsRangeAggregationAggregationMin) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationRange Base
 
 func (c TsRangeAggregationAggregationRange) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationStdP Base
 
 func (c TsRangeAggregationAggregationStdP) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationStdS Base
 
 func (c TsRangeAggregationAggregationStdS) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationSum Base
 
 func (c TsRangeAggregationAggregationSum) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationTwa Base
 
 func (c TsRangeAggregationAggregationTwa) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationVarP Base
 
 func (c TsRangeAggregationAggregationVarP) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationAggregationVarS Base
 
 func (c TsRangeAggregationAggregationVarS) Bucketduration(bucketduration int64) TsRangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRangeAggregationBucketduration)(c)
+	return TsRangeAggregationBucketduration(c)
 }
 
 type TsRangeAggregationBucketduration Base
 
 func (c TsRangeAggregationBucketduration) Buckettimestamp(buckettimestamp string) TsRangeAggregationBuckettimestamp {
 	c.command.append("BUCKETTIMESTAMP", buckettimestamp)
-	return (TsRangeAggregationBuckettimestamp)(c)
+	return TsRangeAggregationBuckettimestamp(c)
 }
 
 func (c TsRangeAggregationBucketduration) Empty() TsRangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsRangeAggregationEmpty)(c)
+	return TsRangeAggregationEmpty(c)
 }
 
 // Return Completed Redis command.
@@ -33302,7 +33302,7 @@ type TsRangeAggregationBuckettimestamp Base
 
 func (c TsRangeAggregationBuckettimestamp) Empty() TsRangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsRangeAggregationEmpty)(c)
+	return TsRangeAggregationEmpty(c)
 }
 
 // Return Completed Redis command.
@@ -33321,67 +33321,67 @@ type TsRangeAlign Base
 
 func (c TsRangeAlign) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeAlign) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeAlign) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeAlign) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeAlign) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeAlign) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeAlign) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeAlign) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeAlign) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeAlign) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeAlign) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeAlign) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeAlign) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33393,72 +33393,72 @@ type TsRangeCount Base
 
 func (c TsRangeCount) Align(value string) TsRangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRangeAlign)(c)
+	return TsRangeAlign(c)
 }
 
 func (c TsRangeCount) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeCount) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeCount) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeCount) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeCount) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeCount) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeCount) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeCount) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeCount) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeCount) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeCount) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeCount) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeCount) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33478,82 +33478,82 @@ func (c TsRangeFilterByTs) FilterByTs(timestamp ...int64) TsRangeFilterByTs {
 
 func (c TsRangeFilterByTs) FilterByValue(min float64, max float64) TsRangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRangeFilterByValue)(c)
+	return TsRangeFilterByValue(c)
 }
 
 func (c TsRangeFilterByTs) Count(count int64) TsRangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRangeCount)(c)
+	return TsRangeCount(c)
 }
 
 func (c TsRangeFilterByTs) Align(value string) TsRangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRangeAlign)(c)
+	return TsRangeAlign(c)
 }
 
 func (c TsRangeFilterByTs) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeFilterByTs) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeFilterByTs) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeFilterByTs) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeFilterByTs) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeFilterByTs) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeFilterByTs) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeFilterByTs) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeFilterByTs) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeFilterByTs) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeFilterByTs) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeFilterByTs) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeFilterByTs) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33565,77 +33565,77 @@ type TsRangeFilterByValue Base
 
 func (c TsRangeFilterByValue) Count(count int64) TsRangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRangeCount)(c)
+	return TsRangeCount(c)
 }
 
 func (c TsRangeFilterByValue) Align(value string) TsRangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRangeAlign)(c)
+	return TsRangeAlign(c)
 }
 
 func (c TsRangeFilterByValue) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeFilterByValue) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeFilterByValue) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeFilterByValue) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeFilterByValue) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeFilterByValue) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeFilterByValue) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeFilterByValue) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeFilterByValue) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeFilterByValue) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeFilterByValue) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeFilterByValue) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeFilterByValue) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33647,14 +33647,14 @@ type TsRangeFromtimestamp Base
 
 func (c TsRangeFromtimestamp) Totimestamp(totimestamp int64) TsRangeTotimestamp {
 	c.command.append(strconv.FormatInt(totimestamp, 10))
-	return (TsRangeTotimestamp)(c)
+	return TsRangeTotimestamp(c)
 }
 
 type TsRangeKey Base
 
 func (c TsRangeKey) Fromtimestamp(fromtimestamp int64) TsRangeFromtimestamp {
 	c.command.append(strconv.FormatInt(fromtimestamp, 10))
-	return (TsRangeFromtimestamp)(c)
+	return TsRangeFromtimestamp(c)
 }
 
 type TsRangeLatest Base
@@ -33664,87 +33664,87 @@ func (c TsRangeLatest) FilterByTs(timestamp ...int64) TsRangeFilterByTs {
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsRangeFilterByTs)(c)
+	return TsRangeFilterByTs(c)
 }
 
 func (c TsRangeLatest) FilterByValue(min float64, max float64) TsRangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRangeFilterByValue)(c)
+	return TsRangeFilterByValue(c)
 }
 
 func (c TsRangeLatest) Count(count int64) TsRangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRangeCount)(c)
+	return TsRangeCount(c)
 }
 
 func (c TsRangeLatest) Align(value string) TsRangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRangeAlign)(c)
+	return TsRangeAlign(c)
 }
 
 func (c TsRangeLatest) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeLatest) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeLatest) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeLatest) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeLatest) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeLatest) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeLatest) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeLatest) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeLatest) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeLatest) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeLatest) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeLatest) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeLatest) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33756,7 +33756,7 @@ type TsRangeTotimestamp Base
 
 func (c TsRangeTotimestamp) Latest() TsRangeLatest {
 	c.command.append("LATEST")
-	return (TsRangeLatest)(c)
+	return TsRangeLatest(c)
 }
 
 func (c TsRangeTotimestamp) FilterByTs(timestamp ...int64) TsRangeFilterByTs {
@@ -33764,87 +33764,87 @@ func (c TsRangeTotimestamp) FilterByTs(timestamp ...int64) TsRangeFilterByTs {
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsRangeFilterByTs)(c)
+	return TsRangeFilterByTs(c)
 }
 
 func (c TsRangeTotimestamp) FilterByValue(min float64, max float64) TsRangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRangeFilterByValue)(c)
+	return TsRangeFilterByValue(c)
 }
 
 func (c TsRangeTotimestamp) Count(count int64) TsRangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRangeCount)(c)
+	return TsRangeCount(c)
 }
 
 func (c TsRangeTotimestamp) Align(value string) TsRangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRangeAlign)(c)
+	return TsRangeAlign(c)
 }
 
 func (c TsRangeTotimestamp) AggregationAvg() TsRangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRangeAggregationAggregationAvg)(c)
+	return TsRangeAggregationAggregationAvg(c)
 }
 
 func (c TsRangeTotimestamp) AggregationSum() TsRangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRangeAggregationAggregationSum)(c)
+	return TsRangeAggregationAggregationSum(c)
 }
 
 func (c TsRangeTotimestamp) AggregationMin() TsRangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRangeAggregationAggregationMin)(c)
+	return TsRangeAggregationAggregationMin(c)
 }
 
 func (c TsRangeTotimestamp) AggregationMax() TsRangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRangeAggregationAggregationMax)(c)
+	return TsRangeAggregationAggregationMax(c)
 }
 
 func (c TsRangeTotimestamp) AggregationRange() TsRangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRangeAggregationAggregationRange)(c)
+	return TsRangeAggregationAggregationRange(c)
 }
 
 func (c TsRangeTotimestamp) AggregationCount() TsRangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRangeAggregationAggregationCount)(c)
+	return TsRangeAggregationAggregationCount(c)
 }
 
 func (c TsRangeTotimestamp) AggregationFirst() TsRangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRangeAggregationAggregationFirst)(c)
+	return TsRangeAggregationAggregationFirst(c)
 }
 
 func (c TsRangeTotimestamp) AggregationLast() TsRangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRangeAggregationAggregationLast)(c)
+	return TsRangeAggregationAggregationLast(c)
 }
 
 func (c TsRangeTotimestamp) AggregationStdP() TsRangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRangeAggregationAggregationStdP)(c)
+	return TsRangeAggregationAggregationStdP(c)
 }
 
 func (c TsRangeTotimestamp) AggregationStdS() TsRangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRangeAggregationAggregationStdS)(c)
+	return TsRangeAggregationAggregationStdS(c)
 }
 
 func (c TsRangeTotimestamp) AggregationVarP() TsRangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRangeAggregationAggregationVarP)(c)
+	return TsRangeAggregationAggregationVarP(c)
 }
 
 func (c TsRangeTotimestamp) AggregationVarS() TsRangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRangeAggregationAggregationVarS)(c)
+	return TsRangeAggregationAggregationVarS(c)
 }
 
 func (c TsRangeTotimestamp) AggregationTwa() TsRangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRangeAggregationAggregationTwa)(c)
+	return TsRangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -33875,110 +33875,110 @@ func (c TsRevrange) Key(key string) TsRevrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TsRevrangeKey)(c)
+	return TsRevrangeKey(c)
 }
 
 type TsRevrangeAggregationAggregationAvg Base
 
 func (c TsRevrangeAggregationAggregationAvg) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationCount Base
 
 func (c TsRevrangeAggregationAggregationCount) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationFirst Base
 
 func (c TsRevrangeAggregationAggregationFirst) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationLast Base
 
 func (c TsRevrangeAggregationAggregationLast) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationMax Base
 
 func (c TsRevrangeAggregationAggregationMax) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationMin Base
 
 func (c TsRevrangeAggregationAggregationMin) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationRange Base
 
 func (c TsRevrangeAggregationAggregationRange) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationStdP Base
 
 func (c TsRevrangeAggregationAggregationStdP) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationStdS Base
 
 func (c TsRevrangeAggregationAggregationStdS) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationSum Base
 
 func (c TsRevrangeAggregationAggregationSum) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationTwa Base
 
 func (c TsRevrangeAggregationAggregationTwa) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationVarP Base
 
 func (c TsRevrangeAggregationAggregationVarP) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationAggregationVarS Base
 
 func (c TsRevrangeAggregationAggregationVarS) Bucketduration(bucketduration int64) TsRevrangeAggregationBucketduration {
 	c.command.append(strconv.FormatInt(bucketduration, 10))
-	return (TsRevrangeAggregationBucketduration)(c)
+	return TsRevrangeAggregationBucketduration(c)
 }
 
 type TsRevrangeAggregationBucketduration Base
 
 func (c TsRevrangeAggregationBucketduration) Buckettimestamp(buckettimestamp string) TsRevrangeAggregationBuckettimestamp {
 	c.command.append("BUCKETTIMESTAMP", buckettimestamp)
-	return (TsRevrangeAggregationBuckettimestamp)(c)
+	return TsRevrangeAggregationBuckettimestamp(c)
 }
 
 func (c TsRevrangeAggregationBucketduration) Empty() TsRevrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsRevrangeAggregationEmpty)(c)
+	return TsRevrangeAggregationEmpty(c)
 }
 
 // Return Completed Redis command.
@@ -33990,7 +33990,7 @@ type TsRevrangeAggregationBuckettimestamp Base
 
 func (c TsRevrangeAggregationBuckettimestamp) Empty() TsRevrangeAggregationEmpty {
 	c.command.append("EMPTY")
-	return (TsRevrangeAggregationEmpty)(c)
+	return TsRevrangeAggregationEmpty(c)
 }
 
 // Return Completed Redis command.
@@ -34009,67 +34009,67 @@ type TsRevrangeAlign Base
 
 func (c TsRevrangeAlign) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeAlign) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeAlign) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeAlign) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeAlign) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeAlign) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeAlign) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeAlign) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeAlign) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeAlign) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeAlign) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeAlign) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeAlign) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34081,72 +34081,72 @@ type TsRevrangeCount Base
 
 func (c TsRevrangeCount) Align(value string) TsRevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRevrangeAlign)(c)
+	return TsRevrangeAlign(c)
 }
 
 func (c TsRevrangeCount) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeCount) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeCount) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeCount) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeCount) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeCount) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeCount) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeCount) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeCount) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeCount) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeCount) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeCount) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeCount) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34166,82 +34166,82 @@ func (c TsRevrangeFilterByTs) FilterByTs(timestamp ...int64) TsRevrangeFilterByT
 
 func (c TsRevrangeFilterByTs) FilterByValue(min float64, max float64) TsRevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRevrangeFilterByValue)(c)
+	return TsRevrangeFilterByValue(c)
 }
 
 func (c TsRevrangeFilterByTs) Count(count int64) TsRevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRevrangeCount)(c)
+	return TsRevrangeCount(c)
 }
 
 func (c TsRevrangeFilterByTs) Align(value string) TsRevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRevrangeAlign)(c)
+	return TsRevrangeAlign(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeFilterByTs) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34253,77 +34253,77 @@ type TsRevrangeFilterByValue Base
 
 func (c TsRevrangeFilterByValue) Count(count int64) TsRevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRevrangeCount)(c)
+	return TsRevrangeCount(c)
 }
 
 func (c TsRevrangeFilterByValue) Align(value string) TsRevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRevrangeAlign)(c)
+	return TsRevrangeAlign(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeFilterByValue) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34335,14 +34335,14 @@ type TsRevrangeFromtimestamp Base
 
 func (c TsRevrangeFromtimestamp) Totimestamp(totimestamp int64) TsRevrangeTotimestamp {
 	c.command.append(strconv.FormatInt(totimestamp, 10))
-	return (TsRevrangeTotimestamp)(c)
+	return TsRevrangeTotimestamp(c)
 }
 
 type TsRevrangeKey Base
 
 func (c TsRevrangeKey) Fromtimestamp(fromtimestamp int64) TsRevrangeFromtimestamp {
 	c.command.append(strconv.FormatInt(fromtimestamp, 10))
-	return (TsRevrangeFromtimestamp)(c)
+	return TsRevrangeFromtimestamp(c)
 }
 
 type TsRevrangeLatest Base
@@ -34352,87 +34352,87 @@ func (c TsRevrangeLatest) FilterByTs(timestamp ...int64) TsRevrangeFilterByTs {
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsRevrangeFilterByTs)(c)
+	return TsRevrangeFilterByTs(c)
 }
 
 func (c TsRevrangeLatest) FilterByValue(min float64, max float64) TsRevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRevrangeFilterByValue)(c)
+	return TsRevrangeFilterByValue(c)
 }
 
 func (c TsRevrangeLatest) Count(count int64) TsRevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRevrangeCount)(c)
+	return TsRevrangeCount(c)
 }
 
 func (c TsRevrangeLatest) Align(value string) TsRevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRevrangeAlign)(c)
+	return TsRevrangeAlign(c)
 }
 
 func (c TsRevrangeLatest) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeLatest) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeLatest) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeLatest) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeLatest) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeLatest) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeLatest) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeLatest) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeLatest) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeLatest) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeLatest) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeLatest) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeLatest) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34444,7 +34444,7 @@ type TsRevrangeTotimestamp Base
 
 func (c TsRevrangeTotimestamp) Latest() TsRevrangeLatest {
 	c.command.append("LATEST")
-	return (TsRevrangeLatest)(c)
+	return TsRevrangeLatest(c)
 }
 
 func (c TsRevrangeTotimestamp) FilterByTs(timestamp ...int64) TsRevrangeFilterByTs {
@@ -34452,87 +34452,87 @@ func (c TsRevrangeTotimestamp) FilterByTs(timestamp ...int64) TsRevrangeFilterBy
 	for _, n := range timestamp {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (TsRevrangeFilterByTs)(c)
+	return TsRevrangeFilterByTs(c)
 }
 
 func (c TsRevrangeTotimestamp) FilterByValue(min float64, max float64) TsRevrangeFilterByValue {
 	c.command.append("FILTER_BY_VALUE", strconv.FormatFloat(min, 'f', -1, 64), strconv.FormatFloat(max, 'f', -1, 64))
-	return (TsRevrangeFilterByValue)(c)
+	return TsRevrangeFilterByValue(c)
 }
 
 func (c TsRevrangeTotimestamp) Count(count int64) TsRevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (TsRevrangeCount)(c)
+	return TsRevrangeCount(c)
 }
 
 func (c TsRevrangeTotimestamp) Align(value string) TsRevrangeAlign {
 	c.command.append("ALIGN", value)
-	return (TsRevrangeAlign)(c)
+	return TsRevrangeAlign(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationAvg() TsRevrangeAggregationAggregationAvg {
 	c.command.append("AGGREGATION", "AVG")
-	return (TsRevrangeAggregationAggregationAvg)(c)
+	return TsRevrangeAggregationAggregationAvg(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationSum() TsRevrangeAggregationAggregationSum {
 	c.command.append("AGGREGATION", "SUM")
-	return (TsRevrangeAggregationAggregationSum)(c)
+	return TsRevrangeAggregationAggregationSum(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationMin() TsRevrangeAggregationAggregationMin {
 	c.command.append("AGGREGATION", "MIN")
-	return (TsRevrangeAggregationAggregationMin)(c)
+	return TsRevrangeAggregationAggregationMin(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationMax() TsRevrangeAggregationAggregationMax {
 	c.command.append("AGGREGATION", "MAX")
-	return (TsRevrangeAggregationAggregationMax)(c)
+	return TsRevrangeAggregationAggregationMax(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationRange() TsRevrangeAggregationAggregationRange {
 	c.command.append("AGGREGATION", "RANGE")
-	return (TsRevrangeAggregationAggregationRange)(c)
+	return TsRevrangeAggregationAggregationRange(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationCount() TsRevrangeAggregationAggregationCount {
 	c.command.append("AGGREGATION", "COUNT")
-	return (TsRevrangeAggregationAggregationCount)(c)
+	return TsRevrangeAggregationAggregationCount(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationFirst() TsRevrangeAggregationAggregationFirst {
 	c.command.append("AGGREGATION", "FIRST")
-	return (TsRevrangeAggregationAggregationFirst)(c)
+	return TsRevrangeAggregationAggregationFirst(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationLast() TsRevrangeAggregationAggregationLast {
 	c.command.append("AGGREGATION", "LAST")
-	return (TsRevrangeAggregationAggregationLast)(c)
+	return TsRevrangeAggregationAggregationLast(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationStdP() TsRevrangeAggregationAggregationStdP {
 	c.command.append("AGGREGATION", "STD.P")
-	return (TsRevrangeAggregationAggregationStdP)(c)
+	return TsRevrangeAggregationAggregationStdP(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationStdS() TsRevrangeAggregationAggregationStdS {
 	c.command.append("AGGREGATION", "STD.S")
-	return (TsRevrangeAggregationAggregationStdS)(c)
+	return TsRevrangeAggregationAggregationStdS(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationVarP() TsRevrangeAggregationAggregationVarP {
 	c.command.append("AGGREGATION", "VAR.P")
-	return (TsRevrangeAggregationAggregationVarP)(c)
+	return TsRevrangeAggregationAggregationVarP(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationVarS() TsRevrangeAggregationAggregationVarS {
 	c.command.append("AGGREGATION", "VAR.S")
-	return (TsRevrangeAggregationAggregationVarS)(c)
+	return TsRevrangeAggregationAggregationVarS(c)
 }
 
 func (c TsRevrangeTotimestamp) AggregationTwa() TsRevrangeAggregationAggregationTwa {
 	c.command.append("AGGREGATION", "TWA")
-	return (TsRevrangeAggregationAggregationTwa)(c)
+	return TsRevrangeAggregationAggregationTwa(c)
 }
 
 // Return Completed Redis command.
@@ -34563,7 +34563,7 @@ func (c Ttl) Key(key string) TtlKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TtlKey)(c)
+	return TtlKey(c)
 }
 
 type TtlKey Base
@@ -34601,7 +34601,7 @@ func (c Type) Key(key string) TypeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (TypeKey)(c)
+	return TypeKey(c)
 }
 
 type TypeKey Base
@@ -34644,7 +34644,7 @@ func (c Unlink) Key(key ...string) UnlinkKey {
 		}
 	}
 	c.command.append(key...)
-	return (UnlinkKey)(c)
+	return UnlinkKey(c)
 }
 
 type UnlinkKey Base
@@ -34687,7 +34687,7 @@ func (b Builder) Unsubscribe() Unsubscribe {
 
 func (c Unsubscribe) Channel(channel ...string) UnsubscribeChannel {
 	c.command.append(channel...)
-	return (UnsubscribeChannel)(c)
+	return UnsubscribeChannel(c)
 }
 
 // Return Completed Redis command.
@@ -34746,14 +34746,14 @@ func (b Builder) Wait() Wait {
 
 func (c Wait) Numreplicas(numreplicas int64) WaitNumreplicas {
 	c.command.append(strconv.FormatInt(numreplicas, 10))
-	return (WaitNumreplicas)(c)
+	return WaitNumreplicas(c)
 }
 
 type WaitNumreplicas Base
 
 func (c WaitNumreplicas) Timeout(timeout int64) WaitTimeout {
 	c.command.append(strconv.FormatInt(timeout, 10))
-	return (WaitTimeout)(c)
+	return WaitTimeout(c)
 }
 
 type WaitTimeout Base
@@ -34791,7 +34791,7 @@ func (c Watch) Key(key ...string) WatchKey {
 		}
 	}
 	c.command.append(key...)
-	return (WatchKey)(c)
+	return WatchKey(c)
 }
 
 type WatchKey Base
@@ -34839,14 +34839,14 @@ func (c Xack) Key(key string) XackKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XackKey)(c)
+	return XackKey(c)
 }
 
 type XackGroup Base
 
 func (c XackGroup) Id(id ...string) XackId {
 	c.command.append(id...)
-	return (XackId)(c)
+	return XackId(c)
 }
 
 type XackId Base
@@ -34865,7 +34865,7 @@ type XackKey Base
 
 func (c XackKey) Group(group string) XackGroup {
 	c.command.append(group)
-	return (XackGroup)(c)
+	return XackGroup(c)
 }
 
 // Appends a new entry to a stream.
@@ -34891,7 +34891,7 @@ func (c Xadd) Key(key string) XaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XaddKey)(c)
+	return XaddKey(c)
 }
 
 type XaddFieldValue Base
@@ -34909,113 +34909,113 @@ func (c XaddFieldValue) Build() Completed {
 type XaddId Base
 
 func (c XaddId) FieldValue() XaddFieldValue {
-	return (XaddFieldValue)(c)
+	return XaddFieldValue(c)
 }
 
 type XaddKey Base
 
 func (c XaddKey) Nomkstream() XaddNomkstream {
 	c.command.append("NOMKSTREAM")
-	return (XaddNomkstream)(c)
+	return XaddNomkstream(c)
 }
 
 func (c XaddKey) Maxlen() XaddTrimStrategyMaxlen {
 	c.command.append("MAXLEN")
-	return (XaddTrimStrategyMaxlen)(c)
+	return XaddTrimStrategyMaxlen(c)
 }
 
 func (c XaddKey) Minid() XaddTrimStrategyMinid {
 	c.command.append("MINID")
-	return (XaddTrimStrategyMinid)(c)
+	return XaddTrimStrategyMinid(c)
 }
 
 func (c XaddKey) Id(id string) XaddId {
 	c.command.append(id)
-	return (XaddId)(c)
+	return XaddId(c)
 }
 
 type XaddNomkstream Base
 
 func (c XaddNomkstream) Maxlen() XaddTrimStrategyMaxlen {
 	c.command.append("MAXLEN")
-	return (XaddTrimStrategyMaxlen)(c)
+	return XaddTrimStrategyMaxlen(c)
 }
 
 func (c XaddNomkstream) Minid() XaddTrimStrategyMinid {
 	c.command.append("MINID")
-	return (XaddTrimStrategyMinid)(c)
+	return XaddTrimStrategyMinid(c)
 }
 
 func (c XaddNomkstream) Id(id string) XaddId {
 	c.command.append(id)
-	return (XaddId)(c)
+	return XaddId(c)
 }
 
 type XaddTrimLimit Base
 
 func (c XaddTrimLimit) Id(id string) XaddId {
 	c.command.append(id)
-	return (XaddId)(c)
+	return XaddId(c)
 }
 
 type XaddTrimOperatorAlmost Base
 
 func (c XaddTrimOperatorAlmost) Threshold(threshold string) XaddTrimThreshold {
 	c.command.append(threshold)
-	return (XaddTrimThreshold)(c)
+	return XaddTrimThreshold(c)
 }
 
 type XaddTrimOperatorExact Base
 
 func (c XaddTrimOperatorExact) Threshold(threshold string) XaddTrimThreshold {
 	c.command.append(threshold)
-	return (XaddTrimThreshold)(c)
+	return XaddTrimThreshold(c)
 }
 
 type XaddTrimStrategyMaxlen Base
 
 func (c XaddTrimStrategyMaxlen) Exact() XaddTrimOperatorExact {
 	c.command.append("=")
-	return (XaddTrimOperatorExact)(c)
+	return XaddTrimOperatorExact(c)
 }
 
 func (c XaddTrimStrategyMaxlen) Almost() XaddTrimOperatorAlmost {
 	c.command.append("~")
-	return (XaddTrimOperatorAlmost)(c)
+	return XaddTrimOperatorAlmost(c)
 }
 
 func (c XaddTrimStrategyMaxlen) Threshold(threshold string) XaddTrimThreshold {
 	c.command.append(threshold)
-	return (XaddTrimThreshold)(c)
+	return XaddTrimThreshold(c)
 }
 
 type XaddTrimStrategyMinid Base
 
 func (c XaddTrimStrategyMinid) Exact() XaddTrimOperatorExact {
 	c.command.append("=")
-	return (XaddTrimOperatorExact)(c)
+	return XaddTrimOperatorExact(c)
 }
 
 func (c XaddTrimStrategyMinid) Almost() XaddTrimOperatorAlmost {
 	c.command.append("~")
-	return (XaddTrimOperatorAlmost)(c)
+	return XaddTrimOperatorAlmost(c)
 }
 
 func (c XaddTrimStrategyMinid) Threshold(threshold string) XaddTrimThreshold {
 	c.command.append(threshold)
-	return (XaddTrimThreshold)(c)
+	return XaddTrimThreshold(c)
 }
 
 type XaddTrimThreshold Base
 
 func (c XaddTrimThreshold) Limit(count int64) XaddTrimLimit {
 	c.command.append("LIMIT", strconv.FormatInt(count, 10))
-	return (XaddTrimLimit)(c)
+	return XaddTrimLimit(c)
 }
 
 func (c XaddTrimThreshold) Id(id string) XaddId {
 	c.command.append(id)
-	return (XaddId)(c)
+	return XaddId(c)
 }
 
 // Changes (or acquires) ownership of messages in a consumer group, as if the messages were delivered to the specified consumer..
@@ -35041,21 +35041,21 @@ func (c Xautoclaim) Key(key string) XautoclaimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XautoclaimKey)(c)
+	return XautoclaimKey(c)
 }
 
 type XautoclaimConsumer Base
 
 func (c XautoclaimConsumer) MinIdleTime(minIdleTime string) XautoclaimMinIdleTime {
 	c.command.append(minIdleTime)
-	return (XautoclaimMinIdleTime)(c)
+	return XautoclaimMinIdleTime(c)
 }
 
 type XautoclaimCount Base
 
 func (c XautoclaimCount) Justid() XautoclaimJustid {
 	c.command.append("JUSTID")
-	return (XautoclaimJustid)(c)
+	return XautoclaimJustid(c)
 }
 
 // Return Completed Redis command.
@@ -35067,7 +35067,7 @@ type XautoclaimGroup Base
 
 func (c XautoclaimGroup) Consumer(consumer string) XautoclaimConsumer {
 	c.command.append(consumer)
-	return (XautoclaimConsumer)(c)
+	return XautoclaimConsumer(c)
 }
 
 type XautoclaimJustid Base
@@ -35081,26 +35081,26 @@ type XautoclaimKey Base
 
 func (c XautoclaimKey) Group(group string) XautoclaimGroup {
 	c.command.append(group)
-	return (XautoclaimGroup)(c)
+	return XautoclaimGroup(c)
 }
 
 type XautoclaimMinIdleTime Base
 
 func (c XautoclaimMinIdleTime) Start(start string) XautoclaimStart {
 	c.command.append(start)
-	return (XautoclaimStart)(c)
+	return XautoclaimStart(c)
 }
 
 type XautoclaimStart Base
 
 func (c XautoclaimStart) Count(count int64) XautoclaimCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XautoclaimCount)(c)
+	return XautoclaimCount(c)
 }
 
 func (c XautoclaimStart) Justid() XautoclaimJustid {
 	c.command.append("JUSTID")
-	return (XautoclaimJustid)(c)
+	return XautoclaimJustid(c)
 }
 
 // Return Completed Redis command.
@@ -35131,26 +35131,26 @@ func (c Xclaim) Key(key string) XclaimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XclaimKey)(c)
+	return XclaimKey(c)
 }
 
 type XclaimConsumer Base
 
 func (c XclaimConsumer) MinIdleTime(minIdleTime string) XclaimMinIdleTime {
 	c.command.append(minIdleTime)
-	return (XclaimMinIdleTime)(c)
+	return XclaimMinIdleTime(c)
 }
 
 type XclaimForce Base
 
 func (c XclaimForce) Justid() XclaimJustid {
 	c.command.append("JUSTID")
-	return (XclaimJustid)(c)
+	return XclaimJustid(c)
 }
 
 func (c XclaimForce) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35162,7 +35162,7 @@ type XclaimGroup Base
 
 func (c XclaimGroup) Consumer(consumer string) XclaimConsumer {
 	c.command.append(consumer)
-	return (XclaimConsumer)(c)
+	return XclaimConsumer(c)
 }
 
 type XclaimId Base
@@ -35174,32 +35174,32 @@ func (c XclaimId) Id(id ...string) XclaimId {
 
 func (c XclaimId) Idle(ms int64) XclaimIdle {
 	c.command.append("IDLE", strconv.FormatInt(ms, 10))
-	return (XclaimIdle)(c)
+	return XclaimIdle(c)
 }
 
 func (c XclaimId) Time(msUnixTime int64) XclaimTime {
 	c.command.append("TIME", strconv.FormatInt(msUnixTime, 10))
-	return (XclaimTime)(c)
+	return XclaimTime(c)
 }
 
 func (c XclaimId) Retrycount(count int64) XclaimRetrycount {
 	c.command.append("RETRYCOUNT", strconv.FormatInt(count, 10))
-	return (XclaimRetrycount)(c)
+	return XclaimRetrycount(c)
 }
 
 func (c XclaimId) Force() XclaimForce {
 	c.command.append("FORCE")
-	return (XclaimForce)(c)
+	return XclaimForce(c)
 }
 
 func (c XclaimId) Justid() XclaimJustid {
 	c.command.append("JUSTID")
-	return (XclaimJustid)(c)
+	return XclaimJustid(c)
 }
 
 func (c XclaimId) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35211,27 +35211,27 @@ type XclaimIdle Base
 
 func (c XclaimIdle) Time(msUnixTime int64) XclaimTime {
 	c.command.append("TIME", strconv.FormatInt(msUnixTime, 10))
-	return (XclaimTime)(c)
+	return XclaimTime(c)
 }
 
 func (c XclaimIdle) Retrycount(count int64) XclaimRetrycount {
 	c.command.append("RETRYCOUNT", strconv.FormatInt(count, 10))
-	return (XclaimRetrycount)(c)
+	return XclaimRetrycount(c)
 }
 
 func (c XclaimIdle) Force() XclaimForce {
 	c.command.append("FORCE")
-	return (XclaimForce)(c)
+	return XclaimForce(c)
 }
 
 func (c XclaimIdle) Justid() XclaimJustid {
 	c.command.append("JUSTID")
-	return (XclaimJustid)(c)
+	return XclaimJustid(c)
 }
 
 func (c XclaimIdle) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35243,7 +35243,7 @@ type XclaimJustid Base
 
 func (c XclaimJustid) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35255,7 +35255,7 @@ type XclaimKey Base
 
 func (c XclaimKey) Group(group string) XclaimGroup {
 	c.command.append(group)
-	return (XclaimGroup)(c)
+	return XclaimGroup(c)
 }
 
 type XclaimLastid Base
@@ -35269,24 +35269,24 @@ type XclaimMinIdleTime Base
 
 func (c XclaimMinIdleTime) Id(id ...string) XclaimId {
 	c.command.append(id...)
-	return (XclaimId)(c)
+	return XclaimId(c)
 }
 
 type XclaimRetrycount Base
 
 func (c XclaimRetrycount) Force() XclaimForce {
 	c.command.append("FORCE")
-	return (XclaimForce)(c)
+	return XclaimForce(c)
 }
 
 func (c XclaimRetrycount) Justid() XclaimJustid {
 	c.command.append("JUSTID")
-	return (XclaimJustid)(c)
+	return XclaimJustid(c)
 }
 
 func (c XclaimRetrycount) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35298,22 +35298,22 @@ type XclaimTime Base
 
 func (c XclaimTime) Retrycount(count int64) XclaimRetrycount {
 	c.command.append("RETRYCOUNT", strconv.FormatInt(count, 10))
-	return (XclaimRetrycount)(c)
+	return XclaimRetrycount(c)
 }
 
 func (c XclaimTime) Force() XclaimForce {
 	c.command.append("FORCE")
-	return (XclaimForce)(c)
+	return XclaimForce(c)
 }
 
 func (c XclaimTime) Justid() XclaimJustid {
 	c.command.append("JUSTID")
-	return (XclaimJustid)(c)
+	return XclaimJustid(c)
 }
 
 func (c XclaimTime) Lastid() XclaimLastid {
 	c.command.append("LASTID")
-	return (XclaimLastid)(c)
+	return XclaimLastid(c)
 }
 
 // Return Completed Redis command.
@@ -35344,7 +35344,7 @@ func (c Xdel) Key(key string) XdelKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XdelKey)(c)
+	return XdelKey(c)
 }
 
 type XdelId Base
@@ -35363,7 +35363,7 @@ type XdelKey Base
 
 func (c XdelKey) Id(id ...string) XdelId {
 	c.command.append(id...)
-	return (XdelId)(c)
+	return XdelId(c)
 }
 
 // Create a consumer group..
@@ -35389,7 +35389,7 @@ func (c XgroupCreate) Key(key string) XgroupCreateKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XgroupCreateKey)(c)
+	return XgroupCreateKey(c)
 }
 
 type XgroupCreateEntriesread Base
@@ -35403,19 +35403,19 @@ type XgroupCreateGroupname Base
 
 func (c XgroupCreateGroupname) Id(id string) XgroupCreateId {
 	c.command.append(id)
-	return (XgroupCreateId)(c)
+	return XgroupCreateId(c)
 }
 
 type XgroupCreateId Base
 
 func (c XgroupCreateId) Mkstream() XgroupCreateMkstream {
 	c.command.append("MKSTREAM")
-	return (XgroupCreateMkstream)(c)
+	return XgroupCreateMkstream(c)
 }
 
 func (c XgroupCreateId) Entriesread(entriesRead int64) XgroupCreateEntriesread {
 	c.command.append("ENTRIESREAD", strconv.FormatInt(entriesRead, 10))
-	return (XgroupCreateEntriesread)(c)
+	return XgroupCreateEntriesread(c)
 }
 
 // Return Completed Redis command.
@@ -35427,14 +35427,14 @@ type XgroupCreateKey Base
 
 func (c XgroupCreateKey) Groupname(groupname string) XgroupCreateGroupname {
 	c.command.append(groupname)
-	return (XgroupCreateGroupname)(c)
+	return XgroupCreateGroupname(c)
 }
 
 type XgroupCreateMkstream Base
 
 func (c XgroupCreateMkstream) Entriesread(entriesRead int64) XgroupCreateEntriesread {
 	c.command.append("ENTRIESREAD", strconv.FormatInt(entriesRead, 10))
-	return (XgroupCreateEntriesread)(c)
+	return XgroupCreateEntriesread(c)
 }
 
 // Return Completed Redis command.
@@ -35465,7 +35465,7 @@ func (c XgroupCreateconsumer) Key(key string) XgroupCreateconsumerKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XgroupCreateconsumerKey)(c)
+	return XgroupCreateconsumerKey(c)
 }
 
 type XgroupCreateconsumerConsumername Base
@@ -35479,14 +35479,14 @@ type XgroupCreateconsumerGroupname Base
 
 func (c XgroupCreateconsumerGroupname) Consumername(consumername string) XgroupCreateconsumerConsumername {
 	c.command.append(consumername)
-	return (XgroupCreateconsumerConsumername)(c)
+	return XgroupCreateconsumerConsumername(c)
 }
 
 type XgroupCreateconsumerKey Base
 
 func (c XgroupCreateconsumerKey) Groupname(groupname string) XgroupCreateconsumerGroupname {
 	c.command.append(groupname)
-	return (XgroupCreateconsumerGroupname)(c)
+	return XgroupCreateconsumerGroupname(c)
 }
 
 // Delete a consumer from a consumer group..
@@ -35512,7 +35512,7 @@ func (c XgroupDelconsumer) Key(key string) XgroupDelconsumerKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XgroupDelconsumerKey)(c)
+	return XgroupDelconsumerKey(c)
 }
 
 type XgroupDelconsumerConsumername Base
@@ -35526,14 +35526,14 @@ type XgroupDelconsumerGroupname Base
 
 func (c XgroupDelconsumerGroupname) Consumername(consumername string) XgroupDelconsumerConsumername {
 	c.command.append(consumername)
-	return (XgroupDelconsumerConsumername)(c)
+	return XgroupDelconsumerConsumername(c)
 }
 
 type XgroupDelconsumerKey Base
 
 func (c XgroupDelconsumerKey) Groupname(groupname string) XgroupDelconsumerGroupname {
 	c.command.append(groupname)
-	return (XgroupDelconsumerGroupname)(c)
+	return XgroupDelconsumerGroupname(c)
 }
 
 // Destroy a consumer group..
@@ -35559,7 +35559,7 @@ func (c XgroupDestroy) Key(key string) XgroupDestroyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XgroupDestroyKey)(c)
+	return XgroupDestroyKey(c)
 }
 
 type XgroupDestroyGroupname Base
@@ -35573,7 +35573,7 @@ type XgroupDestroyKey Base
 
 func (c XgroupDestroyKey) Groupname(groupname string) XgroupDestroyGroupname {
 	c.command.append(groupname)
-	return (XgroupDestroyGroupname)(c)
+	return XgroupDestroyGroupname(c)
 }
 
 // Show helpful text about the different subcommands.
@@ -35620,7 +35620,7 @@ func (c XgroupSetid) Key(key string) XgroupSetidKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XgroupSetidKey)(c)
+	return XgroupSetidKey(c)
 }
 
 type XgroupSetidEntriesread Base
@@ -35634,14 +35634,14 @@ type XgroupSetidGroupname Base
 
 func (c XgroupSetidGroupname) Id(id string) XgroupSetidId {
 	c.command.append(id)
-	return (XgroupSetidId)(c)
+	return XgroupSetidId(c)
 }
 
 type XgroupSetidId Base
 
 func (c XgroupSetidId) Entriesread(entriesRead int64) XgroupSetidEntriesread {
 	c.command.append("ENTRIESREAD", strconv.FormatInt(entriesRead, 10))
-	return (XgroupSetidEntriesread)(c)
+	return XgroupSetidEntriesread(c)
 }
 
 // Return Completed Redis command.
@@ -35653,7 +35653,7 @@ type XgroupSetidKey Base
 
 func (c XgroupSetidKey) Groupname(groupname string) XgroupSetidGroupname {
 	c.command.append(groupname)
-	return (XgroupSetidGroupname)(c)
+	return XgroupSetidGroupname(c)
 }
 
 // List the consumers in a consumer group.
@@ -35679,7 +35679,7 @@ func (c XinfoConsumers) Key(key string) XinfoConsumersKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XinfoConsumersKey)(c)
+	return XinfoConsumersKey(c)
 }
 
 type XinfoConsumersGroupname Base
@@ -35693,7 +35693,7 @@ type XinfoConsumersKey Base
 
 func (c XinfoConsumersKey) Groupname(groupname string) XinfoConsumersGroupname {
 	c.command.append(groupname)
-	return (XinfoConsumersGroupname)(c)
+	return XinfoConsumersGroupname(c)
 }
 
 // List the consumer groups of a stream.
@@ -35719,7 +35719,7 @@ func (c XinfoGroups) Key(key string) XinfoGroupsKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XinfoGroupsKey)(c)
+	return XinfoGroupsKey(c)
 }
 
 type XinfoGroupsKey Base
@@ -35773,7 +35773,7 @@ func (c XinfoStream) Key(key string) XinfoStreamKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XinfoStreamKey)(c)
+	return XinfoStreamKey(c)
 }
 
 type XinfoStreamFullCount Base
@@ -35787,7 +35787,7 @@ type XinfoStreamFullFull Base
 
 func (c XinfoStreamFullFull) Count(count int64) XinfoStreamFullCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XinfoStreamFullCount)(c)
+	return XinfoStreamFullCount(c)
 }
 
 // Return Completed Redis command.
@@ -35799,7 +35799,7 @@ type XinfoStreamKey Base
 
 func (c XinfoStreamKey) Full() XinfoStreamFullFull {
 	c.command.append("FULL")
-	return (XinfoStreamFullFull)(c)
+	return XinfoStreamFullFull(c)
 }
 
 // Return Completed Redis command.
@@ -35830,7 +35830,7 @@ func (c Xlen) Key(key string) XlenKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XlenKey)(c)
+	return XlenKey(c)
 }
 
 type XlenKey Base
@@ -35863,7 +35863,7 @@ func (c Xpending) Key(key string) XpendingKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XpendingKey)(c)
+	return XpendingKey(c)
 }
 
 type XpendingFiltersConsumer Base
@@ -35877,7 +35877,7 @@ type XpendingFiltersCount Base
 
 func (c XpendingFiltersCount) Consumer(consumer string) XpendingFiltersConsumer {
 	c.command.append(consumer)
-	return (XpendingFiltersConsumer)(c)
+	return XpendingFiltersConsumer(c)
 }
 
 // Return Completed Redis command.
@@ -35889,33 +35889,33 @@ type XpendingFiltersEnd Base
 
 func (c XpendingFiltersEnd) Count(count int64) XpendingFiltersCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (XpendingFiltersCount)(c)
+	return XpendingFiltersCount(c)
 }
 
 type XpendingFiltersIdle Base
 
 func (c XpendingFiltersIdle) Start(start string) XpendingFiltersStart {
 	c.command.append(start)
-	return (XpendingFiltersStart)(c)
+	return XpendingFiltersStart(c)
 }
 
 type XpendingFiltersStart Base
 
 func (c XpendingFiltersStart) End(end string) XpendingFiltersEnd {
 	c.command.append(end)
-	return (XpendingFiltersEnd)(c)
+	return XpendingFiltersEnd(c)
 }
 
 type XpendingGroup Base
 
 func (c XpendingGroup) Idle(minIdleTime int64) XpendingFiltersIdle {
 	c.command.append("IDLE", strconv.FormatInt(minIdleTime, 10))
-	return (XpendingFiltersIdle)(c)
+	return XpendingFiltersIdle(c)
 }
 
 func (c XpendingGroup) Start(start string) XpendingFiltersStart {
 	c.command.append(start)
-	return (XpendingFiltersStart)(c)
+	return XpendingFiltersStart(c)
 }
 
 // Return Completed Redis command.
@@ -35927,7 +35927,7 @@ type XpendingKey Base
 
 func (c XpendingKey) Group(group string) XpendingGroup {
 	c.command.append(group)
-	return (XpendingGroup)(c)
+	return XpendingGroup(c)
 }
 
 // Return a range of elements in a stream, with IDs matching the specified IDs interval.
@@ -35953,7 +35953,7 @@ func (c Xrange) Key(key string) XrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XrangeKey)(c)
+	return XrangeKey(c)
 }
 
 type XrangeCount Base
@@ -35967,7 +35967,7 @@ type XrangeEnd Base
 
 func (c XrangeEnd) Count(count int64) XrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XrangeCount)(c)
+	return XrangeCount(c)
 }
 
 // Return Completed Redis command.
@@ -35979,14 +35979,14 @@ type XrangeKey Base
 
 func (c XrangeKey) Start(start string) XrangeStart {
 	c.command.append(start)
-	return (XrangeStart)(c)
+	return XrangeStart(c)
 }
 
 type XrangeStart Base
 
 func (c XrangeStart) End(end string) XrangeEnd {
 	c.command.append(end)
-	return (XrangeEnd)(c)
+	return XrangeEnd(c)
 }
 
 // Return never seen elements in multiple streams, with IDs greater than the ones reported by the caller for each stream. Can block..
@@ -36007,25 +36007,25 @@ func (b Builder) Xread() Xread {
 
 func (c Xread) Count(count int64) XreadCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XreadCount)(c)
+	return XreadCount(c)
 }
 
 func (c Xread) Block(milliseconds int64) XreadBlock {
 	c.ctags = ctagBlock
 	c.command.append("BLOCK", strconv.FormatInt(milliseconds, 10))
-	return (XreadBlock)(c)
+	return XreadBlock(c)
 }
 
 func (c Xread) Streams() XreadStreams {
 	c.command.append("STREAMS")
-	return (XreadStreams)(c)
+	return XreadStreams(c)
 }
 
 type XreadBlock Base
 
 func (c XreadBlock) Streams() XreadStreams {
 	c.command.append("STREAMS")
-	return (XreadStreams)(c)
+	return XreadStreams(c)
 }
 
 type XreadCount Base
@@ -36033,12 +36033,12 @@ type XreadCount Base
 func (c XreadCount) Block(milliseconds int64) XreadBlock {
 	c.ctags = ctagBlock
 	c.command.append("BLOCK", strconv.FormatInt(milliseconds, 10))
-	return (XreadBlock)(c)
+	return XreadBlock(c)
 }
 
 func (c XreadCount) Streams() XreadStreams {
 	c.command.append("STREAMS")
-	return (XreadStreams)(c)
+	return XreadStreams(c)
 }
 
 type XreadId Base
@@ -36072,7 +36072,7 @@ func (c XreadKey) Key(key ...string) XreadKey {
 
 func (c XreadKey) Id(id ...string) XreadId {
 	c.command.append(id...)
-	return (XreadId)(c)
+	return XreadId(c)
 }
 
 type XreadStreams Base
@@ -36089,7 +36089,7 @@ func (c XreadStreams) Key(key ...string) XreadKey {
 		}
 	}
 	c.command.append(key...)
-	return (XreadKey)(c)
+	return XreadKey(c)
 }
 
 // Return new entries from a stream using a consumer group, or access the history of the pending entries for a given consumer. Can block..
@@ -36110,19 +36110,19 @@ func (b Builder) Xreadgroup() Xreadgroup {
 
 func (c Xreadgroup) Group(group string, consumer string) XreadgroupGroup {
 	c.command.append("GROUP", group, consumer)
-	return (XreadgroupGroup)(c)
+	return XreadgroupGroup(c)
 }
 
 type XreadgroupBlock Base
 
 func (c XreadgroupBlock) Noack() XreadgroupNoack {
 	c.command.append("NOACK")
-	return (XreadgroupNoack)(c)
+	return XreadgroupNoack(c)
 }
 
 func (c XreadgroupBlock) Streams() XreadgroupStreams {
 	c.command.append("STREAMS")
-	return (XreadgroupStreams)(c)
+	return XreadgroupStreams(c)
 }
 
 type XreadgroupCount Base
@@ -36130,40 +36130,40 @@ type XreadgroupCount Base
 func (c XreadgroupCount) Block(milliseconds int64) XreadgroupBlock {
 	c.ctags = ctagBlock
 	c.command.append("BLOCK", strconv.FormatInt(milliseconds, 10))
-	return (XreadgroupBlock)(c)
+	return XreadgroupBlock(c)
 }
 
 func (c XreadgroupCount) Noack() XreadgroupNoack {
 	c.command.append("NOACK")
-	return (XreadgroupNoack)(c)
+	return XreadgroupNoack(c)
 }
 
 func (c XreadgroupCount) Streams() XreadgroupStreams {
 	c.command.append("STREAMS")
-	return (XreadgroupStreams)(c)
+	return XreadgroupStreams(c)
 }
 
 type XreadgroupGroup Base
 
 func (c XreadgroupGroup) Count(count int64) XreadgroupCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XreadgroupCount)(c)
+	return XreadgroupCount(c)
 }
 
 func (c XreadgroupGroup) Block(milliseconds int64) XreadgroupBlock {
 	c.ctags = ctagBlock
 	c.command.append("BLOCK", strconv.FormatInt(milliseconds, 10))
-	return (XreadgroupBlock)(c)
+	return XreadgroupBlock(c)
 }
 
 func (c XreadgroupGroup) Noack() XreadgroupNoack {
 	c.command.append("NOACK")
-	return (XreadgroupNoack)(c)
+	return XreadgroupNoack(c)
 }
 
 func (c XreadgroupGroup) Streams() XreadgroupStreams {
 	c.command.append("STREAMS")
-	return (XreadgroupStreams)(c)
+	return XreadgroupStreams(c)
 }
 
 type XreadgroupId Base
@@ -36197,14 +36197,14 @@ func (c XreadgroupKey) Key(key ...string) XreadgroupKey {
 
 func (c XreadgroupKey) Id(id ...string) XreadgroupId {
 	c.command.append(id...)
-	return (XreadgroupId)(c)
+	return XreadgroupId(c)
 }
 
 type XreadgroupNoack Base
 
 func (c XreadgroupNoack) Streams() XreadgroupStreams {
 	c.command.append("STREAMS")
-	return (XreadgroupStreams)(c)
+	return XreadgroupStreams(c)
 }
 
 type XreadgroupStreams Base
@@ -36221,7 +36221,7 @@ func (c XreadgroupStreams) Key(key ...string) XreadgroupKey {
 		}
 	}
 	c.command.append(key...)
-	return (XreadgroupKey)(c)
+	return XreadgroupKey(c)
 }
 
 // Return a range of elements in a stream, with IDs matching the specified IDs interval, in reverse order (from greater to smaller IDs) compared to XRANGE.
@@ -36247,7 +36247,7 @@ func (c Xrevrange) Key(key string) XrevrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XrevrangeKey)(c)
+	return XrevrangeKey(c)
 }
 
 type XrevrangeCount Base
@@ -36261,21 +36261,21 @@ type XrevrangeEnd Base
 
 func (c XrevrangeEnd) Start(start string) XrevrangeStart {
 	c.command.append(start)
-	return (XrevrangeStart)(c)
+	return XrevrangeStart(c)
 }
 
 type XrevrangeKey Base
 
 func (c XrevrangeKey) End(end string) XrevrangeEnd {
 	c.command.append(end)
-	return (XrevrangeEnd)(c)
+	return XrevrangeEnd(c)
 }
 
 type XrevrangeStart Base
 
 func (c XrevrangeStart) Count(count int64) XrevrangeCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (XrevrangeCount)(c)
+	return XrevrangeCount(c)
 }
 
 // Return Completed Redis command.
@@ -36306,14 +36306,14 @@ func (c Xsetid) Key(key string) XsetidKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XsetidKey)(c)
+	return XsetidKey(c)
 }
 
 type XsetidEntriesadded Base
 
 func (c XsetidEntriesadded) Maxdeletedid(maxDeletedEntryId string) XsetidMaxdeletedid {
 	c.command.append("MAXDELETEDID", maxDeletedEntryId)
-	return (XsetidMaxdeletedid)(c)
+	return XsetidMaxdeletedid(c)
 }
 
 // Return Completed Redis command.
@@ -36325,19 +36325,19 @@ type XsetidKey Base
 
 func (c XsetidKey) LastId(lastId string) XsetidLastId {
 	c.command.append(lastId)
-	return (XsetidLastId)(c)
+	return XsetidLastId(c)
 }
 
 type XsetidLastId Base
 
 func (c XsetidLastId) Entriesadded(entriesAdded int64) XsetidEntriesadded {
 	c.command.append("ENTRIESADDED", strconv.FormatInt(entriesAdded, 10))
-	return (XsetidEntriesadded)(c)
+	return XsetidEntriesadded(c)
 }
 
 func (c XsetidLastId) Maxdeletedid(maxDeletedEntryId string) XsetidMaxdeletedid {
 	c.command.append("MAXDELETEDID", maxDeletedEntryId)
-	return (XsetidMaxdeletedid)(c)
+	return XsetidMaxdeletedid(c)
 }
 
 // Return Completed Redis command.
@@ -36375,19 +36375,19 @@ func (c Xtrim) Key(key string) XtrimKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (XtrimKey)(c)
+	return XtrimKey(c)
 }
 
 type XtrimKey Base
 
 func (c XtrimKey) Maxlen() XtrimTrimStrategyMaxlen {
 	c.command.append("MAXLEN")
-	return (XtrimTrimStrategyMaxlen)(c)
+	return XtrimTrimStrategyMaxlen(c)
 }
 
 func (c XtrimKey) Minid() XtrimTrimStrategyMinid {
 	c.command.append("MINID")
-	return (XtrimTrimStrategyMinid)(c)
+	return XtrimTrimStrategyMinid(c)
 }
 
 type XtrimTrimLimit Base
@@ -36401,55 +36401,55 @@ type XtrimTrimOperatorAlmost Base
 
 func (c XtrimTrimOperatorAlmost) Threshold(threshold string) XtrimTrimThreshold {
 	c.command.append(threshold)
-	return (XtrimTrimThreshold)(c)
+	return XtrimTrimThreshold(c)
 }
 
 type XtrimTrimOperatorExact Base
 
 func (c XtrimTrimOperatorExact) Threshold(threshold string) XtrimTrimThreshold {
 	c.command.append(threshold)
-	return (XtrimTrimThreshold)(c)
+	return XtrimTrimThreshold(c)
 }
 
 type XtrimTrimStrategyMaxlen Base
 
 func (c XtrimTrimStrategyMaxlen) Exact() XtrimTrimOperatorExact {
 	c.command.append("=")
-	return (XtrimTrimOperatorExact)(c)
+	return XtrimTrimOperatorExact(c)
 }
 
 func (c XtrimTrimStrategyMaxlen) Almost() XtrimTrimOperatorAlmost {
 	c.command.append("~")
-	return (XtrimTrimOperatorAlmost)(c)
+	return XtrimTrimOperatorAlmost(c)
 }
 
 func (c XtrimTrimStrategyMaxlen) Threshold(threshold string) XtrimTrimThreshold {
 	c.command.append(threshold)
-	return (XtrimTrimThreshold)(c)
+	return XtrimTrimThreshold(c)
 }
 
 type XtrimTrimStrategyMinid Base
 
 func (c XtrimTrimStrategyMinid) Exact() XtrimTrimOperatorExact {
 	c.command.append("=")
-	return (XtrimTrimOperatorExact)(c)
+	return XtrimTrimOperatorExact(c)
 }
 
 func (c XtrimTrimStrategyMinid) Almost() XtrimTrimOperatorAlmost {
 	c.command.append("~")
-	return (XtrimTrimOperatorAlmost)(c)
+	return XtrimTrimOperatorAlmost(c)
 }
 
 func (c XtrimTrimStrategyMinid) Threshold(threshold string) XtrimTrimThreshold {
 	c.command.append(threshold)
-	return (XtrimTrimThreshold)(c)
+	return XtrimTrimThreshold(c)
 }
 
 type XtrimTrimThreshold Base
 
 func (c XtrimTrimThreshold) Limit(count int64) XtrimTrimLimit {
 	c.command.append("LIMIT", strconv.FormatInt(count, 10))
-	return (XtrimTrimLimit)(c)
+	return XtrimTrimLimit(c)
 }
 
 // Return Completed Redis command.
@@ -36480,144 +36480,144 @@ func (c Zadd) Key(key string) ZaddKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZaddKey)(c)
+	return ZaddKey(c)
 }
 
 type ZaddChangeCh Base
 
 func (c ZaddChangeCh) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddChangeCh) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddComparisonGt Base
 
 func (c ZaddComparisonGt) Ch() ZaddChangeCh {
 	c.command.append("CH")
-	return (ZaddChangeCh)(c)
+	return ZaddChangeCh(c)
 }
 
 func (c ZaddComparisonGt) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddComparisonGt) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddComparisonLt Base
 
 func (c ZaddComparisonLt) Ch() ZaddChangeCh {
 	c.command.append("CH")
-	return (ZaddChangeCh)(c)
+	return ZaddChangeCh(c)
 }
 
 func (c ZaddComparisonLt) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddComparisonLt) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddConditionNx Base
 
 func (c ZaddConditionNx) Gt() ZaddComparisonGt {
 	c.command.append("GT")
-	return (ZaddComparisonGt)(c)
+	return ZaddComparisonGt(c)
 }
 
 func (c ZaddConditionNx) Lt() ZaddComparisonLt {
 	c.command.append("LT")
-	return (ZaddComparisonLt)(c)
+	return ZaddComparisonLt(c)
 }
 
 func (c ZaddConditionNx) Ch() ZaddChangeCh {
 	c.command.append("CH")
-	return (ZaddChangeCh)(c)
+	return ZaddChangeCh(c)
 }
 
 func (c ZaddConditionNx) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddConditionNx) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddConditionXx Base
 
 func (c ZaddConditionXx) Gt() ZaddComparisonGt {
 	c.command.append("GT")
-	return (ZaddComparisonGt)(c)
+	return ZaddComparisonGt(c)
 }
 
 func (c ZaddConditionXx) Lt() ZaddComparisonLt {
 	c.command.append("LT")
-	return (ZaddComparisonLt)(c)
+	return ZaddComparisonLt(c)
 }
 
 func (c ZaddConditionXx) Ch() ZaddChangeCh {
 	c.command.append("CH")
-	return (ZaddChangeCh)(c)
+	return ZaddChangeCh(c)
 }
 
 func (c ZaddConditionXx) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddConditionXx) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddIncrementIncr Base
 
 func (c ZaddIncrementIncr) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddKey Base
 
 func (c ZaddKey) Nx() ZaddConditionNx {
 	c.command.append("NX")
-	return (ZaddConditionNx)(c)
+	return ZaddConditionNx(c)
 }
 
 func (c ZaddKey) Xx() ZaddConditionXx {
 	c.command.append("XX")
-	return (ZaddConditionXx)(c)
+	return ZaddConditionXx(c)
 }
 
 func (c ZaddKey) Gt() ZaddComparisonGt {
 	c.command.append("GT")
-	return (ZaddComparisonGt)(c)
+	return ZaddComparisonGt(c)
 }
 
 func (c ZaddKey) Lt() ZaddComparisonLt {
 	c.command.append("LT")
-	return (ZaddComparisonLt)(c)
+	return ZaddComparisonLt(c)
 }
 
 func (c ZaddKey) Ch() ZaddChangeCh {
 	c.command.append("CH")
-	return (ZaddChangeCh)(c)
+	return ZaddChangeCh(c)
 }
 
 func (c ZaddKey) Incr() ZaddIncrementIncr {
 	c.command.append("INCR")
-	return (ZaddIncrementIncr)(c)
+	return ZaddIncrementIncr(c)
 }
 
 func (c ZaddKey) ScoreMember() ZaddScoreMember {
-	return (ZaddScoreMember)(c)
+	return ZaddScoreMember(c)
 }
 
 type ZaddScoreMember Base
@@ -36655,7 +36655,7 @@ func (c Zcard) Key(key string) ZcardKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZcardKey)(c)
+	return ZcardKey(c)
 }
 
 type ZcardKey Base
@@ -36693,14 +36693,14 @@ func (c Zcount) Key(key string) ZcountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZcountKey)(c)
+	return ZcountKey(c)
 }
 
 type ZcountKey Base
 
 func (c ZcountKey) Min(min string) ZcountMin {
 	c.command.append(min)
-	return (ZcountMin)(c)
+	return ZcountMin(c)
 }
 
 type ZcountMax Base
@@ -36719,7 +36719,7 @@ type ZcountMin Base
 
 func (c ZcountMin) Max(max string) ZcountMax {
 	c.command.append(max)
-	return (ZcountMax)(c)
+	return ZcountMax(c)
 }
 
 // Subtract multiple sorted sets.
@@ -36740,7 +36740,7 @@ func (b Builder) Zdiff() Zdiff {
 
 func (c Zdiff) Numkeys(numkeys int64) ZdiffNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZdiffNumkeys)(c)
+	return ZdiffNumkeys(c)
 }
 
 type ZdiffKey Base
@@ -36762,7 +36762,7 @@ func (c ZdiffKey) Key(key ...string) ZdiffKey {
 
 func (c ZdiffKey) Withscores() ZdiffWithscores {
 	c.command.append("WITHSCORES")
-	return (ZdiffWithscores)(c)
+	return ZdiffWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -36784,7 +36784,7 @@ func (c ZdiffNumkeys) Key(key ...string) ZdiffKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZdiffKey)(c)
+	return ZdiffKey(c)
 }
 
 type ZdiffWithscores Base
@@ -36817,14 +36817,14 @@ func (c Zdiffstore) Destination(destination string) ZdiffstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (ZdiffstoreDestination)(c)
+	return ZdiffstoreDestination(c)
 }
 
 type ZdiffstoreDestination Base
 
 func (c ZdiffstoreDestination) Numkeys(numkeys int64) ZdiffstoreNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZdiffstoreNumkeys)(c)
+	return ZdiffstoreNumkeys(c)
 }
 
 type ZdiffstoreKey Base
@@ -36863,7 +36863,7 @@ func (c ZdiffstoreNumkeys) Key(key ...string) ZdiffstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZdiffstoreKey)(c)
+	return ZdiffstoreKey(c)
 }
 
 // Increment the score of a member in a sorted set.
@@ -36889,21 +36889,21 @@ func (c Zincrby) Key(key string) ZincrbyKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZincrbyKey)(c)
+	return ZincrbyKey(c)
 }
 
 type ZincrbyIncrement Base
 
 func (c ZincrbyIncrement) Member(member string) ZincrbyMember {
 	c.command.append(member)
-	return (ZincrbyMember)(c)
+	return ZincrbyMember(c)
 }
 
 type ZincrbyKey Base
 
 func (c ZincrbyKey) Increment(increment float64) ZincrbyIncrement {
 	c.command.append(strconv.FormatFloat(increment, 'f', -1, 64))
-	return (ZincrbyIncrement)(c)
+	return ZincrbyIncrement(c)
 }
 
 type ZincrbyMember Base
@@ -36931,14 +36931,14 @@ func (b Builder) Zinter() Zinter {
 
 func (c Zinter) Numkeys(numkeys int64) ZinterNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZinterNumkeys)(c)
+	return ZinterNumkeys(c)
 }
 
 type ZinterAggregateMax Base
 
 func (c ZinterAggregateMax) Withscores() ZinterWithscores {
 	c.command.append("WITHSCORES")
-	return (ZinterWithscores)(c)
+	return ZinterWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -36950,7 +36950,7 @@ type ZinterAggregateMin Base
 
 func (c ZinterAggregateMin) Withscores() ZinterWithscores {
 	c.command.append("WITHSCORES")
-	return (ZinterWithscores)(c)
+	return ZinterWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -36962,7 +36962,7 @@ type ZinterAggregateSum Base
 
 func (c ZinterAggregateSum) Withscores() ZinterWithscores {
 	c.command.append("WITHSCORES")
-	return (ZinterWithscores)(c)
+	return ZinterWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -36992,27 +36992,27 @@ func (c ZinterKey) Weights(weight ...int64) ZinterWeights {
 	for _, n := range weight {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ZinterWeights)(c)
+	return ZinterWeights(c)
 }
 
 func (c ZinterKey) AggregateSum() ZinterAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZinterAggregateSum)(c)
+	return ZinterAggregateSum(c)
 }
 
 func (c ZinterKey) AggregateMin() ZinterAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZinterAggregateMin)(c)
+	return ZinterAggregateMin(c)
 }
 
 func (c ZinterKey) AggregateMax() ZinterAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZinterAggregateMax)(c)
+	return ZinterAggregateMax(c)
 }
 
 func (c ZinterKey) Withscores() ZinterWithscores {
 	c.command.append("WITHSCORES")
-	return (ZinterWithscores)(c)
+	return ZinterWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37034,7 +37034,7 @@ func (c ZinterNumkeys) Key(key ...string) ZinterKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZinterKey)(c)
+	return ZinterKey(c)
 }
 
 type ZinterWeights Base
@@ -37049,22 +37049,22 @@ func (c ZinterWeights) Weights(weight ...int64) ZinterWeights {
 
 func (c ZinterWeights) AggregateSum() ZinterAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZinterAggregateSum)(c)
+	return ZinterAggregateSum(c)
 }
 
 func (c ZinterWeights) AggregateMin() ZinterAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZinterAggregateMin)(c)
+	return ZinterAggregateMin(c)
 }
 
 func (c ZinterWeights) AggregateMax() ZinterAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZinterAggregateMax)(c)
+	return ZinterAggregateMax(c)
 }
 
 func (c ZinterWeights) Withscores() ZinterWithscores {
 	c.command.append("WITHSCORES")
-	return (ZinterWithscores)(c)
+	return ZinterWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37097,7 +37097,7 @@ func (b Builder) Zintercard() Zintercard {
 
 func (c Zintercard) Numkeys(numkeys int64) ZintercardNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZintercardNumkeys)(c)
+	return ZintercardNumkeys(c)
 }
 
 type ZintercardKey Base
@@ -37119,7 +37119,7 @@ func (c ZintercardKey) Key(key ...string) ZintercardKey {
 
 func (c ZintercardKey) Limit(limit int64) ZintercardLimit {
 	c.command.append("LIMIT", strconv.FormatInt(limit, 10))
-	return (ZintercardLimit)(c)
+	return ZintercardLimit(c)
 }
 
 // Return Completed Redis command.
@@ -37148,7 +37148,7 @@ func (c ZintercardNumkeys) Key(key ...string) ZintercardKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZintercardKey)(c)
+	return ZintercardKey(c)
 }
 
 // Intersect multiple sorted sets and store the resulting sorted set in a new key.
@@ -37174,7 +37174,7 @@ func (c Zinterstore) Destination(destination string) ZinterstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (ZinterstoreDestination)(c)
+	return ZinterstoreDestination(c)
 }
 
 type ZinterstoreAggregateMax Base
@@ -37202,7 +37202,7 @@ type ZinterstoreDestination Base
 
 func (c ZinterstoreDestination) Numkeys(numkeys int64) ZinterstoreNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZinterstoreNumkeys)(c)
+	return ZinterstoreNumkeys(c)
 }
 
 type ZinterstoreKey Base
@@ -37227,22 +37227,22 @@ func (c ZinterstoreKey) Weights(weight ...int64) ZinterstoreWeights {
 	for _, n := range weight {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ZinterstoreWeights)(c)
+	return ZinterstoreWeights(c)
 }
 
 func (c ZinterstoreKey) AggregateSum() ZinterstoreAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZinterstoreAggregateSum)(c)
+	return ZinterstoreAggregateSum(c)
 }
 
 func (c ZinterstoreKey) AggregateMin() ZinterstoreAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZinterstoreAggregateMin)(c)
+	return ZinterstoreAggregateMin(c)
 }
 
 func (c ZinterstoreKey) AggregateMax() ZinterstoreAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZinterstoreAggregateMax)(c)
+	return ZinterstoreAggregateMax(c)
 }
 
 // Return Completed Redis command.
@@ -37264,7 +37264,7 @@ func (c ZinterstoreNumkeys) Key(key ...string) ZinterstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZinterstoreKey)(c)
+	return ZinterstoreKey(c)
 }
 
 type ZinterstoreWeights Base
@@ -37279,17 +37279,17 @@ func (c ZinterstoreWeights) Weights(weight ...int64) ZinterstoreWeights {
 
 func (c ZinterstoreWeights) AggregateSum() ZinterstoreAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZinterstoreAggregateSum)(c)
+	return ZinterstoreAggregateSum(c)
 }
 
 func (c ZinterstoreWeights) AggregateMin() ZinterstoreAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZinterstoreAggregateMin)(c)
+	return ZinterstoreAggregateMin(c)
 }
 
 func (c ZinterstoreWeights) AggregateMax() ZinterstoreAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZinterstoreAggregateMax)(c)
+	return ZinterstoreAggregateMax(c)
 }
 
 // Return Completed Redis command.
@@ -37320,14 +37320,14 @@ func (c Zlexcount) Key(key string) ZlexcountKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZlexcountKey)(c)
+	return ZlexcountKey(c)
 }
 
 type ZlexcountKey Base
 
 func (c ZlexcountKey) Min(min string) ZlexcountMin {
 	c.command.append(min)
-	return (ZlexcountMin)(c)
+	return ZlexcountMin(c)
 }
 
 type ZlexcountMax Base
@@ -37346,7 +37346,7 @@ type ZlexcountMin Base
 
 func (c ZlexcountMin) Max(max string) ZlexcountMax {
 	c.command.append(max)
-	return (ZlexcountMax)(c)
+	return ZlexcountMax(c)
 }
 
 // Remove and return members with scores in a sorted set.
@@ -37367,7 +37367,7 @@ func (b Builder) Zmpop() Zmpop {
 
 func (c Zmpop) Numkeys(numkeys int64) ZmpopNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZmpopNumkeys)(c)
+	return ZmpopNumkeys(c)
 }
 
 type ZmpopCount Base
@@ -37396,12 +37396,12 @@ func (c ZmpopKey) Key(key ...string) ZmpopKey {
 
 func (c ZmpopKey) Min() ZmpopWhereMin {
 	c.command.append("MIN")
-	return (ZmpopWhereMin)(c)
+	return ZmpopWhereMin(c)
 }
 
 func (c ZmpopKey) Max() ZmpopWhereMax {
 	c.command.append("MAX")
-	return (ZmpopWhereMax)(c)
+	return ZmpopWhereMax(c)
 }
 
 type ZmpopNumkeys Base
@@ -37418,14 +37418,14 @@ func (c ZmpopNumkeys) Key(key ...string) ZmpopKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZmpopKey)(c)
+	return ZmpopKey(c)
 }
 
 type ZmpopWhereMax Base
 
 func (c ZmpopWhereMax) Count(count int64) ZmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ZmpopCount)(c)
+	return ZmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -37437,7 +37437,7 @@ type ZmpopWhereMin Base
 
 func (c ZmpopWhereMin) Count(count int64) ZmpopCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ZmpopCount)(c)
+	return ZmpopCount(c)
 }
 
 // Return Completed Redis command.
@@ -37468,14 +37468,14 @@ func (c Zmscore) Key(key string) ZmscoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZmscoreKey)(c)
+	return ZmscoreKey(c)
 }
 
 type ZmscoreKey Base
 
 func (c ZmscoreKey) Member(member ...string) ZmscoreMember {
 	c.command.append(member...)
-	return (ZmscoreMember)(c)
+	return ZmscoreMember(c)
 }
 
 type ZmscoreMember Base
@@ -37518,7 +37518,7 @@ func (c Zpopmax) Key(key string) ZpopmaxKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZpopmaxKey)(c)
+	return ZpopmaxKey(c)
 }
 
 type ZpopmaxCount Base
@@ -37532,7 +37532,7 @@ type ZpopmaxKey Base
 
 func (c ZpopmaxKey) Count(count int64) ZpopmaxCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (ZpopmaxCount)(c)
+	return ZpopmaxCount(c)
 }
 
 // Return Completed Redis command.
@@ -37563,7 +37563,7 @@ func (c Zpopmin) Key(key string) ZpopminKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZpopminKey)(c)
+	return ZpopminKey(c)
 }
 
 type ZpopminCount Base
@@ -37577,7 +37577,7 @@ type ZpopminKey Base
 
 func (c ZpopminKey) Count(count int64) ZpopminCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (ZpopminCount)(c)
+	return ZpopminCount(c)
 }
 
 // Return Completed Redis command.
@@ -37608,14 +37608,14 @@ func (c Zrandmember) Key(key string) ZrandmemberKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrandmemberKey)(c)
+	return ZrandmemberKey(c)
 }
 
 type ZrandmemberKey Base
 
 func (c ZrandmemberKey) Count(count int64) ZrandmemberOptionsCount {
 	c.command.append(strconv.FormatInt(count, 10))
-	return (ZrandmemberOptionsCount)(c)
+	return ZrandmemberOptionsCount(c)
 }
 
 // Return Completed Redis command.
@@ -37627,7 +37627,7 @@ type ZrandmemberOptionsCount Base
 
 func (c ZrandmemberOptionsCount) Withscores() ZrandmemberOptionsWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrandmemberOptionsWithscores)(c)
+	return ZrandmemberOptionsWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37665,21 +37665,21 @@ func (c Zrange) Key(key string) ZrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrangeKey)(c)
+	return ZrangeKey(c)
 }
 
 type ZrangeKey Base
 
 func (c ZrangeKey) Min(min string) ZrangeMin {
 	c.command.append(min)
-	return (ZrangeMin)(c)
+	return ZrangeMin(c)
 }
 
 type ZrangeLimit Base
 
 func (c ZrangeLimit) Withscores() ZrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangeWithscores)(c)
+	return ZrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37696,27 +37696,27 @@ type ZrangeMax Base
 
 func (c ZrangeMax) Byscore() ZrangeSortbyByscore {
 	c.command.append("BYSCORE")
-	return (ZrangeSortbyByscore)(c)
+	return ZrangeSortbyByscore(c)
 }
 
 func (c ZrangeMax) Bylex() ZrangeSortbyBylex {
 	c.command.append("BYLEX")
-	return (ZrangeSortbyBylex)(c)
+	return ZrangeSortbyBylex(c)
 }
 
 func (c ZrangeMax) Rev() ZrangeRev {
 	c.command.append("REV")
-	return (ZrangeRev)(c)
+	return ZrangeRev(c)
 }
 
 func (c ZrangeMax) Limit(offset int64, count int64) ZrangeLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangeLimit)(c)
+	return ZrangeLimit(c)
 }
 
 func (c ZrangeMax) Withscores() ZrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangeWithscores)(c)
+	return ZrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37733,19 +37733,19 @@ type ZrangeMin Base
 
 func (c ZrangeMin) Max(max string) ZrangeMax {
 	c.command.append(max)
-	return (ZrangeMax)(c)
+	return ZrangeMax(c)
 }
 
 type ZrangeRev Base
 
 func (c ZrangeRev) Limit(offset int64, count int64) ZrangeLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangeLimit)(c)
+	return ZrangeLimit(c)
 }
 
 func (c ZrangeRev) Withscores() ZrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangeWithscores)(c)
+	return ZrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37762,17 +37762,17 @@ type ZrangeSortbyBylex Base
 
 func (c ZrangeSortbyBylex) Rev() ZrangeRev {
 	c.command.append("REV")
-	return (ZrangeRev)(c)
+	return ZrangeRev(c)
 }
 
 func (c ZrangeSortbyBylex) Limit(offset int64, count int64) ZrangeLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangeLimit)(c)
+	return ZrangeLimit(c)
 }
 
 func (c ZrangeSortbyBylex) Withscores() ZrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangeWithscores)(c)
+	return ZrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37789,17 +37789,17 @@ type ZrangeSortbyByscore Base
 
 func (c ZrangeSortbyByscore) Rev() ZrangeRev {
 	c.command.append("REV")
-	return (ZrangeRev)(c)
+	return ZrangeRev(c)
 }
 
 func (c ZrangeSortbyByscore) Limit(offset int64, count int64) ZrangeLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangeLimit)(c)
+	return ZrangeLimit(c)
 }
 
 func (c ZrangeSortbyByscore) Withscores() ZrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangeWithscores)(c)
+	return ZrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -37847,14 +37847,14 @@ func (c Zrangebylex) Key(key string) ZrangebylexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrangebylexKey)(c)
+	return ZrangebylexKey(c)
 }
 
 type ZrangebylexKey Base
 
 func (c ZrangebylexKey) Min(min string) ZrangebylexMin {
 	c.command.append(min)
-	return (ZrangebylexMin)(c)
+	return ZrangebylexMin(c)
 }
 
 type ZrangebylexLimit Base
@@ -37873,7 +37873,7 @@ type ZrangebylexMax Base
 
 func (c ZrangebylexMax) Limit(offset int64, count int64) ZrangebylexLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangebylexLimit)(c)
+	return ZrangebylexLimit(c)
 }
 
 // Return Completed Redis command.
@@ -37890,7 +37890,7 @@ type ZrangebylexMin Base
 
 func (c ZrangebylexMin) Max(max string) ZrangebylexMax {
 	c.command.append(max)
-	return (ZrangebylexMax)(c)
+	return ZrangebylexMax(c)
 }
 
 // Return a range of members in a sorted set, by score.
@@ -37916,14 +37916,14 @@ func (c Zrangebyscore) Key(key string) ZrangebyscoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrangebyscoreKey)(c)
+	return ZrangebyscoreKey(c)
 }
 
 type ZrangebyscoreKey Base
 
 func (c ZrangebyscoreKey) Min(min string) ZrangebyscoreMin {
 	c.command.append(min)
-	return (ZrangebyscoreMin)(c)
+	return ZrangebyscoreMin(c)
 }
 
 type ZrangebyscoreLimit Base
@@ -37942,12 +37942,12 @@ type ZrangebyscoreMax Base
 
 func (c ZrangebyscoreMax) Withscores() ZrangebyscoreWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrangebyscoreWithscores)(c)
+	return ZrangebyscoreWithscores(c)
 }
 
 func (c ZrangebyscoreMax) Limit(offset int64, count int64) ZrangebyscoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangebyscoreLimit)(c)
+	return ZrangebyscoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -37964,14 +37964,14 @@ type ZrangebyscoreMin Base
 
 func (c ZrangebyscoreMin) Max(max string) ZrangebyscoreMax {
 	c.command.append(max)
-	return (ZrangebyscoreMax)(c)
+	return ZrangebyscoreMax(c)
 }
 
 type ZrangebyscoreWithscores Base
 
 func (c ZrangebyscoreWithscores) Limit(offset int64, count int64) ZrangebyscoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangebyscoreLimit)(c)
+	return ZrangebyscoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38007,7 +38007,7 @@ func (c Zrangestore) Dst(dst string) ZrangestoreDst {
 		c.cslot.set(getSlot(dst))
 	}
 	c.command.append(dst)
-	return (ZrangestoreDst)(c)
+	return ZrangestoreDst(c)
 }
 
 type ZrangestoreDst Base
@@ -38019,7 +38019,7 @@ func (c ZrangestoreDst) Src(src string) ZrangestoreSrc {
 		c.cslot.set(getSlot(src))
 	}
 	c.command.append(src)
-	return (ZrangestoreSrc)(c)
+	return ZrangestoreSrc(c)
 }
 
 type ZrangestoreLimit Base
@@ -38033,22 +38033,22 @@ type ZrangestoreMax Base
 
 func (c ZrangestoreMax) Byscore() ZrangestoreSortbyByscore {
 	c.command.append("BYSCORE")
-	return (ZrangestoreSortbyByscore)(c)
+	return ZrangestoreSortbyByscore(c)
 }
 
 func (c ZrangestoreMax) Bylex() ZrangestoreSortbyBylex {
 	c.command.append("BYLEX")
-	return (ZrangestoreSortbyBylex)(c)
+	return ZrangestoreSortbyBylex(c)
 }
 
 func (c ZrangestoreMax) Rev() ZrangestoreRev {
 	c.command.append("REV")
-	return (ZrangestoreRev)(c)
+	return ZrangestoreRev(c)
 }
 
 func (c ZrangestoreMax) Limit(offset int64, count int64) ZrangestoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangestoreLimit)(c)
+	return ZrangestoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38060,14 +38060,14 @@ type ZrangestoreMin Base
 
 func (c ZrangestoreMin) Max(max string) ZrangestoreMax {
 	c.command.append(max)
-	return (ZrangestoreMax)(c)
+	return ZrangestoreMax(c)
 }
 
 type ZrangestoreRev Base
 
 func (c ZrangestoreRev) Limit(offset int64, count int64) ZrangestoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangestoreLimit)(c)
+	return ZrangestoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38079,12 +38079,12 @@ type ZrangestoreSortbyBylex Base
 
 func (c ZrangestoreSortbyBylex) Rev() ZrangestoreRev {
 	c.command.append("REV")
-	return (ZrangestoreRev)(c)
+	return ZrangestoreRev(c)
 }
 
 func (c ZrangestoreSortbyBylex) Limit(offset int64, count int64) ZrangestoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangestoreLimit)(c)
+	return ZrangestoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38096,12 +38096,12 @@ type ZrangestoreSortbyByscore Base
 
 func (c ZrangestoreSortbyByscore) Rev() ZrangestoreRev {
 	c.command.append("REV")
-	return (ZrangestoreRev)(c)
+	return ZrangestoreRev(c)
 }
 
 func (c ZrangestoreSortbyByscore) Limit(offset int64, count int64) ZrangestoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrangestoreLimit)(c)
+	return ZrangestoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38113,7 +38113,7 @@ type ZrangestoreSrc Base
 
 func (c ZrangestoreSrc) Min(min string) ZrangestoreMin {
 	c.command.append(min)
-	return (ZrangestoreMin)(c)
+	return ZrangestoreMin(c)
 }
 
 // Determine the index of a member in a sorted set.
@@ -38139,14 +38139,14 @@ func (c Zrank) Key(key string) ZrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrankKey)(c)
+	return ZrankKey(c)
 }
 
 type ZrankKey Base
 
 func (c ZrankKey) Member(member string) ZrankMember {
 	c.command.append(member)
-	return (ZrankMember)(c)
+	return ZrankMember(c)
 }
 
 type ZrankMember Base
@@ -38184,14 +38184,14 @@ func (c Zrem) Key(key string) ZremKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZremKey)(c)
+	return ZremKey(c)
 }
 
 type ZremKey Base
 
 func (c ZremKey) Member(member ...string) ZremMember {
 	c.command.append(member...)
-	return (ZremMember)(c)
+	return ZremMember(c)
 }
 
 type ZremMember Base
@@ -38229,14 +38229,14 @@ func (c Zremrangebylex) Key(key string) ZremrangebylexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZremrangebylexKey)(c)
+	return ZremrangebylexKey(c)
 }
 
 type ZremrangebylexKey Base
 
 func (c ZremrangebylexKey) Min(min string) ZremrangebylexMin {
 	c.command.append(min)
-	return (ZremrangebylexMin)(c)
+	return ZremrangebylexMin(c)
 }
 
 type ZremrangebylexMax Base
@@ -38250,7 +38250,7 @@ type ZremrangebylexMin Base
 
 func (c ZremrangebylexMin) Max(max string) ZremrangebylexMax {
 	c.command.append(max)
-	return (ZremrangebylexMax)(c)
+	return ZremrangebylexMax(c)
 }
 
 // Remove all members in a sorted set within the given indexes.
@@ -38276,21 +38276,21 @@ func (c Zremrangebyrank) Key(key string) ZremrangebyrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZremrangebyrankKey)(c)
+	return ZremrangebyrankKey(c)
 }
 
 type ZremrangebyrankKey Base
 
 func (c ZremrangebyrankKey) Start(start int64) ZremrangebyrankStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (ZremrangebyrankStart)(c)
+	return ZremrangebyrankStart(c)
 }
 
 type ZremrangebyrankStart Base
 
 func (c ZremrangebyrankStart) Stop(stop int64) ZremrangebyrankStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (ZremrangebyrankStop)(c)
+	return ZremrangebyrankStop(c)
 }
 
 type ZremrangebyrankStop Base
@@ -38323,14 +38323,14 @@ func (c Zremrangebyscore) Key(key string) ZremrangebyscoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZremrangebyscoreKey)(c)
+	return ZremrangebyscoreKey(c)
 }
 
 type ZremrangebyscoreKey Base
 
 func (c ZremrangebyscoreKey) Min(min string) ZremrangebyscoreMin {
 	c.command.append(min)
-	return (ZremrangebyscoreMin)(c)
+	return ZremrangebyscoreMin(c)
 }
 
 type ZremrangebyscoreMax Base
@@ -38344,7 +38344,7 @@ type ZremrangebyscoreMin Base
 
 func (c ZremrangebyscoreMin) Max(max string) ZremrangebyscoreMax {
 	c.command.append(max)
-	return (ZremrangebyscoreMax)(c)
+	return ZremrangebyscoreMax(c)
 }
 
 // Return a range of members in a sorted set, by index, with scores ordered from high to low.
@@ -38370,28 +38370,28 @@ func (c Zrevrange) Key(key string) ZrevrangeKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrevrangeKey)(c)
+	return ZrevrangeKey(c)
 }
 
 type ZrevrangeKey Base
 
 func (c ZrevrangeKey) Start(start int64) ZrevrangeStart {
 	c.command.append(strconv.FormatInt(start, 10))
-	return (ZrevrangeStart)(c)
+	return ZrevrangeStart(c)
 }
 
 type ZrevrangeStart Base
 
 func (c ZrevrangeStart) Stop(stop int64) ZrevrangeStop {
 	c.command.append(strconv.FormatInt(stop, 10))
-	return (ZrevrangeStop)(c)
+	return ZrevrangeStop(c)
 }
 
 type ZrevrangeStop Base
 
 func (c ZrevrangeStop) Withscores() ZrevrangeWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrevrangeWithscores)(c)
+	return ZrevrangeWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38439,14 +38439,14 @@ func (c Zrevrangebylex) Key(key string) ZrevrangebylexKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrevrangebylexKey)(c)
+	return ZrevrangebylexKey(c)
 }
 
 type ZrevrangebylexKey Base
 
 func (c ZrevrangebylexKey) Max(max string) ZrevrangebylexMax {
 	c.command.append(max)
-	return (ZrevrangebylexMax)(c)
+	return ZrevrangebylexMax(c)
 }
 
 type ZrevrangebylexLimit Base
@@ -38465,14 +38465,14 @@ type ZrevrangebylexMax Base
 
 func (c ZrevrangebylexMax) Min(min string) ZrevrangebylexMin {
 	c.command.append(min)
-	return (ZrevrangebylexMin)(c)
+	return ZrevrangebylexMin(c)
 }
 
 type ZrevrangebylexMin Base
 
 func (c ZrevrangebylexMin) Limit(offset int64, count int64) ZrevrangebylexLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrevrangebylexLimit)(c)
+	return ZrevrangebylexLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38508,14 +38508,14 @@ func (c Zrevrangebyscore) Key(key string) ZrevrangebyscoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrevrangebyscoreKey)(c)
+	return ZrevrangebyscoreKey(c)
 }
 
 type ZrevrangebyscoreKey Base
 
 func (c ZrevrangebyscoreKey) Max(max string) ZrevrangebyscoreMax {
 	c.command.append(max)
-	return (ZrevrangebyscoreMax)(c)
+	return ZrevrangebyscoreMax(c)
 }
 
 type ZrevrangebyscoreLimit Base
@@ -38534,19 +38534,19 @@ type ZrevrangebyscoreMax Base
 
 func (c ZrevrangebyscoreMax) Min(min string) ZrevrangebyscoreMin {
 	c.command.append(min)
-	return (ZrevrangebyscoreMin)(c)
+	return ZrevrangebyscoreMin(c)
 }
 
 type ZrevrangebyscoreMin Base
 
 func (c ZrevrangebyscoreMin) Withscores() ZrevrangebyscoreWithscores {
 	c.command.append("WITHSCORES")
-	return (ZrevrangebyscoreWithscores)(c)
+	return ZrevrangebyscoreWithscores(c)
 }
 
 func (c ZrevrangebyscoreMin) Limit(offset int64, count int64) ZrevrangebyscoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrevrangebyscoreLimit)(c)
+	return ZrevrangebyscoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38563,7 +38563,7 @@ type ZrevrangebyscoreWithscores Base
 
 func (c ZrevrangebyscoreWithscores) Limit(offset int64, count int64) ZrevrangebyscoreLimit {
 	c.command.append("LIMIT", strconv.FormatInt(offset, 10), strconv.FormatInt(count, 10))
-	return (ZrevrangebyscoreLimit)(c)
+	return ZrevrangebyscoreLimit(c)
 }
 
 // Return Completed Redis command.
@@ -38599,14 +38599,14 @@ func (c Zrevrank) Key(key string) ZrevrankKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZrevrankKey)(c)
+	return ZrevrankKey(c)
 }
 
 type ZrevrankKey Base
 
 func (c ZrevrankKey) Member(member string) ZrevrankMember {
 	c.command.append(member)
-	return (ZrevrankMember)(c)
+	return ZrevrankMember(c)
 }
 
 type ZrevrankMember Base
@@ -38644,7 +38644,7 @@ func (c Zscan) Key(key string) ZscanKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZscanKey)(c)
+	return ZscanKey(c)
 }
 
 type ZscanCount Base
@@ -38658,12 +38658,12 @@ type ZscanCursor Base
 
 func (c ZscanCursor) Match(pattern string) ZscanMatch {
 	c.command.append("MATCH", pattern)
-	return (ZscanMatch)(c)
+	return ZscanMatch(c)
 }
 
 func (c ZscanCursor) Count(count int64) ZscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ZscanCount)(c)
+	return ZscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -38675,14 +38675,14 @@ type ZscanKey Base
 
 func (c ZscanKey) Cursor(cursor int64) ZscanCursor {
 	c.command.append(strconv.FormatInt(cursor, 10))
-	return (ZscanCursor)(c)
+	return ZscanCursor(c)
 }
 
 type ZscanMatch Base
 
 func (c ZscanMatch) Count(count int64) ZscanCount {
 	c.command.append("COUNT", strconv.FormatInt(count, 10))
-	return (ZscanCount)(c)
+	return ZscanCount(c)
 }
 
 // Return Completed Redis command.
@@ -38713,14 +38713,14 @@ func (c Zscore) Key(key string) ZscoreKey {
 		c.cslot.set(getSlot(key))
 	}
 	c.command.append(key)
-	return (ZscoreKey)(c)
+	return ZscoreKey(c)
 }
 
 type ZscoreKey Base
 
 func (c ZscoreKey) Member(member string) ZscoreMember {
 	c.command.append(member)
-	return (ZscoreMember)(c)
+	return ZscoreMember(c)
 }
 
 type ZscoreMember Base
@@ -38753,14 +38753,14 @@ func (b Builder) Zunion() Zunion {
 
 func (c Zunion) Numkeys(numkeys int64) ZunionNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZunionNumkeys)(c)
+	return ZunionNumkeys(c)
 }
 
 type ZunionAggregateMax Base
 
 func (c ZunionAggregateMax) Withscores() ZunionWithscores {
 	c.command.append("WITHSCORES")
-	return (ZunionWithscores)(c)
+	return ZunionWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38772,7 +38772,7 @@ type ZunionAggregateMin Base
 
 func (c ZunionAggregateMin) Withscores() ZunionWithscores {
 	c.command.append("WITHSCORES")
-	return (ZunionWithscores)(c)
+	return ZunionWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38784,7 +38784,7 @@ type ZunionAggregateSum Base
 
 func (c ZunionAggregateSum) Withscores() ZunionWithscores {
 	c.command.append("WITHSCORES")
-	return (ZunionWithscores)(c)
+	return ZunionWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38814,27 +38814,27 @@ func (c ZunionKey) Weights(weight ...int64) ZunionWeights {
 	for _, n := range weight {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ZunionWeights)(c)
+	return ZunionWeights(c)
 }
 
 func (c ZunionKey) AggregateSum() ZunionAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZunionAggregateSum)(c)
+	return ZunionAggregateSum(c)
 }
 
 func (c ZunionKey) AggregateMin() ZunionAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZunionAggregateMin)(c)
+	return ZunionAggregateMin(c)
 }
 
 func (c ZunionKey) AggregateMax() ZunionAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZunionAggregateMax)(c)
+	return ZunionAggregateMax(c)
 }
 
 func (c ZunionKey) Withscores() ZunionWithscores {
 	c.command.append("WITHSCORES")
-	return (ZunionWithscores)(c)
+	return ZunionWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38856,7 +38856,7 @@ func (c ZunionNumkeys) Key(key ...string) ZunionKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZunionKey)(c)
+	return ZunionKey(c)
 }
 
 type ZunionWeights Base
@@ -38871,22 +38871,22 @@ func (c ZunionWeights) Weights(weight ...int64) ZunionWeights {
 
 func (c ZunionWeights) AggregateSum() ZunionAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZunionAggregateSum)(c)
+	return ZunionAggregateSum(c)
 }
 
 func (c ZunionWeights) AggregateMin() ZunionAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZunionAggregateMin)(c)
+	return ZunionAggregateMin(c)
 }
 
 func (c ZunionWeights) AggregateMax() ZunionAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZunionAggregateMax)(c)
+	return ZunionAggregateMax(c)
 }
 
 func (c ZunionWeights) Withscores() ZunionWithscores {
 	c.command.append("WITHSCORES")
-	return (ZunionWithscores)(c)
+	return ZunionWithscores(c)
 }
 
 // Return Completed Redis command.
@@ -38924,7 +38924,7 @@ func (c Zunionstore) Destination(destination string) ZunionstoreDestination {
 		c.cslot.set(getSlot(destination))
 	}
 	c.command.append(destination)
-	return (ZunionstoreDestination)(c)
+	return ZunionstoreDestination(c)
 }
 
 type ZunionstoreAggregateMax Base
@@ -38952,7 +38952,7 @@ type ZunionstoreDestination Base
 
 func (c ZunionstoreDestination) Numkeys(numkeys int64) ZunionstoreNumkeys {
 	c.command.append(strconv.FormatInt(numkeys, 10))
-	return (ZunionstoreNumkeys)(c)
+	return ZunionstoreNumkeys(c)
 }
 
 type ZunionstoreKey Base
@@ -38977,22 +38977,22 @@ func (c ZunionstoreKey) Weights(weight ...int64) ZunionstoreWeights {
 	for _, n := range weight {
 		c.command.append(strconv.FormatInt(n, 10))
 	}
-	return (ZunionstoreWeights)(c)
+	return ZunionstoreWeights(c)
 }
 
 func (c ZunionstoreKey) AggregateSum() ZunionstoreAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZunionstoreAggregateSum)(c)
+	return ZunionstoreAggregateSum(c)
 }
 
 func (c ZunionstoreKey) AggregateMin() ZunionstoreAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZunionstoreAggregateMin)(c)
+	return ZunionstoreAggregateMin(c)
 }
 
 func (c ZunionstoreKey) AggregateMax() ZunionstoreAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZunionstoreAggregateMax)(c)
+	return ZunionstoreAggregateMax(c)
 }
 
 // Return Completed Redis command.
@@ -39014,7 +39014,7 @@ func (c ZunionstoreNumkeys) Key(key ...string) ZunionstoreKey {
 		}
 	}
 	c.command.append(key...)
-	return (ZunionstoreKey)(c)
+	return ZunionstoreKey(c)
 }
 
 type ZunionstoreWeights Base
@@ -39029,17 +39029,17 @@ func (c ZunionstoreWeights) Weights(weight ...int64) ZunionstoreWeights {
 
 func (c ZunionstoreWeights) AggregateSum() ZunionstoreAggregateSum {
 	c.command.append("AGGREGATE", "SUM")
-	return (ZunionstoreAggregateSum)(c)
+	return ZunionstoreAggregateSum(c)
 }
 
 func (c ZunionstoreWeights) AggregateMin() ZunionstoreAggregateMin {
 	c.command.append("AGGREGATE", "MIN")
-	return (ZunionstoreAggregateMin)(c)
+	return ZunionstoreAggregateMin(c)
 }
 
 func (c ZunionstoreWeights) AggregateMax() ZunionstoreAggregateMax {
 	c.command.append("AGGREGATE", "MAX")
-	return (ZunionstoreAggregateMax)(c)
+	return ZunionstoreAggregateMax(c)
 }
 
 // Return Completed Redis command.

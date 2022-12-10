@@ -898,7 +898,7 @@ func printBuilder(w io.Writer, parent, next goStruct) {
 	if parent.FullName == next.FullName {
 		fmt.Fprintf(w, "\treturn c\n")
 	} else {
-		fmt.Fprintf(w, "\treturn (%s)(c)\n", next.FullName)
+		fmt.Fprintf(w, "\treturn %s(c)\n", next.FullName)
 	}
 	fmt.Fprintf(w, "}\n\n")
 }
