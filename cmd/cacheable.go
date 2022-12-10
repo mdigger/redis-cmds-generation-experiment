@@ -13,14 +13,14 @@ type Cacheable interface {
 	// MGetCacheKey returns the cache key of the MGET singular command
 	MGetCacheKey(i int) string
 
-	musBeCacheable() // check interface
+	mustBeCacheable() // check interface
 }
 
 // Cacheable represents a completed Redis command which supports server-assisted client side caching,
 // and it should be created by the Cache() of command builder.
 type cacheable Base
 
-func (cacheable) musBeCacheable()
+func (cacheable) mustBeCacheable()
 
 var _ Cacheable = (*cacheable)(nil)
 

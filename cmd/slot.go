@@ -21,11 +21,9 @@ func (s *cslot) set(new cslot) {
 	case *s == cslotInit:
 		*s = new
 	default:
-		panic(multiKeySlotErr)
+		panic("slot: multi key command with different key slots are not allowed")
 	}
 }
-
-const multiKeySlotErr = "multi key command with different key slots are not allowed"
 
 func getSlot(key string) cslot {
 	var s, e int

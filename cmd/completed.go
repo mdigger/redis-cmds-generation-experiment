@@ -25,13 +25,13 @@ type Completed interface {
 	// IsMGet returns if the command is MGET
 	IsMGet() bool
 
-	musBeCompleted() // check interface
+	mustBeCompleted() // check interface
 }
 
 // completed represents a internal completed Redis command.
 type completed Base
 
-func (completed) musBeCompleted()
+func (completed) mustBeCompleted()
 
 var _ Completed = (*completed)(nil)
 

@@ -14,6 +14,7 @@ func (c Arbitrary) Keys(keys ...string) Arbitrary {
 		if len(keys) > 0 {
 			c.cslot = cslotNo | getSlot(keys[0])
 		}
+
 	default:
 		for _, k := range keys {
 			c.cslot.set(getSlot(k))
@@ -82,7 +83,7 @@ func (c Arbitrary) MultiGet() Completed {
 // }
 
 var (
-	arbitraryNoCommand = "Arbitrary should be provided with redis command"
-	arbitrarySubscribe = "Arbitrary does not support SUBSCRIBE/UNSUBSCRIBE"
-	arbitraryMultiGet  = "Arbitrary.MultiGet is only valid for MGET and JSON.MGET"
+	arbitraryNoCommand = "arbitrary: should be provided with redis command"
+	arbitrarySubscribe = "arbitrary: does not support SUBSCRIBE/UNSUBSCRIBE"
+	arbitraryMultiGet  = "arbitrary: MultiGet is only valid for MGET and JSON.MGET"
 )

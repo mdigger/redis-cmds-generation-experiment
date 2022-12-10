@@ -82,5 +82,6 @@ func crc16(key string) (crc uint16) {
 	for i := 0; i < len(key); i++ {
 		crc = (crc << 8) ^ crc16tab[(uint8(crc>>8)^key[i])&0x00FF]
 	}
+
 	return crc
 }
